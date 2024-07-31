@@ -1,0 +1,82 @@
+export interface AddOn {
+  id: string;
+  isChecked: boolean;
+  name: string;
+  img: string;
+  price: number;
+  currency: string;
+  text1: string;
+  text2: string;
+};
+
+export interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  currency: string;
+  amount: number;
+  img: string;
+  addOns: AddOn[];
+};
+
+export interface CartState {
+  cartItems: CartItem[];
+  numItemsInCart: number;
+  cartTotal: number;
+  shipping: number;
+  tax: number;
+  orderTotal: number;
+};
+export interface ApiResponse {
+  message?: string;
+  data?: any;
+  status: any;
+}
+
+export interface WishListState {
+  wishListItems: CartItem[];
+  numItemsInWishList: number;
+}
+
+export interface User {
+  temp_token: string;
+  [key: string]: any; // Add additional properties as needed
+}
+
+export interface UserState {
+  isLoading: boolean;
+  isSidebarOpen: boolean;
+  user: User | null;
+}
+
+export type RegisterData = {
+  f_name: string;
+  l_name: string;
+  email: string;
+  phone: string;
+  password: string;
+  password_confirmation: string;
+};
+export type EmailVerificationData = {
+  email: string;
+  token: number;
+};
+
+export type LoginData = {
+  email: string;
+  password: string;
+};
+
+export type ResendOTPData = { email:string};
+export type ForgetPasswordData = {
+  email: string;
+};
+export type ValidateOTPData = {
+  email: string;
+  token: string;
+};
+export type ResetPasswordData = {
+  password: string;
+  password_confirmation: string;
+  token: string;
+};
