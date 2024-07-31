@@ -80,3 +80,6 @@ export type ResetPasswordData = {
   password_confirmation: string;
   token: string;
 };
+export type Link = {
+  text:string;to:string
+}

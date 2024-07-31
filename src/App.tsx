@@ -1,34 +1,206 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { Suspense } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  DefaultOptions,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import {
+  // About,
+  // ContactUs,
+  Home,
+  // Jobs,
+  // Privacy,
+  // Login,
+  // NewAccount,
+  // Branches,
+  // Terms,
+  // Payment,
+  // Delivery,
+  // Refund,
+  // ValidateOTP,
+  // ForgetPassword,
+  // ResetPassword,
+  // Profile,
+  // User,
+  // Orders,
+  // ChangePassword,
+  // MyAddress,
+} from './pages';
+import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 
+// // loaders
+// import { loader as aboutLoader } from './pages/About';
+// import { loader as paymentLoader } from './pages/Payment';
+// import { loader as privacyLoader } from './pages/Privacy';
+// import { loader as deliveryLoader } from './pages/Delivery';
+// import { loader as refundLoader } from './pages/Refund';
+// import { loader as termsLoader } from './pages/Terms';
+
+// Lazy-loaded components
+const Landing = React.lazy(() => import('./pages/Landing'));
+// const MenuList = React.lazy(() => import('./pages/MenuList'));
+// const Cart = React.lazy(() => import('./pages/Cart'));
+// const WishList = React.lazy(() => import('./pages/WishList'));
+// const Gallery = React.lazy(() => import('./pages/Gallery'));
+
+const defaultOptions: DefaultOptions = {
+  queries: {
+    staleTime: 5 * 60 * 1000,
+  },
+};
+
+const queryClient = new QueryClient({defaultOptions});
+
+
+const AppRouter: React.FC = () => {
+  const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Home />,
+      children: [
+        {
+          index: true,
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Landing />
+            </Suspense>
+          ),
+        },
+        // {
+        //   path: '/about',
+        //   element: <About />,
+        //   loader: aboutLoader(queryClient, language),
+        // },
+        // {
+        //   path: '/contact',
+        //   element: <ContactUs />,
+        // },
+        // {
+        //   path: '/jobs',
+        //   element: <Jobs />,
+        // },
+        // {
+        //   path: '/privacy',
+        //   element: <Privacy />,
+        //   loader: privacyLoader(queryClient, language),
+        // },
+        // {
+        //   path: '/login',
+        //   element: <Login />,
+        // },
+        // {
+        //   path: '/register',
+        //   element: <NewAccount />,
+        // },
+        // {
+        //   path: '/branches',
+        //   element: <Branches />,
+        // },
+        // {
+        //   path: '/terms',
+        //   element: <Terms />,
+        //   loader: termsLoader(queryClient, language),
+        // },
+        // {
+        //   path: '/payment',
+        //   element: <Payment />,
+        //   loader: paymentLoader(queryClient, language),
+        // },
+        // {
+        //   path: '/delivery',
+        //   element: <Delivery />,
+        //   loader: deliveryLoader(queryClient, language),
+        // },
+        // {
+        //   path: '/refund',
+        //   element: <Refund />,
+        //   loader: refundLoader(queryClient, language),
+        // },
+        // {
+        //   path: '/validate-otp',
+        //   element: <ValidateOTP />,
+        // },
+        // {
+        //   path: '/forget-password',
+        //   element: <ForgetPassword />,
+        // },
+        // {
+        //   path: '/reset-password',
+        //   element: <ResetPassword />,
+        // },
+        // {
+        //   path: 'profile',
+        //   element: <Profile />,
+        //   children: [
+        //     {
+        //       index: true,
+        //       element: <User />,
+        //     },
+        //     {
+        //       path: 'orders',
+        //       element: <Orders />,
+        //     },
+        //     {
+        //       path: 'changePassword',
+        //       element: <ChangePassword />,
+        //     },
+        //     {
+        //       path: 'address',
+        //       element: <MyAddress />,
+        //     },
+        //   ],
+        // },
+        // {
+        //   path: '/menuList',
+        //   element: (
+        //     <Suspense fallback={<div>Loading...</div>}>
+        //       <MenuList />
+        //     </Suspense>
+        //   ),
+        // },
+        // {
+        //   path: '/cart',
+        //   element: (
+        //     <Suspense fallback={<div>Loading...</div>}>
+        //       <Cart />
+        //     </Suspense>
+        //   ),
+        // },
+        // {
+        //   path: '/wishList',
+        //   element: (
+        //     <Suspense fallback={<div>Loading...</div>}>
+        //       <WishList />
+        //     </Suspense>
+        //   ),
+        // },
+        // {
+        //   path: '/gallery',
+        //   element: (
+        //     <Suspense fallback={<div>Loading...</div>}>
+        //       <Gallery />
+        //     </Suspense>
+        //   ),
+        // },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
+};
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-newRed btn">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <QueryClientProvider client={queryClient}>
+      <GlobalProvider>
+        <AppRouter />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </GlobalProvider>
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
