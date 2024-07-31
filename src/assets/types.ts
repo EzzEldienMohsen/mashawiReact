@@ -81,5 +81,5 @@ export type ResetPasswordData = {
   token: string;
 };
 export type Link = {
-  text:string;to:string
+  text:string;to:string; img?:string;
 }
