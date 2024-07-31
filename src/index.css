@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'abodmaster';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/src/assets/alfont_com_AlFont_com_Abdo-Master-Regular.otf') format('truetype');
+  }
+}
+
+.mainHeroLg{
+  background-image: url(./assets/svg/kabab.svg), url(./assets/svg/mainHero.svg);
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+  height: 500px;
+  background-size: stretch;
+}
+
+
