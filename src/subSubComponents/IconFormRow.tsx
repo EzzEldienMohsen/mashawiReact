@@ -31,9 +31,7 @@ const IconFormRow:React.FC<FormRowProps> = ({
           value={value}
           placeholder={placeHolder}
           onChange={handleChange}
-          className={`text-start ${
-            isLangArabic ? 'pr-14' : 'pl-14'
-          } pl-4 bg-white border-2 w-full place-items-start rounded-full py-1  md:py-4
+          className={`text-start px-14 bg-white border-2 w-full place-items-start rounded-full py-1  md:py-4
             `}
         />
         <img
