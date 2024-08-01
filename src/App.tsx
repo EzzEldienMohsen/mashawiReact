@@ -20,7 +20,7 @@ import {
   // Delivery,
   // Refund,
   ValidateOTP,
-  // ForgetPassword,
+  ForgetPassword,
   // ResetPassword,
   // Profile,
   // User,
@@ -124,10 +124,10 @@ const AppRouter: React.FC = () => {
           path: '/validate-otp',
           element: <ValidateOTP />,
         },
-        // {
-        //   path: '/forget-password',
-        //   element: <ForgetPassword />,
-        // },
+        {
+          path: '/forget-password',
+          element: <ForgetPassword />,
+        },
         // {
         //   path: '/reset-password',
         //   element: <ResetPassword />,
