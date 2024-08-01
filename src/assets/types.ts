@@ -104,3 +104,8 @@ export type FormRowProps = {
   isOTP?:boolean;
   options?:Option[]
 };
+export type Error403 = {
+  status: number;
+  message: string;
+  data: null;
+};

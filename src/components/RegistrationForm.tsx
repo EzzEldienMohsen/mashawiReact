@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { RegisterData } from '../assets/types';
 import { AppDispatch } from '../store';
 
-const RegistrationForm = () => {
+const RegistrationForm:React.FC = () => {
   const [values, setValues] = React.useState<RegisterData>(registerValues);
   const dispatch:AppDispatch = useDispatch();
   const navigate = useNavigate();

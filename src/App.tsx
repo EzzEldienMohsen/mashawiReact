@@ -12,7 +12,7 @@ import {
   Home,
   // Jobs,
   // Privacy,
-  // Login,
+  Login,
   NewAccount,
   // Branches,
   // Terms,
@@ -88,10 +88,10 @@ const AppRouter: React.FC = () => {
         //   element: <Privacy />,
         //   loader: privacyLoader(queryClient, language),
         // },
-        // {
-        //   path: '/login',
-        //   element: <Login />,
-        // },
+        {
+          path: '/login',
+          element: <Login />,
+        },
         {
           path: '/register',
           element: <NewAccount />,
