@@ -151,7 +151,7 @@ const FormRow:React.FC<FormRowProps> = ({
         style={{ backgroundColor: 'white' }}
         className={`px-4 bg-white !important border-2 !important ${
           isOTP
-            ? 'text-center w-14 lg:w-20 aspect-square rounded-2xl'
+            ? 'text-center w-12 lg:w-16 aspect-square rounded-2xl'
             : 'rounded-full text-end w-[100%]'
         }  ${high ? 'py-6 md:py-6' : 'py-2'}`}
       />

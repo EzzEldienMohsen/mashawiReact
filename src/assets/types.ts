@@ -99,7 +99,7 @@ export type FormRowProps = {
   icon?: string;
   high?:boolean;
   full?:boolean;
-  placeHolder:string;
+  placeHolder?:string;
   label?:string;
   isOTP?:boolean;
   options?:Option[]
@@ -108,4 +108,13 @@ export type Error403 = {
   status: number;
   message: string;
   data: null;
+};
+
+export type  InitialOTPInputs = {
+  firstNum: string;
+  secondNum: string;
+  thirdNum: string;
+  fourthNum: string;
+  fifthNum: string;
+  sixthNum: string;
 };

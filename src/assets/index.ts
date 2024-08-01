@@ -1,4 +1,4 @@
-import { Link, RegisterData } from "./types";
+import { InitialOTPInputs, Link, RegisterData } from "./types";
 import arrow from '../assets/svg/header/arrow.svg';
 
 
@@ -75,4 +75,13 @@ export const registerValues:RegisterData = {
   email: '',
   password: '',
   password_confirmation: '',
+};
+
+export const initialOTP:InitialOTPInputs = {
+  firstNum: '',
+  secondNum: '',
+  thirdNum: '',
+  fourthNum: '',
+  fifthNum: '',
+  sixthNum: '',
 };

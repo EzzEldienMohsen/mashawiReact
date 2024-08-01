@@ -22,7 +22,7 @@ const SmallNavBar:React.FC<CloseDrawer> = ({closeDrawer}) => {
 
   return (
     <ul
-      className={`min-h-full gap-y-3 md:gap-y-2 px-7 flex flex-col justify-start items-center ${
+      className={`min-h-full gap-y-5 md:gap-y-2 px-7 flex flex-col justify-start items-center ${
         isLangArabic ? 'rounded-l-3xl ' : 'rounded-r-3xl '
       } font-abdo w-60 z-20 text-[#ffffff] md:w-80 p-4 bg-[#564440] `}
     >
@@ -31,7 +31,7 @@ const SmallNavBar:React.FC<CloseDrawer> = ({closeDrawer}) => {
           onClick={closeDrawer}
           src={logo}
           alt="logo"
-          className="rounded-full w-10 h-10 md:w-24 md:h-24 my-2"
+          className="rounded-full w-16 h-16 md:w-24 md:h-24 my-2"
         />
       </Link>
       <HeaderButtons isTrue={true} />

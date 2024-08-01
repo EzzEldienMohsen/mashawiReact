@@ -19,7 +19,7 @@ import {
   // Payment,
   // Delivery,
   // Refund,
-  // ValidateOTP,
+  ValidateOTP,
   // ForgetPassword,
   // ResetPassword,
   // Profile,
@@ -120,10 +120,10 @@ const AppRouter: React.FC = () => {
         //   element: <Refund />,
         //   loader: refundLoader(queryClient, language),
         // },
-        // {
-        //   path: '/validate-otp',
-        //   element: <ValidateOTP />,
-        // },
+        {
+          path: '/validate-otp',
+          element: <ValidateOTP />,
+        },
         // {
         //   path: '/forget-password',
         //   element: <ForgetPassword />,
