@@ -6,6 +6,13 @@ import icon from '../assets/svg/headerLogo.svg';
 import { useGlobalContext } from '../context/GlobalContext';
 const Header: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
+   const closeDrawer = ():void => {
+     const drawerCheckbox = document.getElementById(
+       'small-nav-drawer'
+     ) as HTMLInputElement;
+     if (drawerCheckbox) drawerCheckbox.checked = false;
+   };
+
   return (
     <div className="flex w-full z-20 flex-row  justify-between items-center px-8 lg:px-20 py-2 bg-transparent">
       <Link to="/">
@@ -36,7 +43,7 @@ const Header: React.FC = () => {
         </div>
         <div className="drawer-side z-30">
           <label htmlFor="small-nav-drawer" className="drawer-overlay"></label>
-          <SmallNavBar />
+          <SmallNavBar closeDrawer={closeDrawer}/>
         </div>
       </div>
     </div>

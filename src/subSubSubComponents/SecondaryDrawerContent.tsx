@@ -4,8 +4,14 @@ import logo from '../assets/svg/logo.svg';
 import { myProfileLinks } from '../assets';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-
-const SecondaryDrawerContent:React.FC = () => {
+interface SmallDrawerProps {
+  drawerId: string;
+  closeDrawer: (drawerId: string) => void;
+}
+const SecondaryDrawerContent: React.FC<SmallDrawerProps> = ({
+  drawerId,
+  closeDrawer,
+}) => {
   const { isLangArabic } = useGlobalContext();
   const { t } = useTranslation();
   return (
@@ -14,7 +20,12 @@ const SecondaryDrawerContent:React.FC = () => {
         isLangArabic ? 'rounded-l-3xl' : 'rounded-r-3xl'
       } font-abdo  text-[#ffffff] `}
     >
-      <Link to="/">
+      <Link
+        to="/"
+        onClick={() => {
+          closeDrawer(drawerId);
+        }}
+      >
         <img
           src={logo}
           alt="logo"
@@ -24,7 +35,13 @@ const SecondaryDrawerContent:React.FC = () => {
       <ul className="flex flex-col justify-start items-start gap-y-1 w-full border-t-1 border-white pt-1">
         {myProfileLinks.map((li) => {
           return (
-            <Link key={t(li.text)} to={li.to}>
+            <Link
+              key={t(li.text)}
+              to={li.to}
+              onClick={() => {
+                closeDrawer(drawerId);
+              }}
+            >
               <li className="my-2 text-md md:text-sm hover:text-newRed">
                 {t(li.text)}
               </li>

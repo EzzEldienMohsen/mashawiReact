@@ -7,10 +7,19 @@ import { useTranslation } from 'react-i18next';
 import logo from '../assets/svg/logo.svg';
 import HeaderButtons from './HeaderButtons';
 import { SecondaryDrawer, SecondaryDropDown } from '../subSubComponents';
-
-const SmallNavBar:React.FC = () => {
+interface CloseDrawer {
+  closeDrawer:() => void
+}
+const SmallNavBar:React.FC<CloseDrawer> = ({closeDrawer}) => {
   const { isLangArabic, toggleLang } = useGlobalContext();
   const { t } = useTranslation();
+   const closeSmallDrawer = (drawerId:string):void => {
+     const drawerCheckbox = document.getElementById(
+       drawerId
+     ) as HTMLInputElement;
+     if (drawerCheckbox) drawerCheckbox.checked = false;
+   };
+
   return (
     <ul
       className={`min-h-full gap-y-3 md:gap-y-2 px-7 flex flex-col justify-start items-center ${
@@ -19,6 +28,7 @@ const SmallNavBar:React.FC = () => {
     >
       <Link to="/">
         <img
+          onClick={closeDrawer}
           src={logo}
           alt="logo"
           className="rounded-full w-10 h-10 md:w-24 md:h-24 my-2"
@@ -32,6 +42,7 @@ const SmallNavBar:React.FC = () => {
               <SecondaryDrawer
                 li={li}
                 key={t(li.text)}
+                closeDrawer={closeSmallDrawer}
                 drawerId={`drawer_id=${index}`}
               />
             );
@@ -42,7 +53,10 @@ const SmallNavBar:React.FC = () => {
               <button
                 key={t(li.text)}
                 className="w-full flex justify-between"
-                onClick={toggleLang}
+                onClick={() => {
+                  toggleLang();
+                  closeDrawer();
+                }}
               >
                 <li className="my-2 text-md md:text-sm hover:text-newRed">
                   {t(li.text)}
@@ -57,6 +71,7 @@ const SmallNavBar:React.FC = () => {
           } else if (li.img) {
             return (
               <Link
+                onClick={closeDrawer}
                 key={t(li.text)}
                 to={li.to}
                 className="w-full flex justify-between"
@@ -73,7 +88,7 @@ const SmallNavBar:React.FC = () => {
             );
           } else {
             return (
-              <Link key={t(li.text)} to={li.to}>
+              <Link onClick={closeDrawer} key={t(li.text)} to={li.to}>
                 <li className="my-2 text-md md:text-sm hover:text-newRed">
                   {t(li.text)}
                 </li>
@@ -82,7 +97,10 @@ const SmallNavBar:React.FC = () => {
           }
         })}
       </ul>
-      <button className="flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2">
+      <button
+        onClick={closeDrawer}
+        className="flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2"
+      >
         <img
           src={icon}
           alt="alt"

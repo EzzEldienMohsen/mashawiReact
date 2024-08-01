@@ -5,11 +5,12 @@ import { Link } from '../assets/types';
 import { SecondaryDrawerContent } from '../subSubSubComponents';
 
 interface SecondDrawerInterface {
-    li:Link;
-    drawerId:string
+  li: Link;
+  drawerId: string;
+  closeDrawer: (drawerId: string) => void;
 }
 
-const SecondaryDrawer:React.FC<SecondDrawerInterface> = ({ li, drawerId }) => {
+const SecondaryDrawer:React.FC<SecondDrawerInterface> = ({ li, drawerId,closeDrawer }) => {
   const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
   return (
@@ -33,7 +34,7 @@ const SecondaryDrawer:React.FC<SecondDrawerInterface> = ({ li, drawerId }) => {
       </div>
       <div className="drawer-side z-40">
         <label htmlFor={drawerId} className="drawer-overlay"></label>
-        <SecondaryDrawerContent />
+        <SecondaryDrawerContent drawerId={drawerId} closeDrawer={closeDrawer} />
       </div>
     </div>
   );
