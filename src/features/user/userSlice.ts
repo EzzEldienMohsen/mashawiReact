@@ -8,6 +8,7 @@ import {
   resetPasswordThunk,
   validateOTPThunk,
   logOutThunk,
+  changePasswordThunk,
 } from './userThunk';
 import {
   addUserToLocalStorage,
@@ -15,7 +16,7 @@ import {
   removeUserFromLocalStorage,
 } from '../../utils';
 import { toast } from 'react-toastify';
-import { User, UserState } from '../../assets/types';
+import { ChangePasswordData, EmailVerificationData, ForgetPasswordData, LoginData, RegisterData, ResendOTPData, ResetPasswordData, User, UserState, ValidateOTPData } from '../../assets/types';
 
 
 
@@ -28,47 +29,50 @@ const initialState: UserState = {
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
-  async (reqData: any, thunkAPI) => {
+  async (reqData:RegisterData, thunkAPI) => {
     return registerUserThunk('/auth/register', reqData, thunkAPI);
   }
 );
 export const loginUser = createAsyncThunk(
   'user/loginUser',
-  async (reqData: any, thunkAPI) => {
+  async (reqData:LoginData, thunkAPI) => {
     return loginThunk('/auth/login', reqData, thunkAPI);
   }
 );
 export const forgetPassword = createAsyncThunk(
   'user/forgetPassword',
-  async (reqData: any, thunkAPI) => {
+  async (reqData: ForgetPasswordData, thunkAPI) => {
     return forgetPasswordThunk('/auth/forget-password', reqData, thunkAPI);
   }
 );
 export const emailVerification = createAsyncThunk(
   'user/emailVerification',
-  async (reqData: any, thunkAPI) => {
+  async (reqData: EmailVerificationData, thunkAPI) => {
     return emailVerificationThunk('/auth/verify-email', reqData, thunkAPI);
   }
 );
 export const resendOTP = createAsyncThunk(
   'user/resendOTP',
-  async (reqData: any, thunkAPI) => {
+  async (reqData: ResendOTPData, thunkAPI) => {
     return resendOTPThunk('/auth/resend-otp', reqData, thunkAPI);
   }
 );
 export const validateOTP = createAsyncThunk(
   'user/validateOTP',
-  async (reqData: any, thunkAPI) => {
+  async (reqData: ValidateOTPData, thunkAPI) => {
     return validateOTPThunk('/auth/validate-otp', reqData, thunkAPI);
   }
 );
 export const resetPassword = createAsyncThunk(
   'user/resetPassword',
-  async (reqData: any, thunkAPI) => {
+  async (reqData: ResetPasswordData, thunkAPI) => {
     const { user } = thunkAPI.getState() as { user: UserState };
+    if (!user || !user.user) {
+      return thunkAPI.rejectWithValue('User is not authenticated');
+    }
     return resetPasswordThunk(
       '/auth/reset-password',
-      { ...reqData, token: user.user?.temp_token },
+      { ...reqData, token: user.user.temp_token },
       thunkAPI
     );
   }
@@ -76,6 +80,15 @@ export const resetPassword = createAsyncThunk(
 export const logOut = createAsyncThunk('user/logOut', async (thunkAPI) => {
   return logOutThunk('/auth/logout', thunkAPI);
 });
+
+
+export const changePassword = createAsyncThunk(
+  'user/changePassword',
+  async (reqData: ChangePasswordData, thunkAPI) => {
+    return changePasswordThunk('/user/change-password', reqData, thunkAPI);
+  }
+);
+
 
 const userSlice = createSlice({
   name: 'user',
@@ -126,7 +139,18 @@ const userSlice = createSlice({
           toast.success(message);
         }
       )
-      .addCase(forgetPassword.rejected, (state) => {
+      .addCase(changePassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        changePassword.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.isLoading = false;
+          const message = action.payload.message;
+          toast.success(message);
+        }
+      )
+      .addCase(changePassword.rejected, (state) => {
         state.isLoading = false;
       })
       .addCase(validateOTP.pending, (state) => {

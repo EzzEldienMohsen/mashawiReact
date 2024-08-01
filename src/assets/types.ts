@@ -42,7 +42,6 @@ export interface WishListState {
 
 export interface User {
   temp_token: string;
-  [key: string]: any; // Add additional properties as needed
 }
 
 export interface UserState {
@@ -118,3 +117,9 @@ export type  InitialOTPInputs = {
   fifthNum: string;
   sixthNum: string;
 };
+
+export interface ChangePasswordData {
+  old_password: string;
+  password: string;
+  password_confirmation: string;
+}

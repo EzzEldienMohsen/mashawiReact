@@ -25,7 +25,7 @@ import {
   // Profile,
   // User,
   // Orders,
-  // ChangePassword,
+  ChangePassword,
   // MyAddress,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
@@ -144,10 +144,10 @@ const AppRouter: React.FC = () => {
         //       path: 'orders',
         //       element: <Orders />,
         //     },
-        //     {
-        //       path: 'changePassword',
-        //       element: <ChangePassword />,
-        //     },
+            {
+              path: 'changePassword',
+              element: <ChangePassword />,
+            },
         //     {
         //       path: 'address',
         //       element: <MyAddress />,

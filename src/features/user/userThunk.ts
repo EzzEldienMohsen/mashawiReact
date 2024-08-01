@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { autoFetch } from '../../utils';
-import { ApiResponse, EmailVerificationData, ForgetPasswordData, LoginData, RegisterData, ResendOTPData, ResetPasswordData, ValidateOTPData } from '../../assets/types';
+import { ApiResponse, ChangePasswordData, EmailVerificationData, ForgetPasswordData, LoginData, RegisterData, ResendOTPData, ResetPasswordData, ValidateOTPData } from '../../assets/types';
 
 // Define a type for the expected structure of response data
 
@@ -133,6 +133,23 @@ export const logOutThunk = async (
 ): Promise<ApiResponse> => {
   try {
     const response: AxiosResponse<ApiResponse> = await autoFetch.post(url);
+    return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};
+
+
+export const changePasswordThunk = async (
+  url: string,
+  reqData: ChangePasswordData,
+  thunkAPI: any
+): Promise<ApiResponse> => {
+  try {
+    const response: AxiosResponse<ApiResponse> = await autoFetch.put(
+      url,
+      reqData
+    );
     return response.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response.data.msg);
