@@ -1,4 +1,4 @@
-import { Link } from "./types";
+import { Link, RegisterData } from "./types";
 import arrow from '../assets/svg/header/arrow.svg';
 
 
@@ -65,3 +65,14 @@ export const privacyLinks:Link[] = [
   { text: 'refundPolicyRoute', to: '/refund' },
 ]
 // Links Ends Here
+
+// Form Values Starts Here
+
+export const registerValues:RegisterData = {
+  f_name: '',
+  l_name: '',
+  phone: '',
+  email: '',
+  password: '',
+  password_confirmation: '',
+};

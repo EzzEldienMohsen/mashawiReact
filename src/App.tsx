@@ -13,7 +13,7 @@ import {
   // Jobs,
   // Privacy,
   // Login,
-  // NewAccount,
+  NewAccount,
   // Branches,
   // Terms,
   // Payment,
@@ -92,10 +92,10 @@ const AppRouter: React.FC = () => {
         //   path: '/login',
         //   element: <Login />,
         // },
-        // {
-        //   path: '/register',
-        //   element: <NewAccount />,
-        // },
+        {
+          path: '/register',
+          element: <NewAccount />,
+        },
         // {
         //   path: '/branches',
         //   element: <Branches />,
