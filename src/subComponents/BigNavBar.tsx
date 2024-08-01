@@ -9,13 +9,15 @@ const BigNavBar: React.FC = () => {
  const {t} = useTranslation()
   return (
     <ul className="hidden lg:flex gap-x-5 font-abdo justify-between items-center flex-row">
+    <ul className="hidden lg:flex gap-x-3 font-abdo justify-between items-center flex-row">
       {headerLinks.map((li) => {
         return (
           <Link key={li.text} to={li.to}>
-            <li className=" text-sm hover:text-newRed">{t(li.text)}</li>
+            <li className=" text-xs hover:text-newRed">{t(li.text)}</li>
           </Link>
         );
       })}
+      </ul>
      <NavBarButtons/>
     </ul>
   );

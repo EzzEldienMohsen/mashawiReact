@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 export interface AddOn {
   id: string;
   isChecked: boolean;
@@ -83,3 +85,22 @@ export type ResetPasswordData = {
 export type Link = {
   text:string;to:string; img?:string;
 }
+
+export type Option = {  label:string;value:string}
+export type FormRowProps = {
+  name: string;
+  type: string;
+  handleChange: (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => void;
+  value: string;
+  icon?: string;
+  high?:boolean;
+  full?:boolean;
+  placeHolder:string;
+  label?:string;
+  isOTP?:boolean;
+  options?:Option[]
+};
