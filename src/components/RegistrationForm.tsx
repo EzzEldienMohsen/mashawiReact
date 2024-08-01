@@ -103,7 +103,7 @@ const onSubmit = (e: React.FormEvent) :void => {
         />
         <Link
           to="/forget-password"
-          className="text-newRed text-start text-xs md:text-sm lg:text-sm mb-10"
+          className="text-newRed text-start px-2 text-xs md:text-sm lg:text-sm mb-10"
         >
           {t('forgetPasswordText')}
         </Link>

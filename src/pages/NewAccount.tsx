@@ -8,7 +8,7 @@ const NewAccount:React.FC = () => {
         <RegistrationForm />
         <LoginLinks />
       </div>
-      <img src={src} alt="img" className=" md:w-[350px] lg:w-2/5 p-4" />
+      <img src={src} alt="img" className=" md:w-[350px] md:h-[600px] lg:h-auto lg:w-2/5 p-4" />
     </div>
   );
 };

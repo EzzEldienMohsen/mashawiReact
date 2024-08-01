@@ -13,7 +13,7 @@ const SmallNavBar:React.FC = () => {
   const { t } = useTranslation();
   return (
     <ul
-      className={` gap-y-3 md:gap-y-2 px-7 flex flex-col justify-start items-center ${
+      className={`min-h-full gap-y-3 md:gap-y-2 px-7 flex flex-col justify-start items-center ${
         isLangArabic ? 'rounded-l-3xl ' : 'rounded-r-3xl '
       } font-abdo w-60 z-20 text-[#ffffff] md:w-80 p-4 bg-[#564440] `}
     >
