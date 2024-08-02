@@ -18,7 +18,7 @@ export interface CartItem {
   currency: string;
   amount: number;
   img: string;
-  addOns: AddOn[];
+  addOns: AddOn[] | [];
 };
 
 export interface CartState {

@@ -3,6 +3,8 @@ import cartReducer from './features/cart/cartSlice';
 import userReducer from './features/user/userSlice';
 import wishListReducer from './features/wishList/wishListSlice';
 import { ThunkAction } from 'redux-thunk';
+import { TypedUseSelectorHook } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // Define the store configuration with typed reducers
 export const store = configureStore({
@@ -15,6 +17,7 @@ export const store = configureStore({
 
 // Define RootState type which represents the entire state of the Redux store
 export type RootState = ReturnType<typeof store.getState>;
+export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 // Define AppDispatch type which represents the dispatch function with the store's actions
 export type AppDispatch = typeof store.dispatch;
