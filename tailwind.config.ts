@@ -9,9 +9,7 @@ const config: Config = {
       abdo: ['abodmaster'],
     },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      },
+      
       gradientColorStops: (theme) => ({
         'white-transparent': 'rgba(255, 255, 255, 0.7)',
         'white-fade': 'rgba(255, 255, 255, 0.0160418)',
