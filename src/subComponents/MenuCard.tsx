@@ -5,7 +5,7 @@ import { Card } from '../subSubComponents';
 
 const MenuCard:React.FC = () => {
   return (
-    <div className="my-8 flex flex-col justify-center items-center px-4 md:flex-row md:justify-evenly lg:justify-between md:flex-wrap w-full">
+    <div className="my-8 flex flex-col justify-center items-center gap-y-5 md:flex-row md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-start lg:gap-x-7  lg:flex-wrap w-full">
       {menuItems.map((data) => {
         return <Card data={data} key={data.id} />;
       })}

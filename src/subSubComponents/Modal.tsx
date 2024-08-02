@@ -2,24 +2,27 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import src from '../assets/svg/menu/addOns.svg';
 import { useTranslation } from 'react-i18next';
-import { addAddOns } from '../features/cart/cartSlice';
+import { addAddOns, removeAddOns } from '../features/cart/cartSlice';
 import { AddOn, CartItem } from '../assets/types';
 import { AppDispatch, useTypedSelector } from '../store';
 import { AddOns, ProductDetails, WishlistButton } from '../subSubSubComponents';
-interface ModalProps{
-    modalId:string;
-    theAmount:number;
-    data:CartItem;
+
+interface ModalProps {
+  modalId: string;
+  theAmount: number;
+  data: CartItem;
 }
-const Modal:React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
+
+const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   const [amount, setAmount] = React.useState<number>(theAmount);
   const [selectedAddOns, setSelectedAddOns] = React.useState<AddOn[]>([]);
-  const dispatch:AppDispatch = useDispatch();
+  const [removeAddOnsList, setRemoveAddOnsList] = React.useState<AddOn[]>([]);
+  const dispatch: AppDispatch = useDispatch();
   const { wishListItems } = useTypedSelector((state) => state.wishList);
-  const item = wishListItems.find((i:CartItem) => i.id === data.id);
+  const item = wishListItems.find((i: CartItem) => i.id === data.id);
   const { t } = useTranslation();
 
-  const handleAddOnChange = (addOn:AddOn, isChecked:boolean) :void => {
+  const handleAddOnChange = (addOn: AddOn, isChecked: boolean): void => {
     setSelectedAddOns((prevAddOns) =>
       isChecked
         ? [...prevAddOns, addOn]
@@ -27,7 +30,15 @@ const Modal:React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     );
   };
 
-  const cartProduct:CartItem = {
+  const handleRemoveAddOnChange = (addOn: AddOn, isChecked: boolean): void => {
+    setRemoveAddOnsList((prevRemoveAddOns) =>
+      isChecked
+        ? [...prevRemoveAddOns, addOn]
+        : prevRemoveAddOns.filter((ao) => ao.id !== addOn.id)
+    );
+  };
+
+  const cartProduct: CartItem = {
     id: data.id,
     name: data.name,
     price: data.price,
@@ -36,13 +47,23 @@ const Modal:React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     amount,
     addOns: selectedAddOns,
   };
+
   const handleAddToCart = () => {
-    dispatch(addAddOns({ cartID: data.id, addOns: selectedAddOns }));
+    if (selectedAddOns.length > 0) {
+      dispatch(addAddOns({ cartID: data.id, addOns: selectedAddOns }));
+    }
+    if (removeAddOnsList.length > 0) {
+      dispatch(
+        removeAddOns({
+          cartID: data.id,
+          addOnIDs: removeAddOnsList.map((ao) => ao.id),
+        })
+      );
+    }
     // dispatch(addItem({ product: { ...data, amount, addOns: selectedAddOns } }));
   };
 
-
-  const wishListProduct:CartItem = {
+  const wishListProduct: CartItem = {
     id: data.id,
     name: data.name,
     price: data.price,
@@ -78,7 +99,11 @@ const Modal:React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
               cartProduct={cartProduct}
             />
           </div>
-          <AddOns data={data} handleAddOnChange={handleAddOnChange} />
+          <AddOns
+            data={data}
+            handleAddOnChange={handleAddOnChange}
+            handleRemoveAddOnChange={handleRemoveAddOnChange}
+          />
         </div>
         <form method="dialog" className="modal-backdrop">
           <button onClick={handleAddToCart}>close</button>

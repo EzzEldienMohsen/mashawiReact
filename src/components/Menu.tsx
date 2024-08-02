@@ -6,7 +6,7 @@ import MenuCard from '../subComponents/MenuCard';
 const Menu :React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="flex justify-center items-center px-4 lg:px-8 flex-col">
+    <div className="flex justify-center items-center flex-col">
       {/* <SectionTitle title={t('menuSectionTitle')} />
       <Slider /> */}
       <MenuCard />
