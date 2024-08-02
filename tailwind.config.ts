@@ -21,7 +21,9 @@ const config: Config = {
         newRed: '#CD0B09',
         bgColor: '#F8F8F8',
       },
-     
+      backgroundImage: {
+        'svg-background': "url('./src/assets/svg/Mask groupتواصل معنا.svg')",
+      },
     },
   },
   plugins: [daisyui, typography],

@@ -4,3 +4,7 @@ export { default as HeaderButtons } from './HeaderButtons';
 export { default as SmallNavBar } from './SmallNavBar';
 export { default as FormRow } from './FormRow';
 export { default as FormTitle } from './FormTitle';
+export { default as MenuCard } from './MenuCard';
+export { default as SectionTitle } from './SectionTitle';
+export { default as Slider } from './Slider';
+export { default as FormTextArea } from './FormTextArea';

@@ -123,3 +123,23 @@ export interface ChangePasswordData {
   password: string;
   password_confirmation: string;
 }
+
+export type AddressData = {
+  id:string;
+  icon:string;
+    mainAddress: string;
+    sideAddress: string;
+    mobIcon: string;
+    mobNumber: string;
+    phIcon:string;
+    phNumber: string;
+    timeIcon: string;
+    time: string;
+  }
+  export type ContactInitialValues = {
+  name: string;
+  email: string;
+  mobile:string;
+  subject: string;
+  text: string;
+};

@@ -1,4 +1,4 @@
-import { CartItem, InitialOTPInputs, Link, RegisterData } from "./types";
+import { AddressData, CartItem, ContactInitialValues, InitialOTPInputs, Link, RegisterData } from "./types";
 import arrow from '../assets/svg/header/arrow.svg';
 import { nanoid } from "@reduxjs/toolkit";
 
@@ -16,6 +16,20 @@ import sauce from './svg/menu/addOns/sauce.svg';
 import pickles from './svg/menu/addOns/pickles.svg';
 import salad from './svg/menu/addOns/salad.svg';
 import fries from './svg/menu/addOns/fries.svg';
+// Menu Slider Images
+
+import burger from '../assets/svg/burger.svg';
+import drinks from '../assets/svg/drinks.svg';
+import shawarma from '../assets/svg/shawarma.svg';
+import pizza from '../assets/svg/pizza.svg';
+import chickenSlider from '../assets/svg/chicken.svg';
+import barbique from '../assets/svg/barbique.svg';
+
+// Address Images and icons
+import address from './svg/address.svg';
+import addMob from './svg/addMob.svg';
+import addTel from './svg/addTel.svg';
+import addTime from './svg/addTime.svg';
 
 
 
@@ -99,6 +113,19 @@ export const initialOTP:InitialOTPInputs = {
   fifthNum: '',
   sixthNum: '',
 };
+
+export const contactInitialValues:ContactInitialValues = {
+  name: '',
+  email: '',
+  mobile: '',
+  subject: '',
+  text: '',
+};
+
+
+
+
+
 // Menu Items starts here
 export const menuItems: CartItem[] = [
   {
@@ -671,5 +698,78 @@ export const menuItems: CartItem[] = [
         text2: 'menuAddOnWithOutSalad',
       },
     ],
+  },
+];
+// Menu Slider
+  export const menuCategories:{icon:string;label:string}[] = [
+    { icon: burger, label: 'burgerText' },
+    { icon: drinks, label: 'drinkText' },
+    { icon: shawarma, label: 'shawText' },
+    { icon: pizza, label: 'pizza' },
+    { icon: chickenSlider, label: 'chicken' },
+    { icon: barbique, label: 'barb' },
+  ];
+
+
+
+
+
+
+
+
+  // HomePage Data 
+
+  
+export const theAddress: AddressData[] = [
+  {
+    id: nanoid(),
+    icon: address,
+    mainAddress: 'theAddressMainTitle',
+    sideAddress: 'theAddressSecondTitle',
+    mobIcon: addMob,
+    mobNumber: '011546250809',
+    phIcon: addTel,
+    phNumber: '546250809',
+    timeIcon: addTime,
+    time: '11:00 am - 03:00 am ',
+  },
+
+  {
+    id: nanoid(),
+    icon: address,
+    mainAddress: 'theAddressMainTitle',
+    sideAddress: 'theAddressSecondTitle',
+    mobIcon: addMob,
+    mobNumber: '011546250809',
+    phIcon: addTel,
+    phNumber: '546250809',
+    timeIcon: addTime,
+    time: '11:00 am - 03:00 am ',
+  },
+
+  {
+    id: nanoid(),
+    icon: address,
+    mainAddress: 'theAddressMainTitle',
+    sideAddress: 'theAddressSecondTitle',
+    mobIcon: addMob,
+    mobNumber: '011546250809',
+    phIcon: addTel,
+    phNumber: '546250809',
+    timeIcon: addTime,
+    time: '11:00 am - 03:00 am ',
+  },
+
+  {
+    id: nanoid(),
+    icon: address,
+    mainAddress: 'theAddressMainTitle',
+    sideAddress: 'theAddressSecondTitle',
+    mobIcon: addMob,
+    mobNumber: '011546250809',
+    phIcon: addTel,
+    phNumber: '546250809',
+    timeIcon: addTime,
+    time: '11:00 am - 03:00 am ',
   },
 ];
