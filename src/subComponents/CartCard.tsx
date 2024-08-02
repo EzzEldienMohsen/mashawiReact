@@ -28,7 +28,7 @@ const CartCard:React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
     dispatch(addItem({ product: cartProduct }));
   };
   return (
-    <div className="flex bg-white  w-full relative justify-start items-center pt-4 pb-2 px-2 my-2 gap-x-8 ">
+    <div className="flex bg-white  w-full relative justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-8 ">
       <button
         className="absolute top-2 left-2"
         onClick={() => removeItemsFromCart(item)}

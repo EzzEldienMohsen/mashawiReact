@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-const CartDrawerContent:React.FC = () => {
+const CartDrawerContent: React.FC = () => {
   return (
-    <div>CartDrawerContent</div>
-  )
-}
+    <div className="bg-white w-64 h-full shadow-lg">
+      <div>CartDrawerContent</div>
+    </div>
+  );
+};
 
-export default CartDrawerContent
+export default CartDrawerContent;

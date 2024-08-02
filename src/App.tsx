@@ -42,7 +42,7 @@ import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 const Landing = React.lazy(() => import('./pages/Landing'));
 // const MenuList = React.lazy(() => import('./pages/MenuList'));
 const Cart = React.lazy(() => import('./pages/Cart'));
-// const WishList = React.lazy(() => import('./pages/WishList'));
+const WishList = React.lazy(() => import('./pages/WishList'));
 // const Gallery = React.lazy(() => import('./pages/Gallery'));
 
 const defaultOptions: DefaultOptions = {
@@ -170,14 +170,14 @@ const AppRouter: React.FC = () => {
             </Suspense>
           ),
         },
-        // {
-        //   path: '/wishList',
-        //   element: (
-        //     <Suspense fallback={<div>Loading...</div>}>
-        //       <WishList />
-        //     </Suspense>
-        //   ),
-        // },
+        {
+          path: '/wishList',
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <WishList />
+            </Suspense>
+          ),
+        },
         // {
         //   path: '/gallery',
         //   element: (

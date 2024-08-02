@@ -4,19 +4,26 @@ import CartDrawerContent from './CartDrawerContent';
 
 const CartDrawer: React.FC = () => {
   return (
-    <div className="lg:drawer w-10  hidden">
-      <input id="cart-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content ">
+    <div className="drawer w-10">
+      <input
+        id="cart-drawer"
+        type="checkbox"
+        className="drawer-toggle"
+        onChange={(e) => console.log(e.target.checked)}
+      />
+      <div className="drawer-content">
         {/* Drawer button */}
         <label htmlFor="cart-drawer" className="">
-          <button className="rounded-badge aspect-square flex lg:hidden items-center justify-center  w-10 bg-white">
-            <img src={cartImg} alt="" className="w-5 h-5" />
-          </button>
+          <div className="rounded-badge aspect-square flex items-center justify-center w-10 bg-white">
+            <img src={cartImg} alt="Cart" className="w-5 h-5" />
+          </div>
         </label>
       </div>
       <div className="drawer-side z-30">
         <label htmlFor="cart-drawer" className="drawer-overlay"></label>
-        <CartDrawerContent />
+        <div className="drawer-content p-4">
+          <CartDrawerContent />
+        </div>
       </div>
     </div>
   );
