@@ -13,7 +13,7 @@ const CartItems:React.FC = () => {
   const { cartItems } = useTypedSelector((state:RootState) => state.mashawiCart);
   console.log(cartItems);
   return (
-    <div className="my-16 w-full flex flex-col justify-center items-center">
+    <div className="my-16 w-full flex flex-col justify-center items-center px-4 lg:px-20">
       {cartItems.map((item) => {
         return (
           <CartCard
