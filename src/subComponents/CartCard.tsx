@@ -28,24 +28,24 @@ const CartCard:React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
     dispatch(addItem({ product: cartProduct }));
   };
   return (
-    <div className="flex bg-white flex-col w-full justify-center items-center relative pt-4 pb-2 px-2 my-2 rounded-xl md:justify-between md:flex-row gap-y-3 md:gap-y-0">
+    <div className="flex bg-white  w-full relative justify-start items-center pt-4 pb-2 px-2 my-2 gap-x-8 ">
       <button
         className="absolute top-2 left-2"
         onClick={() => removeItemsFromCart(item)}
       >
         <img src={theClose} alt="alt" />
       </button>
-      <div className="flex flex-row justify-between items-center md:w-1/2 gap-x-4">
-        <img src={item.img} alt="alt" className="w-32 aspect-square" />
+      <img src={item.img} alt="alt" className="w-1/5 aspect-square" />
+      <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <h1>{t(item.name)}</h1>
         <p className="text-newRed flex flex-row gap-x-1">
           <span>{item.price}</span>
           <span>{t(item.currency)}</span>
         </p>
-      </div>
-      <div className="flex flex-row justify-evenly items-center w-full md:w-1/3 my-2 md:my-0 ">
-       
-        <AmountInput amount={amount} setAmount={setAmount} />
+        <div className="flex flex-col justify-start items-start gap-y-4 md:flex-row md:justify-between md:items-center w-full">
+          <h1>{t(item.name)}</h1>
+          <AmountInput amount={amount} setAmount={setAmount} />
+        </div>
       </div>
     </div>
   );
