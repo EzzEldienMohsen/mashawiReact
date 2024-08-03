@@ -9,3 +9,4 @@ export { default as SectionTitle } from './SectionTitle';
 export { default as Slider } from './Slider';
 export { default as FormTextArea } from './FormTextArea';
 export { default as CartCard } from './CartCard';
+export { default as DrawerCartCard } from './DrawerCartCard';

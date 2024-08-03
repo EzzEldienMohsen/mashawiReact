@@ -11,7 +11,6 @@ const CartItems:React.FC = () => {
     dispatch(removeItem(prod));
   };
   const { cartItems } = useTypedSelector((state:RootState) => state.theMashawiCart);
-  console.log(cartItems)
   return (
     <div className="my-16 w-full flex flex-col justify-center items-center px-4 lg:px-20">
       {cartItems.map((item) => {

@@ -81,12 +81,12 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
                   key={addOn.id}
                   className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
                 >
-                  <p className="text-xs w-1/5">{t(addOn.name)}</p>
-                  <div className="flex justify-start items-center gap-x-4 w-1/4">
+                  <p className="text-xs w-1/3">{t(addOn.name)}</p>
+                  <div className="flex justify-start items-center gap-x-1 w-1/5">
                     <p className="text-xs">{addOn.price}</p>
                     <p className="text-xs">{t(addOn.currency)}</p>
                   </div>
-                  <div className="flex justify-start items-start gap-x-4 w-1/2">
+                  <div className="flex justify-start items-center gap-x-1 w-1/2">
                     <input
                       type="checkbox"
                       checked={checkedAddOns[addOn.id] || false}
@@ -98,11 +98,11 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
               );
             })}
           </div>
-          <div className="flex flex-col justify-center md:items-end md:justify-end gap-y-3 w-auto">
+          <div className="flex md:flex-col justify-between gap-x-1    md:items-end md:justify-end gap-y-3 w-auto">
             <AmountInput amount={amount} setAmount={setAmount} />
             <button
               onClick={addItemToCart}
-              className="btn bg-newRed text-white flex-row flex justify-between items-center px-4 rounded-full py-2"
+              className="btn bg-newRed text-white flex-row flex justify-between gap-x-[30px] items-center px-4 rounded-full py-2"
             >
               <img src={addOrder} alt="alt" />
               {t('addOnsText')}
