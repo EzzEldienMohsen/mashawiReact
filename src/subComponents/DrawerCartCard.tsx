@@ -65,7 +65,7 @@ const DrawerCartCard: React.FC<CartCardProps> = ({item}) => {
        handleRemoveAddOnChange(addOn, isChecked);
      };
   return (
-    <div className="flex w-full   justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-2 ">
+    <div className="flex w-full rounded-xl border-b-[2px]   justify-start items-start pt-4 pb-6 px-2 my-2 gap-x-2 ">
       <img src={item.img} alt="alt" className="w-1/5 aspect-square" />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <div className="w-full flex justify-between items-center">

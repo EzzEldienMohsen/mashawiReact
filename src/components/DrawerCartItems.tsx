@@ -10,10 +10,10 @@ const DrawerCartItems:React.FC = () => {
        
 
   return (
-    <div className='flex flex-col justify-center items-center gap-y-3'>
+    <div className='flex flex-col justify-center items-center gap-y-3 z-40'>
         {cartItems.map((item)=>{
             return (
-              <DrawerCartCard item={item} />
+              <DrawerCartCard key={item.id} item={item} />
             );
         })}
     </div>

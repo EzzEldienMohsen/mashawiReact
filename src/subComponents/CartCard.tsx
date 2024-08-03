@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { AddOn, CartItem } from '../assets/types';
 import { AmountInput } from '../subSubSubComponents';
 import { AppDispatch } from '../store';
+import { useGlobalContext } from '../context/GlobalContext';
 
 interface CartCardProps {
   item: CartItem;
@@ -15,6 +16,7 @@ interface CartCardProps {
 
 const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
   const { t } = useTranslation();
+  const {isLangArabic} =useGlobalContext()
   const [removeAddOnsList, setRemoveAddOnsList] = React.useState<AddOn[]>([]);
   const [checkedAddOns, setCheckedAddOns] = React.useState<{
     [key: string]: boolean;
@@ -59,14 +61,22 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
   };
 
   return (
-    <div className="flex bg-white w-full relative justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-8 ">
+    <div className="flex bg-white w-full rounded-2xl relative justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-8 ">
       <button
         className="absolute top-2 left-2"
         onClick={() => removeItemsFromCart(item)}
       >
-        <img src={theClose} alt="alt" />
+        <img src={theClose} alt="alt" className={` `} />
       </button>
-      <img src={item.img} alt="alt" className="w-1/5 aspect-square" />
+      <img
+        src={item.img}
+        alt="alt"
+        className={`w-1/5 aspect-square ${
+          isLangArabic
+            ? 'rounded-tr-3xl rounded-bl-3xl'
+            : 'rounded-tl-3xl rounded-br-3xl'
+        }`}
+      />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <h1>{t(item.name)}</h1>
         <p className="text-newRed flex flex-row gap-x-1">

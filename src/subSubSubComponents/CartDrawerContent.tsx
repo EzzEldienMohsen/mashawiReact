@@ -4,14 +4,14 @@ import { clearCart } from '../features/cart/cartSlice';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch } from '../store';
 import theClose from '../assets/svg/closeBtn.svg';
-import { DrawerCartItems } from '../components';
+import {  DrawerCartItems, DrawerCartTotals } from '../components';
 
 const CartDrawerContent: React.FC = () => {
    const dispatch: AppDispatch = useDispatch();
    const clearTheCart = () => dispatch(clearCart());
    const { t } = useTranslation();
   return (
-    <div className="w-full flex flex-col justify-start relative overflow-y-auto items-center px-3 pt-3 bg-[#F8F8F8] min-h-full">
+    <div className="w-full flex flex-col justify-start relative overflow-y-auto items-center px-3 pt-3 bg-[#F8F8F8] h-full">
       {/* title and clear cart logic */}
       <div className="w-full flex justify-start items-center gap-x-6">
         <button className="mt-3" onClick={() => clearTheCart()}>
@@ -23,6 +23,8 @@ const CartDrawerContent: React.FC = () => {
       </div>
       {/* cartItems */}
       <DrawerCartItems />
+      {/* Cart Total */}
+      <DrawerCartTotals/>
     </div>
   );
 };
