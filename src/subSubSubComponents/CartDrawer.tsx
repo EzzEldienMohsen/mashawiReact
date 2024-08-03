@@ -21,7 +21,7 @@ const CartDrawer: React.FC = () => {
       </div>
       <div className="drawer-side z-30">
         <label htmlFor="cart-drawer" className="drawer-overlay"></label>
-        <div className="drawer-content p-4">
+        <div className="drawer-content w-2/5 ">
           <CartDrawerContent />
         </div>
       </div>

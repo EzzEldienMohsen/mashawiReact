@@ -1,5 +1,6 @@
 import React from 'react';
-
+import plus from "../assets/svg/menu/input/plus.svg"
+import minus from "../assets/svg/menu/input/minus.svg"
 interface AmountProps {
   amount: number;
   setAmount: (a: number | ((a: number) => number)) => void;
@@ -7,7 +8,7 @@ interface AmountProps {
 
 const AmountInput: React.FC<AmountProps> = ({ amount, setAmount }) => {
   const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(parseInt(e.target.value));
+    setAmount(parseInt(e.target.value, 10));
   };
 
   const incrementAmount = () => {
@@ -19,9 +20,12 @@ const AmountInput: React.FC<AmountProps> = ({ amount, setAmount }) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <button onClick={decrementAmount} style={{ marginRight: '8px' }}>
-        -
+    <div className="w-1/2 flex justify-between items-center p-2 rounded-3xl bg-[#DDDDDD] gap-x-1">
+      <button
+        onClick={decrementAmount}
+        className="w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center"
+      >
+        <img src={minus} alt="-" />
       </button>
       <input
         type="number"
@@ -29,10 +33,20 @@ const AmountInput: React.FC<AmountProps> = ({ amount, setAmount }) => {
         value={amount}
         onChange={handleAmount}
         min="1"
-        style={{ width: '50px', textAlign: 'center' }}
+        className="bg-[#DDDDDD] text-center appearance-none"
+        style={{
+          width: '50px',
+          textAlign: 'center',
+          appearance: 'none',
+          MozAppearance: 'textfield',
+          WebkitAppearance: 'none',
+        }}
       />
-      <button onClick={incrementAmount} style={{ marginLeft: '8px' }}>
-        +
+      <button
+        onClick={incrementAmount}
+        className="w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center"
+      >
+        <img src={plus} alt="+" />
       </button>
     </div>
   );
