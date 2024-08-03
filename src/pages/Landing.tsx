@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 const Landing : React.FC = () => {
   const {t} = useTranslation()
   return (
-    <div className="w-full flex justify-center flex-col items-center px-4 lg:px-20 py-8">
+    <div className="w-full flex justify-center gap-y-24 flex-col items-center px-4 lg:px-20 py-8">
       <Menu />
       <MenuSection />
       <AddressSection />

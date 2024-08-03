@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 // Define the store configuration with typed reducers
 export const store = configureStore({
   reducer: {
-    mashawiCart: cartReducer,
+    theMashawiCart: cartReducer,
     wishList: wishListReducer,
     user: userReducer,
   },

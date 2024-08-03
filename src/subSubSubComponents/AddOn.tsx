@@ -44,7 +44,7 @@ const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange, onRemoveAddOnChange
             checked={isRemoveChecked}
             onChange={handleRemoveAddOnChange}
           />
-          {t('Remove AddOn')}
+          {t(addOn.text2)}
         </label>
       </div>
     </div>

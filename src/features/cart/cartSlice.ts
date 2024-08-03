@@ -6,7 +6,7 @@ const defaultState: CartState = {
   cartItems: [],
   numItemsInCart: 0,
   cartTotal: 0,
-  shipping: 500,
+  shipping: 5,
   tax: 0,
   orderTotal: 0,
 };
@@ -20,9 +20,9 @@ const calculateProductTotal = (product: CartItem): number => {
 };
 
 const cartSlice = createSlice({
-  name: 'mashawiCart',
+  name: 'theMashawiCart',
   initialState:
-    (JSON.parse(localStorage.getItem('mashawiCart')!) as CartState) ||
+    (JSON.parse(localStorage.getItem('theMashawiCart')!) as CartState) ||
     defaultState,
   reducers: {
     addItem: (state, action: PayloadAction<{ product: CartItem }>) => {
@@ -30,7 +30,8 @@ const cartSlice = createSlice({
       const existingItem = state.cartItems.find((i) => i.id === product.id);
 
       if (existingItem) {
-        existingItem.amount += product.amount;
+        state.numItemsInCart -= existingItem.amount; // Subtract the old amount
+        existingItem.amount = product.amount; // Set the new amount
       } else {
         state.cartItems.push(product);
       }
@@ -41,7 +42,7 @@ const cartSlice = createSlice({
       console.log(state.cartItems);
     },
     clearCart: () => {
-      localStorage.setItem('mashawiCart', JSON.stringify(defaultState));
+      localStorage.setItem('theMashawiCart', JSON.stringify(defaultState));
       toast.error('تم ازالة قائمة الطلبات');
       return defaultState;
     },
@@ -93,7 +94,7 @@ const cartSlice = createSlice({
       }, 0);
       state.tax = 0.1 * state.cartTotal;
       state.orderTotal = state.cartTotal + state.tax + state.shipping;
-      localStorage.setItem('mashawiCart', JSON.stringify(state));
+      localStorage.setItem('theMashawiCart', JSON.stringify(state));
     },
   },
 });

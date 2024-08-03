@@ -6,6 +6,7 @@ import {
   removeItem as removeFromWishList,
 } from '../features/wishList/wishListSlice';
 import { CartItem } from '../assets/types';
+import { useGlobalContext } from '../context/GlobalContext';
 interface WishlistProps {
   data: CartItem;
   item: CartItem | undefined;
@@ -17,7 +18,7 @@ const WishListButton: React.FC<WishlistProps> = ({
   wishListProduct,
 }) => {
   const dispatch = useDispatch();
-
+const {isLangArabic} =useGlobalContext()
   const addItemToWishList = (product: CartItem) => {
     dispatch(addToWishList({ product }));
   };
@@ -28,7 +29,7 @@ const WishListButton: React.FC<WishlistProps> = ({
 
   return (
     <button
-      className={`absolute btn-ghost bg-transparent top-3 left-4 border-0 btn btn-circle ${
+      className={`absolute btn-ghost bg-transparent top-3 ${isLangArabic?"left-4":"right-4"} border-0 btn btn-circle ${
         item?.id === data.id ? 'text-newRed' : 'text-black'
       } text-3xl`}
       onClick={() => {

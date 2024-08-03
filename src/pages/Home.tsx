@@ -7,7 +7,7 @@ const Home = () => {
   const { isLangArabic } = useGlobalContext();
   return (
     <div
-      className="bg-[#DDDDDD] font-abdo relative "
+      className="bg-[#DDDDDD] font-abdo relative w-full m-0 p-0"
       dir={isLangArabic ? 'rtl' : 'ltr'}
     >
       <Header />
