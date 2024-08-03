@@ -143,3 +143,12 @@ export type AddressData = {
   subject: string;
   text: string;
 };
+
+export type GalleryElement = {id:string;img:string};
+export type PrivacyPolicyElement = {id:string;text:string}
+
+// Query Params
+export interface DeliveryQueryParams {
+  queryKey: string[];
+  queryFn: () => Promise<any>;
+}

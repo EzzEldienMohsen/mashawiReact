@@ -1,4 +1,4 @@
-import { AddressData, CartItem, ContactInitialValues, InitialOTPInputs, Link, RegisterData } from "./types";
+import { AddressData, CartItem, ContactInitialValues, GalleryElement, InitialOTPInputs, Link, PrivacyPolicyElement, RegisterData } from "./types";
 import arrow from '../assets/svg/header/arrow.svg';
 import { nanoid } from "@reduxjs/toolkit";
 
@@ -31,6 +31,20 @@ import addMob from './svg/addMob.svg';
 import addTel from './svg/addTel.svg';
 import addTime from './svg/addTime.svg';
 
+// Gallery Images
+
+import im1 from './svg/gallery/firstImage.svg';
+import im2 from './svg/gallery/secondImage.svg';
+import im3 from './svg/gallery/thirdImage.svg';
+import im4 from './svg/gallery/fourthImage.svg';
+import im5 from './svg/gallery/fifthImage.svg';
+import im6 from './svg/gallery/sixthImage.svg';
+import im7 from './svg/gallery/seventhImage.svg';
+import im8 from './svg/gallery/eighthImage.svg';
+import im9 from './svg/gallery/ninethImage.svg';
+import im10 from './svg/gallery/tenthImage.svg';
+import im11 from './svg/gallery/eleventhImage.svg';
+import im12 from './svg/gallery/twilvthImage.svg';
 
 
 
@@ -771,5 +785,49 @@ export const theAddress: AddressData[] = [
     phNumber: '546250809',
     timeIcon: addTime,
     time: '11:00 am - 03:00 am ',
+  },
+];
+
+// Gallery
+export const gallery:GalleryElement[] = [
+  { id: nanoid(), img: im1 },
+  { id: nanoid(), img: im2 },
+  { id: nanoid(), img: im3 },
+  { id: nanoid(), img: im4 },
+  { id: nanoid(), img: im5 },
+  { id: nanoid(), img: im6 },
+  { id: nanoid(), img: im7 },
+  { id: nanoid(), img: im8 },
+  { id: nanoid(), img: im9 },
+  { id: nanoid(), img: im10 },
+  { id: nanoid(), img: im11 },
+  { id: nanoid(), img: im12 },
+];
+
+//  privacy policy fake data
+export const privacyPolicy: PrivacyPolicyElement[] = [
+  {
+    id: nanoid(),
+    text: 'policyFirstLorem',
+  },
+  {
+    id: nanoid(),
+    text: 'policySecondLorem',
+  },
+  {
+    id: nanoid(),
+    text: 'policyThirdLorem',
+  },
+  {
+    id: nanoid(),
+    text: 'policyFirstLorem',
+  },
+  {
+    id: nanoid(),
+    text: 'policySecondLorem',
+  },
+  {
+    id: nanoid(),
+    text: 'policyThirdLorem',
   },
 ];
