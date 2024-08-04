@@ -1,15 +1,12 @@
 import React from 'react';
 import { Policy } from '../components';
-import { privacyPolicy } from '../assets';
-
 import { autoFetch } from '../utils';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
-import { DeliveryQueryParams } from '../assets/types';
+import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
 import { QueryClient } from '@tanstack/react-query';
 
-
-const paymentQuery = (language:string):DeliveryQueryParams => {
+const paymentQuery = (language: string): DeliveryQueryParams => {
   return {
     queryKey: ['payment', language],
     queryFn: () =>
@@ -21,17 +18,18 @@ const paymentQuery = (language:string):DeliveryQueryParams => {
   };
 };
 
-export const loader = (queryClient:QueryClient, language:string) => async ():Promise<any> => {
-  const data = await queryClient.ensureQueryData(paymentQuery(language));
-  return data;
-};
+export const loader =
+  (queryClient: QueryClient, language: string) =>
+  async (): Promise<StaticRequestData> => {
+    const data = await queryClient.ensureQueryData(paymentQuery(language));
+    return data ;
+  };
 
-
-const Payment:React.FC = () => {
-const {t} = useTranslation()
-const {data} = useLoaderData() as any;
-
-  return <Policy title={t("paymentPolicyRoute")} policies={privacyPolicy} />;
+const Payment: React.FC = () => {
+  const { t } = useTranslation();
+  const data = useLoaderData() as StaticRequestData;
+  console.log(data);
+  return <Policy title={t('paymentPolicyRoute')} data={data.data} />;
 };
 
 export default Payment;

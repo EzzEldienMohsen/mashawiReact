@@ -1,10 +1,9 @@
 import React from 'react';
 import { Policy } from '../components';
-import { privacyPolicy } from '../assets';
 import { autoFetch } from '../utils';
 import { useLoaderData } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { DeliveryQueryParams } from '../assets/types';
+import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
 import { QueryClient } from '@tanstack/react-query';
 
 const privacyQuery = (language: string): DeliveryQueryParams => {
@@ -19,17 +18,20 @@ const privacyQuery = (language: string): DeliveryQueryParams => {
   };
 };
 
-export const loader = (queryClient:QueryClient, language:string) => async ():Promise<any> => {
-  const data = await queryClient.ensureQueryData(privacyQuery(language));
-  return data;
-};
+export const loader =
+  (queryClient: QueryClient, language: string) =>
+  async (): Promise<StaticRequestData> => {
+    const data = await queryClient.ensureQueryData(privacyQuery(language));
+    return data as StaticRequestData;
+  };
 
-const Privacy:React.FC = () => {
-  const { data } = useLoaderData() as any;
+const Privacy: React.FC = () => {
+  const { data } = useLoaderData() as StaticRequestData;
   const { t } = useTranslation();
+  console.log(data);
   return (
     <>
-      <Policy title={t('PrivacyPolicyRoute')} policies={privacyPolicy} />
+      <Policy title={t('PrivacyPolicyRoute')} data={data} />
     </>
   );
 };

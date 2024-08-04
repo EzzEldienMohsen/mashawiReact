@@ -1,10 +1,9 @@
 import React from 'react';
 import { Policy } from '../components';
-import { privacyPolicy } from '../assets';
 import { autoFetch } from '../utils';
 import { useLoaderData } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { DeliveryQueryParams } from '../assets/types';
+import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
 import { QueryClient } from '@tanstack/react-query';
 
 const refundQuery = (language:string):DeliveryQueryParams => {
@@ -19,16 +18,16 @@ const refundQuery = (language:string):DeliveryQueryParams => {
   };
 };
 
-export const loader = (queryClient:QueryClient, language:string) => async () :Promise<any> => {
+export const loader = (queryClient:QueryClient, language:string) => async () :Promise<StaticRequestData> => {
   const data = await queryClient.ensureQueryData(refundQuery(language));
-  return data;
+  return data as StaticRequestData;
 };
 
 const Refund:React.FC = () => {
-  const { data } = useLoaderData() as any;
+  const { data } = useLoaderData() as StaticRequestData;
   console.log(data);
   const { t } = useTranslation();
-  return <Policy title={t('refundPageTitle')} policies={privacyPolicy} />;
+  return <Policy title={t('refundPageTitle')} data={data} />;
 };
 
 export default Refund;

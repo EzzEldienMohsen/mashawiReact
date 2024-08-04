@@ -1,13 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { Policy } from '../components';
-import { privacyPolicy } from '../assets';
 import { autoFetch } from '../utils';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
-import { DeliveryQueryParams } from '../assets/types';
+import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
 import { QueryClient } from '@tanstack/react-query';
 
-const termsQuery = (language:string):DeliveryQueryParams => {
+const termsQuery = (language: string): DeliveryQueryParams => {
   return {
     queryKey: ['terms', language],
     queryFn: () =>
@@ -19,16 +18,18 @@ const termsQuery = (language:string):DeliveryQueryParams => {
   };
 };
 
-export const loader = (queryClient:QueryClient, language:string) => async ():Promise<any> => {
-  const data = await queryClient.ensureQueryData(termsQuery(language));
-  return data;
+export const loader =
+  (queryClient: QueryClient, language: string) =>
+  async (): Promise<StaticRequestData> => {
+    const data = await queryClient.ensureQueryData(termsQuery(language));
+    return data as StaticRequestData;
+  };
+
+const Terms: React.FC = () => {
+  const { data } = useLoaderData() as StaticRequestData;
+  console.log(data);
+  const { t } = useTranslation();
+  return <Policy title={t('termsPageTitle')} data={data} />;
 };
 
-const Terms:React.FC = () => {
-  const {data} = useLoaderData() as any;
-  console.log(data)
-  const {t} =useTranslation()
-  return <Policy title={t('termsPageTitle')} policies={privacyPolicy} />;
-}
-
-export default Terms
+export default Terms;

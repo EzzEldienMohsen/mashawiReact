@@ -186,8 +186,10 @@ export type MyOrder =  {
     text: string;
   }
   
-export type StaticRequestData = {
-  data: string;
-  message: string;
-  status: number;
-};
+  export type StaticRequestData = {
+   
+      status: number;
+      message: string;
+      data: string;
+   
+  };
