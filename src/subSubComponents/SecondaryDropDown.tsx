@@ -10,9 +10,7 @@ const SecondaryDropDown: React.FC<{ li: TheLink }> = ({ li }) => {
   const { isLangArabic } = useGlobalContext();
   return (
     <div
-      className={`dropdown-top ${
-        isLangArabic ? 'dropdown-right' : 'dropdown-left'
-      }  dropdown w-[264px] `}
+      className={`dropdown-top  dropdown-right dropdown w-full `}
     >
       <div tabIndex={0} role="button" className="w-full flex justify-between">
         <li className="my-2 text-md md:text-sm hover:text-newRed">
@@ -26,12 +24,12 @@ const SecondaryDropDown: React.FC<{ li: TheLink }> = ({ li }) => {
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content w-full mx-4 menu bg-[#564440] p4 flex flex-col justify-center items-center gap-y-1  font-abdo  text-[#ffffff]   rounded-box z-[1]  p-2 shadow"
+        className="dropdown-content w-4/5 mx-4 menu bg-[#564440]  flex flex-col justify-center items-start gap-y-1  font-abdo  text-[#ffffff]   rounded-box z-[1]  p-2 shadow"
       >
         {privacyLinks.map((li) => {
           return (
             <Link key={t(li.text)} to={li.to}>
-              <li className="my-2 text-md md:text-sm hover:text-newRed">
+              <li className="my-2 text-xs hover:text-newRed">
                 {t(li.text)}
               </li>
             </Link>

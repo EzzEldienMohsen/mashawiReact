@@ -8,6 +8,7 @@ import {
   Link,
   MyOrder,
   PrivacyPolicyElement,
+  ProfileLink,
   RegisterData,
 } from './types';
 import arrow from '../assets/svg/header/arrow.svg';
@@ -61,6 +62,7 @@ import im12 from './svg/gallery/twilvthImage.svg';
 import per from './svg/profile/person.svg';
 import or from './svg/profile/orders.svg';
 import add from './svg/profile/address.svg';
+import wishList from './svg/profile/wishlist.svg';
 
 // OrdersImage
 import orderProfile from './svg/menu/ordersProfile.svg';
@@ -113,6 +115,7 @@ export const navBarLinks: Link[] = [
 ];
 export const myProfileLinks: Link[] = [
   { text: 'wishListRoute', to: '/wishList' },
+  { text: 'profileRoute', to: '/profile' },
   { text: 'myOrdersRoute', to: '/profile/orders' },
   { text: 'myAddressRoute', to: '/profile/address' },
 ];
@@ -840,13 +843,19 @@ export const initialProfileValues: InitialProfileValues = {
   profession: '',
 };
 
-export const profileLinks = [
+export const profileLinks:ProfileLink[] = [
   {
     id: nanoid(),
     img: per,
     text: 'profileRoute',
     to: '/profile',
   },
+   { 
+      id:nanoid(),
+      text: 'wishListRoute',
+      to: '/wishList' ,
+      img:wishList
+    },
   {
     id: nanoid(),
     img: or,
@@ -859,6 +868,8 @@ export const profileLinks = [
     text: 'myAddressRoute',
     to: '/profile/address',
   },
+   
+
 ];
 
 export const genderOptions: { value: string; label: string }[] = [

@@ -52,13 +52,13 @@ const SmallNavBar:React.FC<CloseDrawer> = ({closeDrawer}) => {
             return (
               <button
                 key={t(li.text)}
-                className="w-full flex justify-between"
+                className="w-full mb-2 flex justify-between items-center"
                 onClick={() => {
                   toggleLang();
                   closeDrawer();
                 }}
               >
-                <li className="my-2 text-md md:text-sm hover:text-newRed">
+                <li className=" text-md md:text-sm hover:text-newRed">
                   {t(li.text)}
                 </li>
                 <img
