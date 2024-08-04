@@ -24,7 +24,7 @@ const Card :React.FC<{data:CartItem}>= ({ data }) => {
   };
   return (
     <div
-      className={`my-2 w-3/4 pb-2 md:w-[90%] lg:w-[31%] ${
+      className={`my-2 w-3/4 pb-2 md:w-[90%] lg:w-[22%] ${
         isLangArabic
           ? 'rounded-tr-3xl rounded-bl-3xl'
           : 'rounded-tl-3xl rounded-br-3xl'

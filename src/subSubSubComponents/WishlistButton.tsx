@@ -29,7 +29,7 @@ const {isLangArabic} =useGlobalContext()
 
   return (
     <button
-      className={`absolute btn-ghost bg-transparent top-3 ${isLangArabic?"left-4":"right-4"} border-0 btn btn-circle ${
+      className={`absolute btn-ghost bg-white top-3 ${isLangArabic?"left-4":"right-4"} border-0 btn btn-circle ${
         item?.id === data.id ? 'text-newRed' : 'text-black'
       } text-3xl`}
       onClick={() => {
