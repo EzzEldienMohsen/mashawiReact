@@ -76,12 +76,12 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   return (
     <div>
       <button
-        className="btn bg-newRed text-white flex-row flex justify-between w-full items-center px-4 rounded-full py-2"
+        className="btn bg-newRed text-white text-xs flex-row flex justify-between w-full items-center px-2 rounded-full py-1"
         onClick={() =>
           (document.getElementById(modalId) as HTMLDialogElement).showModal()
         }
       >
-        <img src={src} alt="alt" />
+        <img src={src} alt="alt" className="w-1/5"/>
         {t('addOnsText')}
       </button>
       <dialog id={modalId} className="modal overflow-y-auto">

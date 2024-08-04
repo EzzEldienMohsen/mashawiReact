@@ -50,7 +50,7 @@ const Card :React.FC<{data:CartItem}>= ({ data }) => {
           {data.price} {t(data.currency)}
         </h2>
       </div>
-      <div className="flex px-4 justify-between w-full flex-row  items-center my-2">
+      <div className="flex px-2 gap-x-1 justify-between w-full flex-row  items-center my-2">
         <Modal data={data} theAmount={amount} modalId={modalId} />
         <AmountInput amount={amount} setAmount={setAmount} />
       </div>

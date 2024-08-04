@@ -29,9 +29,9 @@ const {isLangArabic} =useGlobalContext()
 
   return (
     <button
-      className={`absolute btn-ghost bg-white top-3 ${isLangArabic?"left-4":"right-4"} border-0 btn btn-circle ${
+      className={`absolute btn-ghost w-9 h-9 bg-white top-3 ${isLangArabic?"left-4":"right-4"} border-0 flex justify-center items-center rounded-full ${
         item?.id === data.id ? 'text-newRed' : 'text-black'
-      } text-3xl`}
+      } `}
       onClick={() => {
         if (item) {
           removeItemFromWishList(item);
@@ -40,7 +40,7 @@ const {isLangArabic} =useGlobalContext()
         }
       }}
     >
-      <FaHeart />
+      <FaHeart className="w-6"/>
     </button>
   );
 };
