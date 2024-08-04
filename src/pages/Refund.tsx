@@ -20,7 +20,7 @@ const refundQuery = (language:string):DeliveryQueryParams => {
 
 export const loader = (queryClient:QueryClient, language:string) => async () :Promise<StaticRequestData> => {
   const data = await queryClient.ensureQueryData(refundQuery(language));
-  return data as StaticRequestData;
+  return data ;
 };
 
 const Refund:React.FC = () => {

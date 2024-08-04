@@ -148,9 +148,9 @@ export type GalleryElement = {id:string;img:string};
 export type PrivacyPolicyElement = {id:string;text:string}
 
 // Query Params
-export interface DeliveryQueryParams {
+export type DeliveryQueryParams = {
   queryKey: string[];
-  queryFn: () => Promise<any>;
+  queryFn: () => Promise<StaticRequestData>;
 }
 
 export type InitialProfileValues = {

@@ -8,7 +8,7 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
   About,
-  // ContactUs,
+  ContactUs,
   Home,
   Jobs,
   Privacy,
@@ -75,10 +75,10 @@ const AppRouter: React.FC = () => {
           element: <About />,
           loader: aboutLoader(queryClient, language),
         },
-        // {
-        //   path: '/contact',
-        //   element: <ContactUs />,
-        // },
+        {
+          path: '/contact',
+          element: <ContactUs />,
+        },
         {
           path: '/jobs',
           element: <Jobs />,

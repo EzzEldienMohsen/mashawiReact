@@ -19,3 +19,4 @@ export { default as Policy } from './Policy';
 export { default as UserForm } from './UserForm';
 export { default as AboutExcellence } from './AboutExcellence';
 export { default as AboutWhy } from './AboutWhy';
+export { default as Map } from './Map';
