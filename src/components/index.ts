@@ -18,3 +18,4 @@ export { default as SidePageHero } from './SidePageHero';
 export { default as Policy } from './Policy';
 export { default as UserForm } from './UserForm';
 export { default as AboutExcellence } from './AboutExcellence';
+export { default as AboutWhy } from './AboutWhy';

@@ -13,7 +13,7 @@ const AboutExcellence:React.FC = () => {
           return (
             <div
               key={card.id}
-              className="flex gap-x-4  flex-row items-start   lg:justify-start text-start lg:items-start w-full"
+              className="flex gap-x-4   items-start   lg:justify-start text-start lg:items-start w-full"
             >
               <img
                 src={card.src}

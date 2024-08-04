@@ -70,11 +70,14 @@ import orderProfile from './svg/menu/ordersProfile.svg';
 export const whyImg =
   'https://s3-alpha-sig.figma.com/img/d552/f25b/5c2e330ed5e99377cbefe80ee7603291?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nGIxE5JdKXbi8pU2dIq9pCbUwr4LG0ZZRGyQn3csFqPvedatuTPmBw3a6l1Mosn53aJIdKdCt8vzg3nTnZrXpxAW7djZoUXtx6IgBO4H99IOWZ0P0UxPQfOxf54TDTLaYzJfBdKjnsKdcOoIJ-z8vMIez1uvZhbKy7Z54lnVQRKVKjpHCi8pg42krvzv9~wUvx6hggDrTEt2UJi4DnHWRPbZBQ5NeOU~0V-FRHVz2U5HKG6s5je~hpcRcL7B5~cA6VNhvjZ90pIZoaQ69mIViEeq0~Uj21mht84uklL5Hme~81uCetB0Uw284qKt5SvWMxd78f~7aDXdAz-3d5fhtQ__';
 
-// about Excellence Images
+// about  Images
 import img1 from "../assets/svg/about/vision.svg" 
 import img2 from "../assets/svg/about/mission.svg" 
 import img3 from "../assets/svg/about/story.svg" 
 import img4 from "../assets/svg/about/excellence.svg" 
+import checkedLogo from '../assets/svg/about/checked.svg';
+
+
 
 
 // Links Starts Here
@@ -964,5 +967,38 @@ export const excellence: AboutExcellenceUnit[] = [
     src: img4,
     title: 'excellenceTitle4',
     text: 'ExcellenceText4',
+  },
+];
+
+export const whyArray:AboutExcellenceUnit[] = [
+  {
+    id: nanoid(),
+    src: checkedLogo,
+    title: 'whyArrayTitle1',
+    text: 'whyArrayText1',
+  },
+  {
+    id: nanoid(),
+    src: checkedLogo,
+    title: 'whyArrayTitle2',
+    text: 'whyArrayText2',
+  },
+  {
+    id: nanoid(),
+    src: checkedLogo,
+    title: 'whyArrayTitle3',
+    text: 'لأن العمل الناجح يكتمل بفريق منسجم وسعيد!',
+  },
+  {
+    id: nanoid(),
+    src: checkedLogo,
+    title: 'whyArrayTitle4',
+    text: 'whyArrayText4',
+  },
+  {
+    id: nanoid(),
+    src: checkedLogo,
+    title: 'whyArrayTitle5',
+    text: 'whyArrayText5',
   },
 ];

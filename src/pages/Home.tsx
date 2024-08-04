@@ -3,11 +3,11 @@ import { Footer, Header } from '../components';
 import { Outlet } from 'react-router-dom';
 import { useGlobalContext } from './../context/GlobalContext';
 
-const Home = () => {
+const Home:React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   return (
     <div
-      className="bg-[#DDDDDD] font-abdo relative w-full m-0 p-0"
+      className="bg-[#DDDDDD] font-abdo flex flex-col gap-y-10 relative w-full m-0 p-0"
       dir={isLangArabic ? 'rtl' : 'ltr'}
     >
       <Header />

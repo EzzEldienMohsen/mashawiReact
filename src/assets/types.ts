@@ -185,3 +185,9 @@ export type MyOrder =  {
     title: string;
     text: string;
   }
+  
+export type StaticRequestData = {
+  data: string;
+  message: string;
+  status: number;
+};
