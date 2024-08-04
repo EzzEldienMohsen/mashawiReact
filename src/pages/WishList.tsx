@@ -16,17 +16,19 @@ const WishList:React.FC = () => {
           {t('wishListRoute')}
         </h1>
       </div>
-      <div className="my-8 flex flex-col px-4 lg:px-20 justify-center items-center gap-y-5 md:flex-row md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-start lg:gap-x-7  lg:flex-wrap w-full">
-        {items.map((data) => {
-          return <Card data={data} key={data.id} />;
-        })}
+      <div className="w-full flex flex-col justify-center items-center gap-y-4 px-4 lg:px-20">
+        <div className="my-8 flex flex-col  justify-center items-center gap-y-5 md:flex-row md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-between lg:flex-wrap w-full">
+          {items.map((data) => {
+            return <Card data={data} key={data.id} />;
+          })}
+        </div>
+        <button
+          className="bg-newRed text-white btn btn-block rounded-full "
+          onClick={clearWish}
+        >
+          {t('clearWishList')}
+        </button>
       </div>
-      <button
-        className="bg-newRed text-white btn btn-block rounded-full "
-        onClick={clearWish}
-      >
-        {t('clearWishList')}
-      </button>
     </div>
   );
 };
