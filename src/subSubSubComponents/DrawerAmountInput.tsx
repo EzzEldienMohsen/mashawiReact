@@ -19,7 +19,7 @@ const DrawerAmountInput: React.FC<AmountProps> = ({ amount, setAmount }) => {
   };
 
   return (
-    <div className="w-[129px]  flex justify-between items-center p-2 rounded-3xl bg-[#DDDDDD] gap-x-2">
+    <div className="w-full flex justify-between items-center p-2 rounded-3xl bg-[#DDDDDD] gap-x-2">
       <button
         onClick={decrementAmount}
         className="w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center"

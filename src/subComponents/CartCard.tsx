@@ -5,7 +5,7 @@ import { addItem, removeAddOns } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { AddOn, CartItem } from '../assets/types';
-import { AmountInput } from '../subSubSubComponents';
+import {  DrawerAmountInput } from '../subSubSubComponents';
 import { AppDispatch } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 
@@ -109,10 +109,10 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
             })}
           </div>
           <div className="flex md:flex-col justify-between gap-x-1    md:items-end md:justify-end gap-y-3 w-auto">
-            <AmountInput amount={amount} setAmount={setAmount} />
+            <DrawerAmountInput amount={amount} setAmount={setAmount} />
             <button
               onClick={addItemToCart}
-              className="btn bg-newRed text-white flex-row flex justify-between gap-x-[30px] items-center px-4 rounded-full py-2"
+              className="btn bg-newRed text-white flex-row flex justify-between gap-x-[38px] items-center px-4 l rounded-full py-2"
             >
               <img src={addOrder} alt="alt" />
               {t('addOnsText')}

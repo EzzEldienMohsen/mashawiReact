@@ -25,7 +25,7 @@ const SidePageHero:React.FC<SidePageHeroProps>= ({ img, primaryText, secondaryTe
         alt="image"
         className={`${
           isJob ? 'md:-mt-16 lg:-mt-28' : 'mt-2 -mb-24 md:-my-14 lg:-my-20'
-        } w-1/2 md:w-1/4 lg:w-1/3 aspect-square `}
+        } z-40 w-1/2 md:w-1/4 lg:w-1/3 aspect-square `}
       />
     </div>
   );

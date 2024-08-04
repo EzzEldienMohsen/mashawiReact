@@ -26,7 +26,7 @@ const AddressSection:React.FC = () => {
               <p className="text-start text-sm md:text-md lg:text-sm mb-2 text-gray-600 px-1">
                 {t(ad.sideAddress)}
               </p>
-              <div className="flex flex-row gap-x-2 text-start items-center justify-between ">
+              <div className="flex flex-row gap-x-1 text-start items-center justify-between ">
                 <div className="flex flex-row gap-x-1 justify-between lg:text-xs text-sm ">
                   <img src={ad.mobIcon} alt="alt" />{' '}
                   <p className="text-sm lg:text-xs">{ad.mobNumber}</p>
