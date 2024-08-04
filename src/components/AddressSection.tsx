@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 const AddressSection:React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-4 lg:px-20">
+    <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-8 lg:px-20">
       <SectionTitle title={t('branchesAndTimesTitle')} />
       <div className="flex mt-2 flex-col justify-center items-center md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-between lg:items-start md:gap-4 lg:gap-x-2 w-full ">
         {address.map((ad) => {

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 const Orders:React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="my-4 w-full flex flex-col px-4 lg:px-20 justify-center items-center">
+    <div className="my-4 w-full flex flex-col px-8 lg:px-20 justify-center items-center">
       {myOrders.map((order) => {
         return (
           <div

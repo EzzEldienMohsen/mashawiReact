@@ -13,7 +13,7 @@ const CartTotals:React.FC = () => {
   const clearTheCart = () => dispatch(clearCart());
   const {t} = useTranslation()
   return (
-    <div className="flex flex-col my-4 py-4 justify-center items-center border-t-[2px] border-gray-500 w-full px-4 lg:px-20">
+    <div className="flex flex-col my-4 py-4 justify-center items-center border-t-[2px] border-gray-500 w-full px-8 lg:px-20">
       <p className="text-newRed text-lg md:text-xl my-2 lg:text-2xl">
         {t('vatContentText')}
       </p>

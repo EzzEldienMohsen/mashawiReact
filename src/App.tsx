@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
-  // About,
+  About,
   // ContactUs,
   Home,
   Jobs,
@@ -31,7 +31,7 @@ import {
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 
 //  loaders
-// import { loader as aboutLoader } from './pages/About';
+import { loader as aboutLoader } from './pages/About';
 import { loader as paymentLoader } from './pages/Payment';
 import { loader as privacyLoader } from './pages/Privacy';
 import { loader as deliveryLoader } from './pages/Delivery';
@@ -70,11 +70,11 @@ const AppRouter: React.FC = () => {
             </Suspense>
           ),
         },
-        // {
-        //   path: '/about',
-        //   element: <About />,
-        //   loader: aboutLoader(queryClient, language),
-        // },
+        {
+          path: '/about',
+          element: <About />,
+          loader: aboutLoader(queryClient, language),
+        },
         // {
         //   path: '/contact',
         //   element: <ContactUs />,

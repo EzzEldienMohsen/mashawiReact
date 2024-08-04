@@ -35,7 +35,7 @@ const dispatch :AppDispatch = useDispatch()
     <form
       method="post"
       onSubmit={onSubmit}
-      className="flex flex-col w-full lg:w-1/2 justify-start md:justify-evenly items-center lg:justify-center lg:border-0 lg:shadow-none px-4 lg:px-20 py-2 rounded-2xl shadow-2xl my-4"
+      className="flex flex-col w-full lg:w-1/2 justify-start md:justify-evenly items-center lg:justify-center lg:border-0 lg:shadow-none px-8 lg:px-20 py-2 rounded-2xl shadow-2xl my-4"
     >
       <FormRow
         name="old_password"

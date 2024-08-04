@@ -14,7 +14,7 @@ const Profile:React.FC = () => {
           {t('myProfileRoute')}
         </h1>
       </div>
-      <div className="my-8  px-4 lg:px-20  flex flex-row justify-evenly items-center w-full">
+      <div className="my-8  px-8 lg:px-20  flex flex-row justify-evenly items-center w-full">
       
       </div>
       <AnimatePresence mode="wait">

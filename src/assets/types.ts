@@ -178,3 +178,10 @@ export type MyOrder =  {
     date: string;
     address: string;
   };
+
+  export type AboutExcellenceUnit = {
+    id: string;
+    src: string;
+    title: string;
+    text: string;
+  }

@@ -14,7 +14,7 @@ const Policy:React.FC<PolicyProps> = ({ title, policies }) => {
           {title}
         </h1>
       </div>
-      <ul className="list-disc text-start w-full px-4 lg:px-20   mb-6">
+      <ul className="list-disc text-start w-full px-8 lg:px-20   mb-6">
         {policies.map((po) => {
           return (
             <li
