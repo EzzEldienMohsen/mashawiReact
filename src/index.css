@@ -25,3 +25,30 @@ body, html {
     padding: 0;
     overflow-x: hidden;
 }
+
+/* Hide the default date icon in input[type="date"] */
+.input-date::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Placeholder text color */
+::placeholder {
+  color: #b0b0b0; /* Adjust the color to match your design */
+  opacity: 1; /* Firefox */
+  padding:0px 8px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #b0b0b0;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #b0b0b0;
+}
+
+/* Hide the default date icon in input[type="date"] */
+.input-date::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}

@@ -29,7 +29,7 @@ const {isLangArabic} =useGlobalContext()
 
   return (
     <button
-      className={`absolute btn-ghost w-9 h-9 bg-white top-3 ${isLangArabic?"left-4":"right-4"} border-0 flex justify-center items-center rounded-full ${
+      className={`absolute btn-ghost w-8 h-8 bg-white top-3 ${isLangArabic?"left-4":"right-4"} border-0 flex justify-center items-center rounded-full ${
         item?.id === data.id ? 'text-newRed' : 'text-black'
       } `}
       onClick={() => {
@@ -40,7 +40,7 @@ const {isLangArabic} =useGlobalContext()
         }
       }}
     >
-      <FaHeart className="w-6"/>
+      <FaHeart/>
     </button>
   );
 };

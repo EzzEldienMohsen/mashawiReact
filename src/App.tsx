@@ -23,8 +23,8 @@ import {
   ForgetPassword,
   ResetPassword,
   ChangePassword,
-  // Profile,
-  // User,
+  Profile,
+  User,
   // Orders,
   // MyAddress,
 } from './pages';
@@ -132,14 +132,14 @@ const AppRouter: React.FC = () => {
           path: '/reset-password',
           element: <ResetPassword />,
         },
-        // {
-        //   path: 'profile',
-        //   element: <Profile />,
-        //   children: [
-        //     {
-        //       index: true,
-        //       element: <User />,
-        //     },
+        {
+          path: 'profile',
+          element: <Profile />,
+          children: [
+            {
+              index: true,
+              element: <User />,
+            },
         //     {
         //       path: 'orders',
         //       element: <Orders />,
@@ -152,8 +152,8 @@ const AppRouter: React.FC = () => {
         //       path: 'address',
         //       element: <MyAddress />,
         //     },
-        //   ],
-        // },
+          ],
+        },
         {
           path: '/menuList',
           element: (

@@ -16,3 +16,4 @@ export { default as DrawerCartItems } from './DrawerCartItems';
 export { default as DrawerCartTotals } from './DrawerCartTotals';
 export { default as SidePageHero } from './SidePageHero';
 export { default as Policy } from './Policy';
+export { default as UserForm } from './UserForm';

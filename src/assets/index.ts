@@ -1,6 +1,17 @@
-import { AddressData, CartItem, ContactInitialValues, GalleryElement, InitialOTPInputs, Link, PrivacyPolicyElement, RegisterData } from "./types";
+import {
+  AddressData,
+  CartItem,
+  ContactInitialValues,
+  GalleryElement,
+  InitialOTPInputs,
+  InitialProfileValues,
+  Link,
+  MyOrder,
+  PrivacyPolicyElement,
+  RegisterData,
+} from './types';
 import arrow from '../assets/svg/header/arrow.svg';
-import { nanoid } from "@reduxjs/toolkit";
+import { nanoid } from '@reduxjs/toolkit';
 
 // menu images
 import chicken from './svg/menu/chicken.svg';
@@ -46,11 +57,20 @@ import im10 from './svg/gallery/tenthImage.svg';
 import im11 from './svg/gallery/eleventhImage.svg';
 import im12 from './svg/gallery/twilvthImage.svg';
 
+// Links Of Profile
+import per from './svg/profile/person.svg';
+import or from './svg/profile/orders.svg';
+import add from './svg/profile/address.svg';
+
+// OrdersImage
+import orderProfile from './svg/menu/ordersProfile.svg';
+export const whyImg =
+  'https://s3-alpha-sig.figma.com/img/d552/f25b/5c2e330ed5e99377cbefe80ee7603291?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nGIxE5JdKXbi8pU2dIq9pCbUwr4LG0ZZRGyQn3csFqPvedatuTPmBw3a6l1Mosn53aJIdKdCt8vzg3nTnZrXpxAW7djZoUXtx6IgBO4H99IOWZ0P0UxPQfOxf54TDTLaYzJfBdKjnsKdcOoIJ-z8vMIez1uvZhbKy7Z54lnVQRKVKjpHCi8pg42krvzv9~wUvx6hggDrTEt2UJi4DnHWRPbZBQ5NeOU~0V-FRHVz2U5HKG6s5je~hpcRcL7B5~cA6VNhvjZ90pIZoaQ69mIViEeq0~Uj21mht84uklL5Hme~81uCetB0Uw284qKt5SvWMxd78f~7aDXdAz-3d5fhtQ__';
 
 
 
 // Links Starts Here
-export const links:Link[] = [
+export const links: Link[] = [
   { text: 'main', to: '/' },
   { text: 'about', to: '/about' },
   { text: 'newsRoute', to: '/' },
@@ -70,7 +90,7 @@ export const links:Link[] = [
   { text: 'myProfileRoute', to: '/profile' },
 ];
 
-export const headerLinks:Link[] = [
+export const headerLinks: Link[] = [
   { text: 'main', to: '/' },
   { text: 'about', to: '/about' },
   { text: 'branchesRoute', to: '/branches' },
@@ -78,8 +98,7 @@ export const headerLinks:Link[] = [
   { text: 'contactUsRoute', to: '/contact' },
 ];
 
-
-export const navBarLinks:Link[] = [
+export const navBarLinks: Link[] = [
   { text: 'main', to: '/' },
   { text: 'myProfileRoute', to: '/profile', img: arrow },
   { text: 'cartRoute', to: '/cart' },
@@ -90,27 +109,26 @@ export const navBarLinks:Link[] = [
   { text: 'newsRoute', to: '/' },
   { text: 'galleryRoute', to: '/gallery' },
   { text: 'PrivacyPolicyRoute', to: '/privacy', img: arrow },
-  { text: 'lang',to:"", img: arrow },
+  { text: 'lang', to: '', img: arrow },
 ];
-export const myProfileLinks:Link[] = [
+export const myProfileLinks: Link[] = [
   { text: 'wishListRoute', to: '/wishList' },
-  { text: "myOrdersRoute", to: '/profile/orders' },
-  { text:  "myAddressRoute", to: '/profile/address' },
-
+  { text: 'myOrdersRoute', to: '/profile/orders' },
+  { text: 'myAddressRoute', to: '/profile/address' },
 ];
 
-export const privacyLinks:Link[] = [
-    { text: 'PrivacyPolicyRoute', to: '/privacy' },
+export const privacyLinks: Link[] = [
+  { text: 'PrivacyPolicyRoute', to: '/privacy' },
   { text: 'termsPolicyRoute', to: '/terms' },
-  { text: "paymentPolicyRoute", to: '/payment' },
+  { text: 'paymentPolicyRoute', to: '/payment' },
   { text: 'deliveryPolicyRoute', to: '/delivery' },
   { text: 'refundPolicyRoute', to: '/refund' },
-]
+];
 // Links Ends Here
 
 // Form Values Starts Here
 
-export const registerValues:RegisterData = {
+export const registerValues: RegisterData = {
   f_name: '',
   l_name: '',
   phone: '',
@@ -119,7 +137,7 @@ export const registerValues:RegisterData = {
   password_confirmation: '',
 };
 
-export const initialOTP:InitialOTPInputs = {
+export const initialOTP: InitialOTPInputs = {
   firstNum: '',
   secondNum: '',
   thirdNum: '',
@@ -128,17 +146,13 @@ export const initialOTP:InitialOTPInputs = {
   sixthNum: '',
 };
 
-export const contactInitialValues:ContactInitialValues = {
+export const contactInitialValues: ContactInitialValues = {
   name: '',
   email: '',
   mobile: '',
   subject: '',
   text: '',
 };
-
-
-
-
 
 // Menu Items starts here
 export const menuItems: CartItem[] = [
@@ -338,8 +352,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithFries',
         text2: 'menuAddOnWithOut',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -349,8 +362,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithSalad',
         text2: 'menuAddOnWithOutSalad',
-                isChecked:true
-
+        isChecked: true,
       },
     ],
   },
@@ -370,8 +382,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithCheese',
         text2: 'MenuAddOnWithOutCheese',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -381,8 +392,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithCheese',
         text2: 'MenuAddOnWithOutCheese',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -392,8 +402,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithDibs',
         text2: 'menuAddOnWithOutDibs',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -403,8 +412,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithPickles',
         text2: 'menuAddOnWithOutPickles',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -414,8 +422,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithFries',
         text2: 'menuAddOnWithOut',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -425,8 +432,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithSalad',
         text2: 'menuAddOnWithOutSalad',
-                isChecked:true
-
+        isChecked: true,
       },
     ],
   },
@@ -446,8 +452,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithCheese',
         text2: 'MenuAddOnWithOutCheese',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -457,8 +462,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithCheese',
         text2: 'MenuAddOnWithOutCheese',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -468,8 +472,7 @@ export const menuItems: CartItem[] = [
         currency: 'menuItemCurrency',
         text1: 'menuAddOnWithDibs',
         text2: 'menuAddOnWithOutDibs',
-                isChecked:true
-
+        isChecked: true,
       },
       {
         id: nanoid(),
@@ -715,25 +718,17 @@ export const menuItems: CartItem[] = [
   },
 ];
 // Menu Slider
-  export const menuCategories:{icon:string;label:string}[] = [
-    { icon: burger, label: 'burgerText' },
-    { icon: drinks, label: 'drinkText' },
-    { icon: shawarma, label: 'shawText' },
-    { icon: pizza, label: 'pizza' },
-    { icon: chickenSlider, label: 'chicken' },
-    { icon: barbique, label: 'barb' },
-  ];
+export const menuCategories: { icon: string; label: string }[] = [
+  { icon: burger, label: 'burgerText' },
+  { icon: drinks, label: 'drinkText' },
+  { icon: shawarma, label: 'shawText' },
+  { icon: pizza, label: 'pizza' },
+  { icon: chickenSlider, label: 'chicken' },
+  { icon: barbique, label: 'barb' },
+];
 
+// HomePage Data
 
-
-
-
-
-
-
-  // HomePage Data 
-
-  
 export const theAddress: AddressData[] = [
   {
     id: nanoid(),
@@ -789,7 +784,7 @@ export const theAddress: AddressData[] = [
 ];
 
 // Gallery
-export const gallery:GalleryElement[] = [
+export const gallery: GalleryElement[] = [
   { id: nanoid(), img: im1 },
   { id: nanoid(), img: im2 },
   { id: nanoid(), img: im3 },
@@ -831,3 +826,88 @@ export const privacyPolicy: PrivacyPolicyElement[] = [
     text: 'policyThirdLorem',
   },
 ];
+
+// Profile Data
+
+export const initialProfileValues: InitialProfileValues = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  email: '',
+  birthDate: '',
+  gender: '',
+  country: '',
+  profession: '',
+};
+
+export const profileLinks = [
+  {
+    id: nanoid(),
+    img: per,
+    text: 'profileRoute',
+    to: '/profile',
+  },
+  {
+    id: nanoid(),
+    img: or,
+    text: 'myOrdersRoute',
+    to: '/profile/orders',
+  },
+  {
+    id: nanoid(),
+    img: add,
+    text: 'myAddressRoute',
+    to: '/profile/address',
+  },
+];
+
+export const genderOptions: { value: string; label: string }[] = [
+  { value: 'ذكر', label: 'ذكر' },
+  { value: 'انثى', label: 'انثى' },
+  { value: 'اخر', label: 'اخر' },
+  // Add more options as needed
+];
+
+export const countryOptions: { value: string; label: string }[] = [
+  { value: 'usa', label: 'United States' },
+  { value: 'canada', label: 'Canada' },
+  { value: 'mexico', label: 'Mexico' },
+  // Add more countries as needed
+];
+
+export const myOrders:MyOrder[] = [
+  {
+    id: nanoid(),
+    img: orderProfile,
+    title: 'orderTitle',
+    price: 'orderPrice',
+    date: '22-5-2024',
+    address: 'orderAddress',
+  },
+  {
+    id: nanoid(),
+    img: orderProfile,
+    title: 'orderTitle',
+    price: 'orderPrice',
+    date: '22-5-2024',
+    address: 'orderAddress',
+  },
+  {
+    id: nanoid(),
+    img: orderProfile,
+    title: 'orderTitle',
+    price: 'orderPrice',
+    date: '22-5-2024',
+    address: 'orderAddress',
+  },
+  {
+    id: nanoid(),
+    img: orderProfile,
+    title: 'orderTitle',
+    price: 'orderPrice',
+    date: '22-5-2024',
+    address: 'orderAddress',
+  },
+];
+
+

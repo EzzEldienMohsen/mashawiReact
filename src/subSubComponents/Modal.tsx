@@ -76,7 +76,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   return (
     <div>
       <button
-        className="btn bg-newRed text-white text-xs flex-row flex justify-between w-full items-center px-2 rounded-full py-1"
+        className="btn bg-newRed text-white text-xs flex-row flex justify-evenly w-full items-center px-3 rounded-full py-1"
         onClick={() =>
           (document.getElementById(modalId) as HTMLDialogElement).showModal()
         }

@@ -152,3 +152,29 @@ export interface DeliveryQueryParams {
   queryKey: string[];
   queryFn: () => Promise<any>;
 }
+
+export type InitialProfileValues = {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  birthDate: string;
+  gender: string;
+  country: string;
+  profession:string;
+};
+
+export type ProfileLink = {
+  id:string;
+  img:string;
+  text:string;
+  to:string;
+}
+export type MyOrder =  {
+    id:string;
+    img: string;
+    title: string;
+    price: string;
+    date: string;
+    address: string;
+  };
