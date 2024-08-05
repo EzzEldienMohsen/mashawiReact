@@ -102,6 +102,10 @@ import tr4 from "../assets/svg/traker/delivered.svg"
 import or1 from "../assets/svg/delivery/proceed.svg"
 import or2 from "../assets/svg/delivery/cardData.svg"
 import or3 from "../assets/svg/delivery/ordered.svg"
+// Proceed Images
+import pr1 from "../assets/svg/proceed/proceed.svg"
+import pr2 from "../assets/svg/proceed/cardData.svg"
+import pr3 from "../assets/svg/proceed/ordered.svg"
 
 
 // Links Starts Here
@@ -1143,5 +1147,25 @@ export const singleEvent :SingleEvent = {
       img: or3,
       text: 'deliveryDone',
       status: 'complete',
+    },
+  ]; 
+  export const proceed: Tracker[] = [
+    {
+      id: nanoid(),
+      img: pr1,
+      text: 'deliveredProcess',
+      status: 'complete',
+    },
+    {
+      id: nanoid(),
+      img: pr2,
+      text: 'deliveryCard',
+      status: 'upcoming',
+    },
+    {
+      id: nanoid(),
+      img: pr3,
+      text: 'deliveryDone',
+      status: 'upcoming',
     },
   ]; 

@@ -153,5 +153,14 @@
   "deliveredProcess":"complete your purchase",
   "deliveryCard":"card data",
   "deliveryDone":"ordered",
-  "deliveryText":"Congratulations, the order has been completed... Thank you for your cooperation"
+  "deliveryText":"Congratulations, the order has been completed... Thank you for your cooperation",
+  "formInstructions":"Write your notes here, such as change, invoice, and payment in a different currency....",
+  "notes":"Notes",
+  "paymentMethod":"payment method",
+  "checkboxText1":"cash payment",
+  "checkboxText2":"online payment",
+  "discount":"Use a coupon",
+  "coupon":"Enter the discount coupon",
+  "usage":"usage",
+  "cancellation":"cancel"
 }
