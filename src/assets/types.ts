@@ -247,3 +247,9 @@ export type SingleEvent = {
   id: string;
   text: string;
 };
+export type Tracker = {
+  id: string;
+  text: string;
+  img: string;
+  status: 'complete' | 'upcoming';
+};

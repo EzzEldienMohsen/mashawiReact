@@ -13,6 +13,7 @@ import {
   ProfileLink,
   RegisterData,
   SingleEvent,
+  Tracker,
 } from './types';
 import arrow from '../assets/svg/header/arrow.svg';
 import { nanoid } from '@reduxjs/toolkit';
@@ -91,7 +92,11 @@ import pic8 from "../assets/svg/events/pic8.svg"
 import dateIcon from "../assets/svg/events/dateIcon.svg"
 import eventPic from "../assets/svg/events/eventPic.svg"
 
-
+// tracker order Images
+import tr1 from "../assets/svg/traker/ordered.svg"
+import tr2 from "../assets/svg/traker/preparing.svg"
+import tr3 from "../assets/svg/traker/delivering.svg"
+import tr4 from "../assets/svg/traker/delivered.svg"
 
 // Links Starts Here
 export const links: Link[] = [
@@ -1085,3 +1090,32 @@ export const singleEvent :SingleEvent = {
     title: 'eventsTitle',
     text: "policyFirstLorem"
   }
+
+
+  // Tracker Order 
+  export const tracker:Tracker[] = [
+    {
+      id:nanoid(),
+      img:tr1,
+      text:"orderOrdered",
+      status:"complete"
+    },
+    {
+      id:nanoid(),
+      img:tr2,
+      text:"orderPreparing",
+      status:"upcoming"
+    },
+    {
+      id:nanoid(),
+      img:tr3,
+      text:"orderDelivering",
+      status:"upcoming"
+    },
+    {
+      id:nanoid(),
+      img:tr4,
+      text:"orderDelivered",
+      status:"upcoming"
+    },
+  ] 

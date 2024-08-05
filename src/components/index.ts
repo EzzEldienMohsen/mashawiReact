@@ -21,3 +21,4 @@ export { default as AboutExcellence } from './AboutExcellence';
 export { default as AboutWhy } from './AboutWhy';
 export { default as Map } from './Map';
 export { default as EventsCard } from './EventsCard';
+export { default as Steps } from './Steps';

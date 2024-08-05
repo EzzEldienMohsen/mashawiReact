@@ -142,5 +142,11 @@
   "eventsRoute":"events",
   "eventsDate":"Three days ago",
   "eventsTitle":"Opening of City Center Ajman branch",
-  "eventsButton":"Details"
+  "eventsButton":"Details",
+  "orderTracker":"track your order",
+  "orderOrdered":"order is done",
+  "orderPreparing":"preparing",
+  "orderDelivering":"delivering",
+  "orderDelivered":"delivered",
+  "orderText":"Dear customer, the order has been placed and will be prepared to reach you as soon as possible"
 }

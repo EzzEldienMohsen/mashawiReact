@@ -139,8 +139,14 @@
   "addOnModalTitle": "إضافات حسب الطلب",
   "lang": "اللغة",
   "signOut": "تسجيل خروج",
-  "eventsRoute" : "الفعاليات",
-  "eventsDate" : "منذ ثلاثة أيام",
-  "eventsTitle" : "افتتاح فرع سيتي سنتر عجمان",
-  "eventsButton":"تفاصيل"
+  "eventsRoute": "الفعاليات",
+  "eventsDate": "منذ ثلاثة أيام",
+  "eventsTitle": "افتتاح فرع سيتي سنتر عجمان",
+  "eventsButton": "تفاصيل",
+  "orderTracker": "تتبع الطلب",
+  "orderOrdered": "تم الطلب",
+  "orderPreparing": "جاري التحضير",
+  "orderDelivering":"جاري التوصيل",
+  "orderDelivered":"تم التوصيل",
+  "orderText":"عزيزي العميل تم الطلب و سيتم تجهيزه للوصول اليك في اسرع وقت"
 }
