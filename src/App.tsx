@@ -100,12 +100,13 @@ const AppRouter: React.FC = () => {
           element: <News />,
         },
         {
-          path: '/delivered',
-          element: <DeliveredPage />,
-        },
-        {
           path: '/jobs',
           element: <Jobs />,
+        },
+        // UnRouted Pages
+        {
+          path: '/delivered',
+          element: <DeliveredPage />,
         },
         {
           path: '/proceed',
