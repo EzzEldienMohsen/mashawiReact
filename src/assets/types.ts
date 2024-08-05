@@ -149,7 +149,6 @@ export type ContactInitialValues = {
 export type GalleryElement = { id: string; img: string };
 export type PrivacyPolicyElement = { id: string; text: string };
 
-
 export type InitialProfileValues = {
   firstName: string;
   lastName: string;
@@ -230,7 +229,7 @@ export type PrivacyResp = {
     method: string;
   };
   request: object;
-}
+};
 
 export type Event = {
   img: string;
@@ -238,4 +237,13 @@ export type Event = {
   timeText: string;
   title: string;
   id: string;
+};
+
+export type SingleEvent = {
+  img: string;
+  icon: string;
+  timeText: string;
+  title: string;
+  id: string;
+  text: string;
 };

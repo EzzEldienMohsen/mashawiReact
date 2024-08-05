@@ -27,6 +27,7 @@ import {
   User,
   Events,
   News,
+  SingleEventPage,
   // Orders,
   // MyAddress,
 } from './pages';
@@ -84,6 +85,10 @@ const AppRouter: React.FC = () => {
         {
           path: '/events',
           element: <Events />,
+        },
+        {
+          path: '/singleEvent',
+          element: <SingleEventPage />,
         },
         {
           path: '/news',

@@ -28,8 +28,8 @@ const EventsCard: React.FC<{ data: Event }> = ({ data }) => {
         <img src={data.icon} alt="date"/>
         <p className='font-abdo text-sm md:text-xs font-light'>{t(data.timeText)}</p>
       </div>
-      <h1 className="font-abdo text-lg md:text-sm font-semibold">{t(data.title)}</h1>
-      <Link to="" className="btn w-4/5 bg-newRed text-white font-abdo font-normal rounded-full" >{t("eventsButton")}</Link>
+      <h1 className="font-abdo text-md md:text-sm font-semibold">{t(data.title)}</h1>
+      <Link to="/singleEvent" className="btn w-4/5 bg-newRed text-white font-abdo font-normal rounded-full" >{t("eventsButton")}</Link>
     </div>
   );
 };

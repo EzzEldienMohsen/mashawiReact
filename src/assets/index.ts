@@ -12,6 +12,7 @@ import {
   PrivacyPolicyElement,
   ProfileLink,
   RegisterData,
+  SingleEvent,
 } from './types';
 import arrow from '../assets/svg/header/arrow.svg';
 import { nanoid } from '@reduxjs/toolkit';
@@ -88,6 +89,7 @@ import pic6 from "../assets/svg/events/pic6.svg"
 import pic7 from "../assets/svg/events/pic7.svg"
 import pic8 from "../assets/svg/events/pic8.svg"
 import dateIcon from "../assets/svg/events/dateIcon.svg"
+import eventPic from "../assets/svg/events/eventPic.svg"
 
 
 
@@ -1074,3 +1076,12 @@ export const events: Event[] = [
     title: 'eventsTitle',
   },
 ];
+
+export const singleEvent :SingleEvent = {
+    id: nanoid(),
+    img: eventPic,
+    icon: dateIcon,
+    timeText: 'eventsDate',
+    title: 'eventsTitle',
+    text: "policyFirstLorem"
+  }
