@@ -27,13 +27,8 @@ const Steps: React.FC<{tracker:Tracker[]}> = ({ tracker }) => {
           {index < tracker.length - 1 && (
             <div className=" md:flex-grow items-center hidden md:flex">
               <div
-                className="w-full h-1 mx-2 rounded-full bg-[#939393]"
-                style={{
-                  backgroundColor:
-                    tracker[index + 1].status === 'complete'
-                      ? '#e3342f'
-                      : '#939393',
-                }}
+                className={`w-full h-1 mx-2 rounded-full  ${tracker[index].status === 'complete'? 'bg-newRed': 'bg-[#939393]'}`}
+              
               ></div>
             </div>
           )}

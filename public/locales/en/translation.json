@@ -148,5 +148,10 @@
   "orderPreparing":"preparing",
   "orderDelivering":"delivering",
   "orderDelivered":"delivered",
-  "orderText":"Dear customer, the order has been placed and will be prepared to reach you as soon as possible"
+  "orderText":"Dear customer, the order has been placed and will be prepared to reach you as soon as possible",
+  "deliveredTitle":"delivered",
+  "deliveredProcess":"complete your purchase",
+  "deliveryCard":"card data",
+  "deliveryDone":"ordered",
+  "deliveryText":"Congratulations, the order has been completed... Thank you for your cooperation"
 }

@@ -148,5 +148,10 @@
   "orderPreparing": "جاري التحضير",
   "orderDelivering":"جاري التوصيل",
   "orderDelivered":"تم التوصيل",
-  "orderText":"عزيزي العميل تم الطلب و سيتم تجهيزه للوصول اليك في اسرع وقت"
+  "orderText":"عزيزي العميل تم الطلب و سيتم تجهيزه للوصول اليك في اسرع وقت",
+  "deliveredTitle":"تم التوصيل",
+  "deliveredProcess":"استكمال الشراء",
+  "deliveryCard" :"بيانات البطاقة",
+  "deliveryDone":"تم الطلب",
+  "deliveryText":"تهانينا تم اكتمال الطلب ... شكراً لك لتعاونك معنا"
 }

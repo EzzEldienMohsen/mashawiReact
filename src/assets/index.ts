@@ -98,6 +98,12 @@ import tr2 from "../assets/svg/traker/preparing.svg"
 import tr3 from "../assets/svg/traker/delivering.svg"
 import tr4 from "../assets/svg/traker/delivered.svg"
 
+// Done Ordr Images
+import or1 from "../assets/svg/delivery/proceed.svg"
+import or2 from "../assets/svg/delivery/cardData.svg"
+import or3 from "../assets/svg/delivery/ordered.svg"
+
+
 // Links Starts Here
 export const links: Link[] = [
   { text: 'main', to: '/' },
@@ -1092,7 +1098,7 @@ export const singleEvent :SingleEvent = {
   }
 
 
-  // Tracker Order 
+  // Steps Orders
   export const tracker:Tracker[] = [
     {
       id:nanoid(),
@@ -1119,3 +1125,23 @@ export const singleEvent :SingleEvent = {
       status:"upcoming"
     },
   ] 
+  export const completed: Tracker[] = [
+    {
+      id: nanoid(),
+      img: or1,
+      text: 'deliveredProcess',
+      status: 'complete',
+    },
+    {
+      id: nanoid(),
+      img: or2,
+      text: 'deliveryCard',
+      status: 'complete',
+    },
+    {
+      id: nanoid(),
+      img: or3,
+      text: 'deliveryDone',
+      status: 'complete',
+    },
+  ]; 

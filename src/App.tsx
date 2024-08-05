@@ -29,6 +29,7 @@ import {
   News,
   SingleEventPage,
   TrackOrder,
+  DeliveredPage,
   // Orders,
   // MyAddress,
 } from './pages';
@@ -95,6 +96,10 @@ const AppRouter: React.FC = () => {
         {
           path: '/news',
           element: <News />,
+        },
+        {
+          path: '/delivered',
+          element: <DeliveredPage />,
         },
         {
           path: '/jobs',
