@@ -31,6 +31,7 @@ import {
   TrackOrder,
   DeliveredPage,
   ProceedPage,
+  ProceedDelivery,
   // Orders,
   // MyAddress,
 } from './pages';
@@ -109,6 +110,10 @@ const AppRouter: React.FC = () => {
         {
           path: '/proceed',
           element: <ProceedPage />,
+        },
+        {
+          path: '/proceedDelivery',
+          element: <ProceedDelivery />,
         },
         {
           path: '/track',

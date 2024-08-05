@@ -162,5 +162,7 @@
   "discount":"Use a coupon",
   "coupon":"Enter the discount coupon",
   "usage":"usage",
-  "cancellation":"cancel"
+  "cancellation":"cancel",
+  "add":"address",
+  "newAdd":"add new address"
 }

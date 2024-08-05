@@ -923,6 +923,12 @@ export const countryOptions: { value: string; label: string }[] = [
   { value: 'mexico', label: 'Mexico' },
   // Add more countries as needed
 ];
+export const addressOptions: { value: string; label: string }[] = [
+  { value: 'usa', label: 'United States' },
+  { value: 'canada', label: 'Canada' },
+  { value: 'mexico', label: 'Mexico' },
+  // Add more countries as needed
+];
 
 export const myOrders:MyOrder[] = [
   {

@@ -23,3 +23,4 @@ export { default as Map } from './Map';
 export { default as EventsCard } from './EventsCard';
 export { default as Steps } from './Steps';
 export { default as ProceedPageForm } from './ProceedPageForm';
+export { default as ProceedDeliveryForm } from './ProceedDeliveryForm';
