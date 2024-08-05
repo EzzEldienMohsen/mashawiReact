@@ -4,7 +4,7 @@ import { autoFetch } from '../utils';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
 import { QueryClient } from '@tanstack/react-query';
-import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
+import { DeliveryQueryParams, PrivacyResp, StaticRequestData } from '../assets/types';
 
 
 
@@ -29,7 +29,7 @@ export const loader =
 
 const Delivery: React.FC = () => {
   const { t } = useTranslation();
-  const data = useLoaderData() as StaticRequestData;
+  const {data} = useLoaderData() as PrivacyResp;
   console.log(data)
   return <Policy title={t('deliveryPolicyRoute')} data={data} />;
 };

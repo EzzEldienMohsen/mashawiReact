@@ -3,7 +3,7 @@ import { Policy } from '../components';
 import { autoFetch } from '../utils';
 import { useLoaderData } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
+import { DeliveryQueryParams, PrivacyResp, StaticRequestData } from '../assets/types';
 import { QueryClient } from '@tanstack/react-query';
 
 const refundQuery = (language:string):DeliveryQueryParams => {
@@ -24,7 +24,7 @@ export const loader = (queryClient:QueryClient, language:string) => async () :Pr
 };
 
 const Refund:React.FC = () => {
-  const data  = useLoaderData() as StaticRequestData;
+  const {data } = useLoaderData() as PrivacyResp;
   console.log(data);
   const { t } = useTranslation();
   return <Policy title={t('refundPageTitle')} data={data} />;

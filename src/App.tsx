@@ -112,7 +112,7 @@ const AppRouter: React.FC = () => {
           element: <ProceedPage />,
         },
         {
-          path: '/proceedDelivery',
+          path: '/proceed-delivery',
           element: <ProceedDelivery />,
         },
         {
