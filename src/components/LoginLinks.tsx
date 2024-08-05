@@ -4,7 +4,7 @@ import facebook from "../assets/svg/facebookLogin.svg"
 import apple from "../assets/svg/appleLogin.svg"
 import { useTranslation } from 'react-i18next';
 
-const LoginLinks = () => {
+const LoginLinks:React.FC = () => {
   const {t} = useTranslation()
   return (
     <div className="flex flex-col justify-center items-center my-4 w-full">

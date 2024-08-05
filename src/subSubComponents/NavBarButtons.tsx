@@ -1,7 +1,5 @@
 import React from 'react';
-import userImg from '../assets/svg/header/user.svg';
 import { useGlobalContext } from '../context/GlobalContext';
-import { Link } from 'react-router-dom';
 import { CartDrawer, UserDropDown } from '../subSubSubComponents';
 
 const NavBarButtons: React.FC = () => {

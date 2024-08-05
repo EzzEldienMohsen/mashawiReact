@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 
 const ProceedTotals:React.FC= () => {
-  const { cartTotal, shipping, tax, orderTotal } = useTypedSelector(
+  const { cartTotal, tax, orderTotal } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
   );
   const dispatch: AppDispatch = useDispatch();

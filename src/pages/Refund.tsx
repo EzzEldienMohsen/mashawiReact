@@ -24,7 +24,7 @@ export const loader = (queryClient:QueryClient, language:string) => async () :Pr
 };
 
 const Refund:React.FC = () => {
-  const { data } = useLoaderData() as StaticRequestData;
+  const data  = useLoaderData() as StaticRequestData;
   console.log(data);
   const { t } = useTranslation();
   return <Policy title={t('refundPageTitle')} data={data} />;

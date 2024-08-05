@@ -24,7 +24,7 @@ export const loader =
   (queryClient: QueryClient, language: string) =>
   async (): Promise<StaticRequestData> => {
     const data = await queryClient.ensureQueryData(deliveryQuery(language));
-    return data.data;
+    return data;
   };
 
 const Delivery: React.FC = () => {

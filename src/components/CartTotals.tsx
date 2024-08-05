@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 const CartTotals:React.FC = () => {
-  const { cartTotal, shipping, tax, orderTotal } = useTypedSelector(
+  const { cartTotal } = useTypedSelector(
     (state:RootState) => state.theMashawiCart
   );
   const dispatch:AppDispatch = useDispatch();

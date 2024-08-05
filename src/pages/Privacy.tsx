@@ -22,13 +22,13 @@ export const loader =
   (queryClient: QueryClient, language: string) =>
   async (): Promise<StaticRequestData> => {
     const data = await queryClient.ensureQueryData(privacyQuery(language));
-    return data as StaticRequestData;
+    return data ;
   };
 
 const Privacy: React.FC = () => {
-  const { data } = useLoaderData() as StaticRequestData;
   const { t } = useTranslation();
-  console.log(data);
+  const  data  = useLoaderData() as StaticRequestData;
+  console.log(typeof data);
   return (
     <>
       <Policy title={t('PrivacyPolicyRoute')} data={data} />

@@ -26,7 +26,7 @@ export const loader =
   };
 
 const Terms: React.FC = () => {
-  const { data } = useLoaderData() as StaticRequestData;
+  const  data  = useLoaderData() as StaticRequestData;
   console.log(data);
   const { t } = useTranslation();
   return <Policy title={t('termsPageTitle')} data={data} />;

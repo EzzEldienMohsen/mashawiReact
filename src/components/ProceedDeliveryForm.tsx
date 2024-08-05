@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store';
+// import { useDispatch } from 'react-redux';
+// import { AppDispatch } from '../store';
 import { useTranslation } from 'react-i18next';
 import { FormRow, FormTextArea, ProceedTotals } from '../subComponents';
 import { IconFormRow } from '../subSubComponents';
@@ -26,7 +26,7 @@ const ProceedDeliveryForm: React.FC = () => {
   const [values, setValues] = React.useState<ProceedPageProps>(initialValues);
   const [checked, setChecked] = React.useState<string | null>(null);
 
-  const dispatch: AppDispatch = useDispatch();
+  // const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
 
   const handleChange = (

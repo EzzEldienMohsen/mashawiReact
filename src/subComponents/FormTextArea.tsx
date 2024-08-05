@@ -5,7 +5,6 @@ import { useGlobalContext } from '../context/GlobalContext';
 const FormTextArea: React.FC<FormRowProps> = ({
   name,
   label,
-  type,
   value,
   handleChange,
   placeHolder,
@@ -13,7 +12,6 @@ const FormTextArea: React.FC<FormRowProps> = ({
   full,
   icon,
   isOTP,
-  options,
 }) => {
   const {isLangArabic} = useGlobalContext()
   return (
