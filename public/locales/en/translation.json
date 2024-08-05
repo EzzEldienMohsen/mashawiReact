@@ -138,5 +138,9 @@
   "addOnsText": "Add-ons",
   "addOnModalTitle": "Custom Add-ons",
   "lang": "language",
-  "signOut": "log out"
+  "signOut": "log out",
+  "eventsRoute":"events",
+  "eventsDate":"Three days ago",
+  "eventsTitle":"Opening of City Center Ajman branch",
+  "eventsButton":"Details"
 }

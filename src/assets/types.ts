@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 export interface AddOn {
   id: string;
@@ -9,7 +9,7 @@ export interface AddOn {
   currency: string;
   text1: string;
   text2: string;
-};
+}
 
 export type CartItem = {
   id: string;
@@ -28,7 +28,7 @@ export interface CartState {
   shipping: number;
   tax: number;
   orderTotal: number;
-};
+}
 export interface ApiResponse {
   message?: string;
   data?: any;
@@ -68,7 +68,7 @@ export type LoginData = {
   password: string;
 };
 
-export type ResendOTPData = { email:string};
+export type ResendOTPData = { email: string };
 export type ForgetPasswordData = {
   email: string;
 };
@@ -82,10 +82,12 @@ export type ResetPasswordData = {
   token: string;
 };
 export type Link = {
-  text:string;to:string; img?:string;
-}
+  text: string;
+  to: string;
+  img?: string;
+};
 
-export type Option = {  label:string;value:string}
+export type Option = { label: string; value: string };
 export type FormRowProps = {
   name: string;
   type: string;
@@ -96,12 +98,12 @@ export type FormRowProps = {
   ) => void;
   value: string;
   icon?: string;
-  high?:boolean;
-  full?:boolean;
-  placeHolder?:string;
-  label?:string;
-  isOTP?:boolean;
-  options?:Option[]
+  high?: boolean;
+  full?: boolean;
+  placeHolder?: string;
+  label?: string;
+  isOTP?: boolean;
+  options?: Option[];
 };
 export type Error403 = {
   status: number;
@@ -109,7 +111,7 @@ export type Error403 = {
   data: null;
 };
 
-export type  InitialOTPInputs = {
+export type InitialOTPInputs = {
   firstNum: string;
   secondNum: string;
   thirdNum: string;
@@ -125,33 +127,28 @@ export interface ChangePasswordData {
 }
 
 export type AddressData = {
-  id:string;
-  icon:string;
-    mainAddress: string;
-    sideAddress: string;
-    mobIcon: string;
-    mobNumber: string;
-    phIcon:string;
-    phNumber: string;
-    timeIcon: string;
-    time: string;
-  }
-  export type ContactInitialValues = {
+  id: string;
+  icon: string;
+  mainAddress: string;
+  sideAddress: string;
+  mobIcon: string;
+  mobNumber: string;
+  phIcon: string;
+  phNumber: string;
+  timeIcon: string;
+  time: string;
+};
+export type ContactInitialValues = {
   name: string;
   email: string;
-  mobile:string;
+  mobile: string;
   subject: string;
   text: string;
 };
 
-export type GalleryElement = {id:string;img:string};
-export type PrivacyPolicyElement = {id:string;text:string}
+export type GalleryElement = { id: string; img: string };
+export type PrivacyPolicyElement = { id: string; text: string };
 
-// Query Params
-export type DeliveryQueryParams = {
-  queryKey: string[];
-  queryFn: () => Promise<StaticRequestData>;
-}
 
 export type InitialProfileValues = {
   firstName: string;
@@ -161,35 +158,84 @@ export type InitialProfileValues = {
   birthDate: string;
   gender: string;
   country: string;
-  profession:string;
+  profession: string;
 };
 
 export type ProfileLink = {
-  id:string;
-  img:string;
-  text:string;
-  to:string;
-}
-export type MyOrder =  {
-    id:string;
-    img: string;
-    title: string;
-    price: string;
-    date: string;
-    address: string;
-  };
+  id: string;
+  img: string;
+  text: string;
+  to: string;
+};
+export type MyOrder = {
+  id: string;
+  img: string;
+  title: string;
+  price: string;
+  date: string;
+  address: string;
+};
 
-  export type AboutExcellenceUnit = {
-    id: string;
-    src: string;
-    title: string;
-    text: string;
-  }
-  
-  export type StaticRequestData = {
-   
-      status: number;
-      message: string;
-      data: string;
-   
+export type AboutExcellenceUnit = {
+  id: string;
+  src: string;
+  title: string;
+  text: string;
+};
+// Query Params
+export type DeliveryQueryParams = {
+  queryKey: string[];
+  queryFn: () => Promise<StaticRequestData>;
+};
+
+export type StaticRequestData = {
+  status: number;
+  message: string;
+  data: string;
+};
+
+export type PrivacyResp = {
+  data: {
+    status: number;
+    message: string;
+    data: string;
   };
+  status: number;
+  statusText: string;
+  headers: {
+    'cache-control': string;
+    'content-type': string;
+  };
+  config: {
+    transitional: {
+      silentJSONParsing: boolean;
+      forcedJSONParsing: boolean;
+      clarifyTimeoutError: boolean;
+    };
+    adapter: string[];
+    transformRequest: (null | any)[];
+    transformResponse: (null | any)[];
+    timeout: number;
+    xsrfCookieName: string;
+    xsrfHeaderName: string;
+    maxContentLength: number;
+    maxBodyLength: number;
+    env: object;
+    headers: {
+      Accept: string;
+      lang: string;
+    };
+    baseURL: string;
+    url: string;
+    method: string;
+  };
+  request: object;
+}
+
+export type Event = {
+  img: string;
+  icon: string;
+  timeText: string;
+  title: string;
+  id: string;
+};

@@ -14,7 +14,7 @@ const privacyQuery = (language: string): DeliveryQueryParams => {
         headers: {
           lang: language,
         },
-      }),
+      })
   };
 };
 

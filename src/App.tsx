@@ -25,6 +25,8 @@ import {
   ChangePassword,
   Profile,
   User,
+  Events,
+  News,
   // Orders,
   // MyAddress,
 } from './pages';
@@ -78,6 +80,14 @@ const AppRouter: React.FC = () => {
         {
           path: '/contact',
           element: <ContactUs />,
+        },
+        {
+          path: '/events',
+          element: <Events />,
+        },
+        {
+          path: '/news',
+          element: <News />,
         },
         {
           path: '/jobs',

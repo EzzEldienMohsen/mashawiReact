@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { User } from '../assets/types';
+import { StaticRequestData, User } from '../assets/types';
 
 // Define the base URL
 const url = 'https://mshawy.trendline.marketing/api/v1';
@@ -9,8 +9,16 @@ export const autoFetch: AxiosInstance = axios.create({
   baseURL: url,
 });
 
-// Define types for user
-
+// Response normalization
+export const normalizeResponse = (response: any): StaticRequestData => {
+  if ('status' in response && 'message' in response && 'data' in response) {
+    return response;
+  } else if ('data' in response && 'status' in response.data && 'message' in response.data && 'data' in response.data) {
+    return response.data;
+  } else {
+    throw new Error("Unexpected response structure");
+  }
+};
 
 // Add user to localStorage
 export const addUserToLocalStorage = (user: User): void => {
