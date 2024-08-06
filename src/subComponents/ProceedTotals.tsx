@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 
-const ProceedTotals:React.FC= () => {
+const ProceedTotals: React.FC = () => {
   const { cartTotal, tax, orderTotal } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
   );
@@ -30,11 +30,11 @@ const ProceedTotals:React.FC= () => {
       {/* TAX precentage */}
       <p className=" pb-2 flex w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('taxrsText')}</span>
-        <span className="font-medium">10%</span>
+        <span className="font-medium">5%</span>
       </p>
       {/* TAX  */}
       <p className=" pb-2 flex w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
-        <span>{t('taxrsText')}</span>
+        <span>{t('taxValue')}</span>
         <span className="font-medium">{formatPrice(tax)}</span>
       </p>
       {/* ORDER TOTAL */}
@@ -60,6 +60,6 @@ const ProceedTotals:React.FC= () => {
       </button>
     </div>
   );
-}
+};
 
-export default ProceedTotals
+export default ProceedTotals;

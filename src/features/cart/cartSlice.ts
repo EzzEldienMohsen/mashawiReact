@@ -92,7 +92,7 @@ const cartSlice = createSlice({
       state.cartTotal = state.cartItems.reduce((total, item) => {
         return total + calculateProductTotal(item);
       }, 0);
-      state.tax = 0.1 * state.cartTotal;
+      state.tax = 0.05 * state.cartTotal;
       state.orderTotal = state.cartTotal + state.tax + state.shipping;
       localStorage.setItem('theMashawiCart', JSON.stringify(state));
     },
