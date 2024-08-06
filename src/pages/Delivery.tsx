@@ -4,9 +4,7 @@ import { autoFetch } from '../utils';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
 import { QueryClient } from '@tanstack/react-query';
-import { DeliveryQueryParams, PrivacyResp, StaticRequestData } from '../assets/types';
-
-
+import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
 
 const deliveryQuery = (language: string): DeliveryQueryParams => {
   return {
@@ -29,8 +27,9 @@ export const loader =
 
 const Delivery: React.FC = () => {
   const { t } = useTranslation();
-  const {data} = useLoaderData() as PrivacyResp;
-  console.log(data)
+  const axiosData: any = useLoaderData();
+  const data: StaticRequestData = axiosData.data;
+  console.log(data);
   return <Policy title={t('deliveryPolicyRoute')} data={data} />;
 };
 

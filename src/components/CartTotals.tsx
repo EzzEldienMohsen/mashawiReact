@@ -5,13 +5,13 @@ import { clearCart } from '../features/cart/cartSlice';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
-const CartTotals:React.FC = () => {
+const CartTotals: React.FC = () => {
   const { cartTotal } = useTypedSelector(
-    (state:RootState) => state.theMashawiCart
+    (state: RootState) => state.theMashawiCart
   );
-  const dispatch:AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const clearTheCart = () => dispatch(clearCart());
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col my-4 py-4 justify-center items-center border-t-[2px] border-gray-500 w-full px-8 lg:px-20">
       <p className="text-newRed text-lg md:text-xl my-2 lg:text-2xl">
@@ -36,9 +36,12 @@ const CartTotals:React.FC = () => {
         <span>{t('totalText')}</span>
         <span className="font-medium">{formatPrice(orderTotal)}</span>
       </p>   */}
-      <button className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full">
+      <Link
+        to="/proceed"
+        className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+      >
         {t('paymentAndOrderText')}
-      </button>
+      </Link>
 
       <Link
         to="/menuList"

@@ -3,7 +3,7 @@ import { Policy } from '../components';
 import { autoFetch } from '../utils';
 import { useLoaderData } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { DeliveryQueryParams, PrivacyResp, StaticRequestData } from '../assets/types';
+import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
 import { QueryClient } from '@tanstack/react-query';
 
 const privacyQuery = (language: string): DeliveryQueryParams => {
@@ -14,7 +14,7 @@ const privacyQuery = (language: string): DeliveryQueryParams => {
         headers: {
           lang: language,
         },
-      })
+      }),
   };
 };
 
@@ -22,12 +22,14 @@ export const loader =
   (queryClient: QueryClient, language: string) =>
   async (): Promise<StaticRequestData> => {
     const data = await queryClient.ensureQueryData(privacyQuery(language));
-    return data ;
+
+    return data;
   };
 
 const Privacy: React.FC = () => {
   const { t } = useTranslation();
-  const {data} = useLoaderData() as PrivacyResp;
+  const axiosData: any = useLoaderData();
+  const data: StaticRequestData = axiosData.data;
   console.log(typeof data);
   return (
     <>

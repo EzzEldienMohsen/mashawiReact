@@ -5,7 +5,7 @@ import logo from '../assets/svg/logo.svg';
 import { useTranslation } from 'react-i18next';
 import { links } from '../assets';
 
-const Footer :React.FC= () => {
+const Footer: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div className="bg-newRed text-white flex w-full flex-col justify-center lg:px-24 py-10 items-center lg:items-start ">
@@ -18,7 +18,7 @@ const Footer :React.FC= () => {
           {links.map((li) => {
             return (
               <Link key={li.text} to={li.to}>
-                <li className="my-1 ml-2 md:ml-1 text-xs font-extralight md:text-sm ">
+                <li className="my-1 ml-2 md:ml-1 text-xs font-extralight md:text-xs ">
                   {t(li.text)}
                 </li>
               </Link>

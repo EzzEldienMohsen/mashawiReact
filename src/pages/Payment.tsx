@@ -1,6 +1,6 @@
 import React from 'react';
 import { Policy } from '../components';
-import { autoFetch, normalizeResponse } from '../utils';
+import { autoFetch } from '../utils';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
 import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
@@ -14,7 +14,7 @@ const paymentQuery = (language: string): DeliveryQueryParams => {
         headers: {
           lang: language,
         },
-      }).then(normalizeResponse)
+      }),
   };
 };
 
@@ -22,12 +22,13 @@ export const loader =
   (queryClient: QueryClient, language: string) =>
   async (): Promise<StaticRequestData> => {
     const data = await queryClient.ensureQueryData(paymentQuery(language));
-    return data ;
+    return data;
   };
 
 const Payment: React.FC = () => {
   const { t } = useTranslation();
-  const data = useLoaderData() as StaticRequestData;
+  const axiosData: any = useLoaderData();
+  const data: StaticRequestData = axiosData.data;
   console.log(data);
   return <Policy title={t('paymentPolicyRoute')} data={data} />;
 };

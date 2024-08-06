@@ -3,7 +3,7 @@ import { Policy } from '../components';
 import { autoFetch } from '../utils';
 import { useTranslation } from 'react-i18next';
 import { useLoaderData } from 'react-router-dom';
-import { DeliveryQueryParams, PrivacyResp, StaticRequestData } from '../assets/types';
+import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
 import { QueryClient } from '@tanstack/react-query';
 
 const termsQuery = (language: string): DeliveryQueryParams => {
@@ -26,7 +26,8 @@ export const loader =
   };
 
 const Terms: React.FC = () => {
-  const { data } = useLoaderData() as PrivacyResp;
+  const axiosData: any = useLoaderData();
+  const data: StaticRequestData = axiosData.data;
   console.log(data);
   const { t } = useTranslation();
   return <Policy title={t('termsPageTitle')} data={data} />;
