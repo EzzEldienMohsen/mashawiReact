@@ -111,7 +111,6 @@ const ProceedPageForm: React.FC = () => {
               label=" "
               type="text"
               placeHolder={t('coupon')}
-              
             />
             <div className="flex justify-between items-center gap-x-2 w-full md:w-1/2">
               <button
@@ -122,7 +121,7 @@ const ProceedPageForm: React.FC = () => {
               </button>
               <Link
                 to="/menu"
-                className="bg-bgColor w-full md:w-1/2 lg:w-auto text-black py-2 px-6 rounded-2xl mt-4 font-semibold text-center"
+                className="bg-bgColor w-full md:w-1/2 lg:w-3/5 text-black py-2 px-6 rounded-2xl mt-4 font-semibold text-center"
               >
                 {t('cancellation')}
               </Link>
@@ -130,7 +129,7 @@ const ProceedPageForm: React.FC = () => {
           </div>
         </div>
         {/* Cart Totals */}
-        <ProceedTotals/>
+        <ProceedTotals />
       </form>
     </div>
   );
