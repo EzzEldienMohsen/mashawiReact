@@ -8,7 +8,11 @@ interface AddOnProps {
   onRemoveAddOnChange: (addOn: AddOnInterface, isChecked: boolean) => void;
 }
 
-const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange, onRemoveAddOnChange }) => {
+const AddOn: React.FC<AddOnProps> = ({
+  addOn,
+  onAddOnChange,
+  onRemoveAddOnChange,
+}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isRemoveChecked, setIsRemoveChecked] = useState(false);
   const { t } = useTranslation();
@@ -24,27 +28,37 @@ const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange, onRemoveAddOnChange
   };
 
   return (
-    <div className="bg-bgColor flex justify-between flex-row gap-x-2 items-center py-2 my-2 rounded-xl">
-      <div className="flex gap-x-2 flex-row justify-start items-center text-start">
-        <img src={addOn.img} alt="alt" />
-        <h1 className="text-xs">{t(addOn.name)}</h1>
+    <div className="bg-bgColor flex justify-between w-full items-center py-4 px-4 my-2 rounded-lg shadow-md">
+      <div className="flex gap-x-4 w-1/3 items-center">
+        <img
+          src={addOn.img}
+          alt="alt"
+          className="w-12 h-12 object-cover rounded-full"
+        />
+        <h1 className=" font-semibold text-xs font-abdo">{t(addOn.name)}</h1>
       </div>
-      <div className="gap-x-2 text-xs flex items-center">
-        <label className="flex items-center">
+      <div className="flex gap-x-4 items-center justify-start text-thin font-abdo text-xs w-1/4">
+        <label className="flex items-center space-x-2">
           <input
             type="checkbox"
             checked={isChecked}
             onChange={handleAddOnChange}
+            className="h-4 w-4"
           />
-          {t(addOn.text1)} (+{addOn.price} {t(addOn.currency)})
+          <span>
+            {t(addOn.text1)} (+{addOn.price} {t(addOn.currency)})
+          </span>
         </label>
-        <label className="flex items-center">
+      </div>
+      <div className="flex gap-x-4 items-center justify-start text-thin font-abdo text-xs w-1/4">
+        <label className="flex items-center space-x-2">
           <input
             type="checkbox"
             checked={isRemoveChecked}
             onChange={handleRemoveAddOnChange}
+            className="h-4 w-4"
           />
-          {t(addOn.text2)}
+          <span>{t(addOn.text2)}</span>
         </label>
       </div>
     </div>
