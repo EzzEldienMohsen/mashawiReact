@@ -1,23 +1,21 @@
 import React from 'react';
 import addOrder from '../assets/svg/menu/addOrder.svg';
-import { useDispatch } from 'react-redux';
-import { addItem as addToCart } from '../features/cart/cartSlice';
 import AmountInput from './AmountInput';
 import { useTranslation } from 'react-i18next';
 import { CartItem } from '../assets/types';
-import { AppDispatch } from '../store';
 interface ProductProps {
   data: CartItem;
   amount: number;
   setAmount: React.Dispatch<React.SetStateAction<number>>;
-  cartProduct: CartItem;
+  handleAddToCart: () => void;
 }
-const ProductDetails:React.FC<ProductProps> = ({ data, amount, setAmount, cartProduct }) => {
-  const dispatch:AppDispatch = useDispatch();
+const ProductDetails: React.FC<ProductProps> = ({
+  data,
+  amount,
+  setAmount,
+  handleAddToCart,
+}) => {
   const { t } = useTranslation();
-  const addItemToCart = () => {
-    dispatch(addToCart({ product: cartProduct }));
-  };
 
   return (
     <div className="flex flex-col w-full gap-y-2 justify-center items-center">
@@ -31,7 +29,7 @@ const ProductDetails:React.FC<ProductProps> = ({ data, amount, setAmount, cartPr
       <div className="flex justify-between w-full flex-row items-center my-2">
         <button
           className="btn bg-newRed text-white flex justify-between items-center px-4 rounded-full py-2"
-          onClick={addItemToCart}
+          onClick={handleAddToCart}
         >
           <img src={addOrder} alt="alt" />
           اضف الطلب

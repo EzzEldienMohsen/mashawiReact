@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import src from '../assets/svg/menu/addOns.svg';
 import { useTranslation } from 'react-i18next';
 import { addAddOns, removeAddOns } from '../features/cart/cartSlice';
 import { AddOn, CartItem } from '../assets/types';
-import { AppDispatch, useTypedSelector } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { AddOns, ProductDetails, WishlistButton } from '../subSubSubComponents';
+import { addItem as addToCart } from '../features/cart/cartSlice';
 
 interface ModalProps {
   modalId: string;
@@ -18,9 +19,12 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   const [selectedAddOns, setSelectedAddOns] = React.useState<AddOn[]>([]);
   const [removeAddOnsList, setRemoveAddOnsList] = React.useState<AddOn[]>([]);
   const dispatch: AppDispatch = useDispatch();
-  const { wishListItems } = useTypedSelector((state) => state.wishList);
+  const { wishListItems } = useTypedSelector(
+    (state: RootState) => state.wishList
+  );
   const item = wishListItems.find((i: CartItem) => i.id === data.id);
   const { t } = useTranslation();
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const handleAddOnChange = (addOn: AddOn, isChecked: boolean): void => {
     setSelectedAddOns((prevAddOns) =>
@@ -60,7 +64,8 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
         })
       );
     }
-    // dispatch(addItem({ product: { ...data, amount, addOns: selectedAddOns } }));
+    dispatch(addToCart({ product: cartProduct }));
+    dialogRef.current?.close();
   };
 
   const wishListProduct: CartItem = {
@@ -77,15 +82,13 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     <div>
       <button
         className="btn bg-newRed text-white font-abdo font-thin text-xs flex-row flex justify-evenly w-full items-center px-5 lg:px-2 rounded-full py-1"
-        onClick={() =>
-          (document.getElementById(modalId) as HTMLDialogElement).showModal()
-        }
+        onClick={() => dialogRef.current?.showModal()}
       >
         <img src={src} alt="alt" className=" lg:w-1/5" />
         {t('addOnsText')}
       </button>
-      <dialog id={modalId} className="modal overflow-y-auto">
-        <div className="flex flex-col md:justify-between md:flex-row md:items-center w-[90vw] lg:w-[65vw] h-auto rounded-2xl gap-x-2 bg-white px-4 py-2">
+      <dialog ref={dialogRef} id={modalId} className="modal overflow-y-auto ">
+        <div className="flex flex-col md:justify-between md:flex-row md:items-center w-[90vw] lg:w-[65vw] h-auto rounded-2xl gap-x-2 bg-white px-4 py-2 ">
           <div className="flex flex-col justify-center items-stretch relative gap-y-2">
             <WishlistButton
               data={data}
@@ -96,7 +99,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
               data={data}
               amount={amount}
               setAmount={setAmount}
-              cartProduct={cartProduct}
+              handleAddToCart={handleAddToCart}
             />
           </div>
           <AddOns
@@ -106,7 +109,9 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
           />
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button onClick={handleAddToCart}>close</button>
+          <button type="button" onClick={handleAddToCart}>
+            close
+          </button>
         </form>
       </dialog>
     </div>

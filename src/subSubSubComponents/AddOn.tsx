@@ -37,30 +37,26 @@ const AddOn: React.FC<AddOnProps> = ({
         />
         <h1 className=" font-semibold text-xs font-abdo">{t(addOn.name)}</h1>
       </div>
-      <div className="flex gap-x-2 items-center justify-start text-thin font-abdo text-xs w-1/4">
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={handleAddOnChange}
-            className="h-4 w-4"
-          />
-          <span>
-            {t(addOn.text1)} (+{addOn.price} {t(addOn.currency)})
-          </span>
-        </label>
-      </div>
-      <div className="flex gap-x-4 items-center justify-start text-thin font-abdo text-xs w-1/4">
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            checked={isRemoveChecked}
-            onChange={handleRemoveAddOnChange}
-            className="h-4 w-4"
-          />
-          <span>{t(addOn.text2)}</span>
-        </label>
-      </div>
+      <label className="flex gap-x-4 items-center justify-start text-thin font-abdo text-xs w-1/4">
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleAddOnChange}
+          className="h-4 w-4"
+        />
+        <span>
+          {t(addOn.text1)} (+{addOn.price} {t(addOn.currency)})
+        </span>
+      </label>
+      <label className="flex gap-x-4 items-center justify-start text-thin font-abdo text-xs w-1/4">
+        <input
+          type="checkbox"
+          checked={isRemoveChecked}
+          onChange={handleRemoveAddOnChange}
+          className="h-4 w-4"
+        />
+        <span>{t(addOn.text2)}</span>
+      </label>
     </div>
   );
 };

@@ -253,3 +253,36 @@ export type Tracker = {
   img: string;
   status: 'complete' | 'upcoming';
 };
+
+// Cart Data type
+export type Cart = {
+  status: number;
+  message: string;
+  data: {
+    current_page: number;
+    pages_length: number;
+    data: {
+      id: number;
+      name: string;
+      description: string;
+      price: number;
+      image: string;
+      gallery: string[];
+      categories: {
+        id: number;
+        name: string;
+        icon: string;
+        parent: null | string;
+      }[];
+      additions: {
+        id: number;
+        name: string;
+        icon: string;
+        values: {
+          id: number;
+          name: string;
+        }[];
+      }[];
+    }[];
+  };
+};
