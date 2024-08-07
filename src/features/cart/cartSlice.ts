@@ -56,18 +56,20 @@ const cartSlice = createSlice({
     },
     addAddOns: (
       state,
-      action: PayloadAction<{ cartID: number; addOns: AddOn[] }>
+      action: PayloadAction<{ cartID: number; additions: AddOn[] }>
     ) => {
-      const { cartID, addOns } = action.payload;
+      const { cartID, additions } = action.payload;
       const item = state.cartItems.find((i) => i.id === cartID);
 
       if (item) {
-        const newAddOns = addOns.filter(
-          (addOn) =>
-            !item.addOns.some((existingAddOn) => existingAddOn.id === addOn.id)
+        const newAddOns = additions.filter(
+          (additions) =>
+            !item.additions.some(
+              (existingAddOn) => existingAddOn.id === additions.id
+            )
         );
 
-        item.addOns = [...item.addOns, ...newAddOns];
+        item.additions = [...item.additions, ...newAddOns];
         cartSlice.caseReducers.calculateTotals(state);
         toast.success('تم اضافة الاضافة الي طلبك');
       }
@@ -80,7 +82,9 @@ const cartSlice = createSlice({
       const item = state.cartItems.find((i) => i.id === cartID);
 
       if (item) {
-        item.addOns = item.addOns.filter((ao) => !addOnIDs.includes(ao.id));
+        item.additions = item.additions.filter(
+          (ao) => !addOnIDs.includes(ao.id)
+        );
         cartSlice.caseReducers.calculateTotals(state);
         toast.error('تم ازالة الاضافة من طلبك');
       }

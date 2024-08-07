@@ -28,10 +28,9 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
     id: item.id,
     name: item.name,
     price: item.price,
-    currency: item.currency,
-    img: item.img,
+    image: item.image,
     amount: amount,
-    addOns: [],
+    additions: [],
   };
 
   const addItemToCart = () => {
@@ -69,7 +68,7 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
         <img src={theClose} alt="alt" className={` `} />
       </button>
       <img
-        src={item.img}
+        src={item.image}
         alt="alt"
         className={`w-1/5 aspect-square ${
           isLangArabic
@@ -81,28 +80,25 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
         <h1>{t(item.name)}</h1>
         <p className="text-newRed flex flex-row gap-x-1">
           <span>{item.price}</span>
-          <span>{t(item.currency)}</span>
+          <span>{t('menuItemCurrency')}</span>
         </p>
         <div className="flex flex-col justify-start items-start gap-y-4 md:flex-row md:justify-between md:items-center w-full">
           <div className="font-abdo text-sm w-full gap-y-1 flex-col md:w-3/5 flex justify-center items-start">
-            {item.addOns.map((addOn) => {
+            {item.additions.map((addOn) => {
               return (
                 <div
                   key={addOn.id}
                   className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
                 >
                   <p className="text-xs w-1/3">{t(addOn.name)}</p>
-                  <div className="flex justify-start items-center gap-x-1 w-1/5">
-                    <p className="text-xs">{addOn.price}</p>
-                    <p className="text-xs">{t(addOn.currency)}</p>
-                  </div>
+
                   <div className="flex justify-start items-center gap-x-1 w-1/2">
                     <input
                       type="checkbox"
                       checked={checkedAddOns[addOn.id] || false}
                       onChange={() => handleCheckboxChange(addOn)}
                     />
-                    <p className="text-xs"> {t(addOn.text2)}</p>
+                    <p className="text-xs"> {addOn.name}</p>
                   </div>
                 </div>
               );
