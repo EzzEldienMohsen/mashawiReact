@@ -24,3 +24,4 @@ export { default as EventsCard } from './EventsCard';
 export { default as Steps } from './Steps';
 export { default as ProceedPageForm } from './ProceedPageForm';
 export { default as ProceedDeliveryForm } from './ProceedDeliveryForm';
+export { default as MenuWithCategory } from './MenuWithCategory';

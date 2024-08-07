@@ -5,6 +5,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
+
 interface CategoriesQuery {
   queryKey: string[];
   queryFn: () => Promise<Categories>;
@@ -17,11 +18,11 @@ const categoryQuery = (language: string): CategoriesQuery => {
       autoFetch('/categories?limit=20', {
         headers: {
           lang: language,
-          limit: 20,
         },
       }),
   };
 };
+
 export const loader =
   (queryClient: QueryClient, language: string) =>
   async (): Promise<Categories> => {
@@ -34,11 +35,12 @@ const Slider: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: CategoriesData = axiosData.data1.data.data.data;
   console.log(data);
+
   return (
     <div className="carousel rounded-box flex overflow-x-auto space-x-4 py-4">
       {data.map((category) => (
         <Link
-          to=""
+          to={`/menuList/category/${category.id}`}
           key={category.id}
           className={`carousel-item flex-shrink-0 w-14 h-14 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-4 ${
             isLangArabic

@@ -36,6 +36,7 @@ import {
   DeliveredPage,
   ProceedPage,
   ProceedDelivery,
+  MenuCategory,
   // Orders,
   // MyAddress,
 } from './pages';
@@ -51,7 +52,7 @@ import { loader as refundLoader } from './pages/Refund';
 import { loader as termsLoader } from './pages/Terms';
 import { loader as categoryLoader } from './subComponents/Slider';
 import { loader as mealsLoader } from './components/Menu';
-
+import { loader as menuWithCategoryProductLoader } from './components/MenuWithCategory';
 // Combined loaders
 // First Menu Loaders
 interface MenuLoader {
@@ -65,6 +66,22 @@ const menuLoader =
     const page = url.searchParams.get('page') || '1';
     const data1 = await categoryLoader(queryClient, language)();
     const data2 = await mealsLoader(queryClient, language, page)();
+    return { data1, data2 };
+  };
+const menuWithCategoryLoader =
+  (language: string) =>
+  async ({ request, params }: LoaderFunctionArgs): Promise<MenuLoader> => {
+    const url = new URL(request.url);
+    const page = url.searchParams.get('page') || '1';
+    const { cat = '' } = params;
+    console.log;
+    const data1 = await categoryLoader(queryClient, language)();
+    const data2 = await menuWithCategoryProductLoader(
+      queryClient,
+      language,
+      page,
+      cat
+    )();
     return { data1, data2 };
   };
 
@@ -222,6 +239,15 @@ const AppRouter: React.FC = () => {
             </Suspense>
           ),
           loader: menuLoader(language),
+        },
+        {
+          path: '/menuList/category/:cat',
+          element: (
+            <Suspense fallback={<div>Loading...</div>}>
+              <MenuCategory />
+            </Suspense>
+          ),
+          loader: menuWithCategoryLoader(language),
         },
         {
           path: '/cart',
