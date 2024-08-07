@@ -43,7 +43,7 @@ type SelectedAddition = {
   value: Value;
 };
 
-type CartData = {
+export type CartData = {
   cart_id: number;
   qty: number;
   meal: InnerMealResponse;

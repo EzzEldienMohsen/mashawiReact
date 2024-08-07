@@ -1,11 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { AddOn, CartItem, CartItemWithId, CartState } from '../../assets/types';
-import { MealRequest, MealResponse } from './types';
-import { addToCartThunk, editQuantityThunk } from './cartThunk';
+import { CartData, MealRequest, MealResponse } from './types';
+import {
+  addToCartThunk,
+  editQuantityThunk,
+  getTheCartThunk,
+  removeItemThunk,
+} from './cartThunk';
 
 const defaultState: CartState = {
-  cart_id: 0,
   isLoading: false,
   cartItems: [],
   numItemsInCart: 0,
@@ -27,12 +31,22 @@ export const addThisItemToCart = createAsyncThunk(
 );
 export const editQuantity = createAsyncThunk(
   'theMashawiCart/editQuantity',
-  async (reqData: { qty: number }, thunkAPI) => {
-    const { cart_id } = thunkAPI.getState() as CartState;
-    if (!cart_id) {
-      return thunkAPI.rejectWithValue('User is not authenticated');
-    }
-    return editQuantityThunk('/cart/add', reqData, thunkAPI);
+  async (data: { reqData: { qty: number }; cart_id: number }, thunkAPI) => {
+    const { cart_id, reqData } = data;
+    return editQuantityThunk(`/cart/change-qty/${cart_id}`, reqData, thunkAPI);
+  }
+);
+export const removeMeal = createAsyncThunk(
+  'theMashawiCart/removeMeal',
+  async (data: { cart_id: number }, thunkAPI) => {
+    const { cart_id } = data;
+    return removeItemThunk(`/cart/remove/${cart_id}`, thunkAPI);
+  }
+);
+export const getCart = createAsyncThunk(
+  'theMashawiCart/getCart',
+  async (thunkAPI) => {
+    return getTheCartThunk('cart', thunkAPI);
   }
 );
 
@@ -112,6 +126,28 @@ const cartSlice = createSlice({
         toast.error('تم ازالة الاضافة من طلبك');
       }
     },
+    editQuantityLocally: (
+      state,
+      action: PayloadAction<{ cartID: number; qty: number }>
+    ) => {
+      const { cartID, qty } = action.payload;
+      const item = state.cartItems.find((i) => i.cartItem.id === cartID);
+
+      if (item) {
+        state.numItemsInCart -= item.cartItem.amount; // Subtract the old amount
+        if (qty > 0) {
+          item.cartItem.amount = qty; // Set the new amount
+          state.numItemsInCart += qty; // Add the new amount
+        } else {
+          state.cartItems = state.cartItems.filter(
+            (i) => i.cartItem.id !== cartID
+          );
+          toast.error('تم ازالة الطلب من قائمة الطلبات');
+        }
+        cartSlice.caseReducers.calculateTotals(state);
+        toast.success('تم تحديث كمية الوجبة بنجاح');
+      }
+    },
     calculateTotals: (state) => {
       state.cartTotal = state.cartItems.reduce((total, item) => {
         return total + calculateProductTotal(item);
@@ -142,6 +178,75 @@ const cartSlice = createSlice({
       )
       .addCase(addThisItemToCart.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(editQuantity.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        editQuantity.fulfilled,
+        (state, action: PayloadAction<MealResponse>) => {
+          state.isLoading = false;
+          const message = action.payload.message;
+          const item = state.cartItems.find(
+            (i) => i.cartItem.id === action.payload.data.meal.id
+          );
+          if (item) item.cartItem.amount = action.payload.data.qty;
+
+          toast.success(message);
+        }
+      )
+      .addCase(editQuantity.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(removeMeal.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        removeMeal.fulfilled,
+        (
+          state,
+          action: PayloadAction<{ status: number; message: string; data: null }>
+        ) => {
+          state.isLoading = false;
+          const message = action.payload.message;
+          toast.success(message);
+        }
+      )
+      .addCase(removeMeal.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getCart.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getCart.fulfilled,
+        (
+          state,
+          action: PayloadAction<{
+            status: number;
+            message: string;
+            data: CartData[];
+          }>
+        ) => {
+          state.isLoading = false;
+          const message = action.payload.message;
+          state.cartItems = action.payload.data.map((item) => ({
+            cart_id: item.cart_id,
+            cartItem: {
+              name: item.meal.name,
+              price: item.meal.price,
+              image: item.meal.image,
+              id: item.meal.id,
+              additions: item.meal.additions,
+              amount: item.qty,
+            },
+          }));
+
+          toast.success(message);
+        }
+      )
+      .addCase(getCart.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });
@@ -153,6 +258,7 @@ export const {
   addAddOns,
   removeAddOns,
   calculateTotals,
+  editQuantityLocally,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

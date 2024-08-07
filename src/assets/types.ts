@@ -23,7 +23,6 @@ export type CartItem = {
 };
 
 export type CartState = {
-  cart_id: number;
   isLoading: boolean;
   cartItems: CartItemWithId[];
   numItemsInCart: number;
