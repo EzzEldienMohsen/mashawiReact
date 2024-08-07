@@ -5,8 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { AppDispatch } from '../store';
 import theClose from '../assets/svg/closeBtn.svg';
 import { DrawerCartItems, DrawerCartTotals } from '../components';
-
-const CartDrawerContent: React.FC = () => {
+interface CartDrawer{
+  closeDrawer:()=>void
+}
+const CartDrawerContent: React.FC<CartDrawer> = ({closeDrawer}) => {
   const dispatch: AppDispatch = useDispatch();
   const clearTheCart = () => dispatch(clearCart());
   const { t } = useTranslation();
@@ -24,7 +26,7 @@ const CartDrawerContent: React.FC = () => {
       {/* cartItems */}
       <DrawerCartItems />
       {/* Cart Total */}
-      <DrawerCartTotals />
+      <DrawerCartTotals closeDrawer={closeDrawer} />
     </div>
   );
 };

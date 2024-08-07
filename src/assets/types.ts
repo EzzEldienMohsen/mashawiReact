@@ -18,34 +18,34 @@ export type CartItem = {
   additions: AddOn[] | [];
 };
 
-export interface CartState {
+export type CartState = {
   cartItems: CartItem[];
   numItemsInCart: number;
   cartTotal: number;
   shipping: number;
   tax: number;
   orderTotal: number;
-}
-export interface ApiResponse {
+};
+export type ApiResponse = {
   message?: string;
   data?: any;
   status: any;
-}
+};
 
-export interface WishListState {
+export type WishListState = {
   wishListItems: CartItem[];
   numItemsInWishList: number;
-}
+};
 
-export interface User {
+export type User = {
   temp_token: string;
-}
+};
 
-export interface UserState {
+export type UserState = {
   isLoading: boolean;
   isSidebarOpen: boolean;
   user: User | null;
-}
+};
 
 export type RegisterData = {
   f_name: string;
@@ -117,11 +117,11 @@ export type InitialOTPInputs = {
   sixthNum: string;
 };
 
-export interface ChangePasswordData {
+export type ChangePasswordData = {
   old_password: string;
   password: string;
   password_confirmation: string;
-}
+};
 
 export type AddressData = {
   id: string;

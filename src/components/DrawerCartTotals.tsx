@@ -3,8 +3,11 @@ import { formatPrice } from '../utils';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { RootState, useTypedSelector } from '../store';
+interface CartDrawer {
+  closeDrawer: () => void;
+}
 
-const DrawerCartTotals: React.FC = () => {
+const DrawerCartTotals: React.FC<CartDrawer> = ({ closeDrawer }) => {
   const { cartTotal } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
   );
@@ -18,6 +21,7 @@ const DrawerCartTotals: React.FC = () => {
       </p>
 
       <Link
+        onClick={closeDrawer}
         to="/proceed"
         className=" btn flex justify-center shadow-xl bg-newRed text-white items-center w-4/5 rounded-full"
       >
@@ -26,6 +30,7 @@ const DrawerCartTotals: React.FC = () => {
 
       <Link
         to="/menuList"
+        onClick={closeDrawer}
         className=" btn flex justify-center shadow-xl bg-[#D9D9D9] items-center w-4/5 rounded-full"
       >
         {t('contiueSoppingText')}
