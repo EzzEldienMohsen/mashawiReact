@@ -53,7 +53,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
 
   const handleAddToCart = () => {
     if (selectedAddOns.length > 0) {
-      dispatch(addAddOns({ cartID: data.id, addOns: selectedAddOns }));
+      dispatch(addAddOns({ cartID: data.id, additions: selectedAddOns }));
     }
     if (removeAddOnsList.length > 0) {
       dispatch(
