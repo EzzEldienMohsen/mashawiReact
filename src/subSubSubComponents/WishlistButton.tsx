@@ -5,10 +5,10 @@ import {
   addItem as addToWishList,
   removeItem as removeFromWishList,
 } from '../features/wishList/wishListSlice';
-import { CartItem } from '../assets/types';
+import { CartItem, SingleMealData } from '../assets/types';
 import { useGlobalContext } from '../context/GlobalContext';
 interface WishlistProps {
-  data: CartItem;
+  data: SingleMealData;
   item: CartItem | undefined;
   wishListProduct: CartItem;
 }
@@ -18,7 +18,7 @@ const WishListButton: React.FC<WishlistProps> = ({
   wishListProduct,
 }) => {
   const dispatch = useDispatch();
-const {isLangArabic} =useGlobalContext()
+  const { isLangArabic } = useGlobalContext();
   const addItemToWishList = (product: CartItem) => {
     dispatch(addToWishList({ product }));
   };
@@ -29,7 +29,9 @@ const {isLangArabic} =useGlobalContext()
 
   return (
     <button
-      className={`absolute btn-ghost w-8 h-8 bg-white top-3 ${isLangArabic?"left-4":"right-4"} border-0 flex justify-center items-center rounded-full ${
+      className={`absolute btn-ghost w-8 h-8 bg-white top-3 ${
+        isLangArabic ? 'left-4' : 'right-4'
+      } border-0 flex justify-center items-center rounded-full ${
         item?.id === data.id ? 'text-newRed' : 'text-black'
       } `}
       onClick={() => {
@@ -40,7 +42,7 @@ const {isLangArabic} =useGlobalContext()
         }
       }}
     >
-      <FaHeart/>
+      <FaHeart />
     </button>
   );
 };

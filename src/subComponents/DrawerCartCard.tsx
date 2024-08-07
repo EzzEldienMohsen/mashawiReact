@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import theClose from '../assets/svg/closeBtn.svg';
 import { useTranslation } from 'react-i18next';
 import addOrder from '../assets/svg/menu/addOrder.svg';
@@ -10,60 +10,57 @@ import { addItem, removeAddOns, removeItem } from '../features/cart/cartSlice';
 
 interface CartCardProps {
   item: CartItem;
-  
 }
 
-const DrawerCartCard: React.FC<CartCardProps> = ({item}) => {
-    // State declaration
-    const [removeAddOnsList, setRemoveAddOnsList] = React.useState<AddOn[]>([]);
-    const [checkedAddOns, setCheckedAddOns] = React.useState<{[key: string]: boolean;}>({});
-     const [amount, setAmount] = React.useState<number>(item.amount || 0);
-    //  Additional declaration
-   const dispatch: AppDispatch = useDispatch();
-   const { t } = useTranslation();
-//    remove item from the cart
-   const removeItemsFromCart = (prod: CartItem) => {
-       dispatch(removeItem(prod));
-    };
-    // Changing order Amount
-     const cartProduct: CartItem = {
-       id: item.id,
-       name: item.name,
-       price:item.price,
-       currency: item.currency,
-       img: item.img,
-       amount: amount,
-       addOns: [],
-     };
+const DrawerCartCard: React.FC<CartCardProps> = ({ item }) => {
+  // State declaration
+  const [removeAddOnsList, setRemoveAddOnsList] = React.useState<AddOn[]>([]);
+  const [checkedAddOns, setCheckedAddOns] = React.useState<{
+    [key: string]: boolean;
+  }>({});
+  const [amount, setAmount] = React.useState<number>(item.amount || 0);
+  //  Additional declaration
+  const dispatch: AppDispatch = useDispatch();
+  const { t } = useTranslation();
+  //    remove item from the cart
+  const removeItemsFromCart = (prod: CartItem) => {
+    dispatch(removeItem(prod));
+  };
+  // Changing order Amount
+  const cartProduct: CartItem = {
+    id: item.id,
+    name: item.name,
+    price: item.price,
+    img: item.img,
+    amount: amount,
+    addOns: [],
+  };
 
-     const addItemToCart = () => {
-       dispatch(addItem({ product: cartProduct }));
-       if (removeAddOnsList.length > 0) {
-         dispatch(
-           removeAddOns({
-             cartID: item.id,
-             addOnIDs: removeAddOnsList.map((ao) => ao.id),
-           })
-         );
-       }
-     };
-// Handling Add Ons removal
-     const handleRemoveAddOnChange = (
-       addOn: AddOn,
-       isChecked: boolean
-     ): void => {
-       setRemoveAddOnsList((prevRemoveAddOns) =>
-         isChecked
-           ? [...prevRemoveAddOns, addOn]
-           : prevRemoveAddOns.filter((ao) => ao.id !== addOn.id)
-       );
-     };
+  const addItemToCart = () => {
+    dispatch(addItem({ product: cartProduct }));
+    if (removeAddOnsList.length > 0) {
+      dispatch(
+        removeAddOns({
+          cartID: item.id,
+          addOnIDs: removeAddOnsList.map((ao) => ao.id),
+        })
+      );
+    }
+  };
+  // Handling Add Ons removal
+  const handleRemoveAddOnChange = (addOn: AddOn, isChecked: boolean): void => {
+    setRemoveAddOnsList((prevRemoveAddOns) =>
+      isChecked
+        ? [...prevRemoveAddOns, addOn]
+        : prevRemoveAddOns.filter((ao) => ao.id !== addOn.id)
+    );
+  };
 
-     const handleCheckboxChange = (addOn: AddOn) => {
-       const isChecked: boolean = !checkedAddOns[addOn.id];
-       setCheckedAddOns((prev) => ({ ...prev, [addOn.id]: isChecked }));
-       handleRemoveAddOnChange(addOn, isChecked);
-     };
+  const handleCheckboxChange = (addOn: AddOn) => {
+    const isChecked: boolean = !checkedAddOns[addOn.id];
+    setCheckedAddOns((prev) => ({ ...prev, [addOn.id]: isChecked }));
+    handleRemoveAddOnChange(addOn, isChecked);
+  };
   return (
     <div className="flex w-full rounded-xl border-b-[2px]   justify-start items-start pt-4 pb-6 px-2 my-2 gap-x-2 ">
       <img src={item.img} alt="alt" className="w-1/5 aspect-square" />
@@ -82,18 +79,15 @@ const DrawerCartCard: React.FC<CartCardProps> = ({item}) => {
                 key={addOn.id}
                 className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
               >
-                <p className="text-xs w-1/3">{t(addOn.name)}</p>
-                <div className="flex justify-start items-center gap-x-1 w-1/5">
-                  <p className="text-xs">{addOn.price}</p>
-                  <p className="text-xs">{t(addOn.currency)}</p>
-                </div>
+                <p className="text-xs w-1/3">{addOn.name}</p>
+                <div className="flex justify-start items-center gap-x-1 w-1/5"></div>
                 <div className="flex justify-start items-center gap-x-1 w-1/2">
                   <input
                     type="checkbox"
                     checked={checkedAddOns[addOn.id] || false}
                     onChange={() => handleCheckboxChange(addOn)}
                   />
-                  <p className="text-xs"> {t(addOn.text2)}</p>
+                  <p className="text-xs"> {addOn.name}</p>
                 </div>
               </div>
             );
@@ -102,7 +96,7 @@ const DrawerCartCard: React.FC<CartCardProps> = ({item}) => {
         <div className="flex gap-y-4 flex-row justify-between items-center w-full">
           <p className="text-newRed flex flex-row gap-x-1">
             <span>{item.price}</span>
-            <span>{t(item.currency)}</span>
+            <span>{t('menuItemCurrency')}</span>
           </p>
           <div className="flex  justify-between gap-x-5    w-auto">
             <DrawerAmountInput amount={amount} setAmount={setAmount} />
@@ -120,4 +114,4 @@ const DrawerCartCard: React.FC<CartCardProps> = ({item}) => {
   );
 };
 
-export default DrawerCartCard
+export default DrawerCartCard;

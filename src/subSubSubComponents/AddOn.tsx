@@ -31,11 +31,11 @@ const AddOn: React.FC<AddOnProps> = ({
     <div className="bg-bgColor flex justify-between w-full items-center py-2 px-4 my-1 rounded-lg shadow-md">
       <div className="flex gap-x-3 w-1/3 items-center">
         <img
-          src={addOn.img}
+          src={addOn.icon}
           alt="alt"
           className="w-12 h-12 object-cover rounded-full"
         />
-        <h1 className=" font-semibold text-xs font-abdo">{t(addOn.name)}</h1>
+        <h1 className=" font-semibold text-xs font-abdo">{addOn.name}</h1>
       </div>
       <label className="flex gap-x-4 items-center justify-start text-thin font-abdo text-xs w-1/4">
         <input
@@ -44,9 +44,7 @@ const AddOn: React.FC<AddOnProps> = ({
           onChange={handleAddOnChange}
           className="h-4 w-4"
         />
-        <span>
-          {t(addOn.text1)} (+{addOn.price} {t(addOn.currency)})
-        </span>
+        <span>{t(addOn.name)}</span>
       </label>
       <label className="flex gap-x-4 items-center justify-start text-thin font-abdo text-xs w-1/4">
         <input
@@ -55,7 +53,7 @@ const AddOn: React.FC<AddOnProps> = ({
           onChange={handleRemoveAddOnChange}
           className="h-4 w-4"
         />
-        <span>{t(addOn.text2)}</span>
+        <span>{addOn.name}</span>
       </label>
     </div>
   );

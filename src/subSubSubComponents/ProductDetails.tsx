@@ -2,9 +2,9 @@ import React from 'react';
 import addOrder from '../assets/svg/menu/addOrder.svg';
 import AmountInput from './AmountInput';
 import { useTranslation } from 'react-i18next';
-import { CartItem } from '../assets/types';
+import { SingleMealData } from '../assets/types';
 interface ProductProps {
-  data: CartItem;
+  data: SingleMealData;
   amount: number;
   setAmount: React.Dispatch<React.SetStateAction<number>>;
   handleAddToCart: () => void;
@@ -18,12 +18,16 @@ const ProductDetails: React.FC<ProductProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col w-full gap-y-2 justify-center items-center">
-      <img src={data.img} alt="img" className="rounded-tr-3xl rounded-bl-3xl" />
+    <div className="flex flex-col  gap-y-2 justify-center items-center w-full">
+      <img
+        src={data.image}
+        alt="img"
+        className="rounded-tr-3xl rounded-bl-3xl  "
+      />
       <div className="flex justify-between flex-row w-full items-center my-2">
-        <h1>{t(data.name)}</h1>
+        <h1>{data.name}</h1>
         <h2>
-          {data.price} {t(data.currency)}
+          {data.price} {t('menuItemCurrency')}
         </h2>
       </div>
       <div className="flex justify-between w-full flex-row items-center my-2">

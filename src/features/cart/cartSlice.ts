@@ -12,11 +12,7 @@ const defaultState: CartState = {
 };
 
 const calculateProductTotal = (product: CartItem): number => {
-  const addOnsTotal = product.addOns.reduce(
-    (total, addOn) => total + (addOn.price || 0),
-    0
-  );
-  return product.price * product.amount + addOnsTotal * product.amount;
+  return product.price * product.amount;
 };
 
 const cartSlice = createSlice({
@@ -39,14 +35,14 @@ const cartSlice = createSlice({
       state.numItemsInCart += product.amount;
       cartSlice.caseReducers.calculateTotals(state);
       toast.success('تم إضافة الوجبة إلى طلباتك بنجاح');
-      console.log(state.cartItems);
+      console.log('Cart Items after adding:', state.cartItems);
     },
     clearCart: () => {
       localStorage.setItem('theMashawiCart', JSON.stringify(defaultState));
       toast.error('تم ازالة قائمة الطلبات');
       return defaultState;
     },
-    removeItem: (state, action: PayloadAction<{ id: string }>) => {
+    removeItem: (state, action: PayloadAction<{ id: number }>) => {
       const { id } = action.payload;
       const removedProduct = state.cartItems.find((i) => i.id === id);
 
@@ -55,11 +51,12 @@ const cartSlice = createSlice({
         state.numItemsInCart -= removedProduct.amount;
         cartSlice.caseReducers.calculateTotals(state);
         toast.error('تم ازالة الطلب من قائمة الطلبات');
+        console.log('Cart Items after removing:', state.cartItems);
       }
     },
     addAddOns: (
       state,
-      action: PayloadAction<{ cartID: string; addOns: AddOn[] }>
+      action: PayloadAction<{ cartID: number; addOns: AddOn[] }>
     ) => {
       const { cartID, addOns } = action.payload;
       const item = state.cartItems.find((i) => i.id === cartID);
@@ -77,7 +74,7 @@ const cartSlice = createSlice({
     },
     removeAddOns: (
       state,
-      action: PayloadAction<{ cartID: string; addOnIDs: string[] }>
+      action: PayloadAction<{ cartID: number; addOnIDs: number[] }>
     ) => {
       const { cartID, addOnIDs } = action.payload;
       const item = state.cartItems.find((i) => i.id === cartID);
@@ -93,8 +90,9 @@ const cartSlice = createSlice({
         return total + calculateProductTotal(item);
       }, 0);
       state.tax = 0.05 * state.cartTotal;
-      state.orderTotal = state.cartTotal + state.tax + state.shipping;
+      state.orderTotal = state.cartTotal + state.tax;
       localStorage.setItem('theMashawiCart', JSON.stringify(state));
+      console.log('Total calculated:', state.cartTotal);
     },
   },
 });

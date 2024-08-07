@@ -4,12 +4,12 @@ import { clearCart } from '../features/cart/cartSlice';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch } from '../store';
 import theClose from '../assets/svg/closeBtn.svg';
-import {  DrawerCartItems, DrawerCartTotals } from '../components';
+import { DrawerCartItems, DrawerCartTotals } from '../components';
 
 const CartDrawerContent: React.FC = () => {
-   const dispatch: AppDispatch = useDispatch();
-   const clearTheCart = () => dispatch(clearCart());
-   const { t } = useTranslation();
+  const dispatch: AppDispatch = useDispatch();
+  const clearTheCart = () => dispatch(clearCart());
+  const { t } = useTranslation();
   return (
     <div className="w-full flex flex-col justify-start relative  overflow-y-auto pb-20  items-center px-3 pt-3 bg-[#F8F8F8] h-full">
       {/* title and clear cart logic */}

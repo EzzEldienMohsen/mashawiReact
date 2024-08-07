@@ -1,21 +1,18 @@
 import { ChangeEvent } from 'react';
 
-export interface AddOn {
-  id: string;
-  isChecked: boolean;
+export type AddOn = {
+  id: number;
   name: string;
-  img: string;
-  price: number;
-  currency: string;
-  text1: string;
-  text2: string;
-}
-
+  icon: string;
+  values: {
+    id: number;
+    name: string;
+  }[];
+};
 export type CartItem = {
-  id: string;
+  id: number;
   name: string;
   price: number;
-  currency: string;
   amount: number;
   img: string;
   addOns: AddOn[] | [];
@@ -254,8 +251,8 @@ export type Tracker = {
   status: 'complete' | 'upcoming';
 };
 
-// Cart Data type
-export type Cart = {
+// Meals Data type
+export type Meals = {
   status: number;
   message: string;
   data: {
@@ -286,6 +283,30 @@ export type Cart = {
     }[];
   };
 };
+export type SingleMealData = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  gallery: string[];
+  categories: {
+    id: number;
+    name: string;
+    icon: string;
+    parent: null | string;
+  }[];
+  additions: {
+    id: number;
+    name: string;
+    icon: string;
+    values: {
+      id: number;
+      name: string;
+    }[];
+  }[];
+};
+export type MealData = SingleMealData[];
 
 export type Categories = {
   status: number;

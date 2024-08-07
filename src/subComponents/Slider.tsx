@@ -13,7 +13,7 @@ const categoryQuery = (language: string): CategoriesQuery => {
   return {
     queryKey: ['category', language],
     queryFn: () =>
-      autoFetch('/categories', {
+      autoFetch('/categories?limit=20', {
         headers: {
           lang: language,
           limit: 20,
@@ -30,7 +30,7 @@ export const loader =
 
 const Slider: React.FC = () => {
   const axiosData: any = useLoaderData();
-  const data: CategoriesData = axiosData.data.data.data;
+  const data: CategoriesData = axiosData.data1.data.data.data;
   console.log(data);
   return (
     <div className="carousel rounded-box flex overflow-x-auto space-x-4 py-4">

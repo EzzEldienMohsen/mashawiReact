@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import src from '../assets/svg/menu/addOns.svg';
 import { useTranslation } from 'react-i18next';
 import { addAddOns, removeAddOns } from '../features/cart/cartSlice';
-import { AddOn, CartItem } from '../assets/types';
+import { AddOn, CartItem, SingleMealData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { AddOns, ProductDetails, WishlistButton } from '../subSubSubComponents';
 import { addItem as addToCart } from '../features/cart/cartSlice';
@@ -11,7 +11,7 @@ import { addItem as addToCart } from '../features/cart/cartSlice';
 interface ModalProps {
   modalId: string;
   theAmount: number;
-  data: CartItem;
+  data: SingleMealData;
 }
 
 const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
@@ -46,10 +46,9 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     id: data.id,
     name: data.name,
     price: data.price,
-    currency: data.currency,
-    img: data.img,
-    amount,
-    addOns: selectedAddOns,
+    img: data.image,
+    amount: amount,
+    addOns: data.additions || [],
   };
 
   const handleAddToCart = () => {
@@ -68,28 +67,45 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     dialogRef.current?.close();
   };
 
+  const closeModal = () => dialogRef.current?.close();
+
+  const handleClickOutside = (
+    e: React.MouseEvent<HTMLDialogElement, MouseEvent>
+  ) => {
+    if (e.target === dialogRef.current) {
+      closeModal();
+    }
+  };
+
   const wishListProduct: CartItem = {
     id: data.id,
     name: data.name,
     price: data.price,
-    currency: data.currency,
-    img: data.img,
+    img: data.image,
     amount: amount,
-    addOns: data.addOns || [],
+    addOns: data.additions || [],
   };
 
   return (
     <div>
       <button
-        className="btn bg-newRed text-white font-abdo font-thin text-xs flex-row flex justify-evenly w-full items-center px-5 lg:px-2 rounded-full py-1"
+        className="btn bg-newRed text-white font-abdo font-thin text-sm flex-row flex justify-evenly w-full items-center px-5 lg:px-3 rounded-full py-1"
         onClick={() => dialogRef.current?.showModal()}
       >
-        <img src={src} alt="alt" className=" lg:w-1/5" />
+        <img src={src} alt="alt" className=" lg:w-1/4" />
         {t('addOnsText')}
       </button>
-      <dialog ref={dialogRef} id={modalId} className="modal overflow-y-auto ">
-        <div className="flex flex-col md:justify-between md:flex-row md:items-center w-[90vw] lg:w-[65vw] h-auto rounded-2xl gap-x-2 bg-white px-4 py-2 ">
-          <div className="flex flex-col justify-center items-stretch relative gap-y-2">
+      <dialog
+        ref={dialogRef}
+        id={modalId}
+        className="modal overflow-y-auto"
+        onClick={handleClickOutside}
+      >
+        <div
+          className="flex flex-col md:justify-between md:flex-row md:items-start w-[90vw] lg:w-[65vw] h-auto rounded-2xl gap-x-2 bg-white px-4 py-2"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex w-1/2 flex-col justify-center items-stretch relative gap-y-2">
             <WishlistButton
               data={data}
               item={item}
@@ -109,7 +125,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
           />
         </div>
         <form method="dialog" className="modal-backdrop">
-          <button type="button" onClick={handleAddToCart}>
+          <button type="button" onClick={closeModal}>
             close
           </button>
         </form>

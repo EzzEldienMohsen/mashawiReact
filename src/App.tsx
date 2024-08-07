@@ -1,5 +1,9 @@
 import React, { Suspense } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  LoaderFunctionArgs,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom';
 import {
   DefaultOptions,
   QueryClient,
@@ -36,6 +40,7 @@ import {
   // MyAddress,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
+import { Categories, Meals } from './assets/types';
 
 //  loaders
 import { loader as aboutLoader } from './pages/About';
@@ -45,6 +50,23 @@ import { loader as deliveryLoader } from './pages/Delivery';
 import { loader as refundLoader } from './pages/Refund';
 import { loader as termsLoader } from './pages/Terms';
 import { loader as categoryLoader } from './subComponents/Slider';
+import { loader as mealsLoader } from './components/Menu';
+
+// Combined loaders
+// First Menu Loaders
+interface MenuLoader {
+  data1: Categories;
+  data2: Meals;
+}
+const menuLoader =
+  (language: string) =>
+  async ({ request }: LoaderFunctionArgs): Promise<MenuLoader> => {
+    const url = new URL(request.url);
+    const page = url.searchParams.get('page') || '1';
+    const data1 = await categoryLoader(queryClient, language)();
+    const data2 = await mealsLoader(queryClient, language, page)();
+    return { data1, data2 };
+  };
 
 // Lazy-loaded components
 const Landing = React.lazy(() => import('./pages/Landing'));
@@ -76,6 +98,7 @@ const AppRouter: React.FC = () => {
               <Landing />
             </Suspense>
           ),
+          loader: menuLoader(language),
         },
         {
           path: '/about',
@@ -198,7 +221,7 @@ const AppRouter: React.FC = () => {
               <MenuList />
             </Suspense>
           ),
-          loader: categoryLoader(queryClient, language),
+          loader: menuLoader(language),
         },
         {
           path: '/cart',
