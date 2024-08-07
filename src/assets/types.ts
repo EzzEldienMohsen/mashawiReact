@@ -9,6 +9,10 @@ export type AddOn = {
     name: string;
   }[];
 };
+export type CartItemWithId = {
+  cart_id: number;
+  cartItem: CartItem;
+};
 export type CartItem = {
   id: number;
   name: string;
@@ -19,7 +23,9 @@ export type CartItem = {
 };
 
 export type CartState = {
-  cartItems: CartItem[];
+  cart_id: number;
+  isLoading: boolean;
+  cartItems: CartItemWithId[];
   numItemsInCart: number;
   cartTotal: number;
   shipping: number;

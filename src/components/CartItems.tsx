@@ -5,19 +5,21 @@ import { CartCard } from '../subComponents';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { CartItem } from '../assets/types';
 
-const CartItems:React.FC = () => {
-  const dispatch :AppDispatch= useDispatch();
-  const removeItemsFromCart = (prod:CartItem) => {
+const CartItems: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const removeItemsFromCart = (prod: CartItem) => {
     dispatch(removeItem(prod));
   };
-  const { cartItems } = useTypedSelector((state:RootState) => state.theMashawiCart);
+  const { cartItems } = useTypedSelector(
+    (state: RootState) => state.theMashawiCart
+  );
   return (
     <div className="my-16 w-full flex flex-col justify-center items-center px-8 lg:px-20">
       {cartItems.map((item) => {
         return (
           <CartCard
-            key={item.id}
-            item={item}
+            key={item.cartItem.id}
+            item={item.cartItem}
             removeItemsFromCart={removeItemsFromCart}
           />
         );
