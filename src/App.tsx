@@ -44,6 +44,7 @@ import { loader as privacyLoader } from './pages/Privacy';
 import { loader as deliveryLoader } from './pages/Delivery';
 import { loader as refundLoader } from './pages/Refund';
 import { loader as termsLoader } from './pages/Terms';
+import { loader as categoryLoader } from './subComponents/Slider';
 
 // Lazy-loaded components
 const Landing = React.lazy(() => import('./pages/Landing'));
@@ -58,8 +59,7 @@ const defaultOptions: DefaultOptions = {
   },
 };
 
-const queryClient = new QueryClient({defaultOptions});
-
+const queryClient = new QueryClient({ defaultOptions });
 
 const AppRouter: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
@@ -90,7 +90,7 @@ const AppRouter: React.FC = () => {
           path: '/events',
           element: <Events />,
         },
-        
+
         {
           path: '/singleEvent',
           element: <SingleEventPage />,
@@ -177,18 +177,18 @@ const AppRouter: React.FC = () => {
               index: true,
               element: <User />,
             },
-        //     {
-        //       path: 'orders',
-        //       element: <Orders />,
-        //     },
+            //     {
+            //       path: 'orders',
+            //       element: <Orders />,
+            //     },
             {
               path: 'changePassword',
               element: <ChangePassword />,
             },
-        //     {
-        //       path: 'address',
-        //       element: <MyAddress />,
-        //     },
+            //     {
+            //       path: 'address',
+            //       element: <MyAddress />,
+            //     },
           ],
         },
         {
@@ -198,6 +198,7 @@ const AppRouter: React.FC = () => {
               <MenuList />
             </Suspense>
           ),
+          loader: categoryLoader(queryClient, language),
         },
         {
           path: '/cart',

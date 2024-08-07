@@ -286,3 +286,33 @@ export type Cart = {
     }[];
   };
 };
+
+export type Categories = {
+  status: number;
+  message: string;
+  data: {
+    current_page: number;
+    pages_length: number;
+    data: {
+      id: number;
+      name: string;
+      icon: string;
+      children: {
+        id: number;
+        name: string;
+        icon: string;
+      }[];
+    }[];
+  };
+};
+
+export type CategoriesData = {
+  id: number;
+  name: string;
+  icon: string;
+  children: {
+    id: number;
+    name: string;
+    icon: string;
+  }[];
+}[];
