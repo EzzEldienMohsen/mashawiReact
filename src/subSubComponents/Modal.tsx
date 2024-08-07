@@ -46,9 +46,9 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     id: data.id,
     name: data.name,
     price: data.price,
-    img: data.image,
+    image: data.image,
     amount: amount,
-    addOns: data.additions || [],
+    additions: data.additions || [],
   };
 
   const handleAddToCart = () => {
@@ -81,9 +81,9 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     id: data.id,
     name: data.name,
     price: data.price,
-    img: data.image,
+    image: data.image,
     amount: amount,
-    addOns: data.additions || [],
+    additions: data.additions || [],
   };
 
   return (

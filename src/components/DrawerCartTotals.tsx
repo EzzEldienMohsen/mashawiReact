@@ -10,7 +10,7 @@ const DrawerCartTotals: React.FC = () => {
   );
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-y-4 fixed bg-white bottom-0 left-0 z-50 justify-center items-center py-8  w-full ">
+    <div className="flex flex-col gap-y-4 fixed bg-white bottom-0 left-0 z-50 justify-center items-center py-5  w-full ">
       <p className="text-newRed  lg:text-lg">{t('vatContentText')}</p>
       <p className=" pb-2 flex w-3/5 justify-between flex-row gap-x-4 text-newRed text-sm ">
         <span>{t('totalOrderText')}</span>

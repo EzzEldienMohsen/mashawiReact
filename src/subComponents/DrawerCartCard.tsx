@@ -8,11 +8,7 @@ import { AppDispatch } from '../store';
 import { useDispatch } from 'react-redux';
 import { addItem, removeAddOns, removeItem } from '../features/cart/cartSlice';
 
-interface CartCardProps {
-  item: CartItem;
-}
-
-const DrawerCartCard: React.FC<CartCardProps> = ({ item }) => {
+const DrawerCartCard: React.FC<{ item: CartItem }> = ({ item }) => {
   // State declaration
   const [removeAddOnsList, setRemoveAddOnsList] = React.useState<AddOn[]>([]);
   const [checkedAddOns, setCheckedAddOns] = React.useState<{
@@ -31,9 +27,9 @@ const DrawerCartCard: React.FC<CartCardProps> = ({ item }) => {
     id: item.id,
     name: item.name,
     price: item.price,
-    img: item.img,
+    image: item.image,
     amount: amount,
-    addOns: [],
+    additions: [],
   };
 
   const addItemToCart = () => {
@@ -63,7 +59,7 @@ const DrawerCartCard: React.FC<CartCardProps> = ({ item }) => {
   };
   return (
     <div className="flex w-full rounded-xl border-b-[2px]   justify-start items-start pt-4 pb-6 px-2 my-2 gap-x-2 ">
-      <img src={item.img} alt="alt" className="w-1/5 aspect-square" />
+      <img src={item.image} alt="alt" className="w-1/5 aspect-square" />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <div className="w-full flex justify-between items-center">
           <h1>{t(item.name)}</h1>
@@ -73,7 +69,7 @@ const DrawerCartCard: React.FC<CartCardProps> = ({ item }) => {
         </div>
 
         <div className="font-abdo text-sm w-full gap-y-1 flex-colflex justify-center items-start">
-          {item.addOns.map((addOn) => {
+          {item.additions.map((addOn) => {
             return (
               <div
                 key={addOn.id}

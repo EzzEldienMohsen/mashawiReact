@@ -38,7 +38,7 @@ const Slider: React.FC = () => {
         <Link
           to=""
           key={category.id}
-          className="carousel-item flex-shrink-0 w-14 h-14 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-transparent rounded-2xl shadow-md flex flex-col items-center justify-center mx-1"
+          className="carousel-item flex-shrink-0 w-14 h-14 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-transparent rounded-2xl flex flex-col items-center justify-center mx-1"
         >
           <img
             src={category.icon}

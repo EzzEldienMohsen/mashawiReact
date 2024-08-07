@@ -11,7 +11,7 @@ const CartDrawerContent: React.FC = () => {
   const clearTheCart = () => dispatch(clearCart());
   const { t } = useTranslation();
   return (
-    <div className="w-full flex flex-col justify-start relative  overflow-y-auto pb-20  items-center px-3 pt-3 bg-[#F8F8F8] h-full">
+    <div className="w-full flex flex-col justify-start relative  overflow-y-auto pb-48  items-center px-3 pt-3 bg-[#F8F8F8] h-full">
       {/* title and clear cart logic */}
       <div className="w-full flex justify-start items-center gap-x-6">
         <button className="mt-3" onClick={() => clearTheCart()}>

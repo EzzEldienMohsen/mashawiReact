@@ -14,8 +14,8 @@ export type CartItem = {
   name: string;
   price: number;
   amount: number;
-  img: string;
-  addOns: AddOn[] | [];
+  image: string;
+  additions: AddOn[] | [];
 };
 
 export interface CartState {
@@ -286,11 +286,11 @@ export type Meals = {
 export type SingleMealData = {
   id: number;
   name: string;
-  description: string;
+  description?: string;
   price: number;
   image: string;
-  gallery: string[];
-  categories: {
+  gallery?: string[];
+  categories?: {
     id: number;
     name: string;
     icon: string;
