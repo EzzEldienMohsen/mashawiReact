@@ -4,6 +4,7 @@ import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useGlobalContext } from '../context/GlobalContext';
 interface CategoriesQuery {
   queryKey: string[];
   queryFn: () => Promise<Categories>;
@@ -29,6 +30,7 @@ export const loader =
   };
 
 const Slider: React.FC = () => {
+  const { isLangArabic } = useGlobalContext();
   const axiosData: any = useLoaderData();
   const data: CategoriesData = axiosData.data1.data.data.data;
   console.log(data);
@@ -38,7 +40,11 @@ const Slider: React.FC = () => {
         <Link
           to=""
           key={category.id}
-          className="carousel-item flex-shrink-0 w-14 h-14 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-transparent rounded-2xl flex flex-col items-center justify-center mx-1"
+          className={`carousel-item flex-shrink-0 w-14 h-14 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-4 ${
+            isLangArabic
+              ? 'rounded-tr-3xl rounded-bl-3xl'
+              : 'rounded-tl-3xl rounded-br-3xl'
+          }`}
         >
           <img
             src={category.icon}
