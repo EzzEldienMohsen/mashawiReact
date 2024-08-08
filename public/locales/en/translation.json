@@ -166,5 +166,6 @@
   "add": "address",
   "newAdd": "add new address",
   "taxValue": "tax value",
-  "emptyCat":"Sorry, this section is temporarily out of service. Products will be displayed as soon as they are available. Thank you for your support."
+  "emptyCat": "Sorry, this section is temporarily out of service. Products will be displayed as soon as they are available. Thank you for your support.",
+  "emptyWishList": "Please add some items to your favorites so you can see them on this page."
 }

@@ -53,7 +53,7 @@ const Slider: React.FC = () => {
             alt={category.name}
             className="w-5 h-5 md:w-10 md:h-10 lg:w-12 lg:h-12 mb-1 md:mb-2"
           />
-          <span className="text-newRed text-[10px] md:text-sm lg:text-base">
+          <span className="text-black text-[10px] md:text-sm lg:text-base">
             {category.name}
           </span>
         </Link>

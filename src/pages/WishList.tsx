@@ -11,6 +11,17 @@ const WishList: React.FC = () => {
   );
   const dispatch: AppDispatch = useDispatch();
   const clearWish = () => dispatch(clearWishList());
+  if (items.length === 0) {
+    return (
+      <div className=" w-full px-8 lg:px-20">
+        <div className="flex justify-center items-center bg-white text-center my-8 py-5 rounded-2xl shadow-md ">
+          <h1 className="text-black font-abdo font-light">
+            {t('emptyWishList')}
+          </h1>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col justify-center items-center w-full my-4  py-8">
       <div className="bg-[#2C2220] flex flex-col text-start  w-full justify-start items-center px-4 py-6 my-6 font-abdo">
