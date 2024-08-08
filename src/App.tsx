@@ -111,7 +111,13 @@ const AppRouter: React.FC = () => {
         {
           index: true,
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
               <Landing />
             </Suspense>
           ),
@@ -234,7 +240,13 @@ const AppRouter: React.FC = () => {
         {
           path: '/menuList',
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
               <MenuList />
             </Suspense>
           ),
@@ -243,7 +255,13 @@ const AppRouter: React.FC = () => {
         {
           path: '/menuList/category/:cat',
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
               <MenuCategory />
             </Suspense>
           ),
@@ -260,7 +278,13 @@ const AppRouter: React.FC = () => {
         {
           path: '/wishList',
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
               <WishList />
             </Suspense>
           ),
@@ -268,7 +292,13 @@ const AppRouter: React.FC = () => {
         {
           path: '/gallery',
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
               <Gallery />
             </Suspense>
           ),
