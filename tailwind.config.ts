@@ -20,7 +20,7 @@ const config: Config = {
         bgColor: '#F8F8F8',
       },
       backgroundImage: {
-        'svg-background': "url('./src/assets/svg/Mask groupتواصل معنا.svg')",
+        'svg-background': "url('./src/assets/svg/maskedGroupContactUs.svg')",
       },
     },
   },
