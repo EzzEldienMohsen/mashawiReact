@@ -52,3 +52,6 @@ body, html {
   display: none;
   -webkit-appearance: none;
 }
+.theImage {
+background-image: url("./src/assets/svg/Mask groupتواصل معنا.svg");
+}
