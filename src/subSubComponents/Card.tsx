@@ -29,7 +29,7 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
         isLangArabic
           ? 'rounded-tr-3xl rounded-bl-3xl'
           : 'rounded-tl-3xl rounded-br-3xl'
-      } bg-white flex flex-col justify-center items-center gap-y-2 relative`}
+      } bg-white flex flex-col justify-center  items-center gap-y-2 relative`}
     >
       <WishlistButton
         data={data}
@@ -39,7 +39,7 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
       <img
         src={data.image}
         alt="img"
-        className={`w-full  ${
+        className={`w-full h-[348px] ${
           isLangArabic
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'
