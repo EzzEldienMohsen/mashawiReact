@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuWithCategory, SidePageHero } from '../components';
+import { MenuWithCategory, Pagination, SidePageHero } from '../components';
 import img from '../assets/صورة قائمة الطعام.png';
 import { useTranslation } from 'react-i18next';
 const MenuCategory: React.FC = () => {
@@ -13,6 +13,7 @@ const MenuCategory: React.FC = () => {
         secondaryText={t('menuPageText')}
       />
       <MenuWithCategory />
+      <Pagination />
     </div>
   );
 };

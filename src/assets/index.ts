@@ -115,7 +115,7 @@ export const links: Link[] = [
   { text: 'jobsRoute', to: '/jobs' },
   { text: 'cartRoute', to: '/cart' },
   { text: 'wishListRoute', to: '/wishList' },
-  { text: 'menuRoute', to: '/menuList' },
+  { text: 'menuRoute', to: '/meals' },
   { text: 'branchesRoute', to: '/branches' },
   { text: 'PrivacyPolicyRoute', to: '/privacy' },
   { text: 'termsPolicyRoute', to: '/terms' },
@@ -132,7 +132,7 @@ export const headerLinks: Link[] = [
   { text: 'main', to: '/' },
   { text: 'about', to: '/about' },
   { text: 'branchesRoute', to: '/branches' },
-  { text: 'menuRoute', to: '/menuList' },
+  { text: 'menuRoute', to: '/meals' },
   { text: 'contactUsRoute', to: '/contact' },
 ];
 
@@ -142,7 +142,7 @@ export const navBarLinks: Link[] = [
   { text: 'cartRoute', to: '/cart' },
   { text: 'about', to: '/about' },
   { text: 'branchesRoute', to: '/branches', img: arrow },
-  { text: 'menuRoute', to: '/menuList' },
+  { text: 'menuRoute', to: '/meals' },
   { text: 'contactUsRoute', to: '/contact' },
   { text: 'newsRoute', to: '/' },
   { text: 'galleryRoute', to: '/gallery' },

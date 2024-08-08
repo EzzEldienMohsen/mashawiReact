@@ -55,10 +55,10 @@ import { loader as mealsLoader } from './components/Menu';
 import { loader as menuWithCategoryProductLoader } from './components/MenuWithCategory';
 // Combined loaders
 // First Menu Loaders
-interface MenuLoader {
+export type MenuLoader = {
   data1: Categories;
   data2: Meals;
-}
+};
 const menuLoader =
   (language: string) =>
   async ({ request }: LoaderFunctionArgs): Promise<MenuLoader> => {
@@ -238,7 +238,7 @@ const AppRouter: React.FC = () => {
           ],
         },
         {
-          path: '/menuList',
+          path: '/meals',
           element: (
             <Suspense
               fallback={
@@ -253,7 +253,7 @@ const AppRouter: React.FC = () => {
           loader: menuLoader(language),
         },
         {
-          path: '/menuList/category/:cat',
+          path: '/meals/category/:cat',
           element: (
             <Suspense
               fallback={

@@ -259,8 +259,8 @@ export type Tracker = {
 
 // Meals Data type
 export type Meals = {
-  status: number;
-  message: string;
+  status?: number;
+  message?: string;
   data: {
     current_page: number;
     pages_length: number;
@@ -343,3 +343,115 @@ export type CategoriesData = {
     icon: string;
   }[];
 }[];
+
+// paginationData
+
+export type MenuLoader = {
+  data1: {
+    data: {
+      status: number;
+      message: string;
+      data: {
+        current_page: number;
+        pages_length: number;
+        data: Array<{
+          id: number;
+          name: string;
+          icon: string;
+          children: Array<any>;
+        }>;
+      };
+    };
+    status: number;
+    statusText: string;
+    headers: {
+      'cache-control': string;
+      'content-type': string;
+    };
+    config: {
+      transitional: {
+        silentJSONParsing: boolean;
+        forcedJSONParsing: boolean;
+        clarifyTimeoutError: boolean;
+      };
+      adapter: string[];
+      transformRequest: Array<null | any>;
+      transformResponse: Array<null | any>;
+      timeout: number;
+      xsrfCookieName: string;
+      xsrfHeaderName: string;
+      maxContentLength: number;
+      maxBodyLength: number;
+      env: Record<string, any>;
+      headers: {
+        Accept: string;
+        lang: string;
+      };
+      baseURL: string;
+      url: string;
+      method: string;
+    };
+    request: Record<string, any>;
+  };
+  data2: {
+    data: {
+      status: number;
+      message: string;
+      data: {
+        current_page: number;
+        pages_length: number;
+        data: Array<{
+          id: number;
+          name: string;
+          price: string;
+          image: string;
+          gallery: string[];
+          categories: Array<{
+            id: number;
+            name: string;
+            icon: string;
+          }>;
+          additions: Array<{
+            id: number;
+            name: string;
+            icon: string;
+            values: Array<{
+              id: number;
+              name: string;
+            }>;
+          }>;
+        }>;
+      };
+    };
+    status: number;
+    statusText: string;
+    headers: {
+      'cache-control': string;
+      'content-type': string;
+    };
+    config: {
+      transitional: {
+        silentJSONParsing: boolean;
+        forcedJSONParsing: boolean;
+        clarifyTimeoutError: boolean;
+      };
+      adapter: string[];
+      transformRequest: Array<null | any>;
+      transformResponse: Array<null | any>;
+      timeout: number;
+      xsrfCookieName: string;
+      xsrfHeaderName: string;
+      maxContentLength: number;
+      maxBodyLength: number;
+      env: Record<string, any>;
+      headers: {
+        Accept: string;
+        lang: string;
+      };
+      baseURL: string;
+      url: string;
+      method: string;
+    };
+    request: Record<string, any>;
+  };
+};

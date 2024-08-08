@@ -40,7 +40,7 @@ const Slider: React.FC = () => {
     <div className="carousel carousel-end rounded-box flex overflow-x-auto gap-x-2 py-4">
       {data.map((category) => (
         <Link
-          to={`/menuList/category/${category.id}`}
+          to={`/meals/category/${category.id}`}
           key={category.id}
           className={`carousel-item flex-shrink-0 w-12 h-12 md:w-20 md:h-20 lg:w-32 lg:h-32 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
             isLangArabic
