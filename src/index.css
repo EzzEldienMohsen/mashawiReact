@@ -53,5 +53,7 @@ body, html {
   -webkit-appearance: none;
 }
 .theImage {
-background-image: url("/assets/svg/maskedGroupContactUs.svg");
+background-image: url("../src/assets/svg/maskedGroupContactUs.svg");
+background-position: center;
+background-size: contain;
 }
