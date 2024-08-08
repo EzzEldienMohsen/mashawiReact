@@ -165,5 +165,6 @@
   "cancellation": "cancel",
   "add": "address",
   "newAdd": "add new address",
-  "taxValue": "tax value"
+  "taxValue": "tax value",
+  "emptyCat":"Sorry, this section is temporarily out of service. Products will be displayed as soon as they are available. Thank you for your support."
 }
