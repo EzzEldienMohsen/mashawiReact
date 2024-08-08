@@ -19,7 +19,7 @@ const AddOns: React.FC<AddOnsProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col justify-start items-start w-1/2">
+    <div className="flex flex-col justify-start items-start w-[55%]">
       <h1 className="my-2">{t('addOnModalTitle')}</h1>
       {additions.map((addOn: AddOnInterface) => (
         <AddOn

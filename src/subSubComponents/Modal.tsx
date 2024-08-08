@@ -98,14 +98,14 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
       <dialog
         ref={dialogRef}
         id={modalId}
-        className="modal overflow-y-auto"
+        className="modal overflow-y-auto w-full flex justify-center items-center"
         onClick={handleClickOutside}
       >
         <div
-          className="flex flex-col md:justify-between md:flex-row md:items-start w-[90vw] lg:w-[65vw] h-auto rounded-2xl gap-x-2 bg-white px-4 py-2"
+          className="flex flex-col md:justify-between md:flex-row md:items-start w-[90vw] lg:w-[75vw] h-auto rounded-2xl gap-x-2 bg-white px-4 py-2"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex w-1/2 flex-col justify-center items-stretch relative gap-y-2">
+          <div className="flex w-2/5 flex-col justify-center items-stretch relative gap-y-2">
             <WishlistButton
               data={data}
               item={item}

@@ -22,7 +22,7 @@ const ProductDetails: React.FC<ProductProps> = ({
       <img
         src={data.image}
         alt="img"
-        className="rounded-tr-3xl rounded-bl-3xl  "
+        className="rounded-tr-3xl rounded-bl-3xl w-full "
       />
       <div className="flex justify-between flex-row w-full items-center my-2">
         <h1>{data.name}</h1>
