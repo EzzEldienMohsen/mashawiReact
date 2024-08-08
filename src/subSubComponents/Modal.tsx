@@ -2,7 +2,11 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import src from '../assets/svg/menu/addOns.svg';
 import { useTranslation } from 'react-i18next';
-import { addAddOns, removeAddOns } from '../features/cart/cartSlice';
+import {
+  addAddOns,
+  addThisItemToCart,
+  removeAddOns,
+} from '../features/cart/cartSlice';
 import { AddOn, CartItem, SingleMealData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { AddOns, ProductDetails, WishlistButton } from '../subSubSubComponents';
@@ -64,6 +68,18 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
       );
     }
     dispatch(addToCart({ product: cartProduct }));
+    dispatch(
+      addThisItemToCart({
+        meal_id: data.id,
+        qty: amount,
+        additions: cartProduct.additions.flatMap((item) =>
+          item.values.map((value) => ({
+            id: item.id,
+            value: value.id,
+          }))
+        ),
+      })
+    );
     dialogRef.current?.close();
   };
 
