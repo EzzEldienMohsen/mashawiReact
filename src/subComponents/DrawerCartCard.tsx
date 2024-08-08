@@ -62,7 +62,7 @@ const DrawerCartCard: React.FC<{ item: CartItem }> = ({ item }) => {
       <img src={item.image} alt="alt" className="w-1/5 aspect-square" />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <div className="w-full flex justify-between items-center">
-          <h1>{t(item.name)}</h1>
+          <h1>{item.name}</h1>
           <button className="" onClick={() => removeItemsFromCart(item)}>
             <img src={theClose} alt="alt" />
           </button>

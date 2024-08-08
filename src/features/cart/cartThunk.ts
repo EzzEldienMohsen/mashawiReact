@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { autoFetch } from '../../utils';
 import { CartData, MealRequest, MealResponse } from './types';
+import { toast } from 'react-toastify';
 
 export const addToCartThunk = async (
   url: string,
@@ -18,9 +19,11 @@ export const addToCartThunk = async (
         },
       }
     );
+
     return response.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    toast.error(error.response.data.message);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 
@@ -42,6 +45,7 @@ export const editQuantityThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.msg);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
