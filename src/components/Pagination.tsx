@@ -1,11 +1,12 @@
 import React from 'react';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
-import { MenuLoader } from '../assets/types';
+import { Meals } from '../assets/types';
 const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo`;
 const Pagination: React.FC = () => {
-  const { data2 } = useLoaderData() as MenuLoader;
-  const currentPage = data2.data.data.current_page; // Fallback to page 1 if NaN
-  const pageCount = data2.data.data.pages_length; // Fallback to 10 if not provided
+  const axiosData = useLoaderData() as any;
+  const data2: Meals = axiosData.data2.data;
+  const currentPage = data2.data.current_page; // Fallback to page 1 if NaN
+  const pageCount = data2.data.pages_length || 10; // Fallback to 10 if not provided
 
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
