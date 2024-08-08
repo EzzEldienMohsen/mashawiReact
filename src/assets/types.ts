@@ -146,7 +146,7 @@ export type ContactInitialValues = {
   email: string;
   mobile: string;
   subject: string;
-  text: string;
+  message: string;
 };
 
 export type GalleryElement = { id: string; img: string };

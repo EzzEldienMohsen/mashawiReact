@@ -102,7 +102,7 @@ const ContactForm: React.FC<{ title: string }> = ({ title }) => {
             label=" "
             type="textarea"
             high={true}
-            value={values.text}
+            value={values.message}
             placeHolder={t('textAreaInputPlaceHolder')}
             handleChange={handleChange}
             full={true}
