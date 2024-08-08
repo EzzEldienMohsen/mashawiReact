@@ -31,6 +31,7 @@ const CartItems: React.FC = () => {
           <CartCard
             key={item.cartItem.id}
             item={item.cartItem}
+            cart_id={item.cart_id}
             removeItemsFromCart={removeItemsFromCart}
           />
         );

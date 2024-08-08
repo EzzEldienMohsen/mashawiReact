@@ -138,19 +138,24 @@ const cartSlice = createSlice({
         state.numItemsInCart -= item.cartItem.amount;
 
         if (qty > 0) {
+          // Update the item's quantity in the cart
           item.cartItem.amount = qty;
+          // Add the new amount to the total number of items in the cart
           state.numItemsInCart += qty;
           toast.success('تم تحديث كمية الوجبة بنجاح');
         } else {
+          // Remove the item if the quantity is zero or less
           state.cartItems = state.cartItems.filter(
             (i) => i.cartItem.id !== cartID
           );
           toast.error('تم ازالة الطلب من قائمة الطلبات');
         }
 
+        // Recalculate the totals
         cartSlice.caseReducers.calculateTotals(state);
       }
     },
+
     calculateTotals: (state) => {
       state.cartTotal = state.cartItems.reduce((total, item) => {
         return total + calculateProductTotal(item);

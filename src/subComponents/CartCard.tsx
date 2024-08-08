@@ -1,6 +1,6 @@
 import React from 'react';
 import theClose from '../assets/svg/closeBtn.svg';
-import { editQuantityLocally } from '../features/cart/cartSlice';
+import { editQuantity, editQuantityLocally } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { CartItem } from '../assets/types';
@@ -11,17 +11,30 @@ import { useGlobalContext } from '../context/GlobalContext';
 interface CartCardProps {
   item: CartItem;
   removeItemsFromCart: (cart: CartItem) => void;
+  cart_id: number;
 }
 
-const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
+const CartCard: React.FC<CartCardProps> = ({
+  item,
+  removeItemsFromCart,
+  cart_id,
+}) => {
   const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
-
-  const [amount, setAmount] = React.useState<number>(item.amount || 0);
   const dispatch: AppDispatch = useDispatch();
 
+  const [amount, setAmount] = React.useState<number>(item.amount);
+
+  React.useEffect(() => {
+    setAmount(item.amount);
+  }, [item.amount]);
   const editQuantityOfItem = (qty: number) => {
+    // First, update the local state and quantity
+    setAmount(qty);
+
+    // Dispatch the local and async quantity updates
     dispatch(editQuantityLocally({ cartID: item.id, qty }));
+    dispatch(editQuantity({ reqData: { qty }, cart_id }));
   };
 
   return (
@@ -42,25 +55,23 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
         }`}
       />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
-        <h1>{t(item.name)}</h1>
+        <h1>{item.name}</h1>
         <p className="text-newRed flex flex-row gap-x-1">
           <span>{item.price}</span>
           <span>{t('menuItemCurrency')}</span>
         </p>
         <div className="flex flex-col justify-start items-start gap-y-4 md:flex-row md:justify-between md:items-center w-full">
           <div className="font-abdo text-sm w-full gap-y-1 flex-col md:w-3/5 flex justify-center items-start">
-            {item.additions.map((addOn) => {
-              return (
-                <div
-                  key={addOn.id}
-                  className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
-                >
-                  <p className="text-xs w-1/3">{t(addOn.name)}</p>
-                </div>
-              );
-            })}
+            {item.additions.map((addOn) => (
+              <div
+                key={addOn.id}
+                className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
+              >
+                <p className="text-xs w-1/3">{t(addOn.name)}</p>
+              </div>
+            ))}
           </div>
-          <div className="flex md:flex-col justify-between gap-x-1    md:items-end md:justify-end gap-y-3 w-auto">
+          <div className="flex md:flex-col justify-between gap-x-1 md:items-end md:justify-end gap-y-3 w-auto">
             <DrawerAmountInput
               editTheQuantity={editQuantityOfItem}
               amount={amount}

@@ -2,11 +2,7 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import src from '../assets/svg/menu/addOns.svg';
 import { useTranslation } from 'react-i18next';
-import {
-  addAddOns,
-  addThisItemToCart,
-  removeAddOns,
-} from '../features/cart/cartSlice';
+import { addThisItemToCart } from '../features/cart/cartSlice';
 import { AddOn, CartItem, SingleMealData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { AddOns, ProductDetails, WishlistButton } from '../subSubSubComponents';
@@ -45,28 +41,18 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
         : prevRemoveAddOns.filter((ao) => ao.id !== addOn.id)
     );
   };
-
-  const cartProduct: CartItem = {
-    id: data.id,
-    name: data.name,
-    price: data.price,
-    image: data.image,
-    amount: amount,
-    additions: [],
-  };
-
   const handleAddToCart = () => {
-    if (selectedAddOns.length > 0) {
-      dispatch(addAddOns({ cartID: data.id, additions: selectedAddOns }));
-    }
-    if (removeAddOnsList.length > 0) {
-      dispatch(
-        removeAddOns({
-          cartID: data.id,
-          addOnIDs: removeAddOnsList.map((ao) => ao.id),
-        })
-      );
-    }
+    const combinedAddOns = [...selectedAddOns, ...removeAddOnsList];
+
+    const cartProduct: CartItem = {
+      id: data.id,
+      name: data.name,
+      price: data.price,
+      image: data.image,
+      amount: amount,
+      additions: combinedAddOns,
+    };
+
     dispatch(addToCart({ product: cartProduct }));
     dispatch(
       addThisItemToCart({
@@ -82,7 +68,6 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     );
     dialogRef.current?.close();
   };
-
   const closeModal = () => dialogRef.current?.close();
 
   const handleClickOutside = (

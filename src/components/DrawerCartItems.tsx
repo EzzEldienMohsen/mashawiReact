@@ -20,7 +20,13 @@ const DrawerCartItems: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-y-1 z-40">
       {cartItems.map((item) => {
-        return <DrawerCartCard key={item.cartItem.id} item={item.cartItem} />;
+        return (
+          <DrawerCartCard
+            key={item.cartItem.id}
+            item={item.cartItem}
+            cart_id={item.cart_id}
+          />
+        );
       })}
     </div>
   );

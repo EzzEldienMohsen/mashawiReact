@@ -5,23 +5,35 @@ import { DrawerAmountInput } from '../subSubSubComponents';
 import { CartItem } from '../assets/types';
 import { AppDispatch } from '../store';
 import { useDispatch } from 'react-redux';
-import { editQuantityLocally, removeItem } from '../features/cart/cartSlice';
+import {
+  editQuantity,
+  editQuantityLocally,
+  removeItem,
+} from '../features/cart/cartSlice';
 
-const DrawerCartCard: React.FC<{ item: CartItem }> = ({ item }) => {
-  const [amount, setAmount] = React.useState<number>(item.amount || 0);
+const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
+  item,
+  cart_id,
+}) => {
+  const [amount, setAmount] = React.useState<number>(item.amount);
   //  Additional declaration
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
-  //    remove item from the cart
   const removeItemsFromCart = (prod: CartItem) => {
     dispatch(removeItem(prod));
   };
-  // Changing order Amount
+  React.useEffect(() => {
+    setAmount(item.amount);
+  }, [item.amount]);
 
   const editQuantityOfItem = (qty: number) => {
+    // First, update the local state and quantity
+    setAmount(qty);
+
+    // Dispatch the local and async quantity updates
     dispatch(editQuantityLocally({ cartID: item.id, qty }));
+    dispatch(editQuantity({ reqData: { qty }, cart_id }));
   };
-  // Handling Add Ons removal
 
   return (
     <div className="flex w-full rounded-xl border-b-[2px]   justify-start items-start pt-4 pb-6 px-2 my-2 gap-x-2 ">
