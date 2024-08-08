@@ -93,6 +93,7 @@ export type Option = { label: string; value: string };
 export type FormRowProps = {
   name: string;
   type: string;
+  isBorder?: boolean;
   handleChange: (
     event: ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
