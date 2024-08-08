@@ -37,7 +37,7 @@ const Slider: React.FC = () => {
   console.log(data);
 
   return (
-    <div className="carousel rounded-box flex overflow-x-auto space-x-4 py-4">
+    <div className="carousel rounded-box flex overflow-x-auto gap-x-4 py-4">
       {data.map((category) => (
         <Link
           to={`/menuList/category/${category.id}`}

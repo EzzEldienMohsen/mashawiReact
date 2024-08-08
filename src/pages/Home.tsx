@@ -7,7 +7,7 @@ const Home: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   return (
     <div
-      className="bg-[#DDDDDD] font-abdo flex flex-col gap-y-10 relative w-full m-0 p-0"
+      className="bg-[#f5f5f5] font-abdo flex flex-col gap-y-10 relative w-full m-0 p-0"
       dir={isLangArabic ? 'rtl' : 'ltr'}
     >
       <Header />

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { AddOn as AddOnInterface } from '../assets/types';
 
 interface AddOnProps {
@@ -15,8 +14,7 @@ const AddOn: React.FC<AddOnProps> = ({
 }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isRemoveChecked, setIsRemoveChecked] = useState(false);
-  const { t } = useTranslation();
-
+  console.log(addOn);
   const handleAddOnChange = () => {
     setIsChecked(!isChecked);
     onAddOnChange(addOn, !isChecked);
@@ -44,7 +42,7 @@ const AddOn: React.FC<AddOnProps> = ({
           onChange={handleAddOnChange}
           className="h-4 w-4"
         />
-        <span>{t(addOn.name)}</span>
+        <span>{addOn.name}</span>
       </label>
       <label className="flex gap-x-4 items-center justify-start text-thin font-abdo text-xs w-1/4">
         <input
