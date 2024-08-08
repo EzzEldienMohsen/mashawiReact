@@ -39,7 +39,7 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
       <img
         src={data.image}
         alt="img"
-        className={`w-full h-[348px] ${
+        className={`w-full aspect-square md:aspect-auto md:h-[348px] ${
           isLangArabic
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'

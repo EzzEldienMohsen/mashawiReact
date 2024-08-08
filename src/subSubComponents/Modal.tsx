@@ -102,7 +102,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
         onClick={handleClickOutside}
       >
         <div
-          className="flex flex-col md:justify-between md:flex-row md:items-start w-[90vw] lg:w-[75vw] h-auto rounded-2xl gap-x-2 bg-white px-4 py-4"
+          className="flex flex-col md:justify-between md:flex-row md:items-start w-[90vw] lg:w-[80vw] h-auto rounded-2xl gap-x-2 bg-white p-8"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex w-full md:w-2/5 flex-col justify-center items-stretch relative gap-y-2">
