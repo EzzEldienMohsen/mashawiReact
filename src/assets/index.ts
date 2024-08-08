@@ -73,39 +73,38 @@ export const whyImg =
   'https://s3-alpha-sig.figma.com/img/d552/f25b/5c2e330ed5e99377cbefe80ee7603291?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nGIxE5JdKXbi8pU2dIq9pCbUwr4LG0ZZRGyQn3csFqPvedatuTPmBw3a6l1Mosn53aJIdKdCt8vzg3nTnZrXpxAW7djZoUXtx6IgBO4H99IOWZ0P0UxPQfOxf54TDTLaYzJfBdKjnsKdcOoIJ-z8vMIez1uvZhbKy7Z54lnVQRKVKjpHCi8pg42krvzv9~wUvx6hggDrTEt2UJi4DnHWRPbZBQ5NeOU~0V-FRHVz2U5HKG6s5je~hpcRcL7B5~cA6VNhvjZ90pIZoaQ69mIViEeq0~Uj21mht84uklL5Hme~81uCetB0Uw284qKt5SvWMxd78f~7aDXdAz-3d5fhtQ__';
 
 // about  Images
-import img1 from "../assets/svg/about/vision.svg" 
-import img2 from "../assets/svg/about/mission.svg" 
-import img3 from "../assets/svg/about/story.svg" 
-import img4 from "../assets/svg/about/excellence.svg" 
+import img1 from '../assets/svg/about/vision.svg';
+import img2 from '../assets/svg/about/mission.svg';
+import img3 from '../assets/svg/about/story.svg';
+import img4 from '../assets/svg/about/excellence.svg';
 import checkedLogo from '../assets/svg/about/checked.svg';
 
 // events Images
-import pic1 from "../assets/svg/events/pic1.svg"
-import pic2 from "../assets/svg/events/pic2.svg"
-import pic3 from "../assets/svg/events/pic3.svg"
-import pic4 from "../assets/svg/events/pic4.svg"
-import pic5 from "../assets/svg/events/pic5.svg"
-import pic6 from "../assets/svg/events/pic6.svg"
-import pic7 from "../assets/svg/events/pic7.svg"
-import pic8 from "../assets/svg/events/pic8.svg"
-import dateIcon from "../assets/svg/events/dateIcon.svg"
-import eventPic from "../assets/svg/events/eventPic.svg"
+import pic1 from '../assets/svg/events/pic1.svg';
+import pic2 from '../assets/svg/events/pic2.svg';
+import pic3 from '../assets/svg/events/pic3.svg';
+import pic4 from '../assets/svg/events/pic4.svg';
+import pic5 from '../assets/svg/events/pic5.svg';
+import pic6 from '../assets/svg/events/pic6.svg';
+import pic7 from '../assets/svg/events/pic7.svg';
+import pic8 from '../assets/svg/events/pic8.svg';
+import dateIcon from '../assets/svg/events/dateIcon.svg';
+import eventPic from '../assets/svg/events/eventPic.svg';
 
 // tracker order Images
-import tr1 from "../assets/svg/traker/ordered.svg"
-import tr2 from "../assets/svg/traker/preparing.svg"
-import tr3 from "../assets/svg/traker/delivering.svg"
-import tr4 from "../assets/svg/traker/delivered.svg"
+import tr1 from '../assets/svg/traker/ordered.svg';
+import tr2 from '../assets/svg/traker/preparing.svg';
+import tr3 from '../assets/svg/traker/delivering.svg';
+import tr4 from '../assets/svg/traker/delivered.svg';
 
 // Done Ordr Images
-import or1 from "../assets/svg/delivery/proceed.svg"
-import or2 from "../assets/svg/delivery/cardData.svg"
-import or3 from "../assets/svg/delivery/ordered.svg"
+import or1 from '../assets/svg/delivery/proceed.svg';
+import or2 from '../assets/svg/delivery/cardData.svg';
+import or3 from '../assets/svg/delivery/ordered.svg';
 // Proceed Images
-import pr1 from "../assets/svg/proceed/proceed.svg"
-import pr2 from "../assets/svg/proceed/cardData.svg"
-import pr3 from "../assets/svg/proceed/ordered.svg"
-
+import pr1 from '../assets/svg/proceed/proceed.svg';
+import pr2 from '../assets/svg/proceed/cardData.svg';
+import pr3 from '../assets/svg/proceed/ordered.svg';
 
 // Links Starts Here
 export const links: Link[] = [
@@ -191,7 +190,7 @@ export const contactInitialValues: ContactInitialValues = {
   email: '',
   mobile: '',
   subject: '',
-  text: '',
+  message: '',
 };
 
 // Menu Items starts here
@@ -880,19 +879,19 @@ export const initialProfileValues: InitialProfileValues = {
   profession: '',
 };
 
-export const profileLinks:ProfileLink[] = [
+export const profileLinks: ProfileLink[] = [
   {
     id: nanoid(),
     img: per,
     text: 'profileRoute',
     to: '/profile',
   },
-   { 
-      id:nanoid(),
-      text: 'wishListRoute',
-      to: '/wishList' ,
-      img:wishList
-    },
+  {
+    id: nanoid(),
+    text: 'wishListRoute',
+    to: '/wishList',
+    img: wishList,
+  },
   {
     id: nanoid(),
     img: or,
@@ -905,8 +904,6 @@ export const profileLinks:ProfileLink[] = [
     text: 'myAddressRoute',
     to: '/profile/address',
   },
-   
-
 ];
 
 export const genderOptions: { value: string; label: string }[] = [
@@ -929,7 +926,7 @@ export const addressOptions: { value: string; label: string }[] = [
   // Add more countries as needed
 ];
 
-export const myOrders:MyOrder[] = [
+export const myOrders: MyOrder[] = [
   {
     id: nanoid(),
     img: orderProfile,
@@ -963,17 +960,6 @@ export const myOrders:MyOrder[] = [
     address: 'orderAddress',
   },
 ];
-
-
-
-
-
-
-
-
-
-
-
 
 // About Page data
 
@@ -1004,7 +990,7 @@ export const excellence: AboutExcellenceUnit[] = [
   },
 ];
 
-export const whyArray:AboutExcellenceUnit[] = [
+export const whyArray: AboutExcellenceUnit[] = [
   {
     id: nanoid(),
     src: checkedLogo,
@@ -1097,80 +1083,79 @@ export const events: Event[] = [
   },
 ];
 
-export const singleEvent :SingleEvent = {
+export const singleEvent: SingleEvent = {
+  id: nanoid(),
+  img: eventPic,
+  icon: dateIcon,
+  timeText: 'eventsDate',
+  title: 'eventsTitle',
+  text: 'policyFirstLorem',
+};
+
+// Steps Orders
+export const tracker: Tracker[] = [
+  {
     id: nanoid(),
-    img: eventPic,
-    icon: dateIcon,
-    timeText: 'eventsDate',
-    title: 'eventsTitle',
-    text: "policyFirstLorem"
-  }
-
-
-  // Steps Orders
-  export const tracker:Tracker[] = [
-    {
-      id:nanoid(),
-      img:tr1,
-      text:"orderOrdered",
-      status:"complete"
-    },
-    {
-      id:nanoid(),
-      img:tr2,
-      text:"orderPreparing",
-      status:"upcoming"
-    },
-    {
-      id:nanoid(),
-      img:tr3,
-      text:"orderDelivering",
-      status:"upcoming"
-    },
-    {
-      id:nanoid(),
-      img:tr4,
-      text:"orderDelivered",
-      status:"upcoming"
-    },
-  ] 
-  export const completed: Tracker[] = [
-    {
-      id: nanoid(),
-      img: or1,
-      text: 'deliveredProcess',
-      status: 'complete',
-    },
-    {
-      id: nanoid(),
-      img: or2,
-      text: 'deliveryCard',
-      status: 'complete',
-    },
-    {
-      id: nanoid(),
-      img: or3,
-      text: 'deliveryDone',
-      status: 'complete',
-    },
-  ]; 
-  export const proceed: Tracker[] = [
-    {
-      id: nanoid(),
-      img: pr1,
-      text: 'deliveredProcess',
-      status: 'complete',
-    },
-    {
-      id: nanoid(),
-      img: pr2,
-      text: 'deliveryCard',
-      status: 'upcoming',
-    },
-    {
-      id: nanoid(),
-      img: pr3,
-      text: 'deliveryDone',
-      status: 'upcoming',
-    },
-  ]; 
+    img: tr1,
+    text: 'orderOrdered',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: tr2,
+    text: 'orderPreparing',
+    status: 'upcoming',
+  },
+  {
+    id: nanoid(),
+    img: tr3,
+    text: 'orderDelivering',
+    status: 'upcoming',
+  },
+  {
+    id: nanoid(),
+    img: tr4,
+    text: 'orderDelivered',
+    status: 'upcoming',
+  },
+];
+export const completed: Tracker[] = [
+  {
+    id: nanoid(),
+    img: or1,
+    text: 'deliveredProcess',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: or2,
+    text: 'deliveryCard',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: or3,
+    text: 'deliveryDone',
+    status: 'complete',
+  },
+];
+export const proceed: Tracker[] = [
+  {
+    id: nanoid(),
+    img: pr1,
+    text: 'deliveredProcess',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: pr2,
+    text: 'deliveryCard',
+    status: 'upcoming',
+  },
+  {
+    id: nanoid(),
+    img: pr3,
+    text: 'deliveryDone',
+    status: 'upcoming',
+  },
+];
