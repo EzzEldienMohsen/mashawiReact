@@ -9,7 +9,6 @@ const config: Config = {
       abdo: ['abodmaster'],
     },
     extend: {
-      
       gradientColorStops: (theme) => ({
         'white-transparent': 'rgba(255, 255, 255, 0.7)',
         'white-fade': 'rgba(255, 255, 255, 0.0160418)',
@@ -20,7 +19,7 @@ const config: Config = {
         bgColor: '#F8F8F8',
       },
       backgroundImage: {
-        'svg-background': "url('./src/assets/svg/maskedGroupContactUs.svg')",
+        'svg-background': "url('../src/assets/svg/maskedGroupContactUs.svg')",
       },
     },
   },
