@@ -1,11 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
-const Profile:React.FC = () => {
+const Profile: React.FC = () => {
   const { t } = useTranslation();
-
 
   return (
     <div className="flex flex-col justify-center items-center w-full my-4 ">
@@ -14,21 +12,10 @@ const Profile:React.FC = () => {
           {t('myProfileRoute')}
         </h1>
       </div>
-      <div className="my-8  px-8 lg:px-20  flex flex-row justify-evenly items-center w-full">
-      
+      <div className="my-8  px-8 lg:px-20  flex flex-row justify-evenly items-center w-full"></div>
+      <div className="flex flex-col justify-center items-center w-full">
+        <Outlet />
       </div>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key="content"
-          initial={{ y: 10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -10, opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col justify-center items-center w-full"
-        >
-          <Outlet />
-        </motion.div>
-      </AnimatePresence>
     </div>
   );
 };
