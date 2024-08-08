@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
           })}
         </ul>
       </div>
-      <div className="mt-4 flex justify-center text-center border-t-[1px] border-bgColor items-center w-full  py-4">
+      <div className="mt-4 flex justify-center text-center  items-center w-full  py-4">
         {t('rights')}
       </div>
     </div>
