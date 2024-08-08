@@ -1,11 +1,10 @@
 import React from 'react';
-import addOrder from '../assets/svg/menu/addOrder.svg';
 import theClose from '../assets/svg/closeBtn.svg';
-import { addItem, removeAddOns } from '../features/cart/cartSlice';
+import { editQuantityLocally } from '../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { AddOn, CartItem } from '../assets/types';
-import {  DrawerAmountInput } from '../subSubSubComponents';
+import { CartItem } from '../assets/types';
+import { DrawerAmountInput } from '../subSubSubComponents';
 import { AppDispatch } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 
@@ -16,47 +15,13 @@ interface CartCardProps {
 
 const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
   const { t } = useTranslation();
-  const {isLangArabic} =useGlobalContext()
-  const [removeAddOnsList, setRemoveAddOnsList] = React.useState<AddOn[]>([]);
-  const [checkedAddOns, setCheckedAddOns] = React.useState<{
-    [key: string]: boolean;
-  }>({});
+  const { isLangArabic } = useGlobalContext();
 
   const [amount, setAmount] = React.useState<number>(item.amount || 0);
   const dispatch: AppDispatch = useDispatch();
-  const cartProduct: CartItem = {
-    id: item.id,
-    name: item.name,
-    price: item.price,
-    image: item.image,
-    amount: amount,
-    additions: [],
-  };
 
-  const addItemToCart = () => {
-    dispatch(addItem({ product: cartProduct }));
-    if (removeAddOnsList.length > 0) {
-      dispatch(
-        removeAddOns({
-          cartID: item.id,
-          addOnIDs: removeAddOnsList.map((ao) => ao.id),
-        })
-      );
-    }
-  };
-
-  const handleRemoveAddOnChange = (addOn: AddOn, isChecked: boolean): void => {
-    setRemoveAddOnsList((prevRemoveAddOns) =>
-      isChecked
-        ? [...prevRemoveAddOns, addOn]
-        : prevRemoveAddOns.filter((ao) => ao.id !== addOn.id)
-    );
-  };
-
-  const handleCheckboxChange = (addOn: AddOn) => {
-    const isChecked:boolean = !checkedAddOns[addOn.id];
-    setCheckedAddOns((prev) => ({ ...prev, [addOn.id]: isChecked }));
-    handleRemoveAddOnChange(addOn, isChecked);
+  const editQuantityOfItem = (qty: number) => {
+    dispatch(editQuantityLocally({ cartID: item.id, qty }));
   };
 
   return (
@@ -91,28 +56,16 @@ const CartCard: React.FC<CartCardProps> = ({ item, removeItemsFromCart }) => {
                   className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
                 >
                   <p className="text-xs w-1/3">{t(addOn.name)}</p>
-
-                  <div className="flex justify-start items-center gap-x-1 w-1/2">
-                    <input
-                      type="checkbox"
-                      checked={checkedAddOns[addOn.id] || false}
-                      onChange={() => handleCheckboxChange(addOn)}
-                    />
-                    <p className="text-xs"> {addOn.name}</p>
-                  </div>
                 </div>
               );
             })}
           </div>
           <div className="flex md:flex-col justify-between gap-x-1    md:items-end md:justify-end gap-y-3 w-auto">
-            <DrawerAmountInput amount={amount} setAmount={setAmount} />
-            <button
-              onClick={addItemToCart}
-              className="btn bg-newRed text-white flex-row flex justify-between gap-x-[38px] items-center px-4 l rounded-full py-2"
-            >
-              <img src={addOrder} alt="alt" />
-              {t('addOnsText')}
-            </button>
+            <DrawerAmountInput
+              editTheQuantity={editQuantityOfItem}
+              amount={amount}
+              setAmount={setAmount}
+            />
           </div>
         </div>
       </div>

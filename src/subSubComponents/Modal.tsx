@@ -52,7 +52,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     price: data.price,
     image: data.image,
     amount: amount,
-    additions: data.additions || [],
+    additions: [],
   };
 
   const handleAddToCart = () => {
@@ -105,10 +105,10 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   return (
     <div>
       <button
-        className="btn bg-newRed text-white font-abdo font-thin text-sm flex-row flex justify-evenly w-full items-center px-5 lg:px-3 rounded-full py-1"
+        className="btn bg-newRed text-white font-abdo font-thin text-xs md:text-sm flex-row flex justify-evenly w-full items-center px-5 lg:px-3 rounded-full py-1"
         onClick={() => dialogRef.current?.showModal()}
       >
-        <img src={src} alt="alt" className=" lg:w-1/4" />
+        <img src={src} alt="alt" className="w-1/4 lg:w-1/4" />
         {t('addOnsText')}
       </button>
       <dialog

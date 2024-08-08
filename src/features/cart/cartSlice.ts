@@ -134,18 +134,21 @@ const cartSlice = createSlice({
       const item = state.cartItems.find((i) => i.cartItem.id === cartID);
 
       if (item) {
-        state.numItemsInCart -= item.cartItem.amount; // Subtract the old amount
+        // Subtract the old amount from the total number of items in the cart
+        state.numItemsInCart -= item.cartItem.amount;
+
         if (qty > 0) {
-          item.cartItem.amount = qty; // Set the new amount
-          state.numItemsInCart += qty; // Add the new amount
+          item.cartItem.amount = qty;
+          state.numItemsInCart += qty;
+          toast.success('تم تحديث كمية الوجبة بنجاح');
         } else {
           state.cartItems = state.cartItems.filter(
             (i) => i.cartItem.id !== cartID
           );
           toast.error('تم ازالة الطلب من قائمة الطلبات');
         }
+
         cartSlice.caseReducers.calculateTotals(state);
-        toast.success('تم تحديث كمية الوجبة بنجاح');
       }
     },
     calculateTotals: (state) => {
