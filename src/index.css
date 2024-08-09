@@ -61,3 +61,22 @@ background-size: contain;
 .background-gradient {
   background: radial-gradient(circle, #E8908F 0%, #D32A2B 100%);
 }
+.border-gradient {
+  position: relative;
+  padding: 5px; /* Adjust padding for border thickness */
+  background-clip: padding-box; /* Ensures background inside the border */
+  z-index: 1;
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: radial-gradient(circle, #E8908F 0%, #D32A2B 100%);
+  z-index: -1;
+  background-clip: padding-box; /* Ensures gradient inside the border */
+  border-radius: inherit; /* Matches the element's border-radius if any */
+}

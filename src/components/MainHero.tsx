@@ -2,6 +2,7 @@ import React from 'react';
 import { useGlobalContext } from '../context/GlobalContext';
 import slogan from '../assets/svg/mainHero/slogan.svg';
 import grass from '../assets/svg/mainHero/grass.svg';
+import onion from '../assets/svg/mainHero/onion.svg';
 import theImage from '../assets/صورة الرئيسية.png';
 
 import { useTranslation } from 'react-i18next';
@@ -14,7 +15,7 @@ const MainHero: React.FC = () => {
     <div className="w-full relative   px-8 lg:px-20 ">
       {/* the Colored Div */}
       <div
-        className={`absolute w-full  lg:w-[35%] background-gradient h-1/5 md:h-1/4 lg:h-full top-0 ${
+        className={`absolute w-full  lg:w-[35%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
           isLangArabic ? 'left-0' : 'right-0'
         } `}
       ></div>
@@ -24,14 +25,23 @@ const MainHero: React.FC = () => {
           <img
             src={theImage}
             alt="mashawi"
-            className="z-10 rounded-full border-[1px] border-newRed p-[2px] clip-half-border"
+            className="z-10 rounded-full border-[1px] border-newRed p-[2px] border-gradient"
           />
         </div>
         {/* Content */}
         <div className="flex flex-col lg:w-[45%] justify-start items-start gap-y-8 lg:pb-20 relative">
+          <img
+            src={onion}
+            alt="leaf"
+            className={`absolute w-28 md:w-48 aspect-square text-sm top-1/2 lg:top-[100%] ${
+              isLangArabic
+                ? 'left-[20%] md:left-0 lg:left-[82%] '
+                : '-right-1/3 md:-right-1/2 transform scale-x-[-1] lg:right-[30%]  '
+            } transform -translate-x-1/2 -translate-y-1/2  `}
+          />
           <img src={slogan} alt="slogan" />
           <h1 className="text-black font-bold font-abdo relative text-xl md:tex-2xl lg:text-3xl">
-            {t('MainHeroBigTitle')}{' '}
+            {t('MainHeroBigTitle')}
             <img
               src={grass}
               alt="leaf"
