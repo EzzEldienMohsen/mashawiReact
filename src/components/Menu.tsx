@@ -15,7 +15,7 @@ const mealsQuery = (language: string, page: string): MealsQuery => {
   return {
     queryKey: ['meals', language, page],
     queryFn: () =>
-      autoFetch(`/meals?limit=12&page=${page}`, {
+      autoFetch(`/meals?limit=1&page=${page}`, {
         headers: {
           lang: language,
         },

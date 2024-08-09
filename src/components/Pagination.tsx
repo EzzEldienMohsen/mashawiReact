@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { Meals } from '../assets/types';
-import arrow from "../assets/svg/menu/pagination/paginationArroww.svg"
+import arrow from '../assets/svg/menu/pagination/paginationArroww.svg';
 import { useGlobalContext } from '../context/GlobalContext';
 const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo`;
 const Pagination: React.FC = () => {
@@ -12,7 +12,7 @@ const Pagination: React.FC = () => {
 
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
-  const {isLangArabic} = useGlobalContext()
+  const { isLangArabic } = useGlobalContext();
 
   const handlePageChange = (pageNumber: number) => {
     const searchParams = new URLSearchParams(search);
@@ -97,7 +97,7 @@ const Pagination: React.FC = () => {
     <div className="w-full px-8 lg:px-20 flex justify-end items-center">
       <div className="flex justify-end items-center gap-x-2">
         <button
-          className={buttonClass}
+          className={`${buttonClass} flex justify-center items-center`}
           onClick={() => {
             const prevPage = currentPage > 1 ? currentPage - 1 : pageCount;
             handlePageChange(prevPage);
@@ -111,7 +111,7 @@ const Pagination: React.FC = () => {
         </button>
         {renderPageButtons()}
         <button
-          className={buttonClass}
+          className={`${buttonClass} flex justify-center items-center`}
           onClick={() => {
             const nextPage = currentPage < pageCount ? currentPage + 1 : 1;
             handlePageChange(nextPage);
