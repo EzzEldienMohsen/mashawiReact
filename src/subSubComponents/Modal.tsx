@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux';
 import src from '../assets/svg/menu/addOns.svg';
 import { useTranslation } from 'react-i18next';
 import { addThisItemToCart } from '../features/cart/cartSlice';
-import { AddOn, CartItem, SingleMealData } from '../assets/types';
+import {
+  AddOn,
+  CartItem,
+  CartItemWithId,
+  SingleMealData,
+} from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { AddOns, ProductDetails, WishlistButton } from '../subSubSubComponents';
 import { addItem as addToCart } from '../features/cart/cartSlice';
@@ -22,7 +27,9 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   const { wishListItems } = useTypedSelector(
     (state: RootState) => state.wishList
   );
-  const item = wishListItems.find((i: CartItem) => i.id === data.id);
+  const item = wishListItems.find(
+    (i: CartItemWithId) => i.cartItem.id === data.id
+  );
   const { t } = useTranslation();
   const dialogRef = useRef<HTMLDialogElement>(null);
 

@@ -38,8 +38,9 @@ export type ApiResponse = {
 };
 
 export type WishListState = {
-  wishListItems: CartItem[];
+  wishListItems: CartItemWithId[];
   numItemsInWishList: number;
+  isLoading: boolean;
 };
 
 export type User = {

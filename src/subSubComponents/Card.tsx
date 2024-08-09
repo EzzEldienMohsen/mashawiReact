@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from './Modal';
 import { useTranslation } from 'react-i18next';
-import { CartItem, SingleMealData } from '../assets/types';
+import { CartItem, CartItemWithId, SingleMealData } from '../assets/types';
 import { RootState, useTypedSelector } from '../store';
 import { WishlistButton, AmountInput } from '../subSubSubComponents';
 import { useGlobalContext } from '../context/GlobalContext';
@@ -14,7 +14,9 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
   const { isLangArabic } = useGlobalContext();
   const modalId = `modal_${data.id}`;
   const { t } = useTranslation();
-  const item = wishListItems.find((i: CartItem) => i.id === data.id);
+  const item = wishListItems.find(
+    (i: CartItemWithId) => i.cartItem.id === data.id
+  );
   const wishListProduct: CartItem = {
     id: data.id,
     name: data.name,
