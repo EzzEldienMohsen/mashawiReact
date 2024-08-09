@@ -1,20 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/svg/logo.svg';
 import { BigNavBar, HeaderButtons, SmallNavBar } from '../subComponents';
 import icon from '../assets/svg/headerLogo.svg';
 import { useGlobalContext } from '../context/GlobalContext';
 const Header: React.FC = () => {
+  const { pathname } = useLocation();
   const { isLangArabic } = useGlobalContext();
-   const closeDrawer = ():void => {
-     const drawerCheckbox = document.getElementById(
-       'small-nav-drawer'
-     ) as HTMLInputElement;
-     if (drawerCheckbox) drawerCheckbox.checked = false;
-   };
+  const closeDrawer = (): void => {
+    const drawerCheckbox = document.getElementById(
+      'small-nav-drawer'
+    ) as HTMLInputElement;
+    if (drawerCheckbox) drawerCheckbox.checked = false;
+  };
 
   return (
-    <div className="flex w-full z-20 flex-row  justify-between items-center px-8 lg:px-20 py-2 bg-transparent">
+    <div
+      className={`flex w-full z-20 flex-row ${
+        pathname === '/' ? 'absolute top-0 left-0' : ''
+      } justify-between items-center px-8 lg:px-20 py-2 bg-transparent`}
+    >
       <Link to="/">
         <img
           src={logo}
@@ -43,11 +48,11 @@ const Header: React.FC = () => {
         </div>
         <div className="drawer-side z-30">
           <label htmlFor="small-nav-drawer" className="drawer-overlay"></label>
-          <SmallNavBar closeDrawer={closeDrawer}/>
+          <SmallNavBar closeDrawer={closeDrawer} />
         </div>
       </div>
     </div>
   );
 };
 
-export default Header
+export default Header;

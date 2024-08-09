@@ -27,3 +27,4 @@ export { default as ProceedDeliveryForm } from './ProceedDeliveryForm';
 export { default as MenuWithCategory } from './MenuWithCategory';
 export { default as Pagination } from './Pagination';
 export { default as GalleryPagination } from './GalleryPagination';
+export { default as MainHero } from './MainHero';
