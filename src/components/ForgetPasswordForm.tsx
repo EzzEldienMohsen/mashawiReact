@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { FormRow, FormTitle } from '../subComponents';
 import email from '../assets/svg/email.svg';
 import { useTranslation } from 'react-i18next';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 
-const ForgetPasswordForm:React.FC = () => {
+const ForgetPasswordForm: React.FC = () => {
+  const { isLoading } = useTypedSelector((state: RootState) => state.user);
   const { t } = useTranslation();
-  const [values, setValues] = React.useState<{email:string}>({ email: '' });
-  const dispatch:AppDispatch = useDispatch();
+  const [values, setValues] = React.useState<{ email: string }>({ email: '' });
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (
     e: React.ChangeEvent<
@@ -50,8 +51,15 @@ const ForgetPasswordForm:React.FC = () => {
           full={true}
         />
 
-        <button className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4">
-          {t('sendText')}
+        <button
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading loading-spinner loading-lg text-white"></span>
+          ) : (
+            t('sendText')
+          )}
         </button>
       </form>
     </div>

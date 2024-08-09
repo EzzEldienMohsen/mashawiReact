@@ -46,7 +46,7 @@ export const editQuantityThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 export const getTheCartThunk = async (
@@ -58,7 +58,7 @@ export const getTheCartThunk = async (
       status: number;
       message: string;
       data: CartData[];
-    }> = await autoFetch.post(url, {
+    }> = await autoFetch.get(url, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -66,7 +66,7 @@ export const getTheCartThunk = async (
     });
     return response.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 export const removeItemThunk = async (
@@ -78,7 +78,7 @@ export const removeItemThunk = async (
       status: number;
       message: string;
       data: null;
-    }> = await autoFetch.post(url, {
+    }> = await autoFetch.get(url, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -86,6 +86,6 @@ export const removeItemThunk = async (
     });
     return response.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };

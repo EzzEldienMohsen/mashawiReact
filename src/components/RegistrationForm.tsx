@@ -9,27 +9,31 @@ import email from '../assets/svg/email.svg';
 import { registerUser } from '../features/user/userSlice';
 import { useTranslation } from 'react-i18next';
 import { RegisterData } from '../assets/types';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 
-const RegistrationForm:React.FC = () => {
+const RegistrationForm: React.FC = () => {
+  const { isLoading } = useTypedSelector((state: RootState) => state.user);
+
   const [values, setValues] = React.useState<RegisterData>(registerValues);
-  const dispatch:AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
-const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-) :void => {
-  const name = e.target.name;
-  const value = e.target.value;
-  setValues((prevValues) => ({ ...prevValues, [name]: value }));
-};
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ): void => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues((prevValues) => ({ ...prevValues, [name]: value }));
+  };
 
-const onSubmit = (e: React.FormEvent) :void => {
-  e.preventDefault();
-  localStorage.setItem('registerData', JSON.stringify(values));
-  dispatch(registerUser(values));
-  navigate('/validate-otp');
-};
+  const onSubmit = (e: React.FormEvent): void => {
+    e.preventDefault();
+    localStorage.setItem('registerData', JSON.stringify(values));
+    dispatch(registerUser(values));
+    navigate('/validate-otp');
+  };
   return (
     <div className="flex justify-evenly w-full items-center">
       <form
@@ -107,8 +111,15 @@ const onSubmit = (e: React.FormEvent) :void => {
         >
           {t('forgetPasswordText')}
         </Link>
-        <button className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-2">
-          {t('createAccount')}
+        <button
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading loading-spinner loading-lg text-white"></span>
+          ) : (
+            t('createAccount')
+          )}
         </button>
         <Link
           to="/login"

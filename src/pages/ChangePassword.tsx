@@ -1,21 +1,21 @@
-import React, {  FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { FormRow } from '../subComponents';
 import { useTranslation } from 'react-i18next';
 import { ChangePasswordData } from '../assets/types';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { changePassword } from '../features/user/userSlice';
 
-
-
 const ChangePassword: React.FC = () => {
+  const { isLoading } = useTypedSelector((state: RootState) => state.user);
+
   const [values, setValues] = useState<ChangePasswordData>({
     old_password: '',
     password: '',
     password_confirmation: '',
   });
   const { t } = useTranslation();
-const dispatch :AppDispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch();
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -28,7 +28,7 @@ const dispatch :AppDispatch = useDispatch()
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(values);
-    dispatch(changePassword(values))
+    dispatch(changePassword(values));
   };
 
   return (
@@ -69,8 +69,15 @@ const dispatch :AppDispatch = useDispatch()
         full={true}
       />
 
-      <button className="btn btn-block rounded-full text-black w-inherit text-xl bg-transparent my-4">
-        {t('changePassword')}
+      <button
+        disabled={isLoading}
+        className="btn btn-block rounded-full text-black w-inherit text-xl bg-transparent my-4"
+      >
+        {isLoading ? (
+          <span className="loading loading-spinner loading-lg text-white"></span>
+        ) : (
+          t('confirmText')
+        )}
       </button>
     </form>
   );

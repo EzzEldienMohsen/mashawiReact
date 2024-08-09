@@ -7,15 +7,17 @@ import emailIcon from '../assets/svg/email.svg';
 import { loginUser } from '../features/user/userSlice';
 import { useTranslation } from 'react-i18next';
 import { LoginData } from '../assets/types';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 
-const LoginForm:React.FC = () => {
+const LoginForm: React.FC = () => {
+  const { isLoading } = useTypedSelector((state: RootState) => state.user);
+
   const { t } = useTranslation();
   const [values, setValues] = React.useState<LoginData>({
     email: '',
     password: '',
   });
-  const dispatch:AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (
     e: React.ChangeEvent<
@@ -36,7 +38,7 @@ const LoginForm:React.FC = () => {
       if (result.status === 200) {
         navigate('/profile');
       }
-    } catch (error:any) {
+    } catch (error: any) {
       if (error.status === 403) {
         navigate('/validate-otp');
       } else {
@@ -78,8 +80,15 @@ const LoginForm:React.FC = () => {
         >
           {t('forgetPasswordText')}
         </Link>
-        <button className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-2">
-          {t('signInTitle')}
+        <button
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading loading-spinner loading-lg text-white"></span>
+          ) : (
+            t('signInTitle')
+          )}
         </button>
         <Link
           to="/register"

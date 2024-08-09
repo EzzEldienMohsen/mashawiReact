@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { Meals } from '../assets/types';
+import arrow from "../assets/svg/menu/pagination/paginationArroww.svg"
+import { useGlobalContext } from '../context/GlobalContext';
 const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo`;
 const Pagination: React.FC = () => {
   const axiosData: any = useLoaderData();
@@ -10,6 +12,7 @@ const Pagination: React.FC = () => {
 
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
+  const {isLangArabic} = useGlobalContext()
 
   const handlePageChange = (pageNumber: number) => {
     const searchParams = new URLSearchParams(search);
@@ -100,7 +103,11 @@ const Pagination: React.FC = () => {
             handlePageChange(prevPage);
           }}
         >
-          Prev
+          <img
+            src={arrow}
+            alt="leaf"
+            className={` ${isLangArabic ? '' : ' transform scale-x-[-1]'} `}
+          />
         </button>
         {renderPageButtons()}
         <button
@@ -110,7 +117,11 @@ const Pagination: React.FC = () => {
             handlePageChange(nextPage);
           }}
         >
-          Next
+          <img
+            src={arrow}
+            alt="leaf"
+            className={` ${isLangArabic ? 'transform scale-x-[-1]' : ' '} `}
+          />
         </button>
       </div>
     </div>

@@ -107,6 +107,8 @@ export type FormRowProps = {
   label?: string;
   isOTP?: boolean;
   options?: Option[];
+  handleKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  inputRef?: React.Ref<HTMLInputElement>;
 };
 export type Error403 = {
   status: number;
@@ -121,6 +123,7 @@ export type InitialOTPInputs = {
   fourthNum: string;
   fifthNum: string;
   sixthNum: string;
+  [key: string]: string;
 };
 
 export type ChangePasswordData = {

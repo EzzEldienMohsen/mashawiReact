@@ -1,14 +1,24 @@
 import { AxiosResponse } from 'axios';
 import { autoFetch } from '../../utils';
-import { ApiResponse, ChangePasswordData, EmailVerificationData, ForgetPasswordData, LoginData, RegisterData, ResendOTPData, ResetPasswordData, ValidateOTPData } from '../../assets/types';
+import {
+  ApiResponse,
+  ChangePasswordData,
+  EmailVerificationData,
+  ForgetPasswordData,
+  LoginData,
+  RegisterData,
+  ResendOTPData,
+  ResetPasswordData,
+  ValidateOTPData,
+} from '../../assets/types';
+import { toast } from 'react-toastify';
 
 // Define a type for the expected structure of response data
-
 
 export const registerUserThunk = async (
   url: string,
   reqData: RegisterData,
-  thunkAPI:any
+  thunkAPI: any
 ): Promise<ApiResponse> => {
   try {
     const response: AxiosResponse<ApiResponse> = await autoFetch.post(
@@ -23,7 +33,9 @@ export const registerUserThunk = async (
     );
     return response.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    toast.error(error.response.data.message);
+
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 
@@ -40,6 +52,7 @@ export const loginThunk = async (
     console.log(response.status);
     return { data: response.data, status: response.status };
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue({
       message: error.response.data,
       status: error.response.status,
@@ -59,6 +72,7 @@ export const forgetPasswordThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
@@ -75,6 +89,7 @@ export const resendOTPThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
@@ -91,6 +106,7 @@ export const validateOTPThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
@@ -107,6 +123,7 @@ export const resetPasswordThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
@@ -123,6 +140,7 @@ export const emailVerificationThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
@@ -135,10 +153,10 @@ export const logOutThunk = async (
     const response: AxiosResponse<ApiResponse> = await autoFetch.post(url);
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
-
 
 export const changePasswordThunk = async (
   url: string,
@@ -152,6 +170,7 @@ export const changePasswordThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };

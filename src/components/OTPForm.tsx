@@ -1,40 +1,67 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { initialOTP } from '../assets';
 import { useDispatch } from 'react-redux';
 import { resendOTP, validateOTP } from '../features/user/userSlice';
 import { FormRow, FormTitle } from '../subComponents';
 import { useTranslation } from 'react-i18next';
 import { InitialOTPInputs } from '../assets/types';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 
 const OTPForm = () => {
-  const [values, setValues] = React.useState<InitialOTPInputs>(initialOTP);
-  const dispatch:AppDispatch = useDispatch();
+  const { isLoading } = useTypedSelector((state: RootState) => state.user);
+  const [values, setValues] = useState<InitialOTPInputs>(initialOTP);
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
-const storedData = localStorage.getItem('registerData');
-const email: string = storedData ? JSON.parse(storedData).email : '';  console.log(email);
+
+  const storedData = localStorage.getItem('registerData');
+  const email: string = storedData ? JSON.parse(storedData).email : '';
+
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ): void => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setValues({ ...values, [name]: value });
+    const { name, value } = e.target;
+    const index = Number(name.charAt(name.length - 1)) - 1;
+
+    setValues((prevValues) => {
+      const newValues = { ...prevValues, [name]: value };
+
+      if (value.length === 1 && index < 5) {
+        inputRefs.current[index + 1]?.focus();
+      }
+
+      return newValues;
+    });
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const index =
+      Number(e.currentTarget.name.charAt(e.currentTarget.name.length - 1)) - 1;
+
+    if (e.key === 'Backspace' && !values[e.currentTarget.name]) {
+      if (index > 0) {
+        inputRefs.current[index - 1]?.focus();
+      }
+    }
   };
 
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     const token = Object.values(values).join('');
-    const user = {
-      email,
-      token,
-    };
+    const user = { email, token };
     dispatch(validateOTP(user));
   };
+
   const resendTheOTP = () => {
     dispatch(resendOTP({ email }));
+    setIsResendDisabled(true);
+    setTimeout(() => setIsResendDisabled(false), 60000);
   };
+
   return (
     <div className="flex justify-evenly w-full items-center">
       <form
@@ -45,68 +72,45 @@ const email: string = storedData ? JSON.parse(storedData).email : '';  console.l
         <p className="my-2 text-center text-md md:text-lg lg:text-xl">
           {t('OTPCodeText')}
         </p>
-        <div className="flex justify-start items-stretch gap-x-2 my-2 w-full ">
-          <FormRow
-            name="firstNum"
-            label=" "
-            type="text"
-            value={values.firstNum}
-            high={false}
-            isOTP={true}
-            handleChange={handleChange}
-          />
-          <FormRow
-            name="secondNum"
-            label=" "
-            type="text"
-            value={values.secondNum}
-            high={false}
-            isOTP={true}
-            handleChange={handleChange}
-          />
-          <FormRow
-            name="thirdNum"
-            label=" "
-            type="text"
-            value={values.thirdNum}
-            high={false}
-            isOTP={true}
-            handleChange={handleChange}
-          />
-          <FormRow
-            name="fourthNum"
-            label=" "
-            type="text"
-            value={values.fourthNum}
-            high={false}
-            isOTP={true}
-            handleChange={handleChange}
-          />
-          <FormRow
-            name="fifthNum"
-            label=" "
-            type="text"
-            value={values.fifthNum}
-            high={false}
-            isOTP={true}
-            handleChange={handleChange}
-          />
-          <FormRow
-            name="sixthNum"
-            label=" "
-            type="text"
-            value={values.sixthNum}
-            high={false}
-            isOTP={true}
-            handleChange={handleChange}
-          />
+        <div className="flex justify-start items-stretch gap-x-2 my-2 w-full">
+          {[
+            'firstNum',
+            'secondNum',
+            'thirdNum',
+            'fourthNum',
+            'fifthNum',
+            'sixthNum',
+          ].map((name, index) => (
+            <FormRow
+              key={name}
+              name={name}
+              label=" "
+              type="text"
+              value={values[name as keyof InitialOTPInputs]}
+              high={false}
+              isOTP={true}
+              handleKeyDown={handleKeyDown}
+              handleChange={handleChange}
+              inputRef={(el) => (inputRefs.current[index] = el)}
+            />
+          ))}
         </div>
-        <button className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-2">
-          {t('sendText')}
+        <button
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading loading-spinner loading-lg text-white"></span>
+          ) : (
+            t('sendText')
+          )}
         </button>
         <button
           onClick={resendTheOTP}
-          className="text-newRed mt-4 text-xs md:text-sm w-full lg:text-sm mb-10"
+          disabled={isResendDisabled}
+          className={`text-newRed mt-4 text-xs md:text-sm w-full lg:text-sm mb-10 ${
+            isResendDisabled ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
           {t('resendText')}
         </button>

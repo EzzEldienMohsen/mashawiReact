@@ -1,22 +1,24 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { resetPassword } from '../features/user/userSlice';
 import { FormRow, FormTitle } from '../subComponents';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { ResetPasswordData } from '../assets/types';
 
-const ResetPasswordForm:React.FC = () => {
-  const {t} = useTranslation()
+const ResetPasswordForm: React.FC = () => {
+  const { isLoading } = useTypedSelector((state: RootState) => state.user);
+
+  const { t } = useTranslation();
   const [values, setValues] = React.useState<ResetPasswordData>({
     password: '',
     password_confirmation: '',
-    token:"",
+    token: '',
   });
-  const { user } = useTypedSelector((state:RootState) => state.user);
-  
-  const dispatch:AppDispatch = useDispatch();
+  const { user } = useTypedSelector((state: RootState) => state.user);
+
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (
@@ -24,10 +26,10 @@ const ResetPasswordForm:React.FC = () => {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ): void => {
-    const theToken = user?.temp_token || ""
+    const theToken = user?.temp_token || '';
     const name = e.target.name;
     const value = e.target.value;
-    setValues({ ...values, [name]: value,token:theToken });
+    setValues({ ...values, [name]: value, token: theToken });
   };
 
   const onSubmit = (e: React.FormEvent): void => {
@@ -63,8 +65,15 @@ const ResetPasswordForm:React.FC = () => {
           full={true}
         />
 
-        <button className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-2">
-          {t( "confirmText")}
+        <button
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading loading-spinner loading-lg text-white"></span>
+          ) : (
+            t('confirmText')
+          )}
         </button>
       </form>
     </div>

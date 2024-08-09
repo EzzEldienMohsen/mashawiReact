@@ -2,7 +2,9 @@ import React from 'react';
 import { FormRowProps } from '../assets/types';
 import { IconFormRow, PasswordRow } from '../subSubComponents';
 
-const FormRow:React.FC<FormRowProps> = ({
+const FormRow: React.FC<FormRowProps> = ({
+  inputRef,
+  handleKeyDown,
   name,
   label,
   type,
@@ -141,6 +143,8 @@ const FormRow:React.FC<FormRowProps> = ({
       </label>
       <input
         required
+        ref={inputRef}
+        onKeyDown={handleKeyDown}
         type={type}
         name={name}
         id={name}
