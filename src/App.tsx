@@ -53,6 +53,7 @@ import { loader as termsLoader } from './pages/Terms';
 import { loader as categoryLoader } from './subComponents/Slider';
 import { loader as mealsLoader } from './components/Menu';
 import { loader as menuWithCategoryProductLoader } from './components/MenuWithCategory';
+import { loader as galleryLoader } from './pages/Gallery';
 // Combined loaders
 // First Menu Loaders
 export type MenuLoader = {
@@ -308,6 +309,7 @@ const AppRouter: React.FC = () => {
               <Gallery />
             </Suspense>
           ),
+          loader: galleryLoader(queryClient, language),
         },
       ],
     },

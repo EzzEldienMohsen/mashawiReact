@@ -348,4 +348,22 @@ export type CategoriesData = {
   }[];
 }[];
 
-// paginationData
+// Define the type for an individual gallery item
+type GalleryItem = {
+  id: number;
+  path: string;
+};
+
+// Define the type for the data part of the response
+type GalleryData = {
+  current_page: number;
+  pages_length: number;
+  data: GalleryItem[];
+};
+
+// Define the type for the entire response
+export type GalleryResponse = {
+  status: number;
+  message: string;
+  data: GalleryData;
+};

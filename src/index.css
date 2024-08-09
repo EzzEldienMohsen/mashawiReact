@@ -57,3 +57,7 @@ background-image: url("../src/assets/svg/maskedGroupContactUs.svg");
 background-position: center;
 background-size: contain;
 }
+
+.background-gradient {
+  background: radial-gradient(circle, #E8908F 0%, #D32A2B 100%);
+}

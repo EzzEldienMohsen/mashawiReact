@@ -1,14 +1,15 @@
 import React from 'react';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
-import { Meals } from '../assets/types';
+import { GalleryResponse } from '../assets/types';
 import arrow from '../assets/svg/menu/pagination/paginationArroww.svg';
 import { useGlobalContext } from '../context/GlobalContext';
 const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo`;
-const Pagination: React.FC = () => {
+
+const GalleryPagination: React.FC = () => {
   const axiosData: any = useLoaderData();
-  const data2: Meals = axiosData.data2.data;
-  const currentPage = data2.data.current_page; // Fallback to page 1 if NaN
-  const pageCount = data2.data.pages_length ; // Fallback to 10 if not provided
+  const data: GalleryResponse = axiosData.data;
+  const currentPage = data.data.current_page; // Fallback to page 1 if NaN
+  const pageCount = data.data.pages_length; // Fallback to 10 if not provided
 
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
@@ -128,4 +129,4 @@ const Pagination: React.FC = () => {
   );
 };
 
-export default Pagination;
+export default GalleryPagination;
