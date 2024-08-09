@@ -10,7 +10,7 @@ import { useGlobalContext } from '../context/GlobalContext';
 
 interface CartCardProps {
   item: CartItem;
-  removeItemsFromCart: (cart: CartItem) => void;
+  removeItemsFromCart: (cart: CartItem, cart_id: number) => void;
   cart_id: number;
 }
 
@@ -41,7 +41,7 @@ const CartCard: React.FC<CartCardProps> = ({
     <div className="flex bg-white w-full rounded-2xl relative justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-8 ">
       <button
         className="absolute top-2 left-2"
-        onClick={() => removeItemsFromCart(item)}
+        onClick={() => removeItemsFromCart(item, cart_id)}
       >
         <img src={theClose} alt="alt" className={` `} />
       </button>
@@ -67,7 +67,7 @@ const CartCard: React.FC<CartCardProps> = ({
                 key={addOn.id}
                 className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
               >
-                <p className="text-xs w-1/3">{t(addOn.name)}</p>
+                <p className="text-xs w-1/3">{addOn.values[0].name}</p>
               </div>
             ))}
           </div>

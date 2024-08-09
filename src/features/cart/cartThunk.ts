@@ -66,6 +66,7 @@ export const getTheCartThunk = async (
     });
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
@@ -86,6 +87,7 @@ export const removeItemThunk = async (
     });
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };

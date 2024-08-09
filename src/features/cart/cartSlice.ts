@@ -65,6 +65,7 @@ const cartSlice = createSlice({
       if (existingItem) {
         state.numItemsInCart -= existingItem.cartItem.amount; // Subtract the old amount
         existingItem.cartItem.amount = product.amount; // Set the new amount
+        existingItem.cartItem.additions = product.additions;
       } else {
         state.cartItems.push({ cartItem: product, cart_id: 0 });
       }

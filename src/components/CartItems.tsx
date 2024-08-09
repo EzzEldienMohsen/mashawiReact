@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeItem } from '../features/cart/cartSlice';
+import { removeItem, removeMeal } from '../features/cart/cartSlice';
 import { CartCard } from '../subComponents';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { CartItem } from '../assets/types';
@@ -9,7 +9,8 @@ import { useTranslation } from 'react-i18next';
 const CartItems: React.FC = () => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
-  const removeItemsFromCart = (prod: CartItem) => {
+  const removeItemsFromCart = (prod: CartItem, cart_id: number) => {
+    dispatch(removeMeal({ cart_id }));
     dispatch(removeItem(prod));
   };
   const { cartItems } = useTypedSelector(

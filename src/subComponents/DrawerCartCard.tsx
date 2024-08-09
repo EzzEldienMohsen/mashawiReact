@@ -9,6 +9,7 @@ import {
   editQuantity,
   editQuantityLocally,
   removeItem,
+  removeMeal,
 } from '../features/cart/cartSlice';
 
 const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
@@ -19,7 +20,8 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
   //  Additional declaration
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
-  const removeItemsFromCart = (prod: CartItem) => {
+  const removeItemsFromCart = (prod: CartItem, cart_id: number) => {
+    dispatch(removeMeal({ cart_id }));
     dispatch(removeItem(prod));
   };
   React.useEffect(() => {
@@ -41,7 +43,10 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <div className="w-full flex justify-between items-center">
           <h1>{item.name}</h1>
-          <button className="" onClick={() => removeItemsFromCart(item)}>
+          <button
+            className=""
+            onClick={() => removeItemsFromCart(item, cart_id)}
+          >
             <img src={theClose} alt="alt" />
           </button>
         </div>
@@ -53,7 +58,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
                 key={addOn.id}
                 className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
               >
-                <p className="text-xs w-1/3">{addOn.name}</p>
+                <p className="text-xs w-1/3">{addOn.values[0].name}</p>
               </div>
             );
           })}

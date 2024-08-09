@@ -28,13 +28,12 @@ const DrawerCartTotals: React.FC<CartDrawer> = ({ closeDrawer }) => {
         {t('paymentAndOrderText')}
       </Link>
 
-      <Link
-        to="/menuList"
+      <button
         onClick={closeDrawer}
         className=" btn flex justify-center shadow-xl bg-[#D9D9D9] items-center w-4/5 rounded-full"
       >
         {t('contiueSoppingText')}
-      </Link>
+      </button>
     </div>
   );
 };
