@@ -176,5 +176,6 @@
   "paymentTitle": "طريقة الدفع",
   "cardNumber": "رقم البطاقة",
   "cardPlaceHolder": "اكتب هنا",
-  "cardHolderName": "اسم حامل البطاقة"
+  "cardHolderName": "اسم حامل البطاقة",
+  "cardDate": "تاريخ انتهاء البطاقة"
 }

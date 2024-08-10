@@ -34,15 +34,13 @@ const Slider: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const axiosData: any = useLoaderData();
   const data: CategoriesData = axiosData.data1.data.data.data;
-  console.log(data);
 
   return (
     <div className="carousel carousel-center rounded-box w-3/4">
       {data.map((category) => (
-        <div className="carousel-item ">
+        <div className="carousel-item" key={category.id}>
           <Link
             to={`/meals/category/${category.id}`}
-            key={category.id}
             className={`flex-shrink-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
               isLangArabic
                 ? 'rounded-tr-3xl rounded-bl-3xl'

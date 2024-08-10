@@ -50,7 +50,7 @@ const ProceedTotals: React.FC = () => {
       </Link>
 
       <Link
-        to="/menuList"
+        to="/meals"
         className=" btn btn-block my-2 flex justify-center shadow-xl bg-[#D9D9D9] items-center rounded-full"
       >
         {t('contiueSoppingText')}

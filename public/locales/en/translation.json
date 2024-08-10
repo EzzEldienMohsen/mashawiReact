@@ -176,5 +176,6 @@
   "paymentTitle": "payment method",
   "cardNumber": "Card Number",
   "cardPlaceHolder": "insert data here",
-  "cardHolderName": "card holder Name"
+  "cardHolderName": "card holder Name",
+  "cardDate": "card expiration Date"
 }

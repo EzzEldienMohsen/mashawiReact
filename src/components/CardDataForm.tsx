@@ -4,6 +4,7 @@ import { cardInitialValues } from '../assets';
 import { CardData } from '../assets/types';
 import { useTranslation } from 'react-i18next';
 import { FormRow } from '../subComponents';
+import { Link, useNavigate } from 'react-router-dom';
 
 const request = async (data: CardData) => {
   try {
@@ -14,6 +15,7 @@ const request = async (data: CardData) => {
   }
 };
 const CardDataForm: React.FC = () => {
+  const navigate = useNavigate()
   const { t } = useTranslation();
   const [values, setValues] = React.useState<CardData>(cardInitialValues);
   const handleChange = (
@@ -30,6 +32,7 @@ const CardDataForm: React.FC = () => {
     e.preventDefault();
     console.log(values);
     request(values);
+    navigate('/track');
   };
 
   return (
@@ -60,6 +63,41 @@ const CardDataForm: React.FC = () => {
           half={true}
         />
       </div>
+      <div className="w-full flex flex-col justify-start items-start md:flex-row md:justify-between md:gap-x-5">
+        <FormRow
+          name="cardDate"
+          label={t('cardDate')}
+          type="text"
+          value={values.cardDate}
+          high={false}
+          placeHolder={t('cardPlaceHolder')}
+          handleChange={handleChange}
+          half={true}
+        />
+        <FormRow
+          name="CVV"
+          label="C.V.V"
+          type="text"
+          value={values.CVV}
+          high={false}
+          placeHolder={t('cardPlaceHolder')}
+          handleChange={handleChange}
+          half={true}
+        />
+      </div>
+      <button
+        onSubmit={onSubmit}
+        className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+      >
+        {t('paymentAndOrderText')}
+      </button>
+
+      <Link
+        to="/meals"
+        className=" btn btn-block my-2 flex justify-center shadow-xl bg-[#D9D9D9] items-center rounded-full"
+      >
+        {t('contiueSoppingText')}
+      </Link>
     </form>
   );
 };

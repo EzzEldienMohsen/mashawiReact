@@ -137,7 +137,7 @@ const FormRow: React.FC<FormRowProps> = ({
     <div
       className={`flex flex-col justify-start my-1 ${
         full ? 'w-full' : 'w-4/5 md:w-full'
-      } ${half ? 'w-full md:w-[40%]' : 'w-full'} items-start`}
+      } ${half ? 'w-full md:w-[42%]' : 'w-full'} items-start`}
     >
       <label className="my-1 capitalize" htmlFor={name}>
         {label || name}
@@ -154,10 +154,10 @@ const FormRow: React.FC<FormRowProps> = ({
         onChange={handleChange}
         maxLength={isOTP ? 1 : 100}
         style={{ backgroundColor: 'white' }}
-        className={`px-4 bg-white !important border-2 !important ${
+        className={`px-4 bg-white place !important border-2 !important ${
           isOTP
             ? 'text-center w-12 lg:w-16 aspect-square rounded-2xl'
-            : 'rounded-full text-end w-[100%]'
+            : 'rounded-full text-start w-[100%]'
         }  ${high ? 'py-6 md:py-6' : 'py-2'}`}
       />
     </div>

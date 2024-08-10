@@ -1,5 +1,5 @@
 import React from 'react';
-import { Steps } from '../components';
+import { CardDataForm, Steps } from '../components';
 import { cardDataTracker, paymentCardImage } from '../assets/index';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +16,7 @@ const PaymentDetails: React.FC = () => {
           <img key={img.id} alt="payment" src={img.img} />
         ))}
       </div>
+      <CardDataForm />
     </div>
   );
 };
