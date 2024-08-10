@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { InitialOTPInputs } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
+import { useNavigate } from 'react-router-dom';
 
 const OTPForm = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -15,6 +16,7 @@ const OTPForm = () => {
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
+  const navigate = useNavigate();
   const storedData = localStorage.getItem('registerData');
   const email: string = storedData ? JSON.parse(storedData).email : '';
 
@@ -60,6 +62,7 @@ const OTPForm = () => {
     const user = { email, token };
     console.log(user);
     dispatch(validateOTP(user));
+    navigate('/reset-password');
   };
 
   const resendTheOTP = () => {

@@ -50,7 +50,7 @@ export type User = {
 export type UserState = {
   isLoading: boolean;
   isSidebarOpen: boolean;
-  user: User | null;
+  user: User;
 };
 
 export type RegisterData = {

@@ -35,6 +35,7 @@ const ResetPasswordForm: React.FC = () => {
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     dispatch(resetPassword(values));
+    console.log(values);
     navigate('/login');
   };
   return (

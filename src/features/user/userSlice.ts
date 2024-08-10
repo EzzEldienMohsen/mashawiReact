@@ -10,17 +10,23 @@ import {
   logOutThunk,
   changePasswordThunk,
 } from './userThunk';
-import {
-  addUserToLocalStorage,
-  getUserFromLocalStorage,
-  removeUserFromLocalStorage,
-} from '../../utils';
+import { addUserToLocalStorage, removeUserFromLocalStorage } from '../../utils';
 import { toast } from 'react-toastify';
-import { ChangePasswordData, EmailVerificationData, ForgetPasswordData, LoginData, RegisterData, ResendOTPData, ResetPasswordData, User, UserState, ValidateOTPData } from '../../assets/types';
+import {
+  ChangePasswordData,
+  EmailVerificationData,
+  ForgetPasswordData,
+  LoginData,
+  RegisterData,
+  ResendOTPData,
+  ResetPasswordData,
+  User,
+  UserState,
+  ValidateOTPData,
+} from '../../assets/types';
+import { ResetPasswordResponse } from './types';
 
-
-
-const initialUser: User = getUserFromLocalStorage() || { temp_token: '' };
+const initialUser: User = { temp_token: '' };
 const initialState: UserState = {
   isLoading: false,
   isSidebarOpen: false,
@@ -29,13 +35,13 @@ const initialState: UserState = {
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
-  async (reqData:RegisterData, thunkAPI) => {
+  async (reqData: RegisterData, thunkAPI) => {
     return registerUserThunk('/auth/register', reqData, thunkAPI);
   }
 );
 export const loginUser = createAsyncThunk(
   'user/loginUser',
-  async (reqData:LoginData, thunkAPI) => {
+  async (reqData: LoginData, thunkAPI) => {
     return loginThunk('/auth/login', reqData, thunkAPI);
   }
 );
@@ -81,14 +87,12 @@ export const logOut = createAsyncThunk('user/logOut', async (thunkAPI) => {
   return logOutThunk('/auth/logout', thunkAPI);
 });
 
-
 export const changePassword = createAsyncThunk(
   'user/changePassword',
   async (reqData: ChangePasswordData, thunkAPI) => {
     return changePasswordThunk('/user/change-password', reqData, thunkAPI);
   }
 );
-
 
 const userSlice = createSlice({
   name: 'user',
@@ -98,8 +102,7 @@ const userSlice = createSlice({
       state.isSidebarOpen = !state.isSidebarOpen;
     },
     logoutUser: (state) => {
-      state.user = null;
-      state.isSidebarOpen = false;
+      (state.user = { temp_token: '' }), (state.isSidebarOpen = false);
       removeUserFromLocalStorage();
     },
   },
@@ -156,14 +159,15 @@ const userSlice = createSlice({
       .addCase(validateOTP.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(validateOTP.fulfilled, (state, action: PayloadAction<any>) => {
-        state.isLoading = false;
-        const user = action.payload;
-        state.user = user;
-        addUserToLocalStorage(user);
-        const message = action.payload.message;
-        toast.success(message);
-      })
+      .addCase(
+        validateOTP.fulfilled,
+        (state, action: PayloadAction<ResetPasswordResponse>) => {
+          state.isLoading = false;
+          state.user.temp_token = action.payload.data.temp_token;
+          const message = action.payload.message;
+          toast.success(message);
+        }
+      )
       .addCase(validateOTP.rejected, (state) => {
         state.isLoading = false;
       })
