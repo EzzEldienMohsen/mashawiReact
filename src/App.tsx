@@ -42,6 +42,7 @@ import {
   Orders,
   MyAddress,
   NewAddress,
+  SingleOrder,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { Categories, Meals } from './assets/types';
@@ -238,6 +239,10 @@ const AppRouter: React.FC = () => {
             {
               path: 'orders',
               element: <Orders />,
+            },
+            {
+              path: 'single-order',
+              element: <SingleOrder />,
             },
             {
               path: 'changePassword',

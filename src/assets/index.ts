@@ -79,6 +79,13 @@ import pr3 from '../assets/svg/proceed/ordered.svg';
 import cr1 from '../assets/svg/PaymentPage/proceed.svg';
 import cr2 from '../assets/svg/PaymentPage/CardData.svg';
 import cr3 from '../assets/svg/PaymentPage/ordered.svg';
+// SingleOrder
+import sOr1 from '../assets/svg/singleOrder/ordered.svg';
+import sOr2 from '../assets/svg/singleOrder/preparing.svg';
+import sOr3 from '../assets/svg/singleOrder/delivering.svg';
+import sOr4 from '../assets/svg/singleOrder/delivered.svg';
+// Single Order
+ import meat from './svg/menu/meat.svg';
 
 // Links Starts Here
 export const links: Link[] = [
@@ -581,3 +588,73 @@ export const newAddressInitialValues: NewAddressValues = {
   mobileNumber: '',
   phoneNumber: '',
 };
+
+export const singleOrder: Tracker[] = [
+  {
+    id: nanoid(),
+    img: sOr1,
+    text: 'orderedStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr2,
+    text: 'preparingStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr3,
+    text: 'deliveringStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr4,
+    text: 'deliveredStepText',
+    status: 'complete',
+  },
+];
+export const singleOrderElements: {
+  id: string;
+  img: string;
+  name: string;
+  addOn: string;
+  price: string;
+}[] = [
+  {
+    id: nanoid(),
+    img: meat,
+    name: 'menuItemName',
+    addOn: 'menuAddOnCheese',
+    price: 'orderPrice',
+  },
+  {
+    id: nanoid(),
+    img: meat,
+    name: 'menuItemName',
+    addOn: 'menuAddOnCheese',
+    price: 'orderPrice',
+  },
+  {
+    id: nanoid(),
+    img: meat,
+    name: 'menuItemName',
+    addOn: 'menuAddOnCheese',
+    price: 'orderPrice',
+  },
+  {
+    id: nanoid(),
+    img: meat,
+    name: 'menuItemName',
+    addOn: 'menuAddOnCheese',
+    price: 'orderPrice',
+  },
+  {
+    id: nanoid(),
+    img: meat,
+    name: 'menuItemName',
+    addOn: 'menuAddOnCheese',
+    price: 'orderPrice',
+  },
+];

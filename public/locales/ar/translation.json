@@ -183,5 +183,10 @@
   "addressDetails": "تفاصيل العنوان",
   "mobileNumber": "رقم الموبايل",
   "phoneNumber": "رقم التلفون",
-  "save": "حفظ"
+  "save": "حفظ",
+  "orderedStepText": "تم الطلب",
+  "preparingStepText": "جاري التجهيز",
+  "deliveringStepText": "جاري التوصيل",
+  "deliveredStepText": "تم التوصيل",
+  "fakeAddress": "توصيل لعنوان شارع محمد علي فيلا الأمل الدور الأول"
 }

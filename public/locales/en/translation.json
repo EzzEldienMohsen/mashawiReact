@@ -183,5 +183,10 @@
   "addressDetails": "Address Details",
   "mobileNumber": "mobile number",
   "phoneNumber": "phone number",
-  "save": "save"
+  "save": "save",
+  "orderedStepText": "ordered",
+  "preparingStepText": "preparing",
+  "deliveringStepText": "delivering",
+  "deliveredStepText": "delivered",
+  "fakeAddress":"Delivery to the address of Muhammad Ali Street, Villa Al Amal, first floor"
 }

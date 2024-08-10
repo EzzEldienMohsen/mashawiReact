@@ -18,7 +18,7 @@ const Profile: React.FC = () => {
             ? t('myOrdersRoute')
             : pathname === '/profile/new-address'
             ? t('newAddress')
-            : ''}
+            : 'Temp Title'}
         </h1>
       </div>
       <div className="my-8  px-8 lg:px-20  flex flex-row justify-evenly items-center w-full"></div>

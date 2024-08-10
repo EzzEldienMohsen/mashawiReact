@@ -58,7 +58,7 @@ const CartCard: React.FC<CartCardProps> = ({
       />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <h1>{item.name}</h1>
-        <p className="text-newRed flex flex-row gap-x-1">
+        <p className="text-newRed font-abdo flex flex-row gap-x-1">
           <span>{item.price}</span>
           <span>{t('menuItemCurrency')}</span>
         </p>
@@ -69,7 +69,7 @@ const CartCard: React.FC<CartCardProps> = ({
                 key={addOn.id}
                 className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
               >
-                <p className="text-xs w-1/3">{addOn.values[0].name}</p>
+                <p className="text-xs w-1/3 font-abdo">{addOn.values[0].name}</p>
               </div>
             ))}
           </div>

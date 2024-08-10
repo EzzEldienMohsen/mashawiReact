@@ -4,6 +4,7 @@ import theClose from '../assets/svg/closeBtn.svg';
 import { myOrders } from '../assets';
 import { useTranslation } from 'react-i18next';
 import { useGlobalContext } from '../context/GlobalContext';
+import { Link } from 'react-router-dom';
 
 const Orders: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
@@ -12,7 +13,8 @@ const Orders: React.FC = () => {
     <div className="my-4 w-full flex flex-col px-8 lg:px-20 gap-y-6 justify-center items-center">
       {myOrders.map((order) => {
         return (
-          <div
+          <Link
+            to="/profile/single-order"
             key={order.id}
             className="flex flex-col rounded-2xl justify-center items-start  bg-white px-4 py-6 relative gap-y-4 md:flex-row w-full md:justify-between lg:px-2 lg:gap-x-6"
           >
@@ -42,7 +44,7 @@ const Orders: React.FC = () => {
             <button className={`hidden md:block`}>
               <img src={theClose} alt="alt" />
             </button>
-          </div>
+          </Link>
         );
       })}
     </div>
