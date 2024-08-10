@@ -189,11 +189,10 @@ export type ProfileLink = {
 };
 export type MyOrder = {
   id: string;
-  img: string;
   title: string;
   price: string;
+  currency: string;
   date: string;
-  address: string;
 };
 
 export type AboutExcellenceUnit = {

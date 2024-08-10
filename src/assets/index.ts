@@ -38,7 +38,7 @@ import stripe from '../assets/svg/PaymentPage/cardFile/stripe.svg';
 import visa from '../assets/svg/PaymentPage/cardFile/visa.svg';
 
 // OrdersImage
-import orderProfile from './svg/menu/ordersProfile.svg';
+// import orderProfile from './svg/menu/ordersProfile.svg';
 export const whyImg =
   'https://s3-alpha-sig.figma.com/img/d552/f25b/5c2e330ed5e99377cbefe80ee7603291?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nGIxE5JdKXbi8pU2dIq9pCbUwr4LG0ZZRGyQn3csFqPvedatuTPmBw3a6l1Mosn53aJIdKdCt8vzg3nTnZrXpxAW7djZoUXtx6IgBO4H99IOWZ0P0UxPQfOxf54TDTLaYzJfBdKjnsKdcOoIJ-z8vMIez1uvZhbKy7Z54lnVQRKVKjpHCi8pg42krvzv9~wUvx6hggDrTEt2UJi4DnHWRPbZBQ5NeOU~0V-FRHVz2U5HKG6s5je~hpcRcL7B5~cA6VNhvjZ90pIZoaQ69mIViEeq0~Uj21mht84uklL5Hme~81uCetB0Uw284qKt5SvWMxd78f~7aDXdAz-3d5fhtQ__';
 
@@ -314,35 +314,31 @@ export const addressOptions: { value: string; label: string }[] = [
 export const myOrders: MyOrder[] = [
   {
     id: nanoid(),
-    img: orderProfile,
     title: 'orderTitle',
-    price: 'orderPrice',
+    currency: 'menuItemCurrency',
+    price: '22',
     date: '22-5-2024',
-    address: 'orderAddress',
   },
   {
     id: nanoid(),
-    img: orderProfile,
     title: 'orderTitle',
-    price: 'orderPrice',
+    currency: 'menuItemCurrency',
+    price: '22',
     date: '22-5-2024',
-    address: 'orderAddress',
   },
   {
     id: nanoid(),
-    img: orderProfile,
     title: 'orderTitle',
-    price: 'orderPrice',
+    currency: 'menuItemCurrency',
+    price: '22',
     date: '22-5-2024',
-    address: 'orderAddress',
   },
   {
     id: nanoid(),
-    img: orderProfile,
     title: 'orderTitle',
-    price: 'orderPrice',
+    currency: 'menuItemCurrency',
+    price: '22',
     date: '22-5-2024',
-    address: 'orderAddress',
   },
 ];
 

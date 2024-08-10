@@ -39,7 +39,7 @@ import {
   MenuCategory,
   PaymentDetails,
   VerifyEmail,
-  // Orders,
+  Orders,
   MyAddress,
   NewAddress,
 } from './pages';
@@ -235,10 +235,10 @@ const AppRouter: React.FC = () => {
               index: true,
               element: <User />,
             },
-            //     {
-            //       path: 'orders',
-            //       element: <Orders />,
-            //     },
+            {
+              path: 'orders',
+              element: <Orders />,
+            },
             {
               path: 'changePassword',
               element: <ChangePassword />,
