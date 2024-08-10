@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { AddOn, CartItem, CartItemWithId, CartState } from '../../assets/types';
-import { CartData, MealRequest, MealResponse } from './types';
+import { AddOn, CartItemWithId, CartState } from '../../assets/types';
+import { MealRequest, MealResponse } from './types';
 import {
   addToCartThunk,
   editQuantityThunk,
   getTheCartThunk,
   removeItemThunk,
 } from './cartThunk';
+import { RootState } from '../../store';
 
 const defaultState: CartState = {
   isLoading: false,
@@ -79,7 +80,37 @@ export const getCart = createAsyncThunk(
   'theMashawiCart/getCart',
   async (reqData: { token: string; language: string }, thunkAPI) => {
     const { token, language } = reqData;
-    return getTheCartThunk('cart', language, token, thunkAPI as any);
+    const response = await getTheCartThunk(
+      '/cart',
+      thunkAPI as any,
+      token,
+      language
+    );
+    const localCartItems = (thunkAPI.getState() as RootState).theMashawiCart
+      .cartItems;
+
+    // Combine backend cart items with local cart items
+    const combinedCartItems = response.data.map((backendItem) => {
+      const localItem = localCartItems.find(
+        (item) => item.cartItem.id === backendItem.meal.id
+      );
+
+      return localItem
+        ? { ...localItem, cart_id: backendItem.cart_id }
+        : {
+            cart_id: backendItem.cart_id,
+            cartItem: {
+              name: backendItem.meal.name,
+              price: backendItem.meal.price,
+              image: backendItem.meal.image,
+              id: backendItem.meal.id,
+              additions: backendItem.meal.additions,
+              amount: backendItem.qty,
+            },
+          };
+    });
+
+    return { ...response, data: combinedCartItems };
   }
 );
 
@@ -89,21 +120,24 @@ const cartSlice = createSlice({
     (JSON.parse(localStorage.getItem('theMashawiCart')!) as CartState) ||
     defaultState,
   reducers: {
-    addItem: (state, action: PayloadAction<{ product: CartItem }>) => {
+    addItem: (state, action: PayloadAction<{ product: CartItemWithId }>) => {
       const { product } = action.payload;
       const existingItem = state.cartItems.find(
-        (i) => i.cartItem.id === product.id
+        (i) => i.cartItem.id === product.cartItem.id
       );
 
       if (existingItem) {
         state.numItemsInCart -= existingItem.cartItem.amount; // Subtract the old amount
-        existingItem.cartItem.amount = product.amount; // Set the new amount
-        existingItem.cartItem.additions = product.additions;
+        existingItem.cartItem.amount = product.cartItem.amount; // Set the new amount
+        existingItem.cartItem.additions = product.cartItem.additions;
       } else {
-        state.cartItems.push({ cartItem: product, cart_id: 0 });
+        state.cartItems.push({
+          cartItem: product.cartItem,
+          cart_id: product.cart_id,
+        });
       }
 
-      state.numItemsInCart += product.amount;
+      state.numItemsInCart += product.cartItem.amount;
       cartSlice.caseReducers.calculateTotals(state);
       toast.success('تم إضافة الوجبة إلى طلباتك بنجاح');
       console.log('Cart Items after adding:', state.cartItems);
@@ -267,23 +301,12 @@ const cartSlice = createSlice({
           action: PayloadAction<{
             status: number;
             message: string;
-            data: CartData[];
+            data: CartItemWithId[];
           }>
         ) => {
           state.isLoading = false;
           const message = action.payload.message;
-          state.cartItems = action.payload.data.map((item) => ({
-            cart_id: item.cart_id,
-            cartItem: {
-              name: item.meal.name,
-              price: item.meal.price,
-              image: item.meal.image,
-              id: item.meal.id,
-              additions: item.meal.additions,
-              amount: item.qty,
-            },
-          }));
-
+          state.cartItems = action.payload.data;
           toast.success(message);
         }
       )

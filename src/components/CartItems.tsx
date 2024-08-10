@@ -5,12 +5,17 @@ import { CartCard } from '../subComponents';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { CartItem } from '../assets/types';
 import { useTranslation } from 'react-i18next';
+import { useGlobalContext } from '../context/GlobalContext';
 
 const CartItems: React.FC = () => {
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
+  const { isLangArabic } = useGlobalContext();
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const language = isLangArabic ? 'ar' : 'en';
+  const token = user.token;
   const removeItemsFromCart = (prod: CartItem, cart_id: number) => {
-    dispatch(removeMeal({ cart_id }));
+    dispatch(removeMeal({ cart_id, token, language }));
     dispatch(removeItem(prod));
   };
   const { cartItems } = useTypedSelector(
