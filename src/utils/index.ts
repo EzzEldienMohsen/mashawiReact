@@ -13,10 +13,15 @@ export const autoFetch: AxiosInstance = axios.create({
 export const normalizeResponse = (response: any): StaticRequestData => {
   if ('status' in response && 'message' in response && 'data' in response) {
     return response;
-  } else if ('data' in response && 'status' in response.data && 'message' in response.data && 'data' in response.data) {
+  } else if (
+    'data' in response &&
+    'status' in response.data &&
+    'message' in response.data &&
+    'data' in response.data
+  ) {
     return response.data;
   } else {
-    throw new Error("Unexpected response structure");
+    throw new Error('Unexpected response structure');
   }
 };
 
@@ -37,10 +42,28 @@ export const getUserFromLocalStorage = (): User => {
     try {
       return JSON.parse(user) as User;
     } catch (error) {
-      return { temp_token: '' };
+      return {
+        user: {
+          id: 0,
+          f_name: '',
+          l_name: '',
+          phone: '',
+          email: '',
+        },
+        token: '',
+      };
     }
   }
-  return { temp_token: '' };
+  return {
+    user: {
+      id: 0,
+      f_name: '',
+      l_name: '',
+      phone: '',
+      email: '',
+    },
+    token: '',
+  };
 };
 
 // Format price as AED

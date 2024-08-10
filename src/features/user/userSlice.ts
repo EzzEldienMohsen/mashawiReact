@@ -14,6 +14,7 @@ import { addUserToLocalStorage, removeUserFromLocalStorage } from '../../utils';
 import { toast } from 'react-toastify';
 import {
   ChangePasswordData,
+  CompleteUSer,
   EmailVerificationData,
   ForgetPasswordData,
   LoginData,
@@ -26,7 +27,16 @@ import {
 } from '../../assets/types';
 import { ResetPasswordResponse } from './types';
 
-const initialUser: User = { temp_token: '' };
+const initialUser: User = {
+  user: {
+    id: 0,
+    f_name: '',
+    l_name: '',
+    phone: '',
+    email: '',
+  },
+  token: '',
+};
 const initialState: UserState = {
   isLoading: false,
   isSidebarOpen: false,
@@ -78,7 +88,7 @@ export const resetPassword = createAsyncThunk(
     }
     return resetPasswordThunk(
       '/auth/reset-password',
-      { ...reqData, token: user.user.temp_token },
+      { ...reqData, token: user.user.token },
       thunkAPI
     );
   }
@@ -98,11 +108,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    toggleSidebar: (state) => {
-      state.isSidebarOpen = !state.isSidebarOpen;
-    },
     logoutUser: (state) => {
-      (state.user = { temp_token: '' }), (state.isSidebarOpen = false);
+      state.user.token = '';
+      state.user = initialUser;
+      state.isSidebarOpen = false;
       removeUserFromLocalStorage();
     },
   },
@@ -122,10 +131,14 @@ const userSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<any>) => {
+      .addCase(loginUser.fulfilled, (state, action: PayloadAction<CompleteUSer>) => {
         state.isLoading = false;
+        state.isSidebarOpen = true;
         const user = action.payload.data;
         state.user = user;
+        addUserToLocalStorage(user)
+        const message = action.payload.message;
+        toast.success(message);
         addUserToLocalStorage(user);
       })
       .addCase(loginUser.rejected, (state) => {
@@ -163,7 +176,7 @@ const userSlice = createSlice({
         validateOTP.fulfilled,
         (state, action: PayloadAction<ResetPasswordResponse>) => {
           state.isLoading = false;
-          state.user.temp_token = action.payload.data.temp_token;
+          state.user.token = action.payload.data.temp_token;
           const message = action.payload.message;
           toast.success(message);
         }
@@ -212,6 +225,7 @@ const userSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state, action: PayloadAction<any>) => {
         state.isLoading = false;
+        state.isSidebarOpen = false;
         const message = action.payload.message;
         toast.success(message);
       })
@@ -221,6 +235,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { toggleSidebar, logoutUser } = userSlice.actions;
+export const { logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

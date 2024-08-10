@@ -32,7 +32,7 @@ const RegistrationForm: React.FC = () => {
     e.preventDefault();
     localStorage.setItem('registerData', JSON.stringify(values));
     dispatch(registerUser(values));
-    navigate('/validate-otp');
+    navigate('/verify-email');
   };
   return (
     <div className="flex justify-evenly w-full items-center">

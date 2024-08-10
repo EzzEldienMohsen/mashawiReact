@@ -38,6 +38,7 @@ import {
   ProceedDelivery,
   MenuCategory,
   PaymentDetails,
+  VerifyEmail,
   // Orders,
   // MyAddress,
 } from './pages';
@@ -212,6 +213,10 @@ const AppRouter: React.FC = () => {
         {
           path: '/validate-otp',
           element: <ValidateOTP />,
+        },
+        {
+          path: '/verify-email',
+          element: <VerifyEmail />,
         },
         {
           path: '/forget-password',

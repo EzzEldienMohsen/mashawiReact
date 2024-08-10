@@ -1,11 +1,22 @@
 import React from 'react';
 import userImg from '../assets/svg/header/user.svg';
 import { profileLinks } from '../assets';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import logOutImg from '../assets/svg/profile/logOut.svg';
+import { useGlobalContext } from '../context/GlobalContext';
+import { AppDispatch } from '../store';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../features/user/userSlice';
 const UserDropDown: React.FC = () => {
-  const {t} = useTranslation()
+  const { isLangArabic } = useGlobalContext();
+  const { t } = useTranslation();
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const theLogOut = () => {
+    dispatch(logOut());
+    navigate('/');
+  };
   return (
     <div className="dropdown dropdown-end">
       <div
@@ -32,6 +43,17 @@ const UserDropDown: React.FC = () => {
             </Link>
           );
         })}
+        <button
+          onClick={theLogOut}
+          className="flex justify-start items-center gap-x-4"
+        >
+          <img
+            src={logOutImg}
+            alt="img"
+            className={`${isLangArabic ? '' : 'transform scale-x-[-1]'}`}
+          />
+          <p>{t('signOut')}</p>
+        </button>
       </ul>
     </div>
   );

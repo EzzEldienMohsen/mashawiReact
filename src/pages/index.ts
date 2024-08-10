@@ -28,3 +28,4 @@ export { default as ProceedPage } from './ProceedPage';
 export { default as ProceedDelivery } from './ProceedDelivery';
 export { default as MenuCategory } from './MenuCategory';
 export { default as PaymentDetails } from './PaymentDetails';
+export { default as VerifyEmail } from './VerifyEmail';

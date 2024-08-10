@@ -3,6 +3,7 @@ import { autoFetch } from '../../utils';
 import {
   ApiResponse,
   ChangePasswordData,
+  CompleteUSer,
   EmailVerificationData,
   ForgetPasswordData,
   LoginData,
@@ -44,14 +45,14 @@ export const loginThunk = async (
   url: string,
   reqData: LoginData,
   thunkAPI: any
-): Promise<ApiResponse> => {
+): Promise<CompleteUSer> => {
   try {
-    const response: AxiosResponse<ApiResponse> = await autoFetch.post(
+    const response: AxiosResponse<CompleteUSer> = await autoFetch.post(
       url,
       reqData
     );
     console.log(response.status);
-    return { data: response.data, status: response.status };
+    return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue({
@@ -116,9 +117,9 @@ export const resetPasswordThunk = async (
   url: string,
   reqData: ResetPasswordData,
   thunkAPI: any
-): Promise<ApiResponse> => {
+): Promise<CompleteUSer> => {
   try {
-    const response: AxiosResponse<ApiResponse> = await autoFetch.post(
+    const response: AxiosResponse<CompleteUSer> = await autoFetch.post(
       url,
       reqData
     );

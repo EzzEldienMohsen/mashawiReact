@@ -44,7 +44,20 @@ export type WishListState = {
 };
 
 export type User = {
-  temp_token: string;
+  user: {
+    id: number;
+    f_name: string;
+    l_name: string;
+    phone: string;
+    email: string;
+  };
+  token: string;
+};
+
+export type CompleteUSer = {
+  status: number;
+  message: string;
+  data: User;
 };
 
 export type UserState = {
