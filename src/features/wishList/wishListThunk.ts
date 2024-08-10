@@ -10,7 +10,9 @@ import { toast } from 'react-toastify';
 export const addToWishListThunk = async (
   url: string,
   reqData: AddToWishListRequest,
-  thunkAPI: any
+  thunkAPI: any,
+  token: string,
+  language: string
 ): Promise<WishListType> => {
   try {
     const response: AxiosResponse<WishListType> = await autoFetch.post(
@@ -20,6 +22,8 @@ export const addToWishListThunk = async (
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          lang: language,
         },
       }
     );
@@ -32,7 +36,9 @@ export const addToWishListThunk = async (
 };
 export const getWishListThunk = async (
   url: string,
-  thunkAPI: any
+  thunkAPI: any,
+  token: string,
+  language: string
 ): Promise<getWishListResponse> => {
   try {
     const response: AxiosResponse<getWishListResponse> = await autoFetch.get(
@@ -41,6 +47,8 @@ export const getWishListThunk = async (
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          lang: language,
         },
       }
     );
@@ -54,7 +62,9 @@ export const getWishListThunk = async (
 
 export const removeItemThunk = async (
   url: string,
-  thunkAPI: any
+  thunkAPI: any,
+  token: string,
+  language: string
 ): Promise<{ status: number; message: string; data: null }> => {
   try {
     const response: AxiosResponse<{
@@ -65,6 +75,8 @@ export const removeItemThunk = async (
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+        lang: language,
       },
     });
     return response.data;

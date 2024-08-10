@@ -1,15 +1,25 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { clearWishList } from '../features/wishList/wishListSlice';
+import { clearWishList, getWishList } from '../features/wishList/wishListSlice';
 import { Card } from '../subSubComponents';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { useGlobalContext } from '../context/GlobalContext';
 const WishList: React.FC = () => {
   const { t } = useTranslation();
   const { wishListItems: items } = useTypedSelector(
     (state: RootState) => state.wishList
   );
+  console.log(items);
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const { isLangArabic } = useGlobalContext();
+  const token = user.token;
+  const language = isLangArabic ? 'ar' : 'en';
   const dispatch: AppDispatch = useDispatch();
+  const getTheWithList = () => {
+    dispatch(getWishList({ token, language }));
+  };
+  React.useEffect(getTheWithList, []);
   const clearWish = () => dispatch(clearWishList());
   if (items.length === 0) {
     return (
@@ -31,8 +41,8 @@ const WishList: React.FC = () => {
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
         <div className="my-8 flex flex-col justify-center items-center gap-y-5 md:flex-row md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-start lg:gap-x-5  lg:flex-wrap w-full">
-          {items.map((data) => {
-            return <Card data={data.cartItem} key={data.cartItem.id} />;
+          {items.map((data, index) => {
+            return <Card data={data.cartItem} key={data.cartItem.id + index} />;
           })}
         </div>
         <button

@@ -1,16 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { CartItem, WishListState } from '../../assets/types';
-import {
-  AddToWishListRequest,
-  getWishListResponse,
-  WishListType,
-} from './types';
+import { CartItem, CartItemWithId, WishListState } from '../../assets/types';
+import { AddToWishListRequest, WishListType } from './types';
 import {
   addToWishListThunk,
   getWishListThunk,
   removeItemThunk,
 } from './wishListThunk';
+import { RootState } from '../../store';
 
 const defaultItems: WishListState = {
   wishListItems: [],
@@ -18,32 +15,76 @@ const defaultItems: WishListState = {
   isLoading: false,
 };
 
-const getWishListFromLocalStore = (): WishListState => {
-  return JSON.parse(localStorage.getItem('wishList')!) || defaultItems;
-};
-
 export const addThisToWishList = createAsyncThunk(
   'wishList/addThisToWishList',
-  async (reqData: AddToWishListRequest, thunkAPI) => {
-    return addToWishListThunk('/wishlist/add', reqData, thunkAPI);
+  async (
+    data: { reqData: AddToWishListRequest; token: string; language: string },
+    thunkAPI
+  ) => {
+    const { reqData, token, language } = data;
+    return addToWishListThunk(
+      '/wishlist/add',
+      reqData,
+      thunkAPI,
+      token,
+      language
+    );
   }
 );
 export const getWishList = createAsyncThunk(
   'wishList/getWishList',
-  async (thunkAPI) => {
-    return getWishListThunk('/wishlist', thunkAPI);
+  async (data: { token: string; language: string }, thunkAPI) => {
+    const { token, language } = data;
+    const response = await getWishListThunk(
+      '/wishlist',
+      thunkAPI,
+      token,
+      language
+    );
+    const localWishListItems = (thunkAPI.getState() as RootState).wishList
+      .wishListItems;
+
+    const combinedWishListItems = response.data.map((backendItem) => {
+      const localItem = localWishListItems.find(
+        (item) => item.cartItem.id === backendItem.meal.id
+      );
+
+      return localItem
+        ? { ...localItem, cart_id: backendItem.wish_id }
+        : {
+            cart_id: backendItem.wish_id,
+            cartItem: {
+              name: backendItem.meal.name,
+              price: backendItem.meal.price,
+              image: backendItem.meal.image,
+              id: backendItem.meal.id,
+              additions: backendItem.meal.additions,
+              amount: 1, // Default amount if not found locally
+            },
+          };
+    });
+
+    return { ...response, data: combinedWishListItems };
   }
 );
 export const removeMeal = createAsyncThunk(
   'wishList/removeMeal',
-  async (data: { cart_id: number }, thunkAPI) => {
-    const { cart_id } = data;
-    return removeItemThunk(`/wishlist/remove/${cart_id}`, thunkAPI);
+  async (
+    data: { cart_id: number; token: string; language: string },
+    thunkAPI
+  ) => {
+    const { cart_id, token, language } = data;
+    return removeItemThunk(
+      `/wishlist/remove/${cart_id}`,
+      thunkAPI,
+      token,
+      language
+    );
   }
 );
 const wishListSlice = createSlice({
   name: 'wishList',
-  initialState: getWishListFromLocalStore(),
+  initialState: defaultItems,
   reducers: {
     addItem: (state, action: PayloadAction<{ product: CartItem }>) => {
       const { product } = action.payload;
@@ -70,7 +111,6 @@ const wishListSlice = createSlice({
       );
       state.numItemsInWishList -= 1;
       toast.error('تم ازالة الطلب من المفضلة');
-      localStorage.setItem('wishList', JSON.stringify(state));
     },
   },
   extraReducers: (builder) => {
@@ -99,25 +139,16 @@ const wishListSlice = createSlice({
       })
       .addCase(
         getWishList.fulfilled,
-        (state, action: PayloadAction<getWishListResponse>) => {
+        (
+          state,
+          action: PayloadAction<{
+            status: number;
+            message: string;
+            data: CartItemWithId[];
+          }>
+        ) => {
           state.isLoading = false;
-          const message = action.payload.message;
-          state.wishListItems = action.payload.data.map((item) => ({
-            cart_id: item.wish_id,
-            cartItem: {
-              name: item.meal.name,
-              price: item.meal.price,
-              image: item.meal.image,
-              id: item.meal.id,
-              additions: item.meal.additions,
-              amount:
-                state.wishListItems.find(
-                  (existingItem) => existingItem.cartItem.id === item.meal.id
-                )?.cartItem.amount || 1,
-            },
-          }));
-
-          toast.success(message);
+          state.wishListItems = action.payload.data;
         }
       )
       .addCase(getWishList.rejected, (state) => {

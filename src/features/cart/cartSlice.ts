@@ -138,7 +138,6 @@ const cartSlice = createSlice({
       state.numItemsInCart += product.amount;
       cartSlice.caseReducers.calculateTotals(state);
       toast.success('تم إضافة الوجبة إلى طلباتك بنجاح');
-      console.log('Cart Items after adding:', state.cartItems);
     },
     clearCart: () => {
       localStorage.setItem('theMashawiCart', JSON.stringify(defaultState));
