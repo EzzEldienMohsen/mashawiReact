@@ -1,8 +1,21 @@
 import React from 'react';
 import cartImg from '../assets/svg/header/cart.svg';
 import CartDrawerContent from './CartDrawerContent';
+import { useGlobalContext } from '../context/GlobalContext';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { useDispatch } from 'react-redux';
+import { getCart } from '../features/cart/cartSlice';
 
 const CartDrawer: React.FC = () => {
+  const { isLangArabic } = useGlobalContext();
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const language = isLangArabic ? 'ar' : 'en';
+  const token = user.token;
+  const dispatch: AppDispatch = useDispatch();
+  const getTheCart = (): void => {
+    dispatch(getCart({ token, language }));
+  };
+  React.useEffect(getTheCart, []);
   const closeDrawer = (): void => {
     const drawerCheckbox = document.getElementById(
       'cart-drawer'

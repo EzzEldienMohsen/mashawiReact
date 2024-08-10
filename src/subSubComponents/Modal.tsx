@@ -12,6 +12,7 @@ import {
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { AddOns, ProductDetails, WishlistButton } from '../subSubSubComponents';
 import { addItem as addToCart } from '../features/cart/cartSlice';
+import { useGlobalContext } from '../context/GlobalContext';
 
 interface ModalProps {
   modalId: string;
@@ -32,7 +33,10 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   );
   const { t } = useTranslation();
   const dialogRef = useRef<HTMLDialogElement>(null);
-
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const { isLangArabic } = useGlobalContext();
+  const token = user.token;
+  const language = isLangArabic ? 'ar' : 'en';
   const handleAddOnChange = (addOn: AddOn, isChecked: boolean): void => {
     setSelectedAddOns((prevAddOns) =>
       isChecked
@@ -63,14 +67,18 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     dispatch(addToCart({ product: cartProduct }));
     dispatch(
       addThisItemToCart({
-        meal_id: data.id,
-        qty: amount,
-        additions: cartProduct.additions.flatMap((item) =>
-          item.values.map((value) => ({
-            id: item.id,
-            value: value.id,
-          }))
-        ),
+        language: language,
+        token: token,
+        data: {
+          meal_id: data.id,
+          qty: amount,
+          additions: cartProduct.additions.flatMap((item) =>
+            item.values.map((value) => ({
+              id: item.id,
+              value: value.id,
+            }))
+          ),
+        },
       })
     );
     dialogRef.current?.close();

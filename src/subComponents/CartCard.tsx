@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { CartItem } from '../assets/types';
 import { DrawerAmountInput } from '../subSubSubComponents';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 
 interface CartCardProps {
@@ -24,7 +24,9 @@ const CartCard: React.FC<CartCardProps> = ({
   const dispatch: AppDispatch = useDispatch();
 
   const [amount, setAmount] = React.useState<number>(item.amount);
-
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
+  const language = isLangArabic ? 'ar' : 'en';
   React.useEffect(() => {
     setAmount(item.amount);
   }, [item.amount]);
@@ -34,7 +36,7 @@ const CartCard: React.FC<CartCardProps> = ({
 
     // Dispatch the local and async quantity updates
     dispatch(editQuantityLocally({ cartID: item.id, qty }));
-    dispatch(editQuantity({ reqData: { qty }, cart_id }));
+    dispatch(editQuantity({ reqData: { qty }, cart_id, token, language }));
   };
 
   return (

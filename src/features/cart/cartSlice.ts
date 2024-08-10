@@ -25,28 +25,61 @@ const calculateProductTotal = (product: CartItemWithId): number => {
 // Restful api
 export const addThisItemToCart = createAsyncThunk(
   'theMashawiCart/addThisItemToCart',
-  async (reqData: MealRequest, thunkAPI) => {
-    return addToCartThunk('/cart/add', reqData, thunkAPI);
+  async (
+    reqData: { data: MealRequest; token: string; language: string },
+    thunkAPI
+  ) => {
+    return addToCartThunk(
+      '/cart/add',
+      reqData.data,
+      reqData.language,
+      reqData.token,
+      thunkAPI
+    );
   }
 );
 export const editQuantity = createAsyncThunk(
   'theMashawiCart/editQuantity',
-  async (data: { reqData: { qty: number }; cart_id: number }, thunkAPI) => {
-    const { cart_id, reqData } = data;
-    return editQuantityThunk(`/cart/change-qty/${cart_id}`, reqData, thunkAPI);
+  async (
+    data: {
+      reqData: { qty: number };
+      cart_id: number;
+      token: string;
+      language: string;
+    },
+    thunkAPI
+  ) => {
+    const { cart_id, reqData, token, language } = data;
+    return editQuantityThunk(
+      `/cart/change-qty/${cart_id}`,
+      reqData,
+      token,
+      language,
+      thunkAPI
+    );
   }
 );
 export const removeMeal = createAsyncThunk(
   'theMashawiCart/removeMeal',
-  async (data: { cart_id: number }, thunkAPI) => {
-    const { cart_id } = data;
-    return removeItemThunk(`/cart/remove/${cart_id}`, thunkAPI);
+  async (
+    data: { cart_id: number; token: string; language: string },
+    thunkAPI
+  ) => {
+    const { cart_id, token, language } = data;
+    return removeItemThunk(
+      `/cart/remove/${cart_id}`,
+      thunkAPI, // This should be passed here
+      language,
+      token // Token should be passed last
+    );
   }
 );
+
 export const getCart = createAsyncThunk(
   'theMashawiCart/getCart',
-  async (thunkAPI) => {
-    return getTheCartThunk('cart', thunkAPI);
+  async (reqData: { token: string; language: string }, thunkAPI) => {
+    const { token, language } = reqData;
+    return getTheCartThunk('cart', language, token, thunkAPI as any);
   }
 );
 

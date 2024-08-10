@@ -10,7 +10,11 @@ import {
   logOutThunk,
   changePasswordThunk,
 } from './userThunk';
-import { addUserToLocalStorage, removeUserFromLocalStorage } from '../../utils';
+import {
+  addUserToLocalStorage,
+  getUserFromLocalStorage,
+  removeUserFromLocalStorage,
+} from '../../utils';
 import { toast } from 'react-toastify';
 import {
   ChangePasswordData,
@@ -27,16 +31,7 @@ import {
 } from '../../assets/types';
 import { ResetPasswordResponse } from './types';
 
-const initialUser: User = {
-  user: {
-    id: 0,
-    f_name: '',
-    l_name: '',
-    phone: '',
-    email: '',
-  },
-  token: '',
-};
+const initialUser: User = getUserFromLocalStorage();
 const initialState: UserState = {
   isLoading: false,
   isSidebarOpen: false,
@@ -131,16 +126,19 @@ const userSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<CompleteUSer>) => {
-        state.isLoading = false;
-        state.isSidebarOpen = true;
-        const user = action.payload.data;
-        state.user = user;
-        addUserToLocalStorage(user)
-        const message = action.payload.message;
-        toast.success(message);
-        addUserToLocalStorage(user);
-      })
+      .addCase(
+        loginUser.fulfilled,
+        (state, action: PayloadAction<CompleteUSer>) => {
+          state.isLoading = false;
+          state.isSidebarOpen = true;
+          const user = action.payload.data;
+          state.user = user;
+          addUserToLocalStorage(user);
+          const message = action.payload.message;
+          toast.success(message);
+          addUserToLocalStorage(user);
+        }
+      )
       .addCase(loginUser.rejected, (state) => {
         state.isLoading = false;
       })

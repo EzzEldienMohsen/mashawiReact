@@ -3,7 +3,7 @@ import theClose from '../assets/svg/closeBtn.svg';
 import { useTranslation } from 'react-i18next';
 import { DrawerAmountInput } from '../subSubSubComponents';
 import { CartItem } from '../assets/types';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import {
   editQuantity,
@@ -11,17 +11,22 @@ import {
   removeItem,
   removeMeal,
 } from '../features/cart/cartSlice';
+import { useGlobalContext } from '../context/GlobalContext';
 
 const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
   item,
   cart_id,
 }) => {
   const [amount, setAmount] = React.useState<number>(item.amount);
+  const { isLangArabic } = useGlobalContext();
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
+  const language = isLangArabic ? 'ar' : 'en';
   //  Additional declaration
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
   const removeItemsFromCart = (prod: CartItem, cart_id: number) => {
-    dispatch(removeMeal({ cart_id }));
+    dispatch(removeMeal({ cart_id, token, language }));
     dispatch(removeItem(prod));
   };
   React.useEffect(() => {
@@ -34,7 +39,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
 
     // Dispatch the local and async quantity updates
     dispatch(editQuantityLocally({ cartID: item.id, qty }));
-    dispatch(editQuantity({ reqData: { qty }, cart_id }));
+    dispatch(editQuantity({ reqData: { qty }, cart_id, token, language }));
   };
 
   return (
