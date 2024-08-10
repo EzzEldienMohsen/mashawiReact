@@ -172,5 +172,9 @@
   "MainHeroBigTitle": "في مشاوي احلى",
   "MainHeroSecondTitle": "مشويات",
   "MainHeroText": "افضل العروض المقدمة لدينا على المشويات التركية الرائعة  و التوابل الخاصة بنا ",
-  "MainHeroOrder": "اطلب الان"
+  "MainHeroOrder": "اطلب الان",
+  "paymentTitle": "طريقة الدفع",
+  "cardNumber": "رقم البطاقة",
+  "cardPlaceHolder": "اكتب هنا",
+  "cardHolderName": "اسم حامل البطاقة"
 }

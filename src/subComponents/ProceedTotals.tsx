@@ -42,9 +42,12 @@ const ProceedTotals: React.FC = () => {
         <span>{t('totalText')}</span>
         <span className="font-medium">{formatPrice(orderTotal)}</span>
       </p>
-      <button className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full">
+      <Link
+        to="/card-data"
+        className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+      >
         {t('paymentAndOrderText')}
-      </button>
+      </Link>
 
       <Link
         to="/menuList"

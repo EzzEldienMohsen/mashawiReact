@@ -16,8 +16,8 @@ const Header: React.FC = () => {
 
   return (
     <div
-      className={`flex w-full z-20 flex-row ${
-        pathname === '/' ? 'absolute top-0 left-0' : ''
+      className={`flex w-full  flex-row ${
+        pathname === '/' ? 'absolute top-0 left-0 z-50' : 'z-20'
       } justify-between items-center px-8 lg:px-20 py-2 bg-transparent`}
     >
       <Link to="/">
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
             />
           </label>
         </div>
-        <div className="drawer-side z-30">
+        <div className="drawer-side z-50">
           <label htmlFor="small-nav-drawer" className="drawer-overlay"></label>
           <SmallNavBar closeDrawer={closeDrawer} />
         </div>

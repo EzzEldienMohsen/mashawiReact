@@ -172,5 +172,9 @@
   "MainHeroBigTitle": "Mashawi has the best",
   "MainHeroSecondTitle": "Grills",
   "MainHeroText": "Our best offers on wonderful Turkish grills and our special spices",
-  "MainHeroOrder": "Order Now"
+  "MainHeroOrder": "Order Now",
+  "paymentTitle": "payment method",
+  "cardNumber": "Card Number",
+  "cardPlaceHolder": "insert data here",
+  "cardHolderName": "card holder Name"
 }

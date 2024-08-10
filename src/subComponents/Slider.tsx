@@ -37,26 +37,28 @@ const Slider: React.FC = () => {
   console.log(data);
 
   return (
-    <div className="carousel carousel-end rounded-box flex overflow-x-auto gap-x-2 py-4">
+    <div className="carousel carousel-center rounded-box w-3/4">
       {data.map((category) => (
-        <Link
-          to={`/meals/category/${category.id}`}
-          key={category.id}
-          className={`carousel-item flex-shrink-0 w-12 h-12 md:w-20 md:h-20 lg:w-32 lg:h-32 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
-            isLangArabic
-              ? 'rounded-tr-3xl rounded-bl-3xl'
-              : 'rounded-tl-3xl rounded-br-3xl'
-          }`}
-        >
-          <img
-            src={category.icon}
-            alt={category.name}
-            className="w-5 h-5 md:w-10 md:h-10 lg:w-12 lg:h-12 mb-1 md:mb-2"
-          />
-          <span className="text-black text-[10px] md:text-sm lg:text-base">
-            {category.name}
-          </span>
-        </Link>
+        <div className="carousel-item ">
+          <Link
+            to={`/meals/category/${category.id}`}
+            key={category.id}
+            className={`flex-shrink-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
+              isLangArabic
+                ? 'rounded-tr-3xl rounded-bl-3xl'
+                : 'rounded-tl-3xl rounded-br-3xl'
+            }`}
+          >
+            <img
+              src={category.icon}
+              alt={category.name}
+              className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 mb-1 md:mb-2"
+            />
+            <span className="text-black text-[10px] md:text-sm lg:text-base">
+              {category.name}
+            </span>
+          </Link>
+        </div>
       ))}
     </div>
   );

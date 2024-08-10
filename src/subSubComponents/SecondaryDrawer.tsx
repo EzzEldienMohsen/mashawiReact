@@ -10,7 +10,11 @@ interface SecondDrawerInterface {
   closeDrawer: (drawerId: string) => void;
 }
 
-const SecondaryDrawer:React.FC<SecondDrawerInterface> = ({ li, drawerId,closeDrawer }) => {
+const SecondaryDrawer: React.FC<SecondDrawerInterface> = ({
+  li,
+  drawerId,
+  closeDrawer,
+}) => {
   const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
   return (
@@ -32,7 +36,7 @@ const SecondaryDrawer:React.FC<SecondDrawerInterface> = ({ li, drawerId,closeDra
           />
         </label>
       </div>
-      <div className="drawer-side z-40">
+      <div className="drawer-side z-50">
         <label htmlFor={drawerId} className="drawer-overlay"></label>
         <SecondaryDrawerContent drawerId={drawerId} closeDrawer={closeDrawer} />
       </div>

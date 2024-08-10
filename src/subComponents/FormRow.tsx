@@ -13,6 +13,7 @@ const FormRow: React.FC<FormRowProps> = ({
   placeHolder,
   high,
   full,
+  half,
   icon,
   isOTP,
   options,
@@ -136,7 +137,7 @@ const FormRow: React.FC<FormRowProps> = ({
     <div
       className={`flex flex-col justify-start my-1 ${
         full ? 'w-full' : 'w-4/5 md:w-full'
-      } items-start`}
+      } ${half ? 'w-full md:w-[40%]' : 'w-full'} items-start`}
     >
       <label className="my-1 capitalize" htmlFor={name}>
         {label || name}

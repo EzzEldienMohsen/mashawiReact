@@ -43,7 +43,7 @@ const ContactForm: React.FC<{ title: string }> = ({ title }) => {
     <div className="w-full relative flex flex-col  justify-center  items-center my-6 px-8 lg:px-20">
       {/* SVG background at the bottom */}
       <div className="absolute bottom-0 h-full  w-4/5 p-3 bg-svg-background bg-contain bg-no-repeat bg-bottom"></div>
-      <div className="w-1/2 p-3 flex justify-center items-center bg-[#F4F4F4]  flex-col z-10 ">
+      <div className="w-full lg:w-1/2 p-3 flex justify-center items-center bg-[#F4F4F4]  flex-col z-10 ">
         <h1 className="text-black mb-6 font-bold text-xl md:text-2xl tracking-wide">
           {title}
         </h1>

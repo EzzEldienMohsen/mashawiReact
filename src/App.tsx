@@ -37,6 +37,7 @@ import {
   ProceedPage,
   ProceedDelivery,
   MenuCategory,
+  PaymentDetails,
   // Orders,
   // MyAddress,
 } from './pages';
@@ -162,6 +163,10 @@ const AppRouter: React.FC = () => {
         {
           path: '/proceed-delivery',
           element: <ProceedDelivery />,
+        },
+        {
+          path: '/card-data',
+          element: <PaymentDetails />,
         },
         {
           path: '/track',

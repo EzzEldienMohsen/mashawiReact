@@ -27,3 +27,4 @@ export { default as DeliveredPage } from './DeliveredPage';
 export { default as ProceedPage } from './ProceedPage';
 export { default as ProceedDelivery } from './ProceedDelivery';
 export { default as MenuCategory } from './MenuCategory';
+export { default as PaymentDetails } from './PaymentDetails';

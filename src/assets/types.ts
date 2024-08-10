@@ -94,6 +94,7 @@ export type Option = { label: string; value: string };
 export type FormRowProps = {
   name: string;
   type: string;
+  half?: boolean;
   isBorder?: boolean;
   handleChange: (
     event: ChangeEvent<
@@ -366,4 +367,10 @@ export type GalleryResponse = {
   status: number;
   message: string;
   data: GalleryData;
+};
+export type CardData = {
+  cardNumber: string;
+  cardHolderName: string;
+  cardDate: string;
+  CVV: string;
 };
