@@ -1,13 +1,11 @@
-import React from 'react'
+import React from 'react';
 import { Tracker } from '../assets/types';
 import { useTranslation } from 'react-i18next';
 
- 
-
-const Steps: React.FC<{tracker:Tracker[]}> = ({ tracker }) => {
+const Steps: React.FC<{ tracker: Tracker[] }> = ({ tracker }) => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-4xl">
+    <div className="flex flex-row items-center justify-between w-full max-w-4xl">
       {tracker.map((step, index) => (
         <React.Fragment key={step.id}>
           <div className="flex flex-col justify-center items-center gap-y-2 mb-4 md:mb-0">
@@ -27,8 +25,11 @@ const Steps: React.FC<{tracker:Tracker[]}> = ({ tracker }) => {
           {index < tracker.length - 1 && (
             <div className=" md:flex-grow items-center hidden md:flex">
               <div
-                className={`w-full h-1 mx-2 rounded-full  ${tracker[index].status === 'complete'? 'bg-newRed': 'bg-[#939393]'}`}
-              
+                className={`w-full h-1 mx-2 rounded-full  ${
+                  tracker[index].status === 'complete'
+                    ? 'bg-newRed'
+                    : 'bg-[#939393]'
+                }`}
               ></div>
             </div>
           )}
@@ -38,4 +39,4 @@ const Steps: React.FC<{tracker:Tracker[]}> = ({ tracker }) => {
   );
 };
 
-export default Steps
+export default Steps;
