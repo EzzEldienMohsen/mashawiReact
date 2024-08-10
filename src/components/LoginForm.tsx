@@ -19,6 +19,7 @@ const LoginForm: React.FC = () => {
   });
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -35,22 +36,27 @@ const LoginForm: React.FC = () => {
 
     try {
       const result = await dispatch(loginUser(values)).unwrap();
-      if (result.status === 200) {
+      console.log('Result:', result); // Debug result
+      if (result.status === 1) {
+        console.log('Navigating to /profile');
         navigate('/profile');
       }
     } catch (error: any) {
-      if (error.status === 403) {
+      console.error('Navigation Error:', error); // Debug error
+      if (error?.status === 403) {
+        console.log('Navigating to /validate-otp');
         navigate('/validate-otp');
       } else {
         toast.error(error.message || 'Login failed');
       }
     }
   };
+
   return (
     <div className="flex justify-evenly w-full items-center">
       <form
         onSubmit={onSubmit}
-        className="flex flex-col  bg-transparent justify-start md:justify-center w-full items-center rounded-lg"
+        className="flex flex-col bg-transparent justify-start md:justify-center w-full items-center rounded-lg"
       >
         <FormTitle title={t('signInTitle')} />
         <FormRow

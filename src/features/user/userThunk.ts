@@ -51,7 +51,6 @@ export const loginThunk = async (
       url,
       reqData
     );
-    console.log(response.status);
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);

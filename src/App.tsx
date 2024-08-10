@@ -40,7 +40,7 @@ import {
   PaymentDetails,
   VerifyEmail,
   // Orders,
-  // MyAddress,
+  MyAddress,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { Categories, Meals } from './assets/types';
@@ -242,10 +242,10 @@ const AppRouter: React.FC = () => {
               path: 'changePassword',
               element: <ChangePassword />,
             },
-            //     {
-            //       path: 'address',
-            //       element: <MyAddress />,
-            //     },
+            {
+              path: 'address',
+              element: <MyAddress />,
+            },
           ],
         },
         {
