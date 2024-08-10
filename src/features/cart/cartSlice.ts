@@ -116,9 +116,7 @@ export const getCart = createAsyncThunk(
 
 const cartSlice = createSlice({
   name: 'theMashawiCart',
-  initialState:
-    (JSON.parse(localStorage.getItem('theMashawiCart')!) as CartState) ||
-    defaultState,
+  initialState: defaultState,
   reducers: {
     addItem: (state, action: PayloadAction<{ product: CartItem }>) => {
       const { product } = action.payload;
@@ -305,9 +303,8 @@ const cartSlice = createSlice({
           }>
         ) => {
           state.isLoading = false;
-          const message = action.payload.message;
           state.cartItems = action.payload.data;
-          toast.success(message);
+          cartSlice.caseReducers.calculateTotals(state);
         }
       )
       .addCase(getCart.rejected, (state) => {
