@@ -41,6 +41,7 @@ import {
   VerifyEmail,
   // Orders,
   MyAddress,
+  NewAddress,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { Categories, Meals } from './assets/types';
@@ -245,6 +246,10 @@ const AppRouter: React.FC = () => {
             {
               path: 'address',
               element: <MyAddress />,
+            },
+            {
+              path: 'new-address',
+              element: <NewAddress />,
             },
           ],
         },

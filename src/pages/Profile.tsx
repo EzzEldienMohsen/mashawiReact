@@ -16,6 +16,8 @@ const Profile: React.FC = () => {
             ? t('myAddressRoute')
             : pathname === '/profile/orders'
             ? t('myOrdersRoute')
+            : pathname === '/profile/new-address'
+            ? t('newAddress')
             : ''}
         </h1>
       </div>

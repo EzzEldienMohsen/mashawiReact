@@ -10,12 +10,12 @@ const MyAddress: React.FC = () => {
   return (
     <div className="flex mt-2 flex-col relative px-8 lg:px-20 justify-center pt-24 items-center md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-between lg:items-start md:gap-4 lg:gap-x-2 w-full ">
       <Link
-        to="/new-address"
-        className={`btn w-1/5 absolute top-0 ${
+        to="/profile/new-address"
+        className={`btn w-3/5 md:w-1/5 absolute top-0 ${
           isLangArabic ? 'left-20' : 'right-20'
         } bg-newRed text-white rounded-full my-1`}
       >
-        {t('editAddressText')}
+        {t('newAddress')}
       </Link>
       {address.map((ad) => {
         return (

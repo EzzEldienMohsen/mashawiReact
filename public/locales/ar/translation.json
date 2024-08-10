@@ -177,5 +177,11 @@
   "cardNumber": "رقم البطاقة",
   "cardPlaceHolder": "اكتب هنا",
   "cardHolderName": "اسم حامل البطاقة",
-  "cardDate": "تاريخ انتهاء البطاقة"
+  "cardDate": "تاريخ انتهاء البطاقة",
+  "newAddress": "إضافة عنوان جديد",
+  "addressName": "اسم العنوان",
+  "addressDetails": "تفاصيل العنوان",
+  "mobileNumber": "رقم الموبايل",
+  "phoneNumber": "رقم التلفون",
+  "save": "حفظ"
 }

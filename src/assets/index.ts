@@ -9,6 +9,7 @@ import {
   InitialProfileValues,
   Link,
   MyOrder,
+  NewAddressValues,
   PrivacyPolicyElement,
   ProfileLink,
   RegisterData,
@@ -576,4 +577,11 @@ export const cardInitialValues: CardData = {
   cardHolderName: '',
   cardDate: '',
   CVV: '',
+};
+
+export const newAddressInitialValues: NewAddressValues = {
+  addressName: '',
+  addressDetails: '',
+  mobileNumber: '',
+  phoneNumber: '',
 };

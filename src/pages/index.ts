@@ -30,3 +30,4 @@ export { default as MenuCategory } from './MenuCategory';
 export { default as PaymentDetails } from './PaymentDetails';
 export { default as VerifyEmail } from './VerifyEmail';
 export { default as MyAddress } from './MyAddress';
+export { default as NewAddress } from './NewAddress';

@@ -387,3 +387,9 @@ export type CardData = {
   cardDate: string;
   CVV: string;
 };
+export type NewAddressValues = {
+  addressName: string;
+  addressDetails: string;
+  mobileNumber: string;
+  phoneNumber: string;
+};

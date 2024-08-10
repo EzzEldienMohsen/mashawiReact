@@ -177,5 +177,11 @@
   "cardNumber": "Card Number",
   "cardPlaceHolder": "insert data here",
   "cardHolderName": "card holder Name",
-  "cardDate": "card expiration Date"
+  "cardDate": "card expiration Date",
+  "newAddress": "add new address",
+  "addressName": "Address Name",
+  "addressDetails": "Address Details",
+  "mobileNumber": "mobile number",
+  "phoneNumber": "phone number",
+  "save": "save"
 }
