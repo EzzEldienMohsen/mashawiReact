@@ -1,24 +1,33 @@
 import React from 'react';
 import icon from '../assets/svg/header/logout.svg';
 import { navBarLinks } from '../assets';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/svg/logo.svg';
 import HeaderButtons from './HeaderButtons';
 import { SecondaryDrawer, SecondaryDropDown } from '../subSubComponents';
+import { AppDispatch } from '../store';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../features/user/userSlice';
 interface CloseDrawer {
-  closeDrawer:() => void
+  closeDrawer: () => void;
 }
-const SmallNavBar:React.FC<CloseDrawer> = ({closeDrawer}) => {
+const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
   const { isLangArabic, toggleLang } = useGlobalContext();
   const { t } = useTranslation();
-   const closeSmallDrawer = (drawerId:string):void => {
-     const drawerCheckbox = document.getElementById(
-       drawerId
-     ) as HTMLInputElement;
-     if (drawerCheckbox) drawerCheckbox.checked = false;
-   };
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const theLogOut = () => {
+    dispatch(logOut());
+    navigate('/');
+  };
+  const closeSmallDrawer = (drawerId: string): void => {
+    const drawerCheckbox = document.getElementById(
+      drawerId
+    ) as HTMLInputElement;
+    if (drawerCheckbox) drawerCheckbox.checked = false;
+  };
 
   return (
     <ul
@@ -98,7 +107,10 @@ const SmallNavBar:React.FC<CloseDrawer> = ({closeDrawer}) => {
         })}
       </ul>
       <button
-        onClick={closeDrawer}
+        onClick={() => {
+          closeDrawer();
+          theLogOut();
+        }}
         className="flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2"
       >
         <img
