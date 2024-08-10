@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { AddOn, CartItemWithId, CartState } from '../../assets/types';
+import { AddOn, CartItem, CartItemWithId, CartState } from '../../assets/types';
 import { MealRequest, MealResponse } from './types';
 import {
   addToCartThunk,
@@ -120,24 +120,24 @@ const cartSlice = createSlice({
     (JSON.parse(localStorage.getItem('theMashawiCart')!) as CartState) ||
     defaultState,
   reducers: {
-    addItem: (state, action: PayloadAction<{ product: CartItemWithId }>) => {
+    addItem: (state, action: PayloadAction<{ product: CartItem }>) => {
       const { product } = action.payload;
       const existingItem = state.cartItems.find(
-        (i) => i.cartItem.id === product.cartItem.id
+        (i) => i.cartItem.id === product.id
       );
 
       if (existingItem) {
         state.numItemsInCart -= existingItem.cartItem.amount; // Subtract the old amount
-        existingItem.cartItem.amount = product.cartItem.amount; // Set the new amount
-        existingItem.cartItem.additions = product.cartItem.additions;
+        existingItem.cartItem.amount = product.amount; // Set the new amount
+        existingItem.cartItem.additions = product.additions;
       } else {
         state.cartItems.push({
-          cartItem: product.cartItem,
-          cart_id: product.cart_id,
+          cartItem: product,
+          cart_id: 0,
         });
       }
 
-      state.numItemsInCart += product.cartItem.amount;
+      state.numItemsInCart += product.amount;
       cartSlice.caseReducers.calculateTotals(state);
       toast.success('تم إضافة الوجبة إلى طلباتك بنجاح');
       console.log('Cart Items after adding:', state.cartItems);
