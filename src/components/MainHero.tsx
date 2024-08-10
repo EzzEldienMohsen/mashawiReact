@@ -15,7 +15,7 @@ const MainHero: React.FC = () => {
     <div className="w-full relative   px-8 lg:px-20 ">
       {/* the Colored Div */}
       <div
-        className={`absolute w-full  lg:w-[35%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
+        className={`absolute w-full z-10 lg:w-[35%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
           isLangArabic ? 'left-0' : 'right-0'
         } `}
       ></div>
@@ -25,7 +25,12 @@ const MainHero: React.FC = () => {
           <img
             src={theImage}
             alt="mashawi"
-            className="z-10 rounded-full border-[1px] border-newRed p-[2px] border-gradient"
+            className="z-20 rounded-full absolute inset-0"
+          />
+          <img
+            src={theImage}
+            alt="mashawi"
+            className=" rounded-full border-[1px] absolute inset-0 border-newRed p-[2px] border-gradient"
           />
         </div>
         {/* Content */}
