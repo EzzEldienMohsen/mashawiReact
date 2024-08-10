@@ -26,7 +26,7 @@ const ResetPasswordForm: React.FC = () => {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ): void => {
-    const theToken = user?.temp_token || '';
+    const theToken = user.token;
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value, token: theToken });
