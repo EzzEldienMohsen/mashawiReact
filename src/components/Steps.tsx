@@ -23,7 +23,7 @@ const Steps: React.FC<{ tracker: Tracker[] }> = ({ tracker }) => {
             </p>
           </div>
           {index < tracker.length - 1 && (
-            <div className=" md:flex-grow items-center flex">
+            <div className=" flex-grow items-center flex">
               <div
                 className={`w-full h-1 mx-2 rounded-full  ${
                   tracker[index].status === 'complete'

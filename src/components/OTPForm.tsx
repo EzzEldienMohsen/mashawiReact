@@ -6,6 +6,7 @@ import { FormRow, FormTitle } from '../subComponents';
 import { useTranslation } from 'react-i18next';
 import { InitialOTPInputs } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { useGlobalContext } from '../context/GlobalContext';
 
 const OTPForm = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -13,7 +14,7 @@ const OTPForm = () => {
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
-
+  const { isLangArabic } = useGlobalContext();
   const storedData = localStorage.getItem('registerData');
   const email: string = storedData ? JSON.parse(storedData).email : '';
 
@@ -51,8 +52,13 @@ const OTPForm = () => {
 
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
-    const token = Object.values(values).join('');
+    let tokenArray = Object.values(values);
+    if (isLangArabic) {
+      tokenArray = tokenArray.reverse();
+    }
+    const token = tokenArray.join('');
     const user = { email, token };
+    console.log(user);
     dispatch(validateOTP(user));
   };
 
