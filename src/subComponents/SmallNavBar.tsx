@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import logo from '../assets/svg/logo.svg';
 import HeaderButtons from './HeaderButtons';
 import { SecondaryDrawer, SecondaryDropDown } from '../subSubComponents';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { logOut, logoutUser } from '../features/user/userSlice';
 interface CloseDrawer {
@@ -16,6 +16,8 @@ interface CloseDrawer {
 const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
   const { isLangArabic, toggleLang } = useGlobalContext();
   const { t } = useTranslation();
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const theLogOut = () => {
@@ -48,13 +50,30 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
       <ul className="flex flex-col justify-start items-start pb-2 gap-y-1 w-full mt-1 border-b-2 white">
         {navBarLinks.map((li, index) => {
           if (index === 1) {
-            return (
+            return token.length > 0 ? (
               <SecondaryDrawer
                 li={li}
                 key={t(li.text)}
                 closeDrawer={closeSmallDrawer}
                 drawerId={`drawer_id=${index}`}
               />
+            ) : (
+              // Your else case here, e.g., a fallback component or null
+              <Link
+                onClick={closeDrawer}
+                key={t(li.text)}
+                to="/login"
+                className="w-full flex justify-between"
+              >
+                <li className="my-2 text-md md:text-sm hover:text-newRed">
+                  {t(li.text)}
+                </li>
+                <img
+                  src={li.img}
+                  alt="img"
+                  className={isLangArabic ? '' : 'transform scale-x-[-1]'}
+                />
+              </Link>
             );
           } else if (index === 9) {
             return <SecondaryDropDown li={li} key={t(li.text)} />;

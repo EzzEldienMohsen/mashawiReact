@@ -7,13 +7,9 @@ import userImg from '../assets/svg/header/user.svg';
 
 const NavBarButtons: React.FC = () => {
   const { toggleLang, isLangArabic } = useGlobalContext();
-  const { isSidebarOpen } = useTypedSelector((state: RootState) => state.user);
-  const [localSidebarOpen, setLocalSidebarOpen] =
-    React.useState<boolean>(isSidebarOpen);
 
-  React.useEffect(() => {
-    setLocalSidebarOpen(isSidebarOpen);
-  }, [isSidebarOpen]);
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
 
   return (
     <div className="gap-x-2 flex justify-between items-center">
@@ -25,7 +21,7 @@ const NavBarButtons: React.FC = () => {
       >
         {isLangArabic ? 'EN' : 'AR'}
       </button>
-      {localSidebarOpen ? (
+      {token.length > 0 ? (
         <UserDropDown />
       ) : (
         <Link

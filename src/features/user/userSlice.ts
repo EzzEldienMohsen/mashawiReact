@@ -10,7 +10,7 @@ import {
   logOutThunk,
   changePasswordThunk,
 } from './userThunk';
-import { removeUserFromLocalStorage } from '../../utils';
+import { addUserToLocalStorage, removeUserFromLocalStorage } from '../../utils';
 import { toast } from 'react-toastify';
 import {
   ChangePasswordData,
@@ -138,8 +138,10 @@ const userSlice = createSlice({
           state.isSidebarOpen = true;
           const user = action.payload.data;
           state.user = user;
+          addUserToLocalStorage(user);
           const message = action.payload.message;
           toast.success(message);
+          addUserToLocalStorage(user);
         }
       )
       .addCase(loginUser.rejected, (state) => {
