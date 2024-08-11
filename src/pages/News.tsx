@@ -1,11 +1,35 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { events } from '../assets';
 import { EventsCard } from '../components';
+import { EventsQuery, EventsResponse } from '../assets/types';
+import { autoFetch } from '../utils';
+import { QueryClient } from '@tanstack/react-query';
+import { useLoaderData } from 'react-router-dom';
 
-const News:React.FC = () => {
-      const { t } = useTranslation();
+const newsQuery = (token: string, language: string): EventsQuery => {
+  return {
+    queryKey: ['news', token, language],
+    queryFn: () =>
+      autoFetch('news?limit=12', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          lang: language,
+        },
+      }),
+  };
+};
+export const loader =
+  (queryClient: QueryClient, token: string, language: string) =>
+  async (): Promise<EventsResponse> => {
+    const data = await queryClient.ensureQueryData(newsQuery(token, language));
+    return data;
+  };
 
+const News: React.FC = () => {
+  const { t } = useTranslation();
+  const axiosData: any = useLoaderData();
+  const data: EventsResponse = axiosData.data;
+  console.log(data);
   return (
     <div className="flex flex-col justify-center items-center w-full my-4  py-8">
       <div className="bg-[#2C2220] flex flex-col text-start  w-full justify-start items-center px-4 py-6 my-6 font-abdo">
@@ -15,13 +39,15 @@ const News:React.FC = () => {
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
         <div className="my-8 flex flex-col  justify-center items-center gap-y-5 md:flex-row md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-between lg:flex-wrap w-full">
-          {events.map((data) => {
-            return <EventsCard key={data.id} data={data} />;
+          {data.data.map((data) => {
+            return (
+              <EventsCard key={data.id} data={data} destination="singleNews" />
+            );
           })}
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default News
+export default News;

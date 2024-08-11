@@ -251,13 +251,13 @@ export type PrivacyResp = {
   request: object;
 };
 
-export type Event = {
-  img: string;
-  icon: string;
-  timeText: string;
-  title: string;
-  id: string;
-};
+// export type Event = {
+//   img: string;
+//   icon: string;
+//   timeText: string;
+//   title: string;
+//   id: string;
+// };
 
 export type SingleEvent = {
   img: string;
@@ -400,7 +400,7 @@ export type EventsResponse = {
   data: EventData[];
 };
 
-type EventData = {
+export type EventData = {
   id: number;
   image: string;
   title: string;
@@ -410,4 +410,24 @@ type EventData = {
 export type EventsQuery = {
   queryKey: string[];
   queryFn: () => Promise<EventsResponse>;
+};
+// Single event
+
+export type SingleEventResponse = {
+  status: number;
+  message: string;
+  data: SingleEventData;
+};
+
+export type SingleEventData = {
+  id: number;
+  image: string;
+  title: string;
+  content: string;
+  date: string;
+};
+
+export type SingleEventQuery = {
+  queryKey: (string | undefined)[];
+  queryFn: () => Promise<SingleEventResponse>;
 };

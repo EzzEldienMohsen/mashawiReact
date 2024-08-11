@@ -32,3 +32,4 @@ export { default as VerifyEmail } from './VerifyEmail';
 export { default as MyAddress } from './MyAddress';
 export { default as NewAddress } from './NewAddress';
 export { default as SingleOrder } from './SingleOrder';
+export { default as SingleNewsPage } from './SingleNewsPage';

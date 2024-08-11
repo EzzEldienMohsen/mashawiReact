@@ -43,9 +43,11 @@ import {
   MyAddress,
   NewAddress,
   SingleOrder,
+  SingleNewsPage,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { Categories, Meals } from './assets/types';
+import { RootState, useTypedSelector } from './store';
 
 //  loaders
 import { loader as aboutLoader } from './pages/About';
@@ -59,7 +61,9 @@ import { loader as mealsLoader } from './components/Menu';
 import { loader as menuWithCategoryProductLoader } from './components/MenuWithCategory';
 import { loader as galleryLoader } from './pages/Gallery';
 import { loader as eventsLoader } from './pages/Events';
-import { RootState, useTypedSelector } from './store';
+import { loader as newsLoader } from './pages/News';
+import { loader as singleEventLoader } from './pages/SingleEventPage';
+import { loader as singleNewsLoader } from './pages/SingleNewsPage';
 // Combined loaders
 // First Menu Loaders
 export type MenuLoader = {
@@ -149,12 +153,19 @@ const AppRouter: React.FC = () => {
         },
 
         {
-          path: '/singleEvent',
+          path: '/singleEvent/:id',
           element: <SingleEventPage />,
+          loader: singleEventLoader(queryClient, token, language),
+        },
+        {
+          path: '/singleNews/:id',
+          element: <SingleNewsPage />,
+          loader: singleNewsLoader(queryClient, token, language),
         },
         {
           path: '/news',
           element: <News />,
+          loader: newsLoader(queryClient, token, language),
         },
         {
           path: '/jobs',

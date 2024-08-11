@@ -7,9 +7,9 @@ import { QueryClient } from '@tanstack/react-query';
 import { useLoaderData } from 'react-router-dom';
 const eventsQuery = (token: string, language: string): EventsQuery => {
   return {
-    queryKey: ['event', token, language],
+    queryKey: ['events', token, language],
     queryFn: () =>
-      autoFetch('events?limit=10', {
+      autoFetch('events?limit=12', {
         headers: {
           Authorization: `Bearer ${token}`,
           lang: language,
@@ -41,7 +41,9 @@ const Events: React.FC = () => {
       <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
         <div className="my-8 flex flex-col  justify-center items-center gap-y-5 md:flex-row md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-between lg:flex-wrap w-full">
           {data.data.map((data) => {
-            return <EventsCard key={data.id} data={data} />;
+            return (
+              <EventsCard key={data.id} data={data} destination="singleEvent" />
+            );
           })}
         </div>
       </div>

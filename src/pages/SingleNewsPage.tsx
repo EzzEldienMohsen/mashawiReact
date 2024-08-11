@@ -6,15 +6,15 @@ import { QueryClient } from '@tanstack/react-query';
 import { Params, useLoaderData } from 'react-router-dom';
 import dateIcon from '../assets/svg/events/dateIcon.svg';
 
-const singleEventQuery = (
+const SingleNewsQuery = (
   token: string,
   language: string,
   id: string | undefined
 ): SingleEventQuery => {
   return {
-    queryKey: ['singleEvent', token, language, id],
+    queryKey: ['singleNews', token, language, id],
     queryFn: () =>
-      autoFetch(`events/${id}`, {
+      autoFetch(`news/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           lang: language,
@@ -32,11 +32,11 @@ export const loader =
   }): Promise<SingleEventResponse> => {
     const { id } = params;
     const data = await queryClient.ensureQueryData(
-      singleEventQuery(token, language, id)
+      SingleNewsQuery(token, language, id)
     );
     return data;
   };
-const SingleEventPage: React.FC = () => {
+const SingleNewsPage: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const axiosData: any = useLoaderData();
   const data: SingleEventResponse = axiosData.data;
@@ -74,4 +74,4 @@ const SingleEventPage: React.FC = () => {
   );
 };
 
-export default SingleEventPage;
+export default SingleNewsPage;
