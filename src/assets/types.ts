@@ -392,3 +392,22 @@ export type NewAddressValues = {
   mobileNumber: string;
   phoneNumber: string;
 };
+// News And Events
+
+export type EventsResponse = {
+  status: number;
+  message: string;
+  data: EventData[];
+};
+
+type EventData = {
+  id: number;
+  image: string;
+  title: string;
+  date: string;
+};
+
+export type EventsQuery = {
+  queryKey: string[];
+  queryFn: () => Promise<EventsResponse>;
+};

@@ -58,6 +58,8 @@ import { loader as categoryLoader } from './subComponents/Slider';
 import { loader as mealsLoader } from './components/Menu';
 import { loader as menuWithCategoryProductLoader } from './components/MenuWithCategory';
 import { loader as galleryLoader } from './pages/Gallery';
+import { loader as eventsLoader } from './pages/Events';
+import { RootState, useTypedSelector } from './store';
 // Combined loaders
 // First Menu Loaders
 export type MenuLoader = {
@@ -108,6 +110,9 @@ const queryClient = new QueryClient({ defaultOptions });
 const AppRouter: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -140,6 +145,7 @@ const AppRouter: React.FC = () => {
         {
           path: '/events',
           element: <Events />,
+          loader: eventsLoader(queryClient, token, language),
         },
 
         {
