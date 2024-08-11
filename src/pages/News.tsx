@@ -6,22 +6,21 @@ import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { useLoaderData } from 'react-router-dom';
 
-const newsQuery = (token: string, language: string): EventsQuery => {
+const newsQuery = (language: string): EventsQuery => {
   return {
-    queryKey: ['news', token, language],
+    queryKey: ['news', language],
     queryFn: () =>
       autoFetch('news?limit=12', {
         headers: {
-          Authorization: `Bearer ${token}`,
           lang: language,
         },
       }),
   };
 };
 export const loader =
-  (queryClient: QueryClient, token: string, language: string) =>
+  (queryClient: QueryClient, language: string) =>
   async (): Promise<EventsResponse> => {
-    const data = await queryClient.ensureQueryData(newsQuery(token, language));
+    const data = await queryClient.ensureQueryData(newsQuery(language));
     return data;
   };
 

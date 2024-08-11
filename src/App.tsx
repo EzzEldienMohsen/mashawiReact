@@ -47,7 +47,6 @@ import {
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { Categories, Meals } from './assets/types';
-import { RootState, useTypedSelector } from './store';
 
 //  loaders
 import { loader as aboutLoader } from './pages/About';
@@ -114,8 +113,6 @@ const queryClient = new QueryClient({ defaultOptions });
 const AppRouter: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
-  const { user } = useTypedSelector((state: RootState) => state.user);
-  const token = user.token;
 
   const router = createBrowserRouter([
     {
@@ -149,23 +146,23 @@ const AppRouter: React.FC = () => {
         {
           path: '/events',
           element: <Events />,
-          loader: eventsLoader(queryClient, token, language),
+          loader: eventsLoader(queryClient, language),
         },
 
         {
           path: '/singleEvent/:id',
           element: <SingleEventPage />,
-          loader: singleEventLoader(queryClient, token, language),
+          loader: singleEventLoader(queryClient, language),
         },
         {
           path: '/singleNews/:id',
           element: <SingleNewsPage />,
-          loader: singleNewsLoader(queryClient, token, language),
+          loader: singleNewsLoader(queryClient, language),
         },
         {
           path: '/news',
           element: <News />,
-          loader: newsLoader(queryClient, token, language),
+          loader: newsLoader(queryClient, language),
         },
         {
           path: '/jobs',

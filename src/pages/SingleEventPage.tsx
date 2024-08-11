@@ -7,16 +7,14 @@ import { Params, useLoaderData } from 'react-router-dom';
 import dateIcon from '../assets/svg/events/dateIcon.svg';
 
 const singleEventQuery = (
-  token: string,
   language: string,
   id: string | undefined
 ): SingleEventQuery => {
   return {
-    queryKey: ['singleEvent', token, language, id],
+    queryKey: ['singleEvent', language, id],
     queryFn: () =>
       autoFetch(`events/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
           lang: language,
         },
       }),
@@ -24,7 +22,7 @@ const singleEventQuery = (
 };
 
 export const loader =
-  (queryClient: QueryClient, token: string, language: string) =>
+  (queryClient: QueryClient, language: string) =>
   async ({
     params,
   }: {
@@ -32,7 +30,7 @@ export const loader =
   }): Promise<SingleEventResponse> => {
     const { id } = params;
     const data = await queryClient.ensureQueryData(
-      singleEventQuery(token, language, id)
+      singleEventQuery(language, id)
     );
     return data;
   };
