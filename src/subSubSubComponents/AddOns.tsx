@@ -7,14 +7,9 @@ import { AddOn as AddOnInterface } from '../assets/types';
 interface AddOnsProps {
   data: SingleMealData;
   handleAddOnChange: (addOn: AddOnInterface, isChecked: boolean) => void;
-  handleRemoveAddOnChange: (addOn: AddOnInterface, isChecked: boolean) => void;
 }
 
-const AddOns: React.FC<AddOnsProps> = ({
-  data,
-  handleAddOnChange,
-  handleRemoveAddOnChange,
-}) => {
+const AddOns: React.FC<AddOnsProps> = ({ data, handleAddOnChange }) => {
   const { additions } = data;
   const { t } = useTranslation();
 
@@ -22,12 +17,7 @@ const AddOns: React.FC<AddOnsProps> = ({
     <div className="flex flex-col justify-start items-start w-full md:w-[58%]">
       <h1 className="my-2">{t('addOnModalTitle')}</h1>
       {additions.map((addOn: AddOnInterface) => (
-        <AddOn
-          key={addOn.id}
-          addOn={addOn}
-          onAddOnChange={handleAddOnChange}
-          onRemoveAddOnChange={handleRemoveAddOnChange}
-        />
+        <AddOn key={addOn.id} addOn={addOn} onAddOnChange={handleAddOnChange} />
       ))}
     </div>
   );

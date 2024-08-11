@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useGlobalContext } from '../context/GlobalContext';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
-import { clearCart, getCart } from '../features/cart/cartSlice';
+import { getCart } from '../features/cart/cartSlice';
 
 const Cart: React.FC = () => {
   const { t } = useTranslation();
@@ -14,7 +14,9 @@ const Cart: React.FC = () => {
   const token = user.token;
   const dispatch: AppDispatch = useDispatch();
   const getTheCart = async () => {
-    await dispatch(clearCart());
+    // if (token.length > 0) {
+    //   await dispatch(clearCart());
+    // }
     await dispatch(getCart({ token, language }));
   };
   React.useEffect(() => {

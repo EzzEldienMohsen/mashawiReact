@@ -23,7 +23,6 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   const [amount, setAmount] = React.useState<number>(theAmount);
   const [selectedAddOns, setSelectedAddOns] = React.useState<AddOn[]>([]);
-  const [removeAddOnsList, setRemoveAddOnsList] = React.useState<AddOn[]>([]);
   const dispatch: AppDispatch = useDispatch();
   const { wishListItems } = useTypedSelector(
     (state: RootState) => state.wishList
@@ -45,15 +44,8 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
     );
   };
 
-  const handleRemoveAddOnChange = (addOn: AddOn, isChecked: boolean): void => {
-    setRemoveAddOnsList((prevRemoveAddOns) =>
-      isChecked
-        ? [...prevRemoveAddOns, addOn]
-        : prevRemoveAddOns.filter((ao) => ao.id !== addOn.id)
-    );
-  };
   const handleAddToCart = () => {
-    const combinedAddOns = [...selectedAddOns, ...removeAddOnsList];
+    const combinedAddOns = [...selectedAddOns];
 
     const cartProduct: CartItem = {
       id: data.id,
@@ -134,11 +126,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
               handleAddToCart={handleAddToCart}
             />
           </div>
-          <AddOns
-            data={data}
-            handleAddOnChange={handleAddOnChange}
-            handleRemoveAddOnChange={handleRemoveAddOnChange}
-          />
+          <AddOns data={data} handleAddOnChange={handleAddOnChange} />
         </div>
         <form method="dialog" className="modal-backdrop">
           <button type="button" onClick={closeModal}>
