@@ -7,13 +7,14 @@ import logOutImg from '../assets/svg/profile/logOut.svg';
 import { useGlobalContext } from '../context/GlobalContext';
 import { AppDispatch } from '../store';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../features/user/userSlice';
+import { logOut, logoutUser } from '../features/user/userSlice';
 const UserDropDown: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const theLogOut = () => {
+    dispatch(logoutUser());
     dispatch(logOut());
     navigate('/');
   };

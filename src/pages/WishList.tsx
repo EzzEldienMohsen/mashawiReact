@@ -16,11 +16,13 @@ const WishList: React.FC = () => {
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
   const dispatch: AppDispatch = useDispatch();
-  const getTheWithList = () => {
-    dispatch(getWishList({ token, language }));
+  const getTheWithList = async () => {
+    await dispatch(clearWishList());
+    await dispatch(getWishList({ token, language }));
   };
-  React.useEffect(getTheWithList, []);
-  const clearWish = () => dispatch(clearWishList());
+  React.useEffect(() => {
+    getTheWithList();
+  }, [token, language]);
   if (items.length === 0) {
     return (
       <div className=" w-full px-8 lg:px-20">
@@ -45,12 +47,6 @@ const WishList: React.FC = () => {
             return <Card data={data.cartItem} key={data.cartItem.id + index} />;
           })}
         </div>
-        <button
-          className="bg-newRed text-white btn btn-block rounded-full "
-          onClick={clearWish}
-        >
-          {t('clearWishList')}
-        </button>
       </div>
     </div>
   );

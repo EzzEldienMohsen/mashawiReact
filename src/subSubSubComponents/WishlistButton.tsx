@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { FaHeart } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 import {
+  addItem,
   addThisToWishList,
   getWishList,
+  removeItem,
   removeMeal,
 } from '../features/wishList/wishListSlice';
 import { CartItem, CartItemWithId, SingleMealData } from '../assets/types';
@@ -28,8 +30,9 @@ const WishListButton: React.FC<WishlistProps> = ({
   const token = user.token;
   const [isLoading, setIsLoading] = useState(false);
 
-  const addItemToWishList = async (meal_id: number) => {
+  const addItemToWishList = async (product: CartItem, meal_id: number) => {
     setIsLoading(true);
+    await dispatch(addItem({ product }));
     await dispatch(
       addThisToWishList({ reqData: { meal_id }, token, language })
     );
@@ -39,6 +42,7 @@ const WishListButton: React.FC<WishlistProps> = ({
 
   const removeItemFromWishList = async (wish_id: number) => {
     setIsLoading(true);
+    await dispatch(removeItem({ id: wish_id }));
     await dispatch(removeMeal({ cart_id: wish_id, token, language }));
     await dispatch(getWishList({ token, language }));
     setIsLoading(false);
@@ -55,7 +59,7 @@ const WishListButton: React.FC<WishlistProps> = ({
         if (item) {
           await removeItemFromWishList(item.cartItem.id);
         } else {
-          await addItemToWishList(wishListProduct.id);
+          await addItemToWishList(wishListProduct, wishListProduct.id);
         }
       }}
       disabled={isLoading}

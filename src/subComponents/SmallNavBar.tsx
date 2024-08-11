@@ -9,7 +9,7 @@ import HeaderButtons from './HeaderButtons';
 import { SecondaryDrawer, SecondaryDropDown } from '../subSubComponents';
 import { AppDispatch } from '../store';
 import { useDispatch } from 'react-redux';
-import { logOut } from '../features/user/userSlice';
+import { logOut, logoutUser } from '../features/user/userSlice';
 interface CloseDrawer {
   closeDrawer: () => void;
 }
@@ -19,6 +19,7 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const theLogOut = () => {
+    dispatch(logoutUser());
     dispatch(logOut());
     navigate('/');
   };

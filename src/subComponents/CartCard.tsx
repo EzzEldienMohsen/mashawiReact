@@ -12,12 +12,14 @@ interface CartCardProps {
   item: CartItem;
   removeItemsFromCart: (cart: CartItem, cart_id: number) => void;
   cart_id: number;
+  isLoading: boolean;
 }
 
 const CartCard: React.FC<CartCardProps> = ({
   item,
   removeItemsFromCart,
   cart_id,
+  isLoading,
 }) => {
   const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
@@ -42,7 +44,9 @@ const CartCard: React.FC<CartCardProps> = ({
   return (
     <div className="flex bg-white w-full rounded-2xl relative justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-8 ">
       <button
-        className="absolute top-2 left-2"
+        className={`absolute top-2 ${isLangArabic ? 'left-2' : 'right-2'} ${
+          isLoading ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
         onClick={() => removeItemsFromCart(item, cart_id)}
       >
         <img src={theClose} alt="alt" className={` `} />
@@ -69,7 +73,9 @@ const CartCard: React.FC<CartCardProps> = ({
                 key={addOn.id}
                 className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
               >
-                <p className="text-xs w-1/3 font-abdo">{addOn.values[0].name}</p>
+                <p className="text-xs w-1/3 font-abdo">
+                  {addOn.values[0].name}
+                </p>
               </div>
             ))}
           </div>

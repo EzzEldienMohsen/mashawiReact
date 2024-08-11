@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeItem, removeMeal } from '../features/cart/cartSlice';
+import { getCart, removeItem, removeMeal } from '../features/cart/cartSlice';
 import { CartCard } from '../subComponents';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { CartItem } from '../assets/types';
@@ -9,14 +9,19 @@ import { useGlobalContext } from '../context/GlobalContext';
 
 const CartItems: React.FC = () => {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
   const dispatch: AppDispatch = useDispatch();
   const { isLangArabic } = useGlobalContext();
   const { user } = useTypedSelector((state: RootState) => state.user);
   const language = isLangArabic ? 'ar' : 'en';
   const token = user.token;
-  const removeItemsFromCart = (prod: CartItem, cart_id: number) => {
-    dispatch(removeMeal({ cart_id, token, language }));
-    dispatch(removeItem(prod));
+  const removeItemsFromCart = async (prod: CartItem, cart_id: number) => {
+    setIsLoading(true);
+    await dispatch(removeMeal({ cart_id, token, language }));
+    await dispatch(removeItem(prod));
+    await dispatch(getCart({ token, language }));
+    setIsLoading(false);
   };
   const { cartItems } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
@@ -39,6 +44,7 @@ const CartItems: React.FC = () => {
             item={item.cartItem}
             cart_id={item.cart_id}
             removeItemsFromCart={removeItemsFromCart}
+            isLoading={isLoading}
           />
         );
       })}

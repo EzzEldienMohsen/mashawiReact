@@ -4,18 +4,24 @@ import CartDrawerContent from './CartDrawerContent';
 import { useGlobalContext } from '../context/GlobalContext';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
-import { getCart } from '../features/cart/cartSlice';
+import { clearCart, getCart } from '../features/cart/cartSlice';
+import { clearWishList } from '../features/wishList/wishListSlice';
 
 const CartDrawer: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
+
   const { user } = useTypedSelector((state: RootState) => state.user);
   const language = isLangArabic ? 'ar' : 'en';
   const token = user.token;
   const dispatch: AppDispatch = useDispatch();
-  const getTheCart = (): void => {
-    dispatch(getCart({ token, language }));
+  const getTheCart = async () => {
+    await dispatch(clearCart());
+    await dispatch(clearWishList());
+    await dispatch(getCart({ token, language }));
   };
-  React.useEffect(getTheCart, []);
+  React.useEffect(() => {
+    getTheCart();
+  }, [token, language]);
   const closeDrawer = (): void => {
     const drawerCheckbox = document.getElementById(
       'cart-drawer'

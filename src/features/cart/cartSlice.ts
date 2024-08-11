@@ -78,39 +78,51 @@ export const removeMeal = createAsyncThunk(
 
 export const getCart = createAsyncThunk(
   'theMashawiCart/getCart',
-  async (reqData: { token: string; language: string }, thunkAPI) => {
-    const { token, language } = reqData;
-    const response = await getTheCartThunk(
-      '/cart',
-      thunkAPI as any,
-      token,
-      language
-    );
-    const localCartItems = (thunkAPI.getState() as RootState).theMashawiCart
-      .cartItems;
+  async (
+    { token, language }: { token: string; language: string },
+    thunkAPI
+  ) => {
+    const state = thunkAPI.getState() as RootState;
 
-    // Combine backend cart items with local cart items
-    const combinedCartItems = response.data.map((backendItem) => {
-      const localItem = localCartItems.find(
-        (item) => item.cartItem.id === backendItem.meal.id
+    if (token) {
+      const response = await getTheCartThunk(
+        '/cart',
+        thunkAPI,
+        token,
+        language
       );
+      const combinedCartItems = response.data.map((backendItem) => {
+        const localItem = state.theMashawiCart.cartItems.find(
+          (item) => item.cartItem.id === backendItem.meal.id
+        );
 
-      return localItem
-        ? { ...localItem, cart_id: backendItem.cart_id }
-        : {
-            cart_id: backendItem.cart_id,
-            cartItem: {
-              name: backendItem.meal.name,
-              price: backendItem.meal.price,
-              image: backendItem.meal.image,
-              id: backendItem.meal.id,
-              additions: backendItem.meal.additions,
-              amount: backendItem.qty,
-            },
-          };
-    });
+        return localItem
+          ? { ...localItem, cart_id: backendItem.cart_id }
+          : {
+              cart_id: backendItem.cart_id,
+              cartItem: {
+                name: backendItem.meal.name,
+                price: backendItem.meal.price,
+                image: backendItem.meal.image,
+                id: backendItem.meal.id,
+                additions: backendItem.meal.additions,
+                amount: backendItem.qty,
+              },
+            };
+      });
 
-    return { ...response, data: combinedCartItems };
+      return { ...response, data: combinedCartItems };
+    } else {
+      // Load cart from local storage if no user is logged in
+      const localCart = JSON.parse(
+        localStorage.getItem('theMashawiCart') || '[]'
+      );
+      return {
+        status: 200,
+        message: 'Cart loaded from local storage',
+        data: localCart,
+      };
+    }
   }
 );
 

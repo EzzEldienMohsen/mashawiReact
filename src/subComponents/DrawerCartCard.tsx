@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import {
   editQuantity,
   editQuantityLocally,
+  getCart,
   removeItem,
   removeMeal,
 } from '../features/cart/cartSlice';
@@ -18,6 +19,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
   cart_id,
 }) => {
   const [amount, setAmount] = React.useState<number>(item.amount);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { isLangArabic } = useGlobalContext();
   const { user } = useTypedSelector((state: RootState) => state.user);
   const token = user.token;
@@ -25,9 +27,12 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
   //  Additional declaration
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
-  const removeItemsFromCart = (prod: CartItem, cart_id: number) => {
-    dispatch(removeMeal({ cart_id, token, language }));
-    dispatch(removeItem(prod));
+  const removeItemsFromCart = async (prod: CartItem, cart_id: number) => {
+    setIsLoading(true);
+    await dispatch(removeMeal({ cart_id, token, language }));
+    await dispatch(removeItem(prod));
+    await dispatch(getCart({ token, language }));
+    setIsLoading(false);
   };
   React.useEffect(() => {
     setAmount(item.amount);
@@ -49,7 +54,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
         <div className="w-full flex justify-between items-center">
           <h1>{item.name}</h1>
           <button
-            className=""
+            className={`${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={() => removeItemsFromCart(item, cart_id)}
           >
             <img src={theClose} alt="alt" />
