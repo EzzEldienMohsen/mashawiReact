@@ -12,7 +12,6 @@ import {
   PrivacyPolicyElement,
   ProfileLink,
   RegisterData,
-  SingleEvent,
   Tracker,
 } from './types';
 import arrow from '../assets/svg/header/arrow.svg';
@@ -47,18 +46,6 @@ import img2 from '../assets/svg/about/mission.svg';
 import img3 from '../assets/svg/about/story.svg';
 import img4 from '../assets/svg/about/excellence.svg';
 import checkedLogo from '../assets/svg/about/checked.svg';
-
-// // events Images
-// import pic1 from '../assets/svg/events/pic1.svg';
-// import pic2 from '../assets/svg/events/pic2.svg';
-// import pic3 from '../assets/svg/events/pic3.svg';
-// import pic4 from '../assets/svg/events/pic4.svg';
-// import pic5 from '../assets/svg/events/pic5.svg';
-// import pic6 from '../assets/svg/events/pic6.svg';
-// import pic7 from '../assets/svg/events/pic7.svg';
-// import pic8 from '../assets/svg/events/pic8.svg';
-// import dateIcon from '../assets/svg/events/dateIcon.svg';
-// import eventPic from '../assets/svg/events/eventPic.svg';
 
 // tracker order Images
 import tr1 from '../assets/svg/traker/ordered.svg';
@@ -409,75 +396,6 @@ export const whyArray: AboutExcellenceUnit[] = [
     text: 'whyArrayText5',
   },
 ];
-// Events starts here
-
-// export const events: Event[] = [
-//   {
-//     id: nanoid(),
-//     img: pic1,
-//     icon: dateIcon,
-//     timeText: 'eventsDate',
-//     title: 'eventsTitle',
-//   },
-//   {
-//     id: nanoid(),
-//     img: pic2,
-//     icon: dateIcon,
-//     timeText: 'eventsDate',
-//     title: 'eventsTitle',
-//   },
-//   {
-//     id: nanoid(),
-//     img: pic3,
-//     icon: dateIcon,
-//     timeText: 'eventsDate',
-//     title: 'eventsTitle',
-//   },
-//   {
-//     id: nanoid(),
-//     img: pic4,
-//     icon: dateIcon,
-//     timeText: 'eventsDate',
-//     title: 'eventsTitle',
-//   },
-//   {
-//     id: nanoid(),
-//     img: pic5,
-//     icon: dateIcon,
-//     timeText: 'eventsDate',
-//     title: 'eventsTitle',
-//   },
-//   {
-//     id: nanoid(),
-//     img: pic6,
-//     icon: dateIcon,
-//     timeText: 'eventsDate',
-//     title: 'eventsTitle',
-//   },
-//   {
-//     id: nanoid(),
-//     img: pic7,
-//     icon: dateIcon,
-//     timeText: 'eventsDate',
-//     title: 'eventsTitle',
-//   },
-//   {
-//     id: nanoid(),
-//     img: pic8,
-//     icon: dateIcon,
-//     timeText: 'eventsDate',
-//     title: 'eventsTitle',
-//   },
-// ];
-
-// export const singleEvent: SingleEvent = {
-//   id: nanoid(),
-//   img: eventPic,
-//   icon: dateIcon,
-//   timeText: 'eventsDate',
-//   title: 'eventsTitle',
-//   text: 'policyFirstLorem',
-// };
 
 // Steps Orders
 export const tracker: Tracker[] = [
