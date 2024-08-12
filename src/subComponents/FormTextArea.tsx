@@ -32,7 +32,7 @@ const FormTextArea: React.FC<FormRowProps> = ({
           required
           name={name}
           id={name}
-          value={value}
+          value={value || ''}
           placeholder={placeHolder}
           onChange={handleChange}
           maxLength={isOTP ? 1 : 100}

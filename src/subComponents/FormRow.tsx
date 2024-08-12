@@ -59,7 +59,7 @@ const FormRow: React.FC<FormRowProps> = ({
           <select
             name={name}
             id={name}
-            value={value}
+            value={value || ''}
             onChange={handleChange}
             className="appearance-none px-4 bg-white border-2 rounded-full py-2 w-full text-start"
           >
@@ -98,7 +98,7 @@ const FormRow: React.FC<FormRowProps> = ({
             type={type}
             name={name}
             id={name}
-            value={value}
+            value={value || ''}
             placeholder={placeHolder}
             onChange={handleChange}
             style={{ backgroundColor: 'white' }}
@@ -127,7 +127,7 @@ const FormRow: React.FC<FormRowProps> = ({
             required
             name={name}
             id={name}
-            value={value}
+            value={value || ''}
             placeholder={placeHolder}
             onChange={handleChange}
             className="text-start pr-4 pl-4 bg-white border-2 w-full rounded-full py-4 resize-none h-32"
@@ -153,7 +153,7 @@ const FormRow: React.FC<FormRowProps> = ({
         type={type}
         name={name}
         id={name}
-        value={value}
+        value={value || ''}
         placeholder={placeHolder}
         onChange={handleChange}
         maxLength={isOTP ? 1 : 100}
