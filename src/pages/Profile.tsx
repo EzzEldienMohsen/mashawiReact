@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
@@ -16,17 +16,26 @@ const Profile: React.FC = () => {
   const { pathname } = useLocation();
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const language = isLangArabic ? 'ar' : 'en';
-  const token = user.token;
+  const token = user?.token; // Ensure token is retrieved from user object
+  
   const getTheProfile = async () => {
     setIsLoading(true);
     await dispatch(getUser({ token, language }));
     await dispatch(getAddress({ token, language }));
     setIsLoading(false);
   };
+
   React.useEffect(() => {
-    getTheProfile();
-  }, [token, language]);
+    if (!token) {
+      navigate('/'); // Redirect to home page if no token
+    } else {
+      getTheProfile(); // Fetch user profile data if token exists
+    }
+  }, [token, language, navigate]);
+
   if (isLoading) {
     return (
       <div className="flex w-full py-8 justify-center h-96 items-center">
@@ -34,6 +43,7 @@ const Profile: React.FC = () => {
       </div>
     );
   }
+
   return (
     <div className="flex flex-col justify-center items-center w-full my-4 ">
       <div className="bg-[#2C2220] flex flex-col text-start w-full justify-start items-center px-4 py-6 my-6 font-abdo">
@@ -49,11 +59,11 @@ const Profile: React.FC = () => {
             : pathname === '/profile/changePassword'
             ? t('changePassword')
             : id
-            ? 'editAddressText'
-            : 'Temp Title'}
+            ? t('editAddressText')
+            : t('tempTitle')}
         </h1>
       </div>
-      <div className="my-8  px-8 lg:px-20  flex flex-row justify-evenly items-center w-full"></div>
+      <div className="my-8 px-8 lg:px-20 flex flex-row justify-evenly items-center w-full"></div>
       <div className="flex flex-col justify-center items-center w-full">
         <Outlet />
       </div>

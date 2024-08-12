@@ -17,6 +17,7 @@ const UserDropDown: React.FC = () => {
   const theLogOut = async () => {
     await dispatch(logOut(user.token));
     await dispatch(logoutUser());
+    window.location.reload();
     navigate('/');
   };
   return (
