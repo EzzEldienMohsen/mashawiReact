@@ -3,7 +3,7 @@ import { SectionTitle } from '../subComponents';
 import { theAddress as address } from '../assets';
 import { useTranslation } from 'react-i18next';
 
-const AddressSection:React.FC = () => {
+const AddressSection: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-8 lg:px-20">
@@ -13,7 +13,7 @@ const AddressSection:React.FC = () => {
           return (
             <div
               key={ad.id}
-              className="rounded-2xl aspect-auto  flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md w-5/6 my-2 lg:w-1/4 md:w-auto"
+              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md w-5/6 my-2 lg:w-[28%] md:w-auto "
             >
               <img
                 src={ad.icon}

@@ -37,7 +37,7 @@ const MyAddress: React.FC = () => {
     );
   }
   return (
-    <div className="flex mt-2 flex-col relative px-8 lg:px-20 justify-center pt-24 items-center  md:flex md:flex-row md:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
+    <div className="flex mt-2 flex-col relative px-8 lg:px-20 justify-center pt-24 items-center  md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
       <Link
         to="/profile/new-address"
         className={`btn w-3/5 md:w-1/5 absolute top-0 ${
@@ -50,7 +50,7 @@ const MyAddress: React.FC = () => {
         return (
           <div
             key={ad.id}
-            className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md w-5/6 my-2 lg:w-1/4 md:w-auto"
+            className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md w-5/6 my-2 lg:w-[32%] md:w-[42%] "
           >
             <button
               className={`absolute top-2 ${
