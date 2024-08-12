@@ -8,12 +8,12 @@ const AddressSection: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-8 lg:px-20">
       <SectionTitle title={t('branchesAndTimesTitle')} />
-      <div className="flex mt-2 flex-col justify-center items-center md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-between lg:items-start md:gap-4 lg:gap-x-2 w-full ">
+      <div className="flex mt-2 flex-col justify-center items-center md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
         {address.map((ad) => {
           return (
             <div
               key={ad.id}
-              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md w-5/6 my-2 lg:w-[28%] md:w-auto "
+              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md w-5/6 my-2 lg:w-[32%] md:w-[42%] "
             >
               <img
                 src={ad.icon}
