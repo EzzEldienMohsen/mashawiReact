@@ -13,7 +13,8 @@ import { toast } from 'react-toastify';
 const VerifyForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
   const [values, setValues] = useState<InitialOTPInputs>(initialOTP);
-  const [isResendDisabled, setIsResendDisabled] = useState(false);
+  const [isResendDisabled, setIsResendDisabled] = useState<boolean>(false);
+  const [currentFocus, setCurrentFocus] = useState(0);
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
@@ -23,18 +24,31 @@ const VerifyForm: React.FC = () => {
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  // Use useEffect to handle the focus of the input refs after rendering
+  // Handle initial focus
   useEffect(() => {
-    // Focus on the first empty input field or the first field if all are empty
-    const firstEmptyInput = inputRefs.current.find(
-      (input) => input?.value === ''
-    );
-    if (firstEmptyInput) {
-      firstEmptyInput.focus();
-    } else {
-      inputRefs.current[0]?.focus();
+    const startIndex = isLangArabic ? inputRefs.current.length - 1 : 0;
+    setCurrentFocus(startIndex);
+    inputRefs.current[startIndex]?.focus();
+  }, [isLangArabic]);
+
+  // Handle automatic focus shift when values change
+  useEffect(() => {
+    const filledValues = Object.values(values).map((value) => value !== '');
+    const nextEmptyIndex = isLangArabic
+      ? filledValues.lastIndexOf(false)
+      : filledValues.indexOf(false);
+
+    if (nextEmptyIndex !== -1 && nextEmptyIndex !== currentFocus) {
+      setCurrentFocus(nextEmptyIndex);
     }
-  }, []);
+  }, [values, isLangArabic]);
+
+  // Update focus based on currentFocus
+  useEffect(() => {
+    if (inputRefs.current[currentFocus]) {
+      inputRefs.current[currentFocus]?.focus();
+    }
+  }, [currentFocus]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -42,28 +56,10 @@ const VerifyForm: React.FC = () => {
     >
   ): void => {
     const { name, value } = e.target;
-    const index = Number(name.charAt(name.length - 1)) - 1;
-
-    setValues((prevValues) => {
-      const newValues = { ...prevValues, [name]: value };
-
-      if (value.length === 1 && index < 5) {
-        inputRefs.current[index + 1]?.focus();
-      }
-
-      return newValues;
-    });
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const index =
-      Number(e.currentTarget.name.charAt(e.currentTarget.name.length - 1)) - 1;
-
-    if (e.key === 'Backspace' && !values[e.currentTarget.name]) {
-      if (index > 0) {
-        inputRefs.current[index - 1]?.focus();
-      }
-    }
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
   };
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -72,7 +68,8 @@ const VerifyForm: React.FC = () => {
     if (isLangArabic) {
       tokenArray = tokenArray.reverse();
     }
-    const token = parseInt(tokenArray.join(''));
+    const theToken = tokenArray.join('');
+    const token = parseInt(theToken);
     const user = { email, token };
     try {
       const result = await dispatch(emailVerification(user)).unwrap();
@@ -122,7 +119,6 @@ const VerifyForm: React.FC = () => {
               value={values[name as keyof InitialOTPInputs]}
               high={false}
               isOTP={true}
-              handleKeyDown={handleKeyDown}
               handleChange={handleChange}
               inputRef={(el) => (inputRefs.current[index] = el)}
             />
