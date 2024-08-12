@@ -13,7 +13,7 @@ import {
   ValidateOTPData,
 } from '../../assets/types';
 import { toast } from 'react-toastify';
-import { GetUserResponse, ResetPasswordResponse, UpdateUserReq } from './types';
+import { GetUserResponse, UpdateUserReq, ValidateOTPRes } from './types';
 
 // Define a type for the expected structure of response data
 
@@ -99,9 +99,9 @@ export const validateOTPThunk = async (
   url: string,
   reqData: ValidateOTPData,
   thunkAPI: any
-): Promise<ResetPasswordResponse> => {
+): Promise<ValidateOTPRes> => {
   try {
-    const response: AxiosResponse<ResetPasswordResponse> = await autoFetch.post(
+    const response: AxiosResponse<ValidateOTPRes> = await autoFetch.post(
       url,
       reqData
     );

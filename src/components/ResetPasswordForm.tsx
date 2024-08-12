@@ -32,10 +32,9 @@ const ResetPasswordForm: React.FC = () => {
     setValues({ ...values, [name]: value, token: theToken });
   };
 
-  const onSubmit = (e: React.FormEvent): void => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(resetPassword(values));
-    console.log(values);
+    await dispatch(resetPassword(values));
     navigate('/login');
   };
   return (

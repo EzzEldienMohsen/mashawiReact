@@ -50,7 +50,7 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
       <ul className="flex flex-col justify-start items-start pb-2 gap-y-1 w-full mt-1 border-b-2 white">
         {navBarLinks.map((li, index) => {
           if (index === 1) {
-            return token.length > 0 ? (
+            return token ? (
               <SecondaryDrawer
                 li={li}
                 key={t(li.text)}

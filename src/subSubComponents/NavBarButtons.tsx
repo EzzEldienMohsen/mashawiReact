@@ -21,7 +21,7 @@ const NavBarButtons: React.FC = () => {
       >
         {isLangArabic ? 'EN' : 'AR'}
       </button>
-      {token.length > 0 ? (
+      {token ? (
         <UserDropDown />
       ) : (
         <Link

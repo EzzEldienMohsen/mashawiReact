@@ -30,3 +30,11 @@ export type UpdateUserReq = {
   nationality: string | null;
   birthdate: string | null;
 };
+
+export type ValidateOTPRes = {
+  status: number;
+  message: string;
+  data: {
+    temp_token: string;
+  };
+};

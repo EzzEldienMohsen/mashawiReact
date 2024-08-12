@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { initialOTP } from '../assets';
 import { useDispatch } from 'react-redux';
 import { resendOTP, validateOTP } from '../features/user/userSlice';
@@ -22,6 +22,12 @@ const OTPForm = () => {
   const email: string = storedData ? JSON.parse(storedData).email : '';
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
+    }
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -80,7 +86,7 @@ const OTPForm = () => {
   const resendTheOTP = () => {
     dispatch(resendOTP({ email }));
     setIsResendDisabled(true);
-    setTimeout(() => setIsResendDisabled(false), 60000);
+    setTimeout(() => setIsResendDisabled(false), 6000);
   };
 
   return (

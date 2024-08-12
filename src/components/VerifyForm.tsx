@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { initialOTP } from '../assets';
 import { useDispatch } from 'react-redux';
 import { emailVerification, resendOTP } from '../features/user/userSlice';
@@ -22,6 +22,19 @@ const VerifyForm: React.FC = () => {
   const email: string = storedData ? JSON.parse(storedData).email : '';
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // Use useEffect to handle the focus of the input refs after rendering
+  useEffect(() => {
+    // Focus on the first empty input field or the first field if all are empty
+    const firstEmptyInput = inputRefs.current.find(
+      (input) => input?.value === ''
+    );
+    if (firstEmptyInput) {
+      firstEmptyInput.focus();
+    } else {
+      inputRefs.current[0]?.focus();
+    }
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -79,7 +92,7 @@ const VerifyForm: React.FC = () => {
   const resendTheOTP = () => {
     dispatch(resendOTP({ email }));
     setIsResendDisabled(true);
-    setTimeout(() => setIsResendDisabled(false), 60000);
+    setTimeout(() => setIsResendDisabled(false), 6000);
   };
 
   return (

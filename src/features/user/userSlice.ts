@@ -31,7 +31,7 @@ import {
   UserState,
   ValidateOTPData,
 } from '../../assets/types';
-import { GetUserResponse, ResetPasswordResponse, UpdateUserReq } from './types';
+import { GetUserResponse, UpdateUserReq, ValidateOTPRes } from './types';
 
 const initialUser: User = getUserFromLocalStorage() || {
   token: '',
@@ -252,9 +252,9 @@ const userSlice = createSlice({
       })
       .addCase(
         validateOTP.fulfilled,
-        (state, action: PayloadAction<ResetPasswordResponse>) => {
+        (state, action: PayloadAction<ValidateOTPRes>) => {
           state.isLoading = false;
-          state.user = action.payload.data;
+          state.user.token = action.payload.data.temp_token;
           const message = action.payload.message;
           toast.success(message);
         }
