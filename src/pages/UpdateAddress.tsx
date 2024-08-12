@@ -1,26 +1,34 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { newAddressInitialValues } from '../assets';
 import { FormRow } from '../subComponents';
 import add from '../assets/svg/newAddress/address.svg';
 import mob from '../assets/svg/newAddress/mobile.svg';
 import ph from '../assets/svg/newAddress/phone.svg';
-import { CreateAddressReq } from '../features/address/types';
+import { AddressData } from '../features/address/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useDispatch } from 'react-redux';
-import { createAddress } from '../features/address/addressSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getAddress, updateAddress } from '../features/address/addressSlice';
 
-const NewAddress: React.FC = () => {
+const UpdateAddress: React.FC = () => {
   const { t } = useTranslation();
   const { user } = useTypedSelector((state: RootState) => state.user);
-  const { isLoading } = useTypedSelector((state: RootState) => state.address);
-  const { isLangArabic } = useGlobalContext();
-  const [values, setValues] = React.useState<CreateAddressReq>(
-    newAddressInitialValues
+  const { isLoading, address } = useTypedSelector(
+    (state: RootState) => state.address
   );
+  const { isLangArabic } = useGlobalContext();
+  const { id } = useParams<{ id: string }>();
+  const item = address.find((add) => add.id.toString() === id) || {
+    id: 0,
+    name: '',
+    details: '',
+    phone: '',
+    landing_phone: '',
+    created_at: '',
+  };
   const navigate = useNavigate();
+  const [values, setValues] = React.useState<AddressData>(item);
   const dispatch: AppDispatch = useDispatch();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
@@ -36,7 +44,10 @@ const NewAddress: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await dispatch(createAddress({ reqData: values, token, language }));
+    await dispatch(
+      updateAddress({ id: `${item.id}`, reqData: values, token, language })
+    );
+    await dispatch(getAddress({ token, language }));
     navigate('/profile/address');
   };
 
@@ -110,4 +121,4 @@ const NewAddress: React.FC = () => {
   );
 };
 
-export default NewAddress;
+export default UpdateAddress;

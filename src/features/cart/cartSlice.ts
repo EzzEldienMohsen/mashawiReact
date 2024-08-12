@@ -149,11 +149,9 @@ const cartSlice = createSlice({
 
       state.numItemsInCart += product.amount;
       cartSlice.caseReducers.calculateTotals(state);
-      toast.success('تم إضافة الوجبة إلى طلباتك بنجاح');
     },
     clearCart: () => {
       localStorage.setItem('theMashawiCart', JSON.stringify(defaultState));
-      toast.error('تم ازالة قائمة الطلبات');
       return defaultState;
     },
     removeItem: (state, action: PayloadAction<{ id: number }>) => {
@@ -164,8 +162,6 @@ const cartSlice = createSlice({
         state.cartItems = state.cartItems.filter((i) => i.cartItem.id !== id);
         state.numItemsInCart -= removedProduct.cartItem.amount;
         cartSlice.caseReducers.calculateTotals(state);
-        toast.error('تم ازالة الطلب من قائمة الطلبات');
-        console.log('Cart Items after removing:', state.cartItems);
       }
     },
     addAddOns: (
@@ -185,7 +181,6 @@ const cartSlice = createSlice({
 
         item.cartItem.additions = [...item.cartItem.additions, ...newAddOns];
         cartSlice.caseReducers.calculateTotals(state);
-        toast.success('تم اضافة الاضافة الي طلبك');
       }
     },
     removeAddOns: (
@@ -200,7 +195,6 @@ const cartSlice = createSlice({
           (ao) => !addOnIDs.includes(ao.id)
         );
         cartSlice.caseReducers.calculateTotals(state);
-        toast.error('تم ازالة الاضافة من طلبك');
       }
     },
     editQuantityLocally: (
@@ -219,13 +213,11 @@ const cartSlice = createSlice({
           item.cartItem.amount = qty;
           // Add the new amount to the total number of items in the cart
           state.numItemsInCart += qty;
-          toast.success('تم تحديث كمية الوجبة بنجاح');
         } else {
           // Remove the item if the quantity is zero or less
           state.cartItems = state.cartItems.filter(
             (i) => i.cartItem.id !== cartID
           );
-          toast.error('تم ازالة الطلب من قائمة الطلبات');
         }
 
         // Recalculate the totals

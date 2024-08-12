@@ -5,17 +5,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logOutImg from '../assets/svg/profile/logOut.svg';
 import { useGlobalContext } from '../context/GlobalContext';
-import { AppDispatch } from '../store';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { logOut, logoutUser } from '../features/user/userSlice';
 const UserDropDown: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
+  const { user } = useTypedSelector((state: RootState) => state.user);
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const theLogOut = () => {
-    dispatch(logoutUser());
-    dispatch(logOut());
+  const theLogOut = async () => {
+    await dispatch(logOut(user.token));
+    await dispatch(logoutUser());
     navigate('/');
   };
   return (

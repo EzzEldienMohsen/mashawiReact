@@ -42,15 +42,19 @@ export type WishListState = {
   numItemsInWishList: number;
   isLoading: boolean;
 };
-
+export type UserInfo = {
+  id: number;
+  f_name: string;
+  l_name: string;
+  phone: string;
+  email: string;
+  gender?: string | null;
+  work?: string | null;
+  nationality?: string | null;
+  birthdate?: string | null;
+};
 export type User = {
-  user: {
-    id: number;
-    f_name: string;
-    l_name: string;
-    phone: string;
-    email: string;
-  };
+  user: UserInfo;
   token: string;
 };
 
@@ -114,7 +118,7 @@ export type FormRowProps = {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => void;
-  value: string;
+  value: string | null;
   icon?: string;
   high?: boolean;
   full?: boolean;
@@ -162,7 +166,7 @@ export type AddressData = {
 export type ContactInitialValues = {
   name: string;
   email: string;
-  mobile: string;
+  phone: string;
   subject: string;
   message: string;
 };
@@ -386,12 +390,7 @@ export type CardData = {
   cardDate: string;
   CVV: string;
 };
-export type NewAddressValues = {
-  addressName: string;
-  addressDetails: string;
-  mobileNumber: string;
-  phoneNumber: string;
-};
+
 // News And Events
 
 export type EventsResponse = {

@@ -9,17 +9,21 @@ import subject from '../assets/svg/subject.svg';
 import message from '../assets/svg/message.svg';
 import { useTranslation } from 'react-i18next';
 import { ContactInitialValues } from '../assets/types';
+import { toast } from 'react-toastify';
 
-const request = async (data: ContactInitialValues) => {
+const request = async (data: ContactInitialValues, destination: string) => {
   try {
-    const resp = await autoFetch.post('', data);
-    console.log(resp.data);
+    const resp = await autoFetch.post(`/${destination}`, data);
+    toast.success(resp.data.message);
   } catch (error) {
     console.log(error);
   }
 };
 
-const ContactForm: React.FC<{ title: string }> = ({ title }) => {
+const ContactForm: React.FC<{ title: string; destination: string }> = ({
+  title,
+  destination,
+}) => {
   const { t } = useTranslation();
   const [values, setValues] =
     React.useState<ContactInitialValues>(contactInitialValues);
@@ -36,7 +40,7 @@ const ContactForm: React.FC<{ title: string }> = ({ title }) => {
   const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     console.log(values);
-    request(values);
+    request(values, destination);
   };
 
   return (
@@ -75,12 +79,12 @@ const ContactForm: React.FC<{ title: string }> = ({ title }) => {
             full={true}
           />
           <FormRow
-            name="mobile"
+            name="phone"
             icon={phone}
             label=" "
             type="text"
             high={false}
-            value={values.mobile}
+            value={values.phone}
             placeHolder={t('mobileInputPlaceHolder')}
             handleChange={handleChange}
             full={true}

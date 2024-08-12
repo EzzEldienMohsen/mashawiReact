@@ -20,9 +20,9 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
   const token = user.token;
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const theLogOut = () => {
-    dispatch(logoutUser());
-    dispatch(logOut());
+  const theLogOut = async () => {
+    await dispatch(logOut(user.token));
+    await dispatch(logoutUser());
     navigate('/');
   };
   const closeSmallDrawer = (drawerId: string): void => {

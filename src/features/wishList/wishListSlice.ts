@@ -92,11 +92,9 @@ const wishListSlice = createSlice({
         (item) => item.cartItem.id === product.id
       );
       if (existingItem) {
-        toast.success('الطلب موجود في المفضلة بالفعل');
       } else {
         state.wishListItems.push({ cartItem: product, cart_id: 0 });
         state.numItemsInWishList += 1;
-        toast.success('تم اضافة الطلب الي المفضلة');
       }
       localStorage.setItem('wishList', JSON.stringify(state));
     },
@@ -110,7 +108,6 @@ const wishListSlice = createSlice({
         (item) => item.cartItem.id !== id
       );
       state.numItemsInWishList -= 1;
-      toast.error('تم ازالة الطلب من المفضلة');
     },
   },
   extraReducers: (builder) => {

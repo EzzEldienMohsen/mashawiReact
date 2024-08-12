@@ -13,7 +13,7 @@ import {
   ValidateOTPData,
 } from '../../assets/types';
 import { toast } from 'react-toastify';
-import { ResetPasswordResponse } from './types';
+import { GetUserResponse, ResetPasswordResponse, UpdateUserReq } from './types';
 
 // Define a type for the expected structure of response data
 
@@ -107,7 +107,6 @@ export const validateOTPThunk = async (
     );
     return response.data;
   } catch (error: any) {
-    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
@@ -148,10 +147,21 @@ export const emailVerificationThunk = async (
 
 export const logOutThunk = async (
   url: string,
+  token: string,
   thunkAPI: any
 ): Promise<ApiResponse> => {
   try {
-    const response: AxiosResponse<ApiResponse> = await autoFetch.post(url);
+    const response: AxiosResponse<ApiResponse> = await autoFetch.post(
+      url,
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
@@ -162,12 +172,69 @@ export const logOutThunk = async (
 export const changePasswordThunk = async (
   url: string,
   reqData: ChangePasswordData,
+  token: string,
+  language: string,
   thunkAPI: any
-): Promise<ApiResponse> => {
+): Promise<GetUserResponse> => {
   try {
-    const response: AxiosResponse<ApiResponse> = await autoFetch.put(
+    const response: AxiosResponse<GetUserResponse> = await autoFetch.put(
       url,
-      reqData
+      reqData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          lang: language,
+        },
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    toast.error(error.response.data.message);
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};
+export const getUserThunk = async (
+  url: string,
+  token: string,
+  language: string,
+  thunkAPI: any
+): Promise<GetUserResponse> => {
+  try {
+    const response: AxiosResponse<GetUserResponse> = await autoFetch.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`,
+        lang: language,
+      },
+    });
+    return response.data;
+  } catch (error: any) {
+    toast.error(error.response.data.message);
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};
+export const updateUserThunk = async (
+  url: string,
+  reqData: UpdateUserReq,
+  token: string,
+  language: string,
+  thunkAPI: any
+): Promise<GetUserResponse> => {
+  try {
+    const response: AxiosResponse<GetUserResponse> = await autoFetch.put(
+      url,
+      reqData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+          lang: language,
+        },
+      }
     );
     return response.data;
   } catch (error: any) {

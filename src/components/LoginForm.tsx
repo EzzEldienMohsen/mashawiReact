@@ -11,7 +11,6 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 
 const LoginForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
-
   const { t } = useTranslation();
   const [values, setValues] = React.useState<LoginData>({
     email: '',
@@ -36,6 +35,7 @@ const LoginForm: React.FC = () => {
 
     try {
       const result = await dispatch(loginUser(values)).unwrap();
+
       console.log('Result:', result); // Debug result
       if (result.status === 1) {
         console.log('Navigating to /profile');

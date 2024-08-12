@@ -8,6 +8,7 @@ import { InitialOTPInputs } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const VerifyForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -52,7 +53,7 @@ const VerifyForm: React.FC = () => {
     }
   };
 
-  const onSubmit = (e: React.FormEvent): void => {
+  const onSubmit =async (e: React.FormEvent) => {
     e.preventDefault();
     let tokenArray = Object.values(values);
     if (isLangArabic) {
@@ -60,9 +61,20 @@ const VerifyForm: React.FC = () => {
     }
     const token = parseInt(tokenArray.join(''));
     const user = { email, token };
-    console.log(user);
-    dispatch(emailVerification(user));
-    navigate('/login');
+try {
+const result = await dispatch(emailVerification(user)).unwrap()
+if(result.status ===1 ){
+  navigate('/login');
+
+}else if(result.status === 0){
+  toast.error(result.message)
+}
+}catch(error:any){
+  if (error.status === 403) {
+    toast.error('Please Insert Email Correctly');
+  }
+}
+    
   };
 
   const resendTheOTP = () => {

@@ -62,7 +62,6 @@ const FormRow: React.FC<FormRowProps> = ({
             value={value}
             onChange={handleChange}
             className="appearance-none px-4 bg-white border-2 rounded-full py-2 w-full text-start"
-            style={{ WebkitAppearance: 'none', MozAppearance: 'none' }}
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -75,6 +74,11 @@ const FormRow: React.FC<FormRowProps> = ({
               <img src={icon} alt="icon" />
             </div>
           )}
+          <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+              <path d="M7 10l5 5 5-5H7z" />
+            </svg>
+          </div>
         </div>
       </div>
     );

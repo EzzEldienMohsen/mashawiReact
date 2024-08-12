@@ -2,6 +2,7 @@ import { Action, configureStore } from '@reduxjs/toolkit';
 import cartReducer from './features/cart/cartSlice';
 import userReducer from './features/user/userSlice';
 import wishListReducer from './features/wishList/wishListSlice';
+import addressReducer from './features/address/addressSlice';
 import { ThunkAction } from 'redux-thunk';
 import { TypedUseSelectorHook } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -12,6 +13,7 @@ export const store = configureStore({
     theMashawiCart: cartReducer,
     wishList: wishListReducer,
     user: userReducer,
+    address: addressReducer,
   },
 });
 

@@ -44,6 +44,7 @@ import {
   NewAddress,
   SingleOrder,
   SingleNewsPage,
+  UpdateAddress,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { Categories, Meals } from './assets/types';
@@ -269,6 +270,10 @@ const AppRouter: React.FC = () => {
             {
               path: 'new-address',
               element: <NewAddress />,
+            },
+            {
+              path: 'update-address/:id',
+              element: <UpdateAddress />,
             },
           ],
         },

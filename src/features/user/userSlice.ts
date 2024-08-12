@@ -9,6 +9,8 @@ import {
   validateOTPThunk,
   logOutThunk,
   changePasswordThunk,
+  getUserThunk,
+  updateUserThunk,
 } from './userThunk';
 import { addUserToLocalStorage, removeUserFromLocalStorage } from '../../utils';
 import { toast } from 'react-toastify';
@@ -25,7 +27,7 @@ import {
   UserState,
   ValidateOTPData,
 } from '../../assets/types';
-import { ResetPasswordResponse } from './types';
+import { GetUserResponse, ResetPasswordResponse, UpdateUserReq } from './types';
 
 const initialUser: User = {
   token: '',
@@ -35,6 +37,10 @@ const initialUser: User = {
     l_name: '',
     phone: '',
     email: '',
+    birthdate: '',
+    gender: '',
+    nationality: '',
+    work: '',
   },
 };
 const initialState: UserState = {
@@ -93,14 +99,45 @@ export const resetPassword = createAsyncThunk(
     );
   }
 );
-export const logOut = createAsyncThunk('user/logOut', async (thunkAPI) => {
-  return logOutThunk('/auth/logout', thunkAPI);
-});
+export const logOut = createAsyncThunk(
+  'user/logOut',
+  async (token: string, thunkAPI) => {
+    return logOutThunk('/auth/logout', token, thunkAPI);
+  }
+);
 
 export const changePassword = createAsyncThunk(
   'user/changePassword',
-  async (reqData: ChangePasswordData, thunkAPI) => {
-    return changePasswordThunk('/user/change-password', reqData, thunkAPI);
+  async (
+    data: { reqData: ChangePasswordData; token: string; language: string },
+    thunkAPI
+  ) => {
+    const { reqData, token, language } = data;
+    return changePasswordThunk(
+      '/user/change-password',
+      reqData,
+      token,
+      language,
+      thunkAPI
+    );
+  }
+);
+
+export const getUser = createAsyncThunk(
+  'user/getUser',
+  async (data: { token: string; language: string }, thunkAPI) => {
+    const { token, language } = data;
+    return getUserThunk('/user/profile', token, language, thunkAPI);
+  }
+);
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (
+    data: { reqData: UpdateUserReq; token: string; language: string },
+    thunkAPI
+  ) => {
+    const { reqData, token, language } = data;
+    return updateUserThunk('/user/profile', reqData, token, language, thunkAPI);
   }
 );
 
@@ -141,10 +178,44 @@ const userSlice = createSlice({
           addUserToLocalStorage(user);
           const message = action.payload.message;
           toast.success(message);
-          addUserToLocalStorage(user);
         }
       )
       .addCase(loginUser.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        getUser.fulfilled,
+        (state, action: PayloadAction<GetUserResponse>) => {
+          state.isLoading = false;
+          state.isSidebarOpen = true;
+          const user = action.payload.data;
+          state.user.user = user;
+
+          addUserToLocalStorage(state.user);
+        }
+      )
+      .addCase(getUser.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        updateUser.fulfilled,
+        (state, action: PayloadAction<GetUserResponse>) => {
+          state.isLoading = false;
+          state.isSidebarOpen = true;
+          const user = action.payload.data;
+          state.user.user = user;
+          const message = action.payload.message;
+          toast.success(message);
+          addUserToLocalStorage(state.user);
+        }
+      )
+      .addCase(updateUser.rejected, (state) => {
         state.isLoading = false;
       })
       .addCase(forgetPassword.pending, (state) => {
@@ -163,10 +234,12 @@ const userSlice = createSlice({
       })
       .addCase(
         changePassword.fulfilled,
-        (state, action: PayloadAction<any>) => {
+        (state, action: PayloadAction<GetUserResponse>) => {
           state.isLoading = false;
           const message = action.payload.message;
+          state.user.user = action.payload.data;
           toast.success(message);
+          addUserToLocalStorage(state.user);
         }
       )
       .addCase(changePassword.rejected, (state) => {
@@ -179,7 +252,7 @@ const userSlice = createSlice({
         validateOTP.fulfilled,
         (state, action: PayloadAction<ResetPasswordResponse>) => {
           state.isLoading = false;
-          state.user.token = action.payload.data.temp_token;
+          state.user = action.payload.data;
           const message = action.payload.message;
           toast.success(message);
         }

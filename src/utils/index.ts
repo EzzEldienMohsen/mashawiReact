@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { StaticRequestData, User } from '../assets/types';
+import { AddressData, StaticRequestData, User } from '../assets/types';
 
 // Define the base URL
 const url = 'https://mshawy.trendline.marketing/api/v1';
@@ -29,10 +29,16 @@ export const normalizeResponse = (response: any): StaticRequestData => {
 export const addUserToLocalStorage = (user: User): void => {
   localStorage.setItem('user', JSON.stringify(user));
 };
+export const addAddressToLocalStorage = (address: AddressData[]): void => {
+  localStorage.setItem('mashawiAddress', JSON.stringify(address));
+};
 
 // Remove user from localStorage
 export const removeUserFromLocalStorage = (): void => {
   localStorage.removeItem('user');
+};
+export const removeAddressFromLocalStorage = (): void => {
+  localStorage.removeItem('mashawiAddress');
 };
 
 // Get user from localStorage
@@ -64,6 +70,17 @@ export const getUserFromLocalStorage = (): User => {
     },
     token: '',
   };
+};
+export const getAddressFromLocalStorage = (): AddressData[] => {
+  const address = localStorage.getItem('mashawiAddress');
+  if (address) {
+    try {
+      return JSON.parse(address) as AddressData[];
+    } catch (error) {
+      return [];
+    }
+  }
+  return [];
 };
 
 // Format price as AED

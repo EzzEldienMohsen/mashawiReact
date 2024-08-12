@@ -5,10 +5,8 @@ import {
   ContactInitialValues,
   GalleryElement,
   InitialOTPInputs,
-  InitialProfileValues,
   Link,
   MyOrder,
-  NewAddressValues,
   PrivacyPolicyElement,
   ProfileLink,
   RegisterData,
@@ -72,6 +70,8 @@ import sOr3 from '../assets/svg/singleOrder/delivering.svg';
 import sOr4 from '../assets/svg/singleOrder/delivered.svg';
 // Single Order
 import meat from './svg/menu/meat.svg';
+import { UpdateUserReq } from '../features/user/types';
+import { CreateAddressReq } from '../features/address/types';
 
 // Links Starts Here
 export const links: Link[] = [
@@ -155,7 +155,7 @@ export const initialOTP: InitialOTPInputs = {
 export const contactInitialValues: ContactInitialValues = {
   name: '',
   email: '',
-  mobile: '',
+  phone: '',
   subject: '',
   message: '',
 };
@@ -244,17 +244,17 @@ export const privacyPolicy: PrivacyPolicyElement[] = [
   },
 ];
 
-// Profile Data
+// // Profile Data
 
-export const initialProfileValues: InitialProfileValues = {
-  firstName: '',
-  lastName: '',
+export const initialProfileValues: UpdateUserReq = {
+  f_name: '',
+  l_name: '',
   phone: '',
   email: '',
-  birthDate: '',
+  birthdate: '',
   gender: '',
-  country: '',
-  profession: '',
+  nationality: '',
+  work: '',
 };
 
 export const profileLinks: ProfileLink[] = [
@@ -499,11 +499,11 @@ export const cardInitialValues: CardData = {
   CVV: '',
 };
 
-export const newAddressInitialValues: NewAddressValues = {
-  addressName: '',
-  addressDetails: '',
-  mobileNumber: '',
-  phoneNumber: '',
+export const newAddressInitialValues: CreateAddressReq = {
+  name: '',
+  details: '',
+  phone: '',
+  landing_phone: '',
 };
 
 export const singleOrder: Tracker[] = [
