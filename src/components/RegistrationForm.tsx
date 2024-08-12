@@ -28,10 +28,10 @@ const RegistrationForm: React.FC = () => {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  const onSubmit = (e: React.FormEvent): void => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     localStorage.setItem('registerData', JSON.stringify(values));
-    dispatch(registerUser(values));
+    await dispatch(registerUser(values));
     navigate('/verify-email');
   };
   return (

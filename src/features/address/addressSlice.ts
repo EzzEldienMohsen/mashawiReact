@@ -14,9 +14,10 @@ import {
   updateAddressThunk,
 } from './addressThunk';
 import { toast } from 'react-toastify';
+import { getAddressFromLocalStorage } from '../../utils';
 // import { RootState } from '../../store';
 
-const initialAddress: AddressData[] = [];
+const initialAddress: AddressData[] = getAddressFromLocalStorage() || [];
 
 const initialState: AddressState = {
   isLoading: false,

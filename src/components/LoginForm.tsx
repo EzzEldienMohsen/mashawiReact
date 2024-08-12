@@ -36,18 +36,14 @@ const LoginForm: React.FC = () => {
     try {
       const result = await dispatch(loginUser(values)).unwrap();
 
-      console.log('Result:', result); // Debug result
       if (result.status === 1) {
-        console.log('Navigating to /profile');
         navigate('/profile');
       }
     } catch (error: any) {
-      console.error('Navigation Error:', error); // Debug error
       if (error?.status === 403) {
-        console.log('Navigating to /validate-otp');
         navigate('/validate-otp');
       } else {
-        toast.error(error.message || 'Login failed');
+        toast.success(error.message || 'Login failed');
       }
     }
   };

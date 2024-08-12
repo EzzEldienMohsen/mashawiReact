@@ -212,7 +212,6 @@ export const getUserThunk = async (
     });
     return response.data;
   } catch (error: any) {
-    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };

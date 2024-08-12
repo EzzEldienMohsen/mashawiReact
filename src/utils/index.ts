@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { AddressData, StaticRequestData, User } from '../assets/types';
+import { StaticRequestData, User } from '../assets/types';
+import { AddressData } from '../features/address/types';
 
 // Define the base URL
 const url = 'https://mshawy.trendline.marketing/api/v1';

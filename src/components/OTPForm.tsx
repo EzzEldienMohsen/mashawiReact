@@ -70,6 +70,8 @@ const OTPForm = () => {
       }
     } catch (error: any) {
       if (error.status === 403) {
+        toast.error(error.message);
+
         toast.error('Please Insert Email Correctly');
       }
     }

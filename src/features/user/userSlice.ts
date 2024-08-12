@@ -12,7 +12,11 @@ import {
   getUserThunk,
   updateUserThunk,
 } from './userThunk';
-import { addUserToLocalStorage, removeUserFromLocalStorage } from '../../utils';
+import {
+  addUserToLocalStorage,
+  getUserFromLocalStorage,
+  removeUserFromLocalStorage,
+} from '../../utils';
 import { toast } from 'react-toastify';
 import {
   ChangePasswordData,
@@ -29,7 +33,7 @@ import {
 } from '../../assets/types';
 import { GetUserResponse, ResetPasswordResponse, UpdateUserReq } from './types';
 
-const initialUser: User = {
+const initialUser: User = getUserFromLocalStorage() || {
   token: '',
   user: {
     id: 0,
@@ -210,8 +214,6 @@ const userSlice = createSlice({
           state.isSidebarOpen = true;
           const user = action.payload.data;
           state.user.user = user;
-          const message = action.payload.message;
-          toast.success(message);
           addUserToLocalStorage(state.user);
         }
       )
