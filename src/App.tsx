@@ -11,7 +11,6 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
-  About,
   ContactUs,
   Home,
   Jobs,
@@ -102,6 +101,7 @@ const MenuList = React.lazy(() => import('./pages/MenuList'));
 const Cart = React.lazy(() => import('./pages/Cart'));
 const WishList = React.lazy(() => import('./pages/WishList'));
 const Gallery = React.lazy(() => import('./pages/Gallery'));
+const About = React.lazy(() => import('./pages/About'));
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -137,7 +137,17 @@ const AppRouter: React.FC = () => {
         },
         {
           path: '/about',
-          element: <About />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <About />
+            </Suspense>
+          ),
           loader: aboutLoader(queryClient, language),
         },
         {

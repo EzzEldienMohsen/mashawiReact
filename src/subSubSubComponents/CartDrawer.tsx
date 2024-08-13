@@ -31,13 +31,7 @@ const CartDrawer: React.FC = () => {
     ) as HTMLInputElement;
     if (drawerCheckbox) drawerCheckbox.checked = false;
   };
-  if (isLoading) {
-    return (
-      <div className="flex w-full py-8 justify-center h-96 items-center">
-        <span className="loading loading-spinner loading-lg text-newRed"></span>
-      </div>
-    );
-  }
+
   return (
     <div className="drawer w-10">
       <input id="cart-drawer" type="checkbox" className="drawer-toggle" />
@@ -52,7 +46,7 @@ const CartDrawer: React.FC = () => {
       <div className="drawer-side z-30">
         <label htmlFor="cart-drawer" className="drawer-overlay"></label>
         <div className="drawer-content w-1/2 h-full">
-          <CartDrawerContent closeDrawer={closeDrawer} />
+          <CartDrawerContent closeDrawer={closeDrawer} isLoading={isLoading} />
         </div>
       </div>
     </div>

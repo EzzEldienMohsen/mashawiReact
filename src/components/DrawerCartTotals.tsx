@@ -25,14 +25,14 @@ const DrawerCartTotals: React.FC<CartDrawer> = ({ closeDrawer }) => {
       {token ? (
         <Link
           to="/proceed"
-          className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+          className=" btn w-4/5 my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
         >
           {t('paymentAndOrderText')}
         </Link>
       ) : (
         <Link
           to="/login"
-          className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+          className=" btn w-4/5 my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
         >
           {t('paymentAndOrderText')}
         </Link>

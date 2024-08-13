@@ -281,7 +281,9 @@ const cartSlice = createSlice({
           );
           if (item) item.cartItem.amount = action.payload.data.qty;
 
-          toast.success(message);
+          toast.success(message, {
+            position: 'top-left',
+          });
         }
       )
       .addCase(editQuantity.rejected, (state) => {

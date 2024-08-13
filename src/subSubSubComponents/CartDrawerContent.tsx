@@ -4,9 +4,21 @@ import theClose from '../assets/svg/closeBtn.svg';
 import { DrawerCartItems, DrawerCartTotals } from '../components';
 interface CartDrawer {
   closeDrawer: () => void;
+  isLoading: boolean;
 }
-const CartDrawerContent: React.FC<CartDrawer> = ({ closeDrawer }) => {
+const CartDrawerContent: React.FC<CartDrawer> = ({
+  closeDrawer,
+  isLoading,
+}) => {
   const { t } = useTranslation();
+
+  if (isLoading) {
+    return (
+      <div className="flex w-full py-8 justify-center h-96 items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   return (
     <div className="w-full flex flex-col justify-start relative  overflow-y-auto pb-48  items-center px-3 pt-3 bg-[#F8F8F8] h-full">
       {/* title and clear cart logic */}
