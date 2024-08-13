@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
       </Link>
       <div className="flex flex-col lg:flex-row w-full flex-wrap lg:justify-between   md:items-center ">
         <FooterFirstColumn />
-        <ul className=" hidden lg:grid grid-cols-2  lg:grid-cols-3  list-disc list-inside md:w-3/5 lg:w-1/2 mt-1">
+        <ul className=" hidden lg:grid  lg:grid-cols-3  list-disc list-inside md:w-3/5 lg:w-[55%] mt-1">
           {links.map((li) => {
             return (
               <Link key={li.text} to={li.to}>
