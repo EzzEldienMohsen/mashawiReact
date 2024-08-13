@@ -38,7 +38,7 @@ const CartCard: React.FC<CartCardProps> = ({
 
     // Dispatch the local and async quantity updates
     dispatch(editQuantityLocally({ cartID: item.id, qty }));
-    dispatch(editQuantity({ reqData: { qty }, cart_id, token, language }));
+    dispatch(editQuantity({ reqData: { qty }, cart_id, token, language, t }));
   };
 
   return (

@@ -9,6 +9,7 @@ import {
   removeItemThunk,
 } from './cartThunk';
 import { RootState } from '../../store';
+import { TFunction } from 'i18next';
 
 const defaultState: CartState = {
   isLoading: false,
@@ -27,7 +28,12 @@ const calculateProductTotal = (product: CartItemWithId): number => {
 export const addThisItemToCart = createAsyncThunk(
   'theMashawiCart/addThisItemToCart',
   async (
-    reqData: { data: MealRequest; token: string; language: string },
+    reqData: {
+      data: MealRequest;
+      token: string;
+      language: string;
+      t: TFunction<'translation', undefined>;
+    },
     thunkAPI
   ) => {
     return addToCartThunk(
@@ -35,6 +41,7 @@ export const addThisItemToCart = createAsyncThunk(
       reqData.data,
       reqData.language,
       reqData.token,
+      reqData.t,
       thunkAPI
     );
   }
@@ -47,15 +54,17 @@ export const editQuantity = createAsyncThunk(
       cart_id: number;
       token: string;
       language: string;
+      t: TFunction<'translation', undefined>;
     },
     thunkAPI
   ) => {
-    const { cart_id, reqData, token, language } = data;
+    const { cart_id, reqData, token, language, t } = data;
     return editQuantityThunk(
       `/cart/change-qty/${cart_id}`,
       reqData,
       token,
       language,
+      t,
       thunkAPI
     );
   }

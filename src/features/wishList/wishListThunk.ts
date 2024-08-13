@@ -6,13 +6,15 @@ import {
   getWishListResponse,
 } from './types';
 import { toast } from 'react-toastify';
+import { TFunction } from 'i18next';
 
 export const addToWishListThunk = async (
   url: string,
   reqData: AddToWishListRequest,
   thunkAPI: any,
   token: string,
-  language: string
+  language: string,
+  t: TFunction<'translation', undefined>
 ): Promise<WishListType> => {
   try {
     const response: AxiosResponse<WishListType> = await autoFetch.post(
@@ -30,7 +32,12 @@ export const addToWishListThunk = async (
 
     return response.data;
   } catch (error: any) {
-    toast.error(error.response.data.message);
+    debugger;
+    if (error.response.status === 401) {
+      toast.warn(t('addWishMsg'));
+    } else {
+      toast.error(error.response.data.message);
+    }
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
@@ -55,6 +62,10 @@ export const getWishListThunk = async (
 
     return response.data;
   } catch (error: any) {
+    if (error.response.status === 401) {
+    } else {
+      toast.error(error.response.data.message);
+    }
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
@@ -80,7 +91,10 @@ export const removeItemThunk = async (
     });
     return response.data;
   } catch (error: any) {
-    toast.error(error.response.data.message);
+    if (error.response.status === 401) {
+    } else {
+      toast.error(error.response.data.message);
+    }
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };

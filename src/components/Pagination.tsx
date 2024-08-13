@@ -7,8 +7,8 @@ const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg
 const Pagination: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data2: Meals = axiosData.data2.data;
-  const currentPage = data2.data.current_page; // Fallback to page 1 if NaN
-  const pageCount = data2.data.pages_length ; // Fallback to 10 if not provided
+  const currentPage = data2.data.current_page;
+  const pageCount = data2.data.pages_length;
 
   const { search, pathname } = useLocation();
   const navigate = useNavigate();

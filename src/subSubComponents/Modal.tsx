@@ -71,6 +71,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
             }))
           ),
         },
+        t,
       })
     );
     dialogRef.current?.close();

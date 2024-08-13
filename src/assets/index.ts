@@ -75,24 +75,24 @@ import { CreateAddressReq } from '../features/address/types';
 
 // Links Starts Here
 export const links: Link[] = [
-  { text: 'main', to: '/' },
-  { text: 'about', to: '/about' },
-  { text: 'newsRoute', to: '/news' },
-  { text: 'eventsRoute', to: '/events' },
-  { text: 'jobsRoute', to: '/jobs' },
-  { text: 'cartRoute', to: '/cart' },
-  { text: 'wishListRoute', to: '/wishList' },
   { text: 'menuRoute', to: '/meals' },
-  { text: 'branchesRoute', to: '/branches' },
+  { text: 'about', to: '/about' },
   { text: 'PrivacyPolicyRoute', to: '/privacy' },
+  { text: 'newsRoute', to: '/news' },
+  { text: 'jobsRoute', to: '/jobs' },
   { text: 'termsPolicyRoute', to: '/terms' },
+  { text: 'eventsRoute', to: '/events' },
+  { text: 'branchesRoute', to: '/branches' },
   { text: 'paymentPolicyRoute', to: '/payment' },
+  { text: 'galleryRoute', to: '/gallery' },
+  { text: 'contactUsRoute', to: '/contact' },
   { text: 'deliveryPolicyRoute', to: '/delivery' },
   { text: 'refundPolicyRoute', to: '/refund' },
-  { text: 'contactUsRoute', to: '/contact' },
-  { text: 'loginRoute', to: '/login' },
-  { text: 'galleryRoute', to: '/gallery' },
-  { text: 'myProfileRoute', to: '/profile' },
+  // { text: 'main', to: '/' },
+  // { text: 'cartRoute', to: '/cart' },
+  // { text: 'wishListRoute', to: '/wishList' },
+  // { text: 'loginRoute', to: '/login' },
+  // { text: 'myProfileRoute', to: '/profile' },
 ];
 
 export const headerLinks: Link[] = [

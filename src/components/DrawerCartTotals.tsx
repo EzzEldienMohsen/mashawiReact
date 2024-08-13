@@ -8,6 +8,8 @@ interface CartDrawer {
 }
 
 const DrawerCartTotals: React.FC<CartDrawer> = ({ closeDrawer }) => {
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
   const { cartTotal } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
   );
@@ -20,13 +22,21 @@ const DrawerCartTotals: React.FC<CartDrawer> = ({ closeDrawer }) => {
         <span>{formatPrice(cartTotal)}</span>
       </p>
 
-      <Link
-        onClick={closeDrawer}
-        to="/proceed"
-        className=" btn flex justify-center shadow-xl bg-newRed text-white items-center w-4/5 rounded-full"
-      >
-        {t('paymentAndOrderText')}
-      </Link>
+      {token ? (
+        <Link
+          to="/proceed"
+          className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+        >
+          {t('paymentAndOrderText')}
+        </Link>
+      ) : (
+        <Link
+          to="/login"
+          className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+        >
+          {t('paymentAndOrderText')}
+        </Link>
+      )}
 
       <button
         onClick={closeDrawer}

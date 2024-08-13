@@ -2,12 +2,14 @@ import { AxiosResponse } from 'axios';
 import { autoFetch } from '../../utils';
 import { CartData, MealRequest, MealResponse } from './types';
 import { toast } from 'react-toastify';
+import { TFunction } from 'i18next';
 
 export const addToCartThunk = async (
   url: string,
   reqData: MealRequest,
   language: string,
   token: string,
+  t: TFunction<'translation', undefined>,
   thunkAPI: any
 ): Promise<MealResponse> => {
   try {
@@ -26,7 +28,11 @@ export const addToCartThunk = async (
 
     return response.data;
   } catch (error: any) {
-    toast.error(error.response.data.message);
+    if (error.response.status === 401) {
+      toast.warn(t('addToCartMsg '));
+    } else {
+      toast.error(error.response.data.message);
+    }
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
@@ -36,6 +42,7 @@ export const editQuantityThunk = async (
   reqData: { qty: number },
   token: string,
   language: string,
+  t: TFunction<'translation', undefined>,
   thunkAPI: any
 ): Promise<MealResponse> => {
   try {
@@ -53,6 +60,11 @@ export const editQuantityThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    if (error.response.status === 401) {
+      toast.warn(t('editCartMsg '));
+    } else {
+      toast.error(error.response.data.message);
+    }
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
@@ -77,6 +89,10 @@ export const getTheCartThunk = async (
     });
     return response.data;
   } catch (error: any) {
+    if (error.response.status === 401) {
+    } else {
+      toast.error(error.response.data.message);
+    }
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
@@ -101,7 +117,10 @@ export const removeItemThunk = async (
     });
     return response.data;
   } catch (error: any) {
-    toast.error(error.response.data.message);
+    if (error.response.status === 401) {
+    } else {
+      toast.error(error.response.data.message);
+    }
     return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };

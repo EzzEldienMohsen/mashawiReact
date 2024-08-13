@@ -11,6 +11,7 @@ import {
 import { CartItem, CartItemWithId, SingleMealData } from '../assets/types';
 import { useGlobalContext } from '../context/GlobalContext';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { useTranslation } from 'react-i18next';
 
 interface WishlistProps {
   data: SingleMealData;
@@ -24,6 +25,7 @@ const WishListButton: React.FC<WishlistProps> = ({
   wishListProduct,
 }) => {
   const dispatch: AppDispatch = useDispatch();
+  const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
   const { user } = useTypedSelector((state: RootState) => state.user);
@@ -34,7 +36,7 @@ const WishListButton: React.FC<WishlistProps> = ({
     setIsLoading(true);
     await dispatch(addItem({ product }));
     await dispatch(
-      addThisToWishList({ reqData: { meal_id }, token, language })
+      addThisToWishList({ reqData: { meal_id }, token, language, t })
     );
     await dispatch(getWishList({ token, language }));
     setIsLoading(false);

@@ -154,7 +154,7 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
           <img
             src={icon}
             alt="alt"
-            className={isLangArabic ? '' : 'transform scale-x-[-1]'}
+            className={isLangArabic ? 'transform scale-x-[-1]' : ''}
           />
           <p className="text-md md:text-sm hover:text-newRed">
             {t('signInTitle')}

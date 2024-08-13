@@ -8,6 +8,7 @@ import {
   removeItemThunk,
 } from './wishListThunk';
 import { RootState } from '../../store';
+import { TFunction } from 'i18next';
 
 const defaultItems: WishListState = {
   wishListItems: [],
@@ -18,16 +19,22 @@ const defaultItems: WishListState = {
 export const addThisToWishList = createAsyncThunk(
   'wishList/addThisToWishList',
   async (
-    data: { reqData: AddToWishListRequest; token: string; language: string },
+    data: {
+      reqData: AddToWishListRequest;
+      token: string;
+      language: string;
+      t: TFunction<'translation', undefined>;
+    },
     thunkAPI
   ) => {
-    const { reqData, token, language } = data;
+    const { reqData, token, language, t } = data;
     return addToWishListThunk(
       '/wishlist/add',
       reqData,
       thunkAPI,
       token,
-      language
+      language,
+      t
     );
   }
 );

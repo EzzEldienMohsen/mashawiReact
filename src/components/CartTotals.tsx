@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { RootState, useTypedSelector } from '../store';
 const CartTotals: React.FC = () => {
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
   const { cartTotal } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
   );
@@ -32,13 +34,21 @@ const CartTotals: React.FC = () => {
         <span>{t('totalText')}</span>
         <span className="font-medium">{formatPrice(orderTotal)}</span>
       </p>   */}
-      <Link
-        to="/proceed"
-        className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
-      >
-        {t('paymentAndOrderText')}
-      </Link>
-
+      {token ? (
+        <Link
+          to="/proceed"
+          className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+        >
+          {t('paymentAndOrderText')}
+        </Link>
+      ) : (
+        <Link
+          to="/login"
+          className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+        >
+          {t('paymentAndOrderText')}
+        </Link>
+      )}
       <Link
         to="/meals"
         className=" btn btn-block my-2 flex justify-center shadow-xl bg-[#D9D9D9] items-center rounded-full"
