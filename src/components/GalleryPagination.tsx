@@ -3,14 +3,17 @@ import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { GalleryResponse } from '../assets/types';
 import arrow from '../assets/svg/menu/pagination/paginationArroww.svg';
 import { useGlobalContext } from '../context/GlobalContext';
+
 const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo`;
 
 const GalleryPagination: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: GalleryResponse = axiosData.data;
-  const currentPage = data.data.current_page; // Fallback to page 1 if NaN
-  const pageCount = data.data.pages_length; // Fallback to 10 if not provided
-
+  const currentPage = data.data.current_page;
+  const pageCount = data.data.pages_length;
+  console.log(currentPage);
+  console.log(pageCount);
+  console.log(data.data);
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
   const { isLangArabic } = useGlobalContext();
@@ -54,6 +57,7 @@ const GalleryPagination: React.FC = () => {
     }
 
     for (let i = startPage; i <= endPage; i++) {
+      console.log(i, currentPage);
       pageButtons.push(
         <button
           key={i}
