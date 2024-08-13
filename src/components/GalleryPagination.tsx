@@ -11,9 +11,7 @@ const GalleryPagination: React.FC = () => {
   const data: GalleryResponse = axiosData.data;
   const currentPage = data.data.current_page;
   const pageCount = data.data.pages_length;
-  console.log(currentPage);
-  console.log(pageCount);
-  console.log(data.data);
+
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
   const { isLangArabic } = useGlobalContext();
@@ -57,7 +55,6 @@ const GalleryPagination: React.FC = () => {
     }
 
     for (let i = startPage; i <= endPage; i++) {
-      console.log(i, currentPage);
       pageButtons.push(
         <button
           key={i}

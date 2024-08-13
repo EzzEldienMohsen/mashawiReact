@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { GalleryResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
-import { useLoaderData } from 'react-router-dom';
+import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import { GalleryPagination } from '../components';
 import { useGlobalContext } from '../context/GlobalContext';
 
@@ -12,11 +12,11 @@ interface GalleryQuery {
   queryFn: () => Promise<GalleryResponse>;
 }
 
-const galleryQuery = (language: string): GalleryQuery => {
+const galleryQuery = (language: string, page: string): GalleryQuery => {
   return {
-    queryKey: ['gallery', language],
+    queryKey: ['gallery', language, page],
     queryFn: () =>
-      autoFetch(`/gallery?limit=1`, {
+      autoFetch(`/gallery?limit=1&page=${page}`, {
         headers: {
           lang: language,
         },
@@ -25,8 +25,10 @@ const galleryQuery = (language: string): GalleryQuery => {
 };
 export const loader =
   (queryClient: QueryClient, language: string) =>
-  async (): Promise<GalleryResponse> => {
-    const data = queryClient.ensureQueryData(galleryQuery(language));
+  async ({ request }: LoaderFunctionArgs): Promise<GalleryResponse> => {
+    const url = new URL(request.url);
+    const page = url.searchParams.get('page') || '1';
+    const data = queryClient.ensureQueryData(galleryQuery(language, page));
     return data;
   };
 
