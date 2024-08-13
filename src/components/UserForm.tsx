@@ -15,10 +15,20 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { updateUser } from '../features/user/userSlice';
+import { toast } from 'react-toastify';
+const debounce = (func: (...args: any[]) => void, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (...args: any[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
 
 const UserForm: React.FC = () => {
   const { t } = useTranslation();
-  const { user } = useTypedSelector((state: RootState) => state.user);
+  const { user, isLoading } = useTypedSelector(
+    (state: RootState) => state.user
+  );
   let profileValues: UpdateUserReq = {
     f_name: user.user.f_name,
     l_name: user.user.l_name,
@@ -33,6 +43,20 @@ const UserForm: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
   const token = user.token;
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleValidation = React.useCallback(
+    debounce((name: string, value: string) => {
+      if (name === 'email' && !validateEmail(value)) {
+        toast.error(t('invalidEmailAddress'));
+        return;
+      }
+    }, 5000),
+    []
+  );
   const dispatch: AppDispatch = useDispatch();
   const handleChange = (
     e: React.ChangeEvent<
@@ -42,12 +66,13 @@ const UserForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
+    handleValidation(name, value);
   };
 
-  const onSubmit = (e: React.FormEvent): void => {
+  const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     console.log(values);
-    dispatch(updateUser({ reqData: values, token, language }));
+    await dispatch(updateUser({ reqData: values, token, language }));
   };
 
   return (
@@ -143,8 +168,15 @@ const UserForm: React.FC = () => {
         handleChange={handleChange}
         full={true}
       />
-      <button className="btn btn-block rounded-full text-white w-inherit hover:bg-newRed hover:text-white text-xl bg-newRed my-2">
-        {t('saveChangesText')}
+      <button
+        disabled={isLoading}
+        className="btn btn-block rounded-full text-white w-inherit hover:bg-newRed hover:text-white text-xl bg-newRed my-2"
+      >
+        {isLoading ? (
+          <span className="loading loading-spinner loading-lg text-white"></span>
+        ) : (
+          t('saveChangesText')
+        )}
       </button>
       <Link
         to="/profile/changePassword"

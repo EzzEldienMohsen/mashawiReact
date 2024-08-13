@@ -10,6 +10,15 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAddress, updateAddress } from '../features/address/addressSlice';
+import { toast } from 'react-toastify';
+
+const debounce = (func: (...args: any[]) => void, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (...args: any[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
 
 const UpdateAddress: React.FC = () => {
   const { t } = useTranslation();
@@ -32,6 +41,29 @@ const UpdateAddress: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // const validatePhoneNumber = (phoneNumber: string): boolean => {
+  //   const phoneRegex = /^\+?[1-9]\d{1,14}$/; // E.164 international format
+  //   return phoneRegex.test(phoneNumber);
+  // };
+  const handleValidation = React.useCallback(
+    debounce((name: string, value: string) => {
+      if (name === 'email' && !validateEmail(value)) {
+        toast.error(t('invalidEmailAddress'));
+        return;
+      }
+      // if (name === 'phone' && !validatePhoneNumber(value)) {
+      //   toast.error('Invalid phone number');
+      //   return;
+      // }
+    }, 5000),
+    []
+  );
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -40,9 +72,10 @@ const UpdateAddress: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
+    handleValidation(name, value);
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     await dispatch(
       updateAddress({ id: `${item.id}`, reqData: values, token, language })
@@ -87,7 +120,7 @@ const UpdateAddress: React.FC = () => {
           name="phone"
           icon={mob}
           label=" "
-          type="text"
+          type="tel"
           value={values.phone}
           high={false}
           placeHolder={t('mobileNumber')}
@@ -98,7 +131,7 @@ const UpdateAddress: React.FC = () => {
           name="landing_phone"
           icon={ph}
           label=" "
-          type="text"
+          type="tel"
           value={values.landing_phone}
           high={false}
           placeHolder={t('phoneNumber')}

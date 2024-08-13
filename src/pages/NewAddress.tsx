@@ -11,6 +11,15 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { useDispatch } from 'react-redux';
 import { createAddress } from '../features/address/addressSlice';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+const debounce = (func: (...args: any[]) => void, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (...args: any[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
 
 const NewAddress: React.FC = () => {
   const { t } = useTranslation();
@@ -24,6 +33,29 @@ const NewAddress: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // const validatePhoneNumber = (phoneNumber: string): boolean => {
+  //   const phoneRegex = /^\+?[1-9]\d{1,14}$/; // E.164 international format
+  //   return phoneRegex.test(phoneNumber);
+  // };
+  const handleValidation = React.useCallback(
+    debounce((name: string, value: string) => {
+      if (name === 'email' && !validateEmail(value)) {
+        toast.error(t('invalidEmailAddress'));
+        return;
+      }
+      // if (name === 'phone' && !validatePhoneNumber(value)) {
+      //   toast.error('Invalid phone number');
+      //   return;
+      // }
+    }, 5000),
+    []
+  );
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -32,9 +64,10 @@ const NewAddress: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
+    handleValidation(name, value);
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     await dispatch(createAddress({ reqData: values, token, language }));
     navigate('/profile/address');
@@ -76,7 +109,7 @@ const NewAddress: React.FC = () => {
           name="phone"
           icon={mob}
           label=" "
-          type="text"
+          type="tel"
           value={values.phone}
           high={false}
           placeHolder={t('mobileNumber')}
@@ -87,7 +120,7 @@ const NewAddress: React.FC = () => {
           name="landing_phone"
           icon={ph}
           label=" "
-          type="text"
+          type="tel"
           value={values.landing_phone}
           high={false}
           placeHolder={t('phoneNumber')}

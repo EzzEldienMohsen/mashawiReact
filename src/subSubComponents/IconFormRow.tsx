@@ -37,8 +37,8 @@ const IconFormRow: React.FC<FormRowProps> = ({
           style={{
             color: type === 'date' ? '#b0b0b0' : 'initial',
             textAlign: isLangArabic ? 'right' : 'left',
-            paddingLeft: isLangArabic ? '14px' : '40px',
-            paddingRight: isLangArabic ? '40px' : '14px',
+            paddingLeft: isLangArabic ? '14px' : '45px',
+            paddingRight: isLangArabic ? '45px' : '14px',
           }}
         />
         <img

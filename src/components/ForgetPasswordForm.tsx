@@ -6,6 +6,15 @@ import { FormRow, FormTitle } from '../subComponents';
 import email from '../assets/svg/email.svg';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { toast } from 'react-toastify';
+
+const debounce = (func: (...args: any[]) => void, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (...args: any[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
 
 const ForgetPasswordForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -13,6 +22,22 @@ const ForgetPasswordForm: React.FC = () => {
   const [values, setValues] = React.useState<{ email: string }>({ email: '' });
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleValidation = React.useCallback(
+    debounce((name: string, value: string) => {
+      if (name === 'email' && !validateEmail(value)) {
+        toast.error(t('invalidEmailAddress'));
+        return;
+      }
+    }, 5000),
+    []
+  );
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -21,12 +46,13 @@ const ForgetPasswordForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
+    handleValidation(name, value);
   };
 
-  const onSubmit = (e: React.FormEvent): void => {
+  const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     localStorage.setItem('registerData', JSON.stringify(values));
-    dispatch(forgetPassword(values));
+    await dispatch(forgetPassword(values));
     navigate('/validate-otp');
   };
   return (

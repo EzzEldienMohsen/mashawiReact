@@ -10,6 +10,15 @@ import { registerUser } from '../features/user/userSlice';
 import { useTranslation } from 'react-i18next';
 import { RegisterData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { toast } from 'react-toastify';
+
+const debounce = (func: (...args: any[]) => void, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (...args: any[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
 
 const RegistrationForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -18,6 +27,20 @@ const RegistrationForm: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleValidation = React.useCallback(
+    debounce((name: string, value: string) => {
+      if (name === 'email' && !validateEmail(value)) {
+        toast.error(t('invalidEmailAddress'));
+        return;
+      }
+    }, 5000),
+    []
+  );
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -26,9 +49,10 @@ const RegistrationForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
+    handleValidation(name, value);
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     localStorage.setItem('registerData', JSON.stringify(values));
     await dispatch(registerUser(values));
@@ -78,7 +102,7 @@ const RegistrationForm: React.FC = () => {
           name="phone"
           label=" "
           icon={mobile}
-          type="text"
+          type="tel"
           value={values.phone}
           high={false}
           placeHolder={t('telephonePlaceHolder')}

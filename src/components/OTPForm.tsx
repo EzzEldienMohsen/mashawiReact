@@ -62,7 +62,7 @@ const OTPForm = () => {
     }));
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     let tokenArray = Object.values(values);
     if (isLangArabic) {

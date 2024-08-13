@@ -9,6 +9,14 @@ import { useTranslation } from 'react-i18next';
 import { LoginData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 
+const debounce = (func: (...args: any[]) => void, delay: number) => {
+  let timeoutId: ReturnType<typeof setTimeout>;
+  return (...args: any[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func(...args), delay);
+  };
+};
+
 const LoginForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
   const { t } = useTranslation();
@@ -18,7 +26,20 @@ const LoginForm: React.FC = () => {
   });
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
+  const handleValidation = React.useCallback(
+    debounce((name: string, value: string) => {
+      if (name === 'email' && !validateEmail(value)) {
+        toast.error(t('invalidEmailAddress'));
+        return;
+      }
+    }, 5000),
+    []
+  );
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -27,6 +48,7 @@ const LoginForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
+    handleValidation(name, value);
   };
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {

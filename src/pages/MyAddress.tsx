@@ -50,7 +50,7 @@ const MyAddress: React.FC = () => {
         return (
           <div
             key={ad.id}
-            className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md w-5/6 my-2 lg:w-[32%] md:w-[42%] "
+            className="rounded-2xl md:h-[350px] aspect-auto relative flex flex-col justify-between items-center bg-white lg:px-2 text-center py-2 gap-y-4 shadow-md w-[90vw] my-2 lg:w-[32%] md:w-[42%] "
           >
             <button
               className={`absolute top-2 ${
@@ -65,13 +65,13 @@ const MyAddress: React.FC = () => {
               alt="alt"
               className="bg-[#F4F4F4] p-2 rounded-full"
             />
-            <h1 className="text-black font-bold text-xl my-1 md:text-xl lg:text-lg">
+            <h1 className="text-black font-normal text-md my-1 md:text-md lg:text-md">
               {ad.name}
             </h1>
             <p className="text-start text-sm md:text-md lg:text-sm mb-2 text-gray-600 px-1">
               {ad.details}
             </p>
-            <div className="flex flex-row text-start items-center justify-between px-1 text-md md:text-xs lg:text-sm">
+            <div className="flex flex-row text-start items-center justify-between px-1 text-md md:text-xs lg:text-xs">
               <div className="flex flex-row gap-x-1 text-start items-center justify-between ">
                 <div className="flex flex-row gap-x-1 justify-between lg:text-xs text-sm ">
                   <img src={addMob} alt="alt" />{' '}
