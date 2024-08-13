@@ -128,20 +128,39 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
           }
         })}
       </ul>
-      <button
-        onClick={() => {
-          closeDrawer();
-          theLogOut();
-        }}
-        className="flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2"
-      >
-        <img
-          src={icon}
-          alt="alt"
-          className={isLangArabic ? '' : 'transform scale-x-[-1]'}
-        />
-        <p className="text-md md:text-sm hover:text-newRed">{t('signOut')}</p>
-      </button>
+      {token ? (
+        <button
+          onClick={() => {
+            closeDrawer();
+            theLogOut();
+          }}
+          className="flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2"
+        >
+          <img
+            src={icon}
+            alt="alt"
+            className={isLangArabic ? '' : 'transform scale-x-[-1]'}
+          />
+          <p className="text-md md:text-sm hover:text-newRed">{t('signOut')}</p>
+        </button>
+      ) : (
+        <Link
+          to="/login"
+          onClick={() => {
+            closeDrawer();
+          }}
+          className="flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2"
+        >
+          <img
+            src={icon}
+            alt="alt"
+            className={isLangArabic ? '' : 'transform scale-x-[-1]'}
+          />
+          <p className="text-md md:text-sm hover:text-newRed">
+            {t('signInTitle')}
+          </p>
+        </Link>
+      )}
     </ul>
   );
 };

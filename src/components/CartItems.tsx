@@ -35,6 +35,13 @@ const CartItems: React.FC = () => {
       </div>
     );
   }
+  if (isLoading) {
+    return (
+      <div className="flex w-full py-8 justify-center h-96 items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   return (
     <div className="my-16 w-full flex flex-col justify-center items-center px-8 lg:px-20">
       {cartItems.map((item) => {

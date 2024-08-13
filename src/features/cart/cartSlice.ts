@@ -226,6 +226,9 @@ const cartSlice = createSlice({
     },
 
     calculateTotals: (state) => {
+      if (!Array.isArray(state.cartItems)) {
+        state.cartItems = [];
+      }
       state.cartTotal = state.cartItems.reduce((total, item) => {
         return total + calculateProductTotal(item);
       }, 0);
