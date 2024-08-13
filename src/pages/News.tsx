@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { EventsCard } from '../components';
+import { EventsCard, GalleryPagination } from '../components';
 import { EventsQuery, EventsResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
@@ -44,6 +44,7 @@ const News: React.FC = () => {
             );
           })}
         </div>
+        <GalleryPagination />
       </div>
     </div>
   );
