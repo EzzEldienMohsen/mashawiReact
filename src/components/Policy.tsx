@@ -1,13 +1,11 @@
 import React from 'react';
 import { StaticRequestData } from '../assets/types';
 
-
 interface PolicyProps {
   title: string;
   data: StaticRequestData;
 }
-const Policy:React.FC<PolicyProps> = ({ title, data }) => {
-  console.log(data)
+const Policy: React.FC<PolicyProps> = ({ title, data }) => {
   return (
     <>
       <div className="bg-[#2C2220] flex flex-col text-start  justify-start items-center py-6 my-6 font-abdo">

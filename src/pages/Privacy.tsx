@@ -30,7 +30,6 @@ const Privacy: React.FC = () => {
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
   const data: StaticRequestData = axiosData.data;
-  console.log(typeof data);
   return (
     <>
       <Policy title={t('PrivacyPolicyRoute')} data={data} />

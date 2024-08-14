@@ -28,7 +28,6 @@ export const loader =
 const Terms: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: StaticRequestData = axiosData.data;
-  console.log(data);
   const { t } = useTranslation();
   return <Policy title={t('termsPageTitle')} data={data} />;
 };

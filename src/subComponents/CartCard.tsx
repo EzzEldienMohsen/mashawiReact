@@ -22,16 +22,15 @@ const CartCard: React.FC<CartCardProps> = ({
   isLoading,
 }) => {
   const { t } = useTranslation();
-  const { isLangArabic } = useGlobalContext();
+  const { isLangArabic, amount, setAmount } = useGlobalContext();
   const dispatch: AppDispatch = useDispatch();
 
-  const [amount, setAmount] = React.useState<number>(item.amount);
   const { user } = useTypedSelector((state: RootState) => state.user);
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
   React.useEffect(() => {
     setAmount(item.amount);
-  }, [item.amount]);
+  }, [item.amount, setAmount]);
   const editQuantityOfItem = (qty: number) => {
     // First, update the local state and quantity
     setAmount(qty);

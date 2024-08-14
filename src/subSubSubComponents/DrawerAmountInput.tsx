@@ -1,6 +1,7 @@
 import React from 'react';
 import plus from '../assets/svg/menu/input/plus.svg';
 import minus from '../assets/svg/menu/input/minus.svg';
+import { RootState, useTypedSelector } from '../store';
 interface AmountProps {
   amount: number;
   setAmount: (a: number | ((a: number) => number)) => void;
@@ -11,6 +12,9 @@ const DrawerAmountInput: React.FC<AmountProps> = ({
   setAmount,
   editTheQuantity,
 }) => {
+  const { isLoading } = useTypedSelector(
+    (state: RootState) => state.theMashawiCart
+  );
   const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(parseInt(e.target.value, 10));
   };
@@ -34,9 +38,11 @@ const DrawerAmountInput: React.FC<AmountProps> = ({
   return (
     <div className="w-full flex justify-between items-center p-2 rounded-3xl bg-[#DDDDDD] gap-x-2">
       <button
-        disabled={amount === 1}
+        disabled={amount === 1 || isLoading}
         onClick={decrementAmount}
-        className="w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center"
+        className={`w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center ${
+          isLoading ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
       >
         <img src={minus} alt="-" />
       </button>
@@ -56,8 +62,11 @@ const DrawerAmountInput: React.FC<AmountProps> = ({
         }}
       />
       <button
+        disabled={isLoading}
         onClick={incrementAmount}
-        className="w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center"
+        className={`w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center ${
+          isLoading ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
       >
         <img src={plus} alt="+" />
       </button>

@@ -18,9 +18,8 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
   item,
   cart_id,
 }) => {
-  const [amount, setAmount] = React.useState<number>(item.amount);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const { isLangArabic } = useGlobalContext();
+  const { isLangArabic, amount, setAmount } = useGlobalContext();
   const { user } = useTypedSelector((state: RootState) => state.user);
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
@@ -36,7 +35,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
   };
   React.useEffect(() => {
     setAmount(item.amount);
-  }, [item.amount]);
+  }, [item.amount, setAmount]);
 
   const editQuantityOfItem = (qty: number) => {
     // First, update the local state and quantity

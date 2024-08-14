@@ -30,7 +30,6 @@ const About: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: StaticRequestData = axiosData.data;
   const { t } = useTranslation();
-  console.log(data);
   return (
     <div className="w-full ">
       <SidePageHero

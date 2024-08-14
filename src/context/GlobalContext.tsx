@@ -1,36 +1,33 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from 'react';
+import React, { createContext } from 'react';
 import i18n from '../i18n';
 
 interface GlobalContextProps {
   isLangArabic: boolean;
   toggleLang: () => void;
+  amount: number;
+  setAmount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
 
 export const useGlobalContext = (): GlobalContextProps => {
-  const context = useContext(GlobalContext);
+  const context = React.useContext(GlobalContext);
   if (!context) {
     throw new Error('useGlobalContext must be used within a GlobalProvider');
   }
   return context;
 };
 
-export const GlobalProvider: React.FC<{ children: ReactNode }> = ({
+export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isLangArabic, setIsLangArabic] = useState<boolean>(() => {
+  const [amount, setAmount] = React.useState<number>(1);
+  const [isLangArabic, setIsLangArabic] = React.useState<boolean>(() => {
     const lang = localStorage.getItem('lang');
     return lang !== null ? JSON.parse(lang) : true;
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     const lang = isLangArabic ? 'ar' : 'en';
     i18n.changeLanguage(lang);
     document.documentElement.dir = isLangArabic ? 'rtl' : 'ltr';
@@ -45,7 +42,9 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <GlobalContext.Provider value={{ isLangArabic, toggleLang }}>
+    <GlobalContext.Provider
+      value={{ isLangArabic, toggleLang, amount, setAmount }}
+    >
       {children}
     </GlobalContext.Provider>
   );

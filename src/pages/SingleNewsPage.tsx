@@ -22,7 +22,7 @@ const SingleNewsQuery = (
 };
 
 export const loader =
-  (queryClient: QueryClient,  language: string) =>
+  (queryClient: QueryClient, language: string) =>
   async ({
     params,
   }: {
@@ -30,7 +30,7 @@ export const loader =
   }): Promise<SingleEventResponse> => {
     const { id } = params;
     const data = await queryClient.ensureQueryData(
-      SingleNewsQuery( language, id)
+      SingleNewsQuery(language, id)
     );
     return data;
   };
@@ -38,7 +38,6 @@ const SingleNewsPage: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const axiosData: any = useLoaderData();
   const data: SingleEventResponse = axiosData.data;
-  console.log(data);
   return (
     <div className="flex flex-col justify-start items-start relative gap-y-6 py-4 w-full">
       <div className="absolute top-0 left-0 w-full py-10 md:py-20 bg-[#2C2220] "></div>

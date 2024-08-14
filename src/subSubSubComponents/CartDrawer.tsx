@@ -9,18 +9,17 @@ import { clearWishList } from '../features/wishList/wishListSlice';
 
 const CartDrawer: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const { user } = useTypedSelector((state: RootState) => state.user);
+  const { user, isLoading } = useTypedSelector(
+    (state: RootState) => state.user
+  );
   const language = isLangArabic ? 'ar' : 'en';
   const token = user.token;
   const dispatch: AppDispatch = useDispatch();
   const getTheCart = async () => {
-    setIsLoading(true);
     await dispatch(clearCart());
     await dispatch(clearWishList());
     await dispatch(getCart({ token, language }));
-    setIsLoading(false);
   };
   React.useEffect(() => {
     getTheCart();

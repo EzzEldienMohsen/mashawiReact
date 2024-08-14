@@ -33,7 +33,6 @@ const Menu: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: MealData = axiosData.data2.data.data.data;
 
-  console.log(data);
   const { t } = useTranslation();
   return (
     <div className="flex justify-center w-full items-center flex-col px-8 lg:px-20">

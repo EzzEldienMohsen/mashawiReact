@@ -22,7 +22,7 @@ const DrawerCartItems: React.FC = () => {
       {cartItems.map((item) => {
         return (
           <DrawerCartCard
-            key={item.cartItem.id}
+            key={item.cart_id}
             item={item.cartItem}
             cart_id={item.cart_id}
           />

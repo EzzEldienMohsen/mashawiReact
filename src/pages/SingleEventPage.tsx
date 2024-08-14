@@ -38,7 +38,6 @@ const SingleEventPage: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const axiosData: any = useLoaderData();
   const data: SingleEventResponse = axiosData.data;
-  console.log(data);
   return (
     <div className="flex flex-col justify-start items-start relative gap-y-6 py-4 w-full">
       <div className="absolute top-0 left-0 w-full py-10 md:py-20 bg-[#2C2220] "></div>

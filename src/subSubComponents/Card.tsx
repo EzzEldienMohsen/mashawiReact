@@ -7,7 +7,7 @@ import { WishlistButton, AmountInput } from '../subSubSubComponents';
 import { useGlobalContext } from '../context/GlobalContext';
 
 const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
-  const [amount, setAmount] = React.useState<number>(1);
+  const { amount, setAmount } = useGlobalContext();
   const { wishListItems } = useTypedSelector(
     (state: RootState) => state.wishList
   );
@@ -54,7 +54,7 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
         </h2>
       </div>
       <div className="flex px-2 gap-x-1 justify-between w-full flex-row  items-center my-2">
-        <Modal data={data} theAmount={amount} modalId={modalId} />
+        <Modal data={data} modalId={modalId} />
         <AmountInput amount={amount} setAmount={setAmount} />
       </div>
     </div>

@@ -8,7 +8,6 @@ import {
   getTheCartThunk,
   removeItemThunk,
 } from './cartThunk';
-import { RootState } from '../../store';
 import { TFunction } from 'i18next';
 
 const defaultState: CartState = {
@@ -91,36 +90,31 @@ export const getCart = createAsyncThunk(
     { token, language }: { token: string; language: string },
     thunkAPI
   ) => {
-    const state = thunkAPI.getState() as RootState;
-
     if (token) {
+      // Clear local cart when the user is signed in
+      localStorage.removeItem('theMashawiCart');
+
+      // Fetch the cart from the backend
       const response = await getTheCartThunk(
         '/cart',
         thunkAPI,
         token,
         language
       );
-      const combinedCartItems = response.data.map((backendItem) => {
-        const localItem = state.theMashawiCart.cartItems.find(
-          (item) => item.cartItem.id === backendItem.meal.id
-        );
 
-        return localItem
-          ? { ...localItem, cart_id: backendItem.cart_id }
-          : {
-              cart_id: backendItem.cart_id,
-              cartItem: {
-                name: backendItem.meal.name,
-                price: backendItem.meal.price,
-                image: backendItem.meal.image,
-                id: backendItem.meal.id,
-                additions: backendItem.meal.additions,
-                amount: backendItem.qty,
-              },
-            };
-      });
+      const backendCartItems = response.data.map((backendItem) => ({
+        cart_id: backendItem.cart_id,
+        cartItem: {
+          name: backendItem.meal.name,
+          price: backendItem.meal.price,
+          image: backendItem.meal.image,
+          id: backendItem.meal.id,
+          additions: backendItem.meal.additions,
+          amount: backendItem.qty,
+        },
+      }));
 
-      return { ...response, data: combinedCartItems };
+      return { ...response, data: backendCartItems };
     } else {
       // Load cart from local storage if no user is logged in
       const localCart = JSON.parse(
@@ -244,7 +238,6 @@ const cartSlice = createSlice({
       state.tax = 0.05 * state.cartTotal;
       state.orderTotal = state.cartTotal + state.tax;
       localStorage.setItem('theMashawiCart', JSON.stringify(state));
-      console.log('Total calculated:', state.cartTotal);
     },
   },
   extraReducers: (builder) => {

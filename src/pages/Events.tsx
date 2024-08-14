@@ -26,7 +26,6 @@ export const loader =
 const Events: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: EventsResponse = axiosData.data;
-  console.log(data);
   const { t } = useTranslation();
   return (
     <div className="flex flex-col justify-center items-center w-full my-4  py-8">

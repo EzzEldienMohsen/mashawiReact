@@ -10,7 +10,6 @@ const WishList: React.FC = () => {
   const { wishListItems: items } = useTypedSelector(
     (state: RootState) => state.wishList
   );
-  console.log(items);
   const { user } = useTypedSelector((state: RootState) => state.user);
   const { isLangArabic } = useGlobalContext();
   const token = user.token;

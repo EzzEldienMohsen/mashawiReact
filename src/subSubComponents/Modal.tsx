@@ -16,12 +16,11 @@ import { useGlobalContext } from '../context/GlobalContext';
 
 interface ModalProps {
   modalId: string;
-  theAmount: number;
+
   data: SingleMealData;
 }
 
-const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
-  const [amount, setAmount] = React.useState<number>(theAmount);
+const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
   const [selectedAddOns, setSelectedAddOns] = React.useState<AddOn[]>([]);
   const dispatch: AppDispatch = useDispatch();
   const { wishListItems } = useTypedSelector(
@@ -33,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ data, theAmount, modalId }) => {
   const { t } = useTranslation();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const { user } = useTypedSelector((state: RootState) => state.user);
-  const { isLangArabic } = useGlobalContext();
+  const { isLangArabic ,amount,setAmount} = useGlobalContext();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
   const handleAddOnChange = (addOn: AddOn, isChecked: boolean): void => {

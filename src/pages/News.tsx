@@ -28,7 +28,6 @@ const News: React.FC = () => {
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
   const data: EventsResponse = axiosData.data;
-  console.log(data);
   return (
     <div className="flex flex-col justify-center items-center w-full my-4  py-8">
       <div className="bg-[#2C2220] flex flex-col text-start  w-full justify-start items-center px-4 py-6 my-6 font-abdo">

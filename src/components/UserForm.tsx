@@ -71,7 +71,6 @@ const UserForm: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    console.log(values);
     await dispatch(updateUser({ reqData: values, token, language }));
   };
 

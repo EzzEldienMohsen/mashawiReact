@@ -29,7 +29,6 @@ const Delivery: React.FC = () => {
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
   const data: StaticRequestData = axiosData.data;
-  console.log(data);
   return <Policy title={t('deliveryPolicyRoute')} data={data} />;
 };
 

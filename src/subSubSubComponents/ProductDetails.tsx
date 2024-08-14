@@ -36,7 +36,7 @@ const ProductDetails: React.FC<ProductProps> = ({
           onClick={handleAddToCart}
         >
           <img src={addOrder} alt="alt" />
-          اضف الطلب
+          {t('addOrder')}
         </button>
         <AmountInput amount={amount} setAmount={setAmount} />
       </div>

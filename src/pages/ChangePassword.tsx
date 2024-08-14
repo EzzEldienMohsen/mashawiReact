@@ -32,7 +32,6 @@ const ChangePassword: React.FC = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(values);
     dispatch(changePassword({ reqData: values, token, language }));
   };
 
