@@ -61,7 +61,7 @@ const UpdateAddress: React.FC = () => {
       //   toast.error('Invalid phone number');
       //   return;
       // }
-    }, 5000),
+    }, 3000),
     []
   );
   const handleChange = (

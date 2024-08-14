@@ -38,7 +38,7 @@ const RegistrationForm: React.FC = () => {
         toast.error(t('invalidEmailAddress'));
         return;
       }
-    }, 5000),
+    }, 3000),
     []
   );
   const handleChange = (
