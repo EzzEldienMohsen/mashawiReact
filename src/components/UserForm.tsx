@@ -1,5 +1,5 @@
 import React from 'react';
-import { countryOptions, genderOptions } from '../assets';
+import { genderOptions } from '../assets';
 import person from '../assets/svg/person.svg';
 import mobile from '../assets/svg/mobile.svg';
 import mail from '../assets/svg/email.svg';
@@ -149,11 +149,10 @@ const UserForm: React.FC = () => {
         name="nationality"
         label=" "
         icon={country}
-        type="select"
+        type="text"
         value={values.nationality}
         handleChange={handleChange}
         placeHolder={t('countryInput')}
-        options={countryOptions}
         full={true}
       />
       <FormRow

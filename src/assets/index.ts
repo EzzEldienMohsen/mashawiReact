@@ -290,12 +290,6 @@ export const genderOptions: { value: string; label: string }[] = [
   // Add more options as needed
 ];
 
-export const countryOptions: { value: string; label: string }[] = [
-  { value: 'usa', label: 'United States' },
-  { value: 'canada', label: 'Canada' },
-  { value: 'mexico', label: 'Mexico' },
-  // Add more countries as needed
-];
 export const addressOptions: { value: string; label: string }[] = [
   { value: 'usa', label: 'United States' },
   { value: 'canada', label: 'Canada' },
