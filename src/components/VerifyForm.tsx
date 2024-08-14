@@ -15,6 +15,10 @@ const VerifyForm: React.FC = () => {
   const [values, setValues] = useState<InitialOTPInputs>(initialOTP);
   const [isResendDisabled, setIsResendDisabled] = useState<boolean>(false);
   const [currentFocus, setCurrentFocus] = useState(0);
+  const [seconds, setSeconds] = useState<number>(0);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [timer, setTimer] = useState<number | null>(null);
+
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
@@ -49,6 +53,37 @@ const VerifyForm: React.FC = () => {
       inputRefs.current[currentFocus]?.focus();
     }
   }, [currentFocus]);
+
+  useEffect(() => {
+    if (isActive && seconds > 0) {
+      const newTimer = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds - 1);
+      }, 1000);
+      setTimer(newTimer);
+
+      // Cleanup interval on component unmount or when timer is stopped
+      return () => {
+        if (timer) {
+          clearInterval(timer);
+        }
+      };
+    } else if (seconds === 0) {
+      setIsActive(false); // Stop the timer when it reaches 0
+    }
+  }, [isActive, seconds]);
+
+  // Handle Button Click For Timer
+  const handleButtonClick = () => {
+    if (isActive) {
+      setIsActive(false); // Stop the timer
+      if (timer !== null) {
+        window.clearInterval(timer); // Clear the existing interval
+      }
+    } else {
+      setSeconds(65); // Reset seconds to 60
+      setIsActive(true); // Start the timer
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -134,15 +169,24 @@ const VerifyForm: React.FC = () => {
             t('sendText')
           )}
         </button>
-        <button
-          onClick={resendTheOTP}
-          disabled={isResendDisabled}
-          className={`text-newRed mt-4 text-xs md:text-sm w-full lg:text-sm mb-10 ${
-            isResendDisabled ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          {t('resendText')}
-        </button>
+        {seconds > 0 ? (
+          <div className="w-10 h-10 rounded-full flex justify-center items-center text-center bg-newRed text-white text-sm">
+            {seconds}s
+          </div>
+        ) : (
+          <button
+            onClick={() => {
+              resendTheOTP();
+              handleButtonClick();
+            }}
+            disabled={isResendDisabled}
+            className={`text-newRed mt-4 text-xs md:text-sm w-full lg:text-sm mb-10 ${
+              isResendDisabled ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+          >
+            {t('resendText')}
+          </button>
+        )}
       </form>
     </div>
   );
