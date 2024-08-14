@@ -12,8 +12,20 @@
   }
 }
 
+.mainHeroLg{
+  background-image: url(./assets/svg/kabab.svg), url(./assets/svg/mainHero.svg);
+  background-position: 0% 0%;
+  background-repeat: no-repeat;
+  height: 500px;
+  background-size: stretch;
+}
 
-
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+/* 
 /* Hide the default date icon in input[type="date"] */
 .input-date::-webkit-calendar-picker-indicator {
   display: none;
@@ -39,7 +51,7 @@
 .input-date::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
-}
+} */
 .theImage {
 background-image: url("../src/assets/svg/maskedGroupContactUs.svg");
 background-position: center;

@@ -59,11 +59,13 @@ const LoginForm: React.FC = () => {
       const result = await dispatch(loginUser(values)).unwrap();
 
       if (result.status === 1) {
-        navigate('/profile');
+        navigate('/');
+      } else if (result.status === 2) {
+        toast.success(result.message);
       }
     } catch (error: any) {
       if (error?.status === 403) {
-        navigate('/validate-otp');
+        navigate('/verify-email');
       } else {
         toast.success(error.message || 'Login failed');
       }

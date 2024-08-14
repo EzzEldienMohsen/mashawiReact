@@ -242,7 +242,11 @@ const userSlice = createSlice({
           state.isLoading = false;
           const message = action.payload.message;
           state.user.user = action.payload.data;
-          toast.success(message);
+          if (action.payload.status === 0) {
+            toast.error(message);
+          } else {
+            toast.success(message);
+          }
           addUserToLocalStorage(state.user);
         }
       )

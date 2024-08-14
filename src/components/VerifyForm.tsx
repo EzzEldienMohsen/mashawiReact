@@ -74,7 +74,7 @@ const VerifyForm: React.FC = () => {
     try {
       const result = await dispatch(emailVerification(user)).unwrap();
       if (result.status === 1) {
-        navigate('/login');
+        navigate('/');
       } else if (result.status === 0) {
         toast.error(result.message);
       }
@@ -89,7 +89,7 @@ const VerifyForm: React.FC = () => {
   const resendTheOTP = () => {
     dispatch(resendOTP({ email }));
     setIsResendDisabled(true);
-    setTimeout(() => setIsResendDisabled(false), 6000);
+    setTimeout(() => setIsResendDisabled(false), 60000);
   };
 
   return (

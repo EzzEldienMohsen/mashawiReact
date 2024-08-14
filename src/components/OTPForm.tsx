@@ -88,7 +88,7 @@ const OTPForm = () => {
   const resendTheOTP = () => {
     dispatch(resendOTP({ email }));
     setIsResendDisabled(true);
-    setTimeout(() => setIsResendDisabled(false), 6000);
+    setTimeout(() => setIsResendDisabled(false), 60000);
   };
 
   return (

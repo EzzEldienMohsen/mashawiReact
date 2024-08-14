@@ -53,7 +53,11 @@ export const loginThunk = async (
     );
     return response.data;
   } catch (error: any) {
-    toast.error(error.response.data.message);
+    if (error.response.status === 403) {
+      toast.success(error.response.data.message);
+    } else {
+      toast.error(error.response.data.message);
+    }
     return thunkAPI.rejectWithValue({
       message: error.response.data,
       status: error.response.status,
@@ -107,6 +111,7 @@ export const validateOTPThunk = async (
     );
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
