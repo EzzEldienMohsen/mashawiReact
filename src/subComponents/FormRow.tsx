@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'; // Add this to style DatePicker
 import { FormRowProps } from '../assets/types';
 import { IconFormRow, PasswordRow } from '../subSubComponents';
 
@@ -18,6 +20,8 @@ const FormRow: React.FC<FormRowProps> = ({
   isOTP,
   options,
 }) => {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
   if (type === 'password') {
     return (
       <PasswordRow
@@ -61,7 +65,7 @@ const FormRow: React.FC<FormRowProps> = ({
             id={name}
             value={value || ''}
             onChange={handleChange}
-            className="appearance-none px-4 bg-white border-2 rounded-full py-2 w-full text-start"
+            className=" px-4 bg-white border-2 rounded-full py-2 w-full text-start"
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -83,6 +87,7 @@ const FormRow: React.FC<FormRowProps> = ({
       </div>
     );
   } else if (type === 'date') {
+    // Use react-datepicker here
     return (
       <div
         className={`flex flex-col justify-start my-1 ${
@@ -93,16 +98,20 @@ const FormRow: React.FC<FormRowProps> = ({
           {label || name}
         </label>
         <div className="relative w-full">
-          <input
-            required
-            type={type}
-            name={name}
-            id={name}
-            value={value || ''}
-            placeholder={placeHolder}
-            onChange={handleChange}
-            style={{ backgroundColor: 'white' }}
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => {
+              setSelectedDate(date);
+              handleChange({
+                target: {
+                  name,
+                  value: date ? date.toISOString().split('T')[0] : '',
+                },
+              } as React.ChangeEvent<HTMLInputElement>); // Handle the date format and pass it to handleChange
+            }}
             className="px-4 bg-white border-2 rounded-full py-2 w-full text-start"
+            placeholderText="YYYY-MM-DD"
+            dateFormat="yyyy-MM-dd"
           />
           {icon && (
             <div className="absolute right-3 top-2.5 pointer-events-none">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { EventsCard, GalleryPagination } from '../components';
+import { EventsCard } from '../components';
 import { EventsQuery, EventsResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
@@ -36,14 +36,13 @@ const News: React.FC = () => {
         </h1>
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
-        <div className="my-8 flex flex-col  justify-center items-center gap-y-5 md:flex-row md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-between lg:flex-wrap w-full">
+        <div className="my-8 flex flex-col  justify-center items-center gap-y-5   md:flex md:flex-row md:gap-x-2 lg:justify-start md:flex-wrap w-full">
           {data.data.map((data) => {
             return (
               <EventsCard key={data.id} data={data} destination="singleNews" />
             );
           })}
         </div>
-        <GalleryPagination />
       </div>
     </div>
   );

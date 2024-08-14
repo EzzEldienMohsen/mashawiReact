@@ -4,6 +4,9 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import dateIcon from '../assets/svg/events/dateIcon.svg';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ar';
+import 'dayjs/locale/en';
 
 const EventsCard: React.FC<{ data: EventData; destination: string }> = ({
   data,
@@ -11,13 +14,17 @@ const EventsCard: React.FC<{ data: EventData; destination: string }> = ({
 }) => {
   const { isLangArabic } = useGlobalContext();
   const { t } = useTranslation();
+  const locale = isLangArabic ? 'ar' : 'en';
+  dayjs.locale(locale);
+
+  const formattedDate = dayjs(data.date).locale(locale).format('DD MMM YYYY');
   return (
     <div
-      className={`my-2 w-3/4 pb-3 md:w-[90%] lg:w-[22%] ${
+      className={`my-2 w-4/5 pb-3  md:w-[44%] lg:w-[24%] ${
         isLangArabic
           ? 'rounded-tr-3xl rounded-bl-3xl'
           : 'rounded-tl-3xl rounded-br-3xl'
-      } bg-white flex flex-col justify-center items-center gap-y-4 `}
+      } bg-white pb-5 flex flex-col justify-center items-center gap-y-4 `}
     >
       <img
         src={data.image}
@@ -28,9 +35,11 @@ const EventsCard: React.FC<{ data: EventData; destination: string }> = ({
             : 'rounded-tl-3xl rounded-br-3xl'
         }`}
       />
-      <div className="w-3/5 flex justify-evenly items-center">
+      <div className="flex justify-evenly gap-x-2 items-center">
         <img src={dateIcon} alt="date" />
-        <p className="font-abdo text-sm md:text-xs font-light">{data.date}</p>
+        <p className="font-abdo text-sm md:text-xs font-light">
+          {formattedDate}
+        </p>
       </div>
       <h1 className="font-abdo text-md md:text-sm font-semibold">
         {data.title}
