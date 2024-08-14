@@ -7,7 +7,7 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 const WishList: React.FC = () => {
   const { t } = useTranslation();
-  const { wishListItems: items } = useTypedSelector(
+  const { wishListItems: items, isLoading } = useTypedSelector(
     (state: RootState) => state.mashawiWishList
   );
   const { user } = useTypedSelector((state: RootState) => state.user);
@@ -22,6 +22,15 @@ const WishList: React.FC = () => {
   React.useEffect(() => {
     getTheWithList();
   }, [token, language]);
+
+  if (isLoading) {
+    return (
+      <div className="flex w-full py-8 justify-center h-96 items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
+
   if (items.length === 0) {
     return (
       <div className=" w-full px-8 lg:px-20">

@@ -38,6 +38,7 @@ export const addThisToWishList = createAsyncThunk(
     );
   }
 );
+
 export const getWishList = createAsyncThunk(
   'wishList/getWishList',
   async (data: { token: string; language: string }, thunkAPI) => {
