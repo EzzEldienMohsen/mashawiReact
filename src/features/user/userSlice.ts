@@ -215,6 +215,8 @@ const userSlice = createSlice({
           const user = action.payload.data;
           state.user.user = user;
           addUserToLocalStorage(state.user);
+          const message = action.payload.message;
+          toast.success(message);
         }
       )
       .addCase(updateUser.rejected, (state) => {

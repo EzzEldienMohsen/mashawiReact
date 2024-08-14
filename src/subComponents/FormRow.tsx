@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Add this to style DatePicker
+import 'react-datepicker/dist/react-datepicker.css';
 import { FormRowProps } from '../assets/types';
 import { IconFormRow, PasswordRow } from '../subSubComponents';
+import { useGlobalContext } from '../context/GlobalContext';
 
 const FormRow: React.FC<FormRowProps> = ({
   inputRef,
@@ -21,7 +22,7 @@ const FormRow: React.FC<FormRowProps> = ({
   options,
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-
+  const { isLangArabic } = useGlobalContext();
   if (type === 'password') {
     return (
       <PasswordRow
@@ -35,7 +36,7 @@ const FormRow: React.FC<FormRowProps> = ({
         name={name}
       />
     );
-  } else if (icon) {
+  } else if (icon && type !== 'date') {
     return (
       <IconFormRow
         label={label}
@@ -65,7 +66,7 @@ const FormRow: React.FC<FormRowProps> = ({
             id={name}
             value={value || ''}
             onChange={handleChange}
-            className=" px-4 bg-white border-2 rounded-full py-2 w-full text-start"
+            className="appearance-none px-4 bg-white border-2 rounded-full py-2 w-full text-start"
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -87,7 +88,7 @@ const FormRow: React.FC<FormRowProps> = ({
       </div>
     );
   } else if (type === 'date') {
-    // Use react-datepicker here
+    // Use react-datepicker here with custom styling and icon click handling
     return (
       <div
         className={`flex flex-col justify-start my-1 ${
@@ -97,8 +98,10 @@ const FormRow: React.FC<FormRowProps> = ({
         <label className="my-1 capitalize" htmlFor={name}>
           {label || name}
         </label>
-        <div className="relative w-full">
+        <div className={`w-full !important`}>
           <DatePicker
+            wrapperClassName="w-full"
+            className={`text-start px-14 bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 `}
             selected={selectedDate}
             onChange={(date) => {
               setSelectedDate(date);
@@ -107,17 +110,42 @@ const FormRow: React.FC<FormRowProps> = ({
                   name,
                   value: date ? date.toISOString().split('T')[0] : '',
                 },
-              } as React.ChangeEvent<HTMLInputElement>); // Handle the date format and pass it to handleChange
+              } as React.ChangeEvent<HTMLInputElement>);
             }}
-            className="px-4 bg-white border-2 rounded-full py-2 w-full text-start"
             placeholderText="YYYY-MM-DD"
             dateFormat="yyyy-MM-dd"
+            customInput={
+              <div className="relative w-full flex items-start">
+                <input
+                  value={value || ''}
+                  onChange={() => {}}
+                  className={`w-full`}
+                  placeholder="YYYY-MM-DD"
+                />
+                {icon && (
+                  <div
+                    className="w-full"
+                    onClick={() => {
+                      const input = document.querySelector(
+                        '.react-datepicker__input-container input'
+                      ) as HTMLInputElement | null;
+                      if (input) {
+                        input.focus();
+                      }
+                    }}
+                  >
+                    <img
+                      src={icon}
+                      alt="calendar icon"
+                      className={`absolute ${
+                        isLangArabic ? 'right-4' : 'left-4'
+                      } top-1/2 transform -translate-y-1/2`}
+                    />
+                  </div>
+                )}
+              </div>
+            }
           />
-          {icon && (
-            <div className="absolute right-3 top-2.5 pointer-events-none">
-              <img src={icon} alt="icon" />
-            </div>
-          )}
         </div>
       </div>
     );
