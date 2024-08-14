@@ -31,3 +31,4 @@ export { default as MainHero } from './MainHero';
 export { default as CardDataForm } from './CardDataForm';
 export { default as VerifyForm } from './VerifyForm';
 export { default as MainMenu } from './MainMenu';
+export { default as MainAddressSection } from './MainAddressSection';

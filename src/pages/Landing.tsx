@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  AddressSection,
   ContactForm,
+  MainAddressSection,
   MainHero,
   MainMenu,
   MenuSection,
@@ -15,7 +15,7 @@ const Landing: React.FC = () => {
       <MainHero />
       <MainMenu />
       <MenuSection />
-      <AddressSection />
+      <MainAddressSection />
       <ContactForm title={t('contactUsRoute')} destination="contact" />
     </div>
   );

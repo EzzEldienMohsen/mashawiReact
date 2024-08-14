@@ -430,3 +430,20 @@ export type SingleEventQuery = {
   queryKey: (string | undefined)[];
   queryFn: () => Promise<SingleEventResponse>;
 };
+
+// Address type
+export type AddressResponse = {
+  status: number;
+  message: string;
+  data: {
+    id: number;
+    order: number;
+    name: string;
+    address: string;
+    phone: string;
+    landing_phone: string;
+    working_time: string;
+    weekend: string[];
+    location: string;
+  }[];
+};

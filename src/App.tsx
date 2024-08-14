@@ -11,13 +11,11 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
-  ContactUs,
   Home,
   Jobs,
   Privacy,
   Login,
   NewAccount,
-  Branches,
   Terms,
   Payment,
   Delivery,
@@ -46,7 +44,7 @@ import {
   UpdateAddress,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
-import { Categories, Meals } from './assets/types';
+import { AddressResponse, Categories, Meals } from './assets/types';
 
 //  loaders
 import { loader as aboutLoader } from './pages/About';
@@ -65,16 +63,24 @@ import { loader as eventsLoader } from './pages/Events';
 import { loader as newsLoader } from './pages/News';
 import { loader as singleEventLoader } from './pages/SingleEventPage';
 import { loader as singleNewsLoader } from './pages/SingleNewsPage';
+import { loader as MainAddressLoader } from './components/MainAddressSection';
+import { loader as addressLoader } from './components/AddressSection';
 // Combined loaders
 // First Menu Loaders
 export type MenuLoader = {
   data1: Categories;
   data2: Meals;
 };
-const mainMenuLoader = (language: string) => async (): Promise<MenuLoader> => {
+export type MainLoader = {
+  data1: Categories;
+  data2: Meals;
+  data3: AddressResponse;
+};
+const mainMenuLoader = (language: string) => async (): Promise<MainLoader> => {
   const data1 = await mainCategoryLoader(queryClient, language)();
   const data2 = await mainMealsLoader(queryClient, language)();
-  return { data1, data2 };
+  const data3 = await MainAddressLoader(queryClient, language)();
+  return { data1, data2, data3 };
 };
 const menuLoader =
   (language: string) =>
@@ -109,6 +115,8 @@ const Cart = React.lazy(() => import('./pages/Cart'));
 const WishList = React.lazy(() => import('./pages/WishList'));
 const Gallery = React.lazy(() => import('./pages/Gallery'));
 const About = React.lazy(() => import('./pages/About'));
+const ContactUs = React.lazy(() => import('./pages/ContactUs'));
+const Branches = React.lazy(() => import('./pages/Branches'));
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -159,7 +167,18 @@ const AppRouter: React.FC = () => {
         },
         {
           path: '/contact',
-          element: <ContactUs />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <ContactUs />
+            </Suspense>
+          ),
+          loader: addressLoader(queryClient, language),
         },
         {
           path: '/events',
@@ -222,8 +241,20 @@ const AppRouter: React.FC = () => {
         },
         {
           path: '/branches',
-          element: <Branches />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Branches />
+            </Suspense>
+          ),
+          loader: addressLoader(queryClient, language),
         },
+
         {
           path: '/terms',
           element: <Terms />,

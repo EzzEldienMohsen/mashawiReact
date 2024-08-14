@@ -32,11 +32,10 @@ export const loader =
     const data = await queryClient.ensureQueryData(addressQuery(language));
     return data;
   };
-
-const AddressSection: React.FC = () => {
+const MainAddressSection: React.FC = () => {
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
-  const data: AddressResponse = axiosData.data;
+  const data: AddressResponse = axiosData.data3.data;
   const unSortedItems = data.data;
   const sortedItems = unSortedItems.sort((a, b) => a.order - b.order);
   return (
@@ -82,4 +81,4 @@ const AddressSection: React.FC = () => {
   );
 };
 
-export default AddressSection;
+export default MainAddressSection;
