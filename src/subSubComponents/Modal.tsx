@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
   const [selectedAddOns, setSelectedAddOns] = React.useState<AddOn[]>([]);
   const dispatch: AppDispatch = useDispatch();
   const { wishListItems } = useTypedSelector(
-    (state: RootState) => state.wishList
+    (state: RootState) => state.mashawiWishList
   );
   const item = wishListItems.find(
     (i: CartItemWithId) => i.cartItem.id === data.id
@@ -32,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
   const { t } = useTranslation();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const { user } = useTypedSelector((state: RootState) => state.user);
-  const { isLangArabic ,amount,setAmount} = useGlobalContext();
+  const { isLangArabic, amount, setAmount } = useGlobalContext();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
   const handleAddOnChange = (addOn: AddOn, isChecked: boolean): void => {

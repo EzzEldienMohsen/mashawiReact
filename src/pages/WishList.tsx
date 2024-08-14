@@ -8,7 +8,7 @@ import { useGlobalContext } from '../context/GlobalContext';
 const WishList: React.FC = () => {
   const { t } = useTranslation();
   const { wishListItems: items } = useTypedSelector(
-    (state: RootState) => state.wishList
+    (state: RootState) => state.mashawiWishList
   );
   const { user } = useTypedSelector((state: RootState) => state.user);
   const { isLangArabic } = useGlobalContext();

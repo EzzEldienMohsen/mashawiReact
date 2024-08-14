@@ -7,6 +7,7 @@ import {
   getWishListThunk,
   removeItemThunk,
 } from './wishListThunk';
+import { RootState } from '../../store';
 import { TFunction } from 'i18next';
 
 const defaultItems: WishListState = {
@@ -39,49 +40,40 @@ export const addThisToWishList = createAsyncThunk(
 );
 export const getWishList = createAsyncThunk(
   'wishList/getWishList',
-  async (
-    { token, language }: { token: string; language: string },
-    thunkAPI
-  ) => {
-    if (token) {
-      // Clear local wish list when the user is signed in
-      localStorage.removeItem('wishList');
+  async (data: { token: string; language: string }, thunkAPI) => {
+    const { token, language } = data;
+    const response = await getWishListThunk(
+      '/wishlist',
+      thunkAPI,
+      token,
+      language
+    );
+    const localWishListItems = (thunkAPI.getState() as RootState)
+      .mashawiWishList.wishListItems;
 
-      // Fetch the wish list from the backend
-      const response = await getWishListThunk(
-        '/wishlist',
-        thunkAPI,
-        token,
-        language
+    const combinedWishListItems = response.data.map((backendItem) => {
+      const localItem = localWishListItems.find(
+        (item) => item.cartItem.id === backendItem.meal.id
       );
 
-      const backendWishListItems = response.data.map((backendItem) => ({
-        wish_id: backendItem.wish_id,
-        cartItem: {
-          name: backendItem.meal.name,
-          price: backendItem.meal.price,
-          image: backendItem.meal.image,
-          id: backendItem.meal.id,
-          additions: backendItem.meal.additions,
-          amount: 1, // Default amount for each wishlist item
-        },
-      }));
+      return localItem
+        ? { ...localItem, cart_id: backendItem.wish_id }
+        : {
+            cart_id: backendItem.wish_id,
+            cartItem: {
+              name: backendItem.meal.name,
+              price: backendItem.meal.price,
+              image: backendItem.meal.image,
+              id: backendItem.meal.id,
+              additions: backendItem.meal.additions,
+              amount: 1, // Default amount if not found locally
+            },
+          };
+    });
 
-      return { ...response, data: backendWishListItems };
-    } else {
-      // Load wishlist from local storage if no user is logged in
-      const localWishList = JSON.parse(
-        localStorage.getItem('wishList') || '[]'
-      );
-      return {
-        status: 200,
-        message: 'Wishlist loaded from local storage',
-        data: localWishList,
-      };
-    }
+    return { ...response, data: combinedWishListItems };
   }
 );
-
 export const removeMeal = createAsyncThunk(
   'wishList/removeMeal',
   async (
@@ -98,7 +90,7 @@ export const removeMeal = createAsyncThunk(
   }
 );
 const wishListSlice = createSlice({
-  name: 'wishList',
+  name: 'mashawiWishList',
   initialState: defaultItems,
   reducers: {
     addItem: (state, action: PayloadAction<{ product: CartItem }>) => {

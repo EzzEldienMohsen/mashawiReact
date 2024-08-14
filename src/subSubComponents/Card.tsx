@@ -9,7 +9,7 @@ import { useGlobalContext } from '../context/GlobalContext';
 const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
   const { amount, setAmount } = useGlobalContext();
   const { wishListItems } = useTypedSelector(
-    (state: RootState) => state.wishList
+    (state: RootState) => state.mashawiWishList
   );
   const { isLangArabic } = useGlobalContext();
   const modalId = `modal_${data.id}`;

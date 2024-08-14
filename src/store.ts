@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 export const store = configureStore({
   reducer: {
     theMashawiCart: cartReducer,
-    wishList: wishListReducer,
+    mashawiWishList: wishListReducer,
     user: userReducer,
     address: addressReducer,
   },

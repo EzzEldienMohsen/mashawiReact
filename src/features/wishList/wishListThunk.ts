@@ -32,7 +32,6 @@ export const addToWishListThunk = async (
 
     return response.data;
   } catch (error: any) {
-    debugger;
     if (error.response.status === 401) {
       toast.warn(t('addWishMsg'));
     } else {
