@@ -1,5 +1,5 @@
 import React from 'react';
-import { AboutExcellence,  AboutWhy,  SidePageHero } from '../components';
+import { AboutExcellence, AboutWhy, SidePageHero } from '../components';
 import img from '../assets/about us photo.png';
 import { autoFetch } from '../utils';
 import { useLoaderData } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { DeliveryQueryParams, StaticRequestData } from '../assets/types';
 import { QueryClient } from '@tanstack/react-query';
 
-const aboutQuery = (language:string) :DeliveryQueryParams => {
+const aboutQuery = (language: string): DeliveryQueryParams => {
   return {
     queryKey: ['about', language],
     queryFn: () =>
@@ -26,8 +26,9 @@ export const loader =
     return data;
   };
 
-const About:React.FC = () => {
-  const { data } = useLoaderData() as StaticRequestData;
+const About: React.FC = () => {
+  const axiosData: any = useLoaderData();
+  const data: StaticRequestData = axiosData.data;
   const { t } = useTranslation();
   console.log(data);
   return (
@@ -38,7 +39,7 @@ const About:React.FC = () => {
         secondaryText={t('aboutPageText')}
       />
       <AboutExcellence />
-      <AboutWhy />
+      <AboutWhy data={data.data} />
     </div>
   );
 };

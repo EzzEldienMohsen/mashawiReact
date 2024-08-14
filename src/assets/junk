@@ -705,3 +705,58 @@
 //   text: 'policyFirstLorem',
 // };
 
+
+//   <h1 className="text-black font-bold font-abdo text-2xl lg:text-3xl">
+//           {t('aboutWhySectionTitle')}
+//         </h1>
+
+// <ul className="w-full flex flex-col items-start justify-center gap-y-4">
+//           {whyArray.map((why) => (
+//             <li
+//               key={why.id}
+//               className="flex flex-row items-start justify-start gap-x-4 lg:gap-x-6 w-full"
+//             >
+//               <img src={why.src} alt="logo" className="w-8 " />
+//               <div className="flex flex-col gap-y-1">
+//                 <p className="text-black text-xs md:text-sm lg:text-md">
+//                   {t(why.text)}
+//                 </p>
+//               </div>
+//             </li>
+//           ))}
+//         </ul>
+
+
+// export const whyArray: AboutExcellenceUnit[] = [
+//   {
+//     id: nanoid(),
+//     src: checkedLogo,
+//     title: 'whyArrayTitle1',
+//     text: 'whyArrayText1',
+//   },
+//   {
+//     id: nanoid(),
+//     src: checkedLogo,
+//     title: 'whyArrayTitle2',
+//     text: 'whyArrayText2',
+//   },
+//   {
+//     id: nanoid(),
+//     src: checkedLogo,
+//     title: 'whyArrayTitle3',
+//     text: 'لأن العمل الناجح يكتمل بفريق منسجم وسعيد!',
+//   },
+//   {
+//     id: nanoid(),
+//     src: checkedLogo,
+//     title: 'whyArrayTitle4',
+//     text: 'whyArrayText4',
+//   },
+//   {
+//     id: nanoid(),
+//     src: checkedLogo,
+//     title: 'whyArrayTitle5',
+//     text: 'whyArrayText5',
+//   },
+// ];
+

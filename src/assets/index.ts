@@ -43,7 +43,6 @@ import img1 from '../assets/svg/about/vision.svg';
 import img2 from '../assets/svg/about/mission.svg';
 import img3 from '../assets/svg/about/story.svg';
 import img4 from '../assets/svg/about/excellence.svg';
-import checkedLogo from '../assets/svg/about/checked.svg';
 
 // tracker order Images
 import tr1 from '../assets/svg/traker/ordered.svg';
@@ -361,39 +360,6 @@ export const excellence: AboutExcellenceUnit[] = [
     src: img4,
     title: 'excellenceTitle4',
     text: 'ExcellenceText4',
-  },
-];
-
-export const whyArray: AboutExcellenceUnit[] = [
-  {
-    id: nanoid(),
-    src: checkedLogo,
-    title: 'whyArrayTitle1',
-    text: 'whyArrayText1',
-  },
-  {
-    id: nanoid(),
-    src: checkedLogo,
-    title: 'whyArrayTitle2',
-    text: 'whyArrayText2',
-  },
-  {
-    id: nanoid(),
-    src: checkedLogo,
-    title: 'whyArrayTitle3',
-    text: 'لأن العمل الناجح يكتمل بفريق منسجم وسعيد!',
-  },
-  {
-    id: nanoid(),
-    src: checkedLogo,
-    title: 'whyArrayTitle4',
-    text: 'whyArrayText4',
-  },
-  {
-    id: nanoid(),
-    src: checkedLogo,
-    title: 'whyArrayTitle5',
-    text: 'whyArrayText5',
   },
 ];
 
