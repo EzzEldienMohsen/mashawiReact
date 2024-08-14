@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import debounce from 'lodash/debounce';
 import plus from '../assets/svg/menu/input/plus.svg';
 import minus from '../assets/svg/menu/input/minus.svg';
 import { RootState, useTypedSelector } from '../store';
+
 interface AmountProps {
   amount: number;
   setAmount: (a: number | ((a: number) => number)) => void;
   editTheQuantity: (qty: number) => void;
 }
+
 const DrawerAmountInput: React.FC<AmountProps> = ({
   amount,
   setAmount,
@@ -15,8 +18,19 @@ const DrawerAmountInput: React.FC<AmountProps> = ({
   const { isLoading } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
   );
+
+  // Create a debounced function for handling amount changes
+  const handleAmountChange = useCallback(
+    debounce((value: number) => {
+      editTheQuantity(value);
+    }, 3000), // 3000 milliseconds = 3 seconds
+    []
+  );
+
   const handleAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(parseInt(e.target.value, 10));
+    const newAmount = parseInt(e.target.value) || 0;
+    setAmount(newAmount);
+    handleAmountChange(newAmount);
   };
 
   const incrementAmount = () => {
@@ -47,18 +61,16 @@ const DrawerAmountInput: React.FC<AmountProps> = ({
         <img src={minus} alt="-" />
       </button>
       <input
+        name="amount"
         type="number"
-        id="amount"
+        disabled={isLoading}
         value={amount}
         onChange={handleAmount}
         min="0"
-        className="bg-[#DDDDDD] text-center appearance-none"
+        className="bg-[#DDDDDD] text-center"
         style={{
           width: '50px',
           textAlign: 'center',
-          appearance: 'none',
-          MozAppearance: 'textfield',
-          WebkitAppearance: 'none',
         }}
       />
       <button
