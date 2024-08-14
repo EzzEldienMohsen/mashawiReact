@@ -3,7 +3,7 @@ import {
   AddressSection,
   ContactForm,
   MainHero,
-  Menu,
+  MainMenu,
   MenuSection,
 } from '../components';
 import { useTranslation } from 'react-i18next';
@@ -13,7 +13,7 @@ const Landing: React.FC = () => {
   return (
     <div className="w-full flex justify-center gap-y-24 flex-col items-center  pb-8">
       <MainHero />
-      <Menu />
+      <MainMenu />
       <MenuSection />
       <AddressSection />
       <ContactForm title={t('contactUsRoute')} destination="contact" />

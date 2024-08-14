@@ -30,3 +30,4 @@ export { default as GalleryPagination } from './GalleryPagination';
 export { default as MainHero } from './MainHero';
 export { default as CardDataForm } from './CardDataForm';
 export { default as VerifyForm } from './VerifyForm';
+export { default as MainMenu } from './MainMenu';

@@ -56,7 +56,9 @@ import { loader as deliveryLoader } from './pages/Delivery';
 import { loader as refundLoader } from './pages/Refund';
 import { loader as termsLoader } from './pages/Terms';
 import { loader as categoryLoader } from './subComponents/Slider';
+import { loader as mainCategoryLoader } from './subComponents/MainSlider';
 import { loader as mealsLoader } from './components/Menu';
+import { loader as mainMealsLoader } from './components/MainMenu';
 import { loader as menuWithCategoryProductLoader } from './components/MenuWithCategory';
 import { loader as galleryLoader } from './pages/Gallery';
 import { loader as eventsLoader } from './pages/Events';
@@ -68,6 +70,11 @@ import { loader as singleNewsLoader } from './pages/SingleNewsPage';
 export type MenuLoader = {
   data1: Categories;
   data2: Meals;
+};
+const mainMenuLoader = (language: string) => async (): Promise<MenuLoader> => {
+  const data1 = await mainCategoryLoader(queryClient, language)();
+  const data2 = await mainMealsLoader(queryClient, language)();
+  return { data1, data2 };
 };
 const menuLoader =
   (language: string) =>
@@ -133,7 +140,7 @@ const AppRouter: React.FC = () => {
               <Landing />
             </Suspense>
           ),
-          loader: menuLoader(language),
+          loader: mainMenuLoader(language),
         },
         {
           path: '/about',
