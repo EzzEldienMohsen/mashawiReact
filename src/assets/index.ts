@@ -284,9 +284,9 @@ export const profileLinks: ProfileLink[] = [
 ];
 
 export const genderOptions: { value: string; label: string }[] = [
-  { value: 'ذكر', label: 'ذكر' },
-  { value: 'انثى', label: 'انثى' },
-  { value: 'اخر', label: 'اخر' },
+  { value: 'male', label: 'maleLabel' },
+  { value: 'female', label: 'femaleLabel' },
+  { value: 'other', label: 'otherLabel' },
   // Add more options as needed
 ];
 

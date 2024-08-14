@@ -16,6 +16,7 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { updateUser } from '../features/user/userSlice';
 import { toast } from 'react-toastify';
+import CustomSelect from '../subSubComponents/CustomSelect';
 const debounce = (func: (...args: any[]) => void, delay: number) => {
   let timeoutId: ReturnType<typeof setTimeout>;
   return (...args: any[]) => {
@@ -134,7 +135,7 @@ const UserForm: React.FC = () => {
         placeHolder={t('birthDateInput')}
         full={true}
       />
-      <FormRow
+      <CustomSelect
         name="gender"
         label=" "
         icon={gender}
