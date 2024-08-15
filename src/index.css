@@ -80,3 +80,9 @@ background-size: contain;
   background-clip: padding-box; /* Ensures gradient inside the border */
   border-radius: inherit; /* Matches the element's border-radius if any */
 }
+
+
+
+
+/* DropDown Select */
+

@@ -17,6 +17,21 @@ import { useDispatch } from 'react-redux';
 import { updateUser } from '../features/user/userSlice';
 import { toast } from 'react-toastify';
 import CustomSelect from '../subSubComponents/CustomSelect';
+// Country library options
+import countries from 'i18n-iso-countries';
+import enLocale from 'i18n-iso-countries/langs/en.json';
+import arLocale from 'i18n-iso-countries/langs/ar.json';
+
+countries.registerLocale(enLocale);
+countries.registerLocale(arLocale);
+
+const getCountryOptions = (lang: string) => {
+  return Object.entries(countries.getNames(lang)).map(([code, name]) => ({
+    value: code,
+    label: name,
+  }));
+};
+
 const debounce = (func: (...args: any[]) => void, delay: number) => {
   let timeoutId: ReturnType<typeof setTimeout>;
   return (...args: any[]) => {
@@ -72,6 +87,7 @@ const UserForm: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
+    console.log(values);
     await dispatch(updateUser({ reqData: values, token, language }));
   };
 
@@ -146,7 +162,18 @@ const UserForm: React.FC = () => {
         options={genderOptions}
         full={true}
       />
-      <FormRow
+      <CustomSelect
+        name="nationality"
+        label=" "
+        icon={country}
+        type="select"
+        value={values.nationality}
+        handleChange={handleChange}
+        placeHolder={t('countryInput')}
+        options={getCountryOptions(language)}
+        full={true}
+      />
+      {/* <FormRow
         name="nationality"
         label=" "
         icon={country}
@@ -155,7 +182,7 @@ const UserForm: React.FC = () => {
         handleChange={handleChange}
         placeHolder={t('countryInput')}
         full={true}
-      />
+      /> */}
       <FormRow
         name="work"
         icon={profession}
