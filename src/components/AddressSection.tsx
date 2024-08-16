@@ -9,6 +9,7 @@ import { AddressResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { useLoaderData } from 'react-router-dom';
+import { useGlobalContext } from '../context/GlobalContext';
 
 interface AddressQuery {
   queryKey: string[];
@@ -34,6 +35,7 @@ export const loader =
   };
 
 const AddressSection: React.FC = () => {
+  const { setTheMap } = useGlobalContext();
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
   const data: AddressResponse = axiosData.data;
@@ -46,6 +48,9 @@ const AddressSection: React.FC = () => {
         {sortedItems.map((ad) => {
           return (
             <div
+              onClick={() => {
+                setTheMap(() => ad.location);
+              }}
               key={ad.id}
               className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md px-2 w-[90%] my-2 lg:w-[32%] md:w-[45%] "
             >

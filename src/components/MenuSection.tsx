@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import img from '../assets/MenuSectionLanding.png';
 import { useTranslation } from 'react-i18next';
 
-const MenuSection:React.FC = () => {
+const MenuSection: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col justify-center items-center mt-6 lg:flex-row lg:justify-between lg:items-between gap-y-10 lg:gap-y-0  w-full px-8 lg:px-20">
@@ -18,7 +18,7 @@ const MenuSection:React.FC = () => {
         <p className="text-xs md:text-lg lg:text-xl mb-6">
           {t('mainMenuSectionText3')}{' '}
         </p>
-        <Link to="/menuList">
+        <Link to="/meals">
           <button className="btn text-white hover:bg-newRed hover:text-white px-10 py-1 text-sm  md:text-xl rounded-3xl bg-newRed my-2">
             {t('browseMenu')}
           </button>
