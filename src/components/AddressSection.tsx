@@ -47,7 +47,7 @@ const AddressSection: React.FC = () => {
       <div className="flex mt-2 flex-col justify-center items-center md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
         {sortedItems.map((ad) => {
           return (
-            <div
+            <button
               onClick={() => {
                 setTheMap(() => ad.location);
               }}
@@ -79,7 +79,7 @@ const AddressSection: React.FC = () => {
                 <img src={addTime} alt="alt" />
                 <p className="ml-2 text-sm">{ad.working_time}</p>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
