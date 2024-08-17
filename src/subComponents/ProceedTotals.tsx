@@ -27,27 +27,27 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
       <p className="text-newRed text-lg md:text-xl my-2 lg:text-2xl">
         {t('vatContentText')}
       </p>
-      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
+      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('totalOrderText')}</span>
         <span>{formatPrice(parseInt(orderTotal.sub_total))}</span>
       </p>
 
       {/* TAX precentage */}
-      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
+      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('taxrsText')}</span>
         <span className="font-medium">{orderTotal.vat_percent}%</span>
       </p>
       {/* TAX  */}
-      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
+      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('taxValue')}</span>
         <span className="font-medium">
           {formatPrice(parseInt(orderTotal.vat))}
         </span>
       </p>
       {/* ORDER TOTAL Or Total Before */}
-      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
+      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('totalText')}</span>
-        <span className="font-medium">
+        <span className="font-medium text-newRed">
           {formatPrice(
             parseInt(
               orderTotal.total_before
@@ -59,7 +59,7 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
       </p>
       {/*Discount */}
       {orderTotal.discount ? (
-        <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
+        <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
           <span>{t('totalText')}</span>
           <span className="font-medium">
             {formatPrice(parseInt(orderTotal.discount))}
@@ -68,7 +68,7 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
       ) : null}
       {/*Total after */}
       {orderTotal.total_after ? (
-        <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
+        <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
           <span>{t('totalText')}</span>
           <span className="font-medium">
             {formatPrice(parseInt(orderTotal.total_after))}
