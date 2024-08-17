@@ -23,7 +23,7 @@ export { default as Map } from './Map';
 export { default as EventsCard } from './EventsCard';
 export { default as Steps } from './Steps';
 export { default as ProceedPageForm } from './ProceedPageForm';
-export { default as ProceedDeliveryForm } from './ProceedDeliveryForm';
+// export { default as ProceedDeliveryForm } from './ProceedDeliveryForm';
 export { default as MenuWithCategory } from './MenuWithCategory';
 export { default as Pagination } from './Pagination';
 export { default as GalleryPagination } from './GalleryPagination';

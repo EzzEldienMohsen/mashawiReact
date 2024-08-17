@@ -32,7 +32,6 @@ import {
   TrackOrder,
   DeliveredPage,
   ProceedPage,
-  ProceedDelivery,
   MenuCategory,
   PaymentDetails,
   VerifyEmail,
