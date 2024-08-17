@@ -15,13 +15,13 @@ const MainHero: React.FC = () => {
     <div className="w-full relative   px-8 lg:px-20 ">
       {/* the Colored Div */}
       <div
-        className={`absolute w-full z-10 lg:w-[35%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
+        className={`absolute w-full pb-10 z-10 lg:w-[30%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
           isLangArabic ? 'left-0' : 'right-0'
         } `}
       ></div>
       <div className="flex mt-10 w-full lg:mt-24 flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
         {/* The image */}
-        <div className="relative w-4/5 lg:w-[45%] aspect-square md:aspect-[4/3] lg:aspect-square place-self-center">
+        <div className="relative w-4/5 lg:w-[36%] aspect-square md:aspect-[4/3] lg:aspect-square place-self-center">
           <img
             src={theImage}
             alt="mashawi"
@@ -30,7 +30,7 @@ const MainHero: React.FC = () => {
           <img
             src={theImage}
             alt="mashawi"
-            className=" rounded-full border-[1px] absolute inset-0 border-newRed p-[2px] border-gradient"
+            className=" rounded-full border-[1px] absolute inset-0 border-newRed p-[1px] border-gradient"
           />
         </div>
         {/* Content */}

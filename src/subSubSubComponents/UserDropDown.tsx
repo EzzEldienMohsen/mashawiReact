@@ -8,6 +8,7 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { logOut, logoutUser } from '../features/user/userSlice';
+import { clearAddress } from '../features/address/addressSlice';
 const UserDropDown: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const { user } = useTypedSelector((state: RootState) => state.user);
@@ -16,6 +17,7 @@ const UserDropDown: React.FC = () => {
   const navigate = useNavigate();
   const theLogOut = async () => {
     await dispatch(logOut(user.token));
+    await dispatch(clearAddress());
     await dispatch(logoutUser());
     window.location.reload();
     navigate('/');

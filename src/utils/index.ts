@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { StaticRequestData, User } from '../assets/types';
 import { AddressData } from '../features/address/types';
+import { OrdersData } from '../features/orders/types';
 
 // Define the base URL
 const url = 'https://mshawy.trendline.marketing/api/v1';
@@ -77,6 +78,17 @@ export const getAddressFromLocalStorage = (): AddressData[] => {
   if (address) {
     try {
       return JSON.parse(address) as AddressData[];
+    } catch (error) {
+      return [];
+    }
+  }
+  return [];
+};
+export const getOrdersFromLocalStorage = (): OrdersData[] => {
+  const orders = localStorage.getItem('orders');
+  if (orders) {
+    try {
+      return JSON.parse(orders) as OrdersData[];
     } catch (error) {
       return [];
     }

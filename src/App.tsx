@@ -36,7 +36,6 @@ import {
   MenuCategory,
   PaymentDetails,
   VerifyEmail,
-  Orders,
   MyAddress,
   NewAddress,
   SingleOrder,
@@ -65,6 +64,7 @@ import { loader as singleEventLoader } from './pages/SingleEventPage';
 import { loader as singleNewsLoader } from './pages/SingleNewsPage';
 import { loader as MainAddressLoader } from './components/MainAddressSection';
 import { loader as addressLoader } from './components/AddressSection';
+
 // Combined loaders
 // First Menu Loaders
 export type MenuLoader = {
@@ -117,6 +117,7 @@ const Gallery = React.lazy(() => import('./pages/Gallery'));
 const About = React.lazy(() => import('./pages/About'));
 const ContactUs = React.lazy(() => import('./pages/ContactUs'));
 const Branches = React.lazy(() => import('./pages/Branches'));
+const Orders = React.lazy(() => import('./pages/Orders'));
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -293,7 +294,17 @@ const AppRouter: React.FC = () => {
         },
         {
           path: 'profile',
-          element: <Profile />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Profile />
+            </Suspense>
+          ),
           children: [
             {
               index: true,
@@ -301,10 +312,20 @@ const AppRouter: React.FC = () => {
             },
             {
               path: 'orders',
-              element: <Orders />,
+              element: (
+                <Suspense
+                  fallback={
+                    <div className="flex w-full py-8 justify-center items-center">
+                      <span className="loading loading-spinner loading-lg text-newRed"></span>
+                    </div>
+                  }
+                >
+                  <Orders />
+                </Suspense>
+              ),
             },
             {
-              path: 'single-order',
+              path: 'orders/:id',
               element: <SingleOrder />,
             },
             {

@@ -1,5 +1,20 @@
 import { UserInfo } from '../../assets/types';
 
+export type OTPResponse = {
+  status: number;
+  message: string;
+  data: {
+    user: {
+      id: number;
+      f_name: string;
+      l_name: string;
+      phone: string; // Both responses have phone as a string
+      email: string;
+    };
+    token: string;
+  };
+};
+
 export type ResetPasswordResponse = {
   status: number;
   message: string;

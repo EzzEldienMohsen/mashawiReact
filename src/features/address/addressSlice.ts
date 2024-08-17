@@ -14,10 +14,9 @@ import {
   updateAddressThunk,
 } from './addressThunk';
 import { toast } from 'react-toastify';
-import { getAddressFromLocalStorage } from '../../utils';
 // import { RootState } from '../../store';
 
-const initialAddress: AddressData[] = getAddressFromLocalStorage() || [];
+const initialAddress: AddressData[] = [];
 
 const initialState: AddressState = {
   isLoading: false,
@@ -85,7 +84,12 @@ export const deleteAddress = createAsyncThunk(
 const addressSlice = createSlice({
   name: 'address',
   initialState,
-  reducers: {},
+  reducers: {
+    clearAddress: (state) => {
+      state.address = [];
+      localStorage.removeItem('mashawiAddress');
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAddress.pending, (state) => {
@@ -154,5 +158,7 @@ const addressSlice = createSlice({
       });
   },
 });
+
+export const { clearAddress } = addressSlice.actions;
 
 export default addressSlice.reducer;

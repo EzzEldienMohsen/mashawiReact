@@ -23,11 +23,18 @@ const MyAddress: React.FC = () => {
   const navigate = useNavigate();
   const handleRemoveAddress = async (id: number) => {
     await dispatch(deleteAddress({ id: `${id}`, token, language }));
-    await dispatch(getAddress({ token, language }));
+    dispatch(getAddress({ token, language }));
   };
-  if (address.length === 0) {
-    navigate('/profile/new-address');
-  }
+  const getTheAddress = () => {
+    dispatch(getAddress({ token, language }));
+  };
+  React.useEffect(() => {
+    if (!token) {
+      navigate('/'); // Redirect to home page if no token
+    } else {
+      getTheAddress();
+    }
+  }, [token, navigate]);
 
   if (isLoading) {
     return (

@@ -271,11 +271,16 @@ const userSlice = createSlice({
       .addCase(resetPassword.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(resetPassword.fulfilled, (state, action: PayloadAction<any>) => {
-        state.isLoading = false;
-        const message = action.payload.message;
-        toast.success(message);
-      })
+      .addCase(
+        resetPassword.fulfilled,
+        (state, action: PayloadAction<CompleteUSer>) => {
+          state.isLoading = false;
+          const message = action.payload.message;
+          state.user.user = action.payload.data.user;
+          state.user.token = action.payload.data.token;
+          toast.success(message);
+        }
+      )
       .addCase(resetPassword.rejected, (state) => {
         state.isLoading = false;
       })
@@ -284,8 +289,10 @@ const userSlice = createSlice({
       })
       .addCase(
         emailVerification.fulfilled,
-        (state, action: PayloadAction<any>) => {
+        (state, action: PayloadAction<CompleteUSer>) => {
           state.isLoading = false;
+          state.user.user = action.payload.data.user;
+          state.user.token = action.payload.data.token;
           const message = action.payload.message;
           toast.success(message);
         }

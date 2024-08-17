@@ -3,6 +3,7 @@ import cartReducer from './features/cart/cartSlice';
 import userReducer from './features/user/userSlice';
 import wishListReducer from './features/wishList/wishListSlice';
 import addressReducer from './features/address/addressSlice';
+import ordersReducer from './features/orders/ordersSlice';
 import { ThunkAction } from 'redux-thunk';
 import { TypedUseSelectorHook } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -14,7 +15,12 @@ export const store = configureStore({
     mashawiWishList: wishListReducer,
     user: userReducer,
     address: addressReducer,
+    orders: ordersReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Disable the serializable state check
+    }),
 });
 
 // Define RootState type which represents the entire state of the Redux store

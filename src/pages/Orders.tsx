@@ -1,20 +1,39 @@
 import React from 'react';
 import theClose from '../assets/svg/closeBtn.svg';
-
 import { myOrders } from '../assets';
 import { useTranslation } from 'react-i18next';
 import { useGlobalContext } from '../context/GlobalContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { useDispatch } from 'react-redux';
+import { getAllOrders } from '../features/orders/ordersSlice';
 
 const Orders: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
+  const language = isLangArabic ? 'ar' : 'en';
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
+  const { orders } = useTypedSelector((state: RootState) => state.orders);
+  const getTheOrders = async () => {
+    await dispatch(getAllOrders({ token, language }));
+  };
+  React.useEffect(() => {
+    if (!token) {
+      navigate('/'); // Redirect to home page if no token
+    } else {
+      getTheOrders();
+    }
+  }, [token, language, navigate]);
+  console.log(orders);
   return (
     <div className="my-4 w-full flex flex-col px-8 lg:px-20 gap-y-6 justify-center items-center">
       {myOrders.map((order) => {
         return (
           <Link
-            to="/profile/single-order"
+            to={`/profile/orders/${order.id}`}
             key={order.id}
             className="flex flex-col rounded-2xl justify-center items-start  bg-white px-4 py-6 relative gap-y-4 md:flex-row w-full md:justify-between lg:px-2 lg:gap-x-6"
           >

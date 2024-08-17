@@ -1,17 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { formatPrice } from '../utils';
-import { clearCart } from '../features/cart/cartSlice';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { RootState, useTypedSelector } from '../store';
 
 const ProceedTotals: React.FC = () => {
   const { cartTotal, tax, orderTotal } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
   );
-  const dispatch: AppDispatch = useDispatch();
-  const clearTheCart = () => dispatch(clearCart());
   const { t } = useTranslation();
   return (
     <div className="flex flex-col my-4 py-4 justify-between md:justify-center items-center border-t-[2px] border-gray-500 w-full px-8 lg:px-20">
@@ -55,12 +51,6 @@ const ProceedTotals: React.FC = () => {
       >
         {t('contiueSoppingText')}
       </Link>
-      <button
-        onClick={clearTheCart}
-        className=" btn btn-block my-2 flex justify-center shadow-xl bg-[#D9D9D9] items-center rounded-full"
-      >
-        {t('clearCartText')}
-      </button>
     </div>
   );
 };

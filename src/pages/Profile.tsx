@@ -5,7 +5,6 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useDispatch } from 'react-redux';
 import { getUser } from '../features/user/userSlice';
-import { getAddress } from '../features/address/addressSlice';
 
 const Profile: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -17,14 +16,14 @@ const Profile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const language = isLangArabic ? 'ar' : 'en';
   const token = user?.token; // Ensure token is retrieved from user object
-  
+
   const getTheProfile = async () => {
     setIsLoading(true);
     await dispatch(getUser({ token, language }));
-    await dispatch(getAddress({ token, language }));
+
     setIsLoading(false);
   };
 

@@ -29,11 +29,15 @@ const NewAddress: React.FC = () => {
   const [values, setValues] = React.useState<CreateAddressReq>(
     newAddressInitialValues
   );
-  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
-
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (!token) {
+      navigate('/');
+    }
+  }, [token, navigate]);
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);

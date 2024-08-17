@@ -11,6 +11,7 @@ import { SecondaryDrawer, SecondaryDropDown } from '../subSubComponents';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { logOut, logoutUser } from '../features/user/userSlice';
+import { clearAddress } from '../features/address/addressSlice';
 interface CloseDrawer {
   closeDrawer: () => void;
 }
@@ -24,6 +25,7 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
 
   const theLogOut = async () => {
     await dispatch(logOut(user.token));
+    await dispatch(clearAddress());
     await dispatch(logoutUser());
     window.location.reload();
     navigate('/');

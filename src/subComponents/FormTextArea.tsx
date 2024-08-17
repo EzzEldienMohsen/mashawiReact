@@ -42,7 +42,7 @@ const FormTextArea: React.FC<FormRowProps> = ({
           } text-sm md:text-auto bg-white font-abdo !important  !important ${
             isOTP
               ? 'text-center w-12 lg:w-16 rounded-2xl'
-              : 'rounded-3xl text-start h-[150px] lg:h-[250px] w-full'
+              : 'rounded-3xl text-start  md:max-h-[150px]  w-full'
           }  ${high ? 'py-6 md:py-6' : 'py-2'} ${isBorder ? 'border-2' : ''}`}
         />
         {icon ? (

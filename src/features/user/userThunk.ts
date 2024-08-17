@@ -137,9 +137,9 @@ export const emailVerificationThunk = async (
   url: string,
   reqData: EmailVerificationData,
   thunkAPI: any
-): Promise<ApiResponse> => {
+): Promise<CompleteUSer> => {
   try {
-    const response: AxiosResponse<ApiResponse> = await autoFetch.post(
+    const response: AxiosResponse<CompleteUSer> = await autoFetch.post(
       url,
       reqData
     );
