@@ -196,5 +196,12 @@
   "maleLabel": "ذكر",
   "femaleLabel": "انثى",
   "otherLabel": "آخر",
-  "allDishes": "جميع الاطباق"
+  "allDishes": "جميع الاطباق",
+  "branchController": "طريقة الاستلام",
+  "branch": "استلام من الفرع",
+  "home": "توصيل للمنزل",
+  "address": "العنوان",
+  "selectAddress": "اختر عنوان موجود",
+  "cash": "نقدا",
+  "onlinePayment": "استخدام البطاقة"
 }

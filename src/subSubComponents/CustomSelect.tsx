@@ -9,7 +9,7 @@ interface CustomSelectProps {
   half?: boolean;
   isBorder?: boolean;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  value: string | null;
+  value: string | null | number;
   icon?: string;
   high?: boolean;
   full?: boolean;
@@ -36,18 +36,19 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   const { isLangArabic } = useGlobalContext();
   const [searchTerm, setSearchTerm] = useState(value || '');
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null); // Ref for the dropdown container
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Filter the options based on the search term
+  // Filter the options based on the search term and apply translation conditionally
   const filteredOptions = options?.filter((option) =>
-    t(option.label).toLowerCase().includes(searchTerm.toLowerCase())
+    (name === 'gender' ? t(option.label) : option.label)
+      .toLowerCase()
+      .includes(searchTerm.toString().toLowerCase())
   );
 
-  const handleSelect = (selectedValue: string) => {
+  const handleSelect = (selectedValue: string | number) => {
     setSearchTerm(selectedValue); // Set the search term for display
     setIsOpen(false);
 
-    // Trigger the handleChange function with a proper event structure
     handleChange({
       target: {
         name, // Provide the name of the input field (in case it's needed)
@@ -56,7 +57,6 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
     } as ChangeEvent<HTMLInputElement>);
   };
 
-  // Close the dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -78,7 +78,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       className={`flex flex-col justify-start my-1 ${
         full ? 'w-full' : 'w-4/5 md:w-full'
       } items-start`}
-      ref={dropdownRef} // Attach the ref to the main container
+      ref={dropdownRef}
     >
       {label && (
         <label className="my-1 capitalize" htmlFor={name}>
@@ -119,7 +119,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
                   onClick={() => handleSelect(option.value)}
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                 >
-                  {t(option.label)}
+                  {name === 'gender' ? t(option.label) : option.label}
                 </div>
               ))
             ) : (

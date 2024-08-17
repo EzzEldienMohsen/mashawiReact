@@ -109,7 +109,7 @@ export type Link = {
   img?: string;
 };
 
-export type Option = { label: string; value: string };
+export type Option = { label: string; value: string | number };
 export type FormRowProps = {
   name: string;
   type: string;
@@ -437,15 +437,16 @@ export type SingleEventQuery = {
 export type AddressResponse = {
   status: number;
   message: string;
-  data: {
-    id: number;
-    order: number;
-    name: string;
-    address: string;
-    phone: string;
-    landing_phone: string;
-    working_time: string;
-    weekend: string[];
-    location: string;
-  }[];
+  data: TheAddressData[];
+};
+export type TheAddressData = {
+  id: number;
+  order: number;
+  name: string;
+  address: string;
+  phone: string;
+  landing_phone: string;
+  working_time: string;
+  weekend: string[];
+  location: string;
 };

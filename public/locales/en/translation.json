@@ -196,5 +196,12 @@
   "maleLabel": "male",
   "femaleLabel": "female",
   "otherLabel": "other",
-  "allDishes": "all dishes"
+  "allDishes": "all dishes",
+  "branchController": "order receive method",
+  "branch": "collect form branch",
+  "home": "home delivery",
+  "address": "address",
+  "selectAddress": "select an existing address",
+  "cash": "Cash",
+  "onlinePayment": "using a card"
 }

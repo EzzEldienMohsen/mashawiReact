@@ -2,13 +2,18 @@
 
 export type OrdersData = {
   id: number;
-  total: string;
+  total: number;
   date: string;
 };
 export type OrdersResponse = {
   status: number;
   message: string;
   data: OrdersData[];
+};
+export type CheckoutResponse = {
+  status: number;
+  message: string;
+  data: OrdersData;
 };
 
 export type SingleOrderResponse = {
@@ -42,4 +47,38 @@ export type OrdersState = {
   isLoading: boolean;
   orders: OrdersData[];
   singleOrder: SingleOrderResponse;
+  orderTotal: OrderCalc;
+};
+export type OrderCalc = {
+  sub_total: string;
+  vat_percent: string;
+  vat: string;
+  total: string;
+  total_before?: string | null;
+  discount?: string | null;
+  total_after?: string | null;
+};
+
+export type GetCalcRes = {
+  status: number;
+  message: string;
+  data: OrderCalc;
+};
+
+export type ApplyCouponRes = {
+  status: number;
+  message: string;
+  data: {
+    total_before: string;
+    discount: string;
+    total_after: string;
+  };
+};
+
+export type CheckoutReq = {
+  payment_method: string;
+  address_id: number | null;
+  branch_id: number | null;
+  notes: string;
+  coupon_code: string;
 };

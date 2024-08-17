@@ -46,7 +46,14 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <GlobalContext.Provider
-      value={{ isLangArabic, toggleLang, amount, setAmount, theMap, setTheMap }}
+      value={{
+        isLangArabic,
+        toggleLang,
+        amount,
+        setAmount,
+        theMap,
+        setTheMap,
+      }}
     >
       {children}
     </GlobalContext.Provider>

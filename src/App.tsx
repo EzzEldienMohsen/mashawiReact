@@ -213,12 +213,23 @@ const AppRouter: React.FC = () => {
         },
         {
           path: '/proceed',
-          element: <ProceedPage />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <ProceedPage />
+            </Suspense>
+          ),
+          loader: addressLoader(queryClient, language),
         },
-        {
-          path: '/proceed-delivery',
-          element: <ProceedDelivery />,
-        },
+        // {
+        //   path: '/proceed-delivery',
+        //   element: <ProceedDelivery />,
+        // },
         {
           path: '/card-data',
           element: <PaymentDetails />,

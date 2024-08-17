@@ -38,6 +38,7 @@ const MainAddressSection: React.FC = () => {
   const data: AddressResponse = axiosData.data3.data;
   const unSortedItems = data.data;
   const sortedItems = unSortedItems.sort((a, b) => a.order - b.order);
+
   return (
     <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-8 lg:px-20">
       <SectionTitle title={t('branchesAndTimesTitle')} />

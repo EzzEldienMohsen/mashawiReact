@@ -2,11 +2,24 @@ import React from 'react';
 import { formatPrice } from '../utils';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { RootState, useTypedSelector } from '../store';
-
-const ProceedTotals: React.FC = () => {
-  const { cartTotal, tax, orderTotal } = useTypedSelector(
-    (state: RootState) => state.theMashawiCart
+import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { useGlobalContext } from '../context/GlobalContext';
+import { useDispatch } from 'react-redux';
+import { getTotals } from '../features/orders/ordersSlice';
+interface ProceedTotalProps {
+  onSubmit: (e: React.FormEvent) => void;
+}
+const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
+  const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
+  const dispatch: AppDispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getTotals({ token, language }));
+  }, [token, language]);
+  const { isLoading, orderTotal } = useTypedSelector(
+    (state: RootState) => state.orders
   );
   const { t } = useTranslation();
   return (
@@ -16,34 +29,64 @@ const ProceedTotals: React.FC = () => {
       </p>
       <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('totalOrderText')}</span>
-        <span>{formatPrice(cartTotal)}</span>
+        <span>{formatPrice(parseInt(orderTotal.sub_total))}</span>
       </p>
-      {/* SHIPPING */}
-      {/* <p className=" pb-2 flex justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
-        <span>{t('shippingText')}</span>
-        <span className="font-medium">{formatPrice(shipping)}</span>
-      </p> */}
+
       {/* TAX precentage */}
       <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('taxrsText')}</span>
-        <span className="font-medium">5%</span>
+        <span className="font-medium">{orderTotal.vat_percent}%</span>
       </p>
       {/* TAX  */}
       <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('taxValue')}</span>
-        <span className="font-medium">{formatPrice(tax)}</span>
+        <span className="font-medium">
+          {formatPrice(parseInt(orderTotal.vat))}
+        </span>
       </p>
-      {/* ORDER TOTAL */}
+      {/* ORDER TOTAL Or Total Before */}
       <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
         <span>{t('totalText')}</span>
-        <span className="font-medium">{formatPrice(orderTotal)}</span>
+        <span className="font-medium">
+          {formatPrice(
+            parseInt(
+              orderTotal.total_before
+                ? orderTotal.total_before
+                : orderTotal.total
+            )
+          )}
+        </span>
       </p>
-      <Link
-        to="/card-data"
+      {/*Discount */}
+      {orderTotal.discount ? (
+        <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
+          <span>{t('totalText')}</span>
+          <span className="font-medium">
+            {formatPrice(parseInt(orderTotal.discount))}
+          </span>
+        </p>
+      ) : null}
+      {/*Total after */}
+      {orderTotal.total_after ? (
+        <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-newRed text-lg md:text-xl my-2 lg:text-2xl ">
+          <span>{t('totalText')}</span>
+          <span className="font-medium">
+            {formatPrice(parseInt(orderTotal.total_after))}
+          </span>
+        </p>
+      ) : null}
+      <button
+        type="submit"
+        disabled={isLoading}
+        onSubmit={onSubmit}
         className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
       >
-        {t('paymentAndOrderText')}
-      </Link>
+        {isLoading ? (
+          <span className="loading loading-spinner loading-lg text-white"></span>
+        ) : (
+          t('paymentAndOrderText')
+        )}
+      </button>
 
       <Link
         to="/meals"
