@@ -58,7 +58,10 @@ export const getAllOrders = createAsyncThunk(
 );
 export const getSingleOrder = createAsyncThunk(
   'orders/getSingleOrder',
-  async (data: { id: string; token: string; language: string }, thunkAPI) => {
+  async (
+    data: { id: string | undefined; token: string; language: string },
+    thunkAPI
+  ) => {
     const { id, token, language } = data;
     return getSingleOrderThunk(`orders/${id}`, token, language, thunkAPI);
   }

@@ -29,7 +29,7 @@ const CartCard: React.FC<CartCardProps> = ({
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
   React.useEffect(() => {
-    setAmount(item.amount);
+    setAmount(() => item.amount);
   }, [item.amount, setAmount]);
   const editQuantityOfItem = (qty: number) => {
     // First, update the local state and quantity

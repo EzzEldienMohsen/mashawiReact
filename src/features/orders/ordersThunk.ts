@@ -25,7 +25,6 @@ export const getAllOrdersThunk = async (
         lang: language,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response.data.msg);
@@ -69,6 +68,7 @@ export const getTotalsThunk = async (
     });
     return response.data;
   } catch (error: any) {
+    toast.error(error.response.data.message);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };

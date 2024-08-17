@@ -24,7 +24,6 @@ const IconFormRow: React.FC<FormRowProps> = ({
       </label>
       <div className="relative w-full flex items-start">
         <input
-          required={name === 'coupon_code' ? false : true}
           type={type}
           name={name}
           id={name}

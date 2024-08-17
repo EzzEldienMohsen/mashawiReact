@@ -34,7 +34,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
     setIsLoading(false);
   };
   React.useEffect(() => {
-    setAmount(item.amount);
+    setAmount(() => item.amount);
   }, [item.amount, setAmount]);
 
   const editQuantityOfItem = (qty: number) => {

@@ -113,6 +113,7 @@ export type FormRowProps = {
   type: string;
   half?: boolean;
   isBorder?: boolean;
+  required?: boolean;
   handleChange: (
     event: ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement

@@ -113,6 +113,7 @@ const AddAddressModal: React.FC = () => {
           <FormRow
             name="name"
             icon={add}
+            required={true}
             label=" "
             type="text"
             value={values.name}
@@ -124,6 +125,7 @@ const AddAddressModal: React.FC = () => {
           <FormTextArea
             name="details"
             icon={add}
+            required={true}
             label=" "
             type="text"
             value={values.details}
@@ -135,10 +137,11 @@ const AddAddressModal: React.FC = () => {
           <FormRow
             name="phone"
             icon={mob}
+            required={true}
             label=" "
             type="tel"
             value={values.phone}
-            high={false}
+            high={true}
             placeHolder={t('mobileNumber')}
             handleChange={handleChange}
             full={true}

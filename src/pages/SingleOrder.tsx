@@ -1,15 +1,50 @@
 import React from 'react';
 import { Steps } from '../components';
-import { singleOrder, singleOrderElements } from '../assets';
+import { singleOrder as theSingleOrder, singleOrderElements } from '../assets';
 import { useTranslation } from 'react-i18next';
 import { useGlobalContext } from '../context/GlobalContext';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { useDispatch } from 'react-redux';
+import { getSingleOrder } from '../features/orders/ordersSlice';
 
 const SingleOrder: React.FC = () => {
   const { t } = useTranslation();
+  const { id } = useParams<{ id: string }>();
   const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  const token = user.token;
+  const dispatch: AppDispatch = useDispatch();
+  const { singleOrder, isLoading } = useTypedSelector(
+    (state: RootState) => state.orders
+  );
+
+  console.log(singleOrder);
+
+  const navigate = useNavigate();
+  const getTheOrder = async () => {
+    await dispatch(getSingleOrder({ id, token, language }));
+  };
+  React.useEffect(() => {
+    if (!token) {
+      navigate('/'); // Redirect to home page if no token
+    } else {
+      getTheOrder();
+    }
+  }, [token, language, navigate]);
+
+  if (isLoading) {
+    return (
+      <div className="flex w-full py-8 justify-center h-96 items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col justify-center items-center gap-y-6 w-full px-8 lg:px-20  py-8">
-      <Steps tracker={singleOrder} />
+      <Steps tracker={theSingleOrder} />
       {/* Card */}
       <div className="my-16 w-full flex flex-col justify-center items-center px-8 lg:px-20">
         {singleOrderElements.map((or) => {

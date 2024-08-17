@@ -20,6 +20,7 @@ const FormRow: React.FC<FormRowProps> = ({
   icon,
   isOTP,
   options,
+  required,
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const { isLangArabic } = useGlobalContext();
@@ -27,6 +28,7 @@ const FormRow: React.FC<FormRowProps> = ({
     return (
       <PasswordRow
         label={label}
+        required={required}
         type={type}
         value={value}
         placeHolder={placeHolder}
@@ -39,6 +41,7 @@ const FormRow: React.FC<FormRowProps> = ({
   } else if (icon && type !== 'date') {
     return (
       <IconFormRow
+        required={required}
         label={label}
         type={type}
         value={value}
@@ -184,7 +187,6 @@ const FormRow: React.FC<FormRowProps> = ({
         {label || name}
       </label>
       <input
-        required
         ref={inputRef}
         onKeyDown={handleKeyDown}
         type={type}

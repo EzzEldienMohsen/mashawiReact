@@ -13,6 +13,7 @@ const FormTextArea: React.FC<FormRowProps> = ({
   icon,
   isOTP,
   isBorder,
+  required,
 }) => {
   const { isLangArabic } = useGlobalContext();
   return (
@@ -29,6 +30,7 @@ const FormTextArea: React.FC<FormRowProps> = ({
       </label>
       <div className="relative w-full flex  items-start">
         <textarea
+          required={required ? false : true}
           name={name}
           id={name}
           value={value || ''}
