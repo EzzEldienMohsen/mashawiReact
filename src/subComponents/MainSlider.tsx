@@ -5,7 +5,8 @@ import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { useLoaderData } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
-import icon from "../assets/svg/drinks.svg"
+import icon from '../assets/svg/menu/all.svg';
+import { useTranslation } from 'react-i18next';
 interface CategoriesQuery {
   queryKey: string[];
   queryFn: () => Promise<Categories>;
@@ -37,6 +38,7 @@ interface MainSliderProps {
 const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
   const { isLangArabic } = useGlobalContext();
   const axiosData: any = useLoaderData();
+  const { t } = useTranslation();
   const data: CategoriesData = axiosData.data1.data.data.data;
 
   return (
@@ -58,7 +60,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
             className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 mb-1 md:mb-2"
           />
           <span className="text-black text-[10px] md:text-sm lg:text-base">
-            ALL
+            {t('allDishes')}
           </span>
         </button>
       </div>

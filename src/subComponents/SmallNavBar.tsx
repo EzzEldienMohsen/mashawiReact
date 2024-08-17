@@ -1,5 +1,6 @@
 import React from 'react';
 import icon from '../assets/svg/header/logout.svg';
+import loginIcon from '../assets/svg/loginIcon.svg';
 import { navBarLinks } from '../assets';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
@@ -152,9 +153,9 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
           className="flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2"
         >
           <img
-            src={icon}
+            src={loginIcon}
             alt="alt"
-            className={isLangArabic ? 'transform scale-x-[-1]' : ''}
+            className={isLangArabic ? '' : 'transform scale-x-[-1]'}
           />
           <p className="text-md md:text-sm hover:text-newRed">
             {t('signInTitle')}

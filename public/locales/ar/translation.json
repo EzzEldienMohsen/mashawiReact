@@ -195,5 +195,6 @@
   "invalidEmailAddress": "برجاء ادخال بريد الكتروني صحيح",
   "maleLabel": "ذكر",
   "femaleLabel": "انثى",
-  "otherLabel": "آخر"
+  "otherLabel": "آخر",
+  "allDishes": "جميع الاطباق"
 }

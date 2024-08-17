@@ -195,5 +195,6 @@
   "invalidEmailAddress": "Invalid email address",
   "maleLabel": "male",
   "femaleLabel": "female",
-  "otherLabel": "other"
+  "otherLabel": "other",
+  "allDishes": "all dishes"
 }
