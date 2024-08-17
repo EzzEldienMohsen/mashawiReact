@@ -12,3 +12,4 @@ export { default as CartCard } from './CartCard';
 export { default as DrawerCartCard } from './DrawerCartCard';
 export { default as ProceedTotals } from './ProceedTotals';
 export { default as MainSlider } from './MainSlider';
+export { default as AddAddressModal } from './AddAddressModal';

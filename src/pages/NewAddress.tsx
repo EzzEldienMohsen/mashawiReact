@@ -1,10 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { newAddressInitialValues } from '../assets';
-import { FormRow } from '../subComponents';
+import { FormRow, FormTextArea } from '../subComponents';
 import add from '../assets/svg/newAddress/address.svg';
 import mob from '../assets/svg/newAddress/mobile.svg';
-import ph from '../assets/svg/newAddress/phone.svg';
 import { CreateAddressReq } from '../features/address/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
@@ -26,9 +25,10 @@ const NewAddress: React.FC = () => {
   const { user } = useTypedSelector((state: RootState) => state.user);
   const { isLoading } = useTypedSelector((state: RootState) => state.address);
   const { isLangArabic } = useGlobalContext();
-  const [values, setValues] = React.useState<CreateAddressReq>(
-    newAddressInitialValues
-  );
+  const [values, setValues] = React.useState<CreateAddressReq>({
+    ...newAddressInitialValues,
+    phone: user.user.phone,
+  });
   const dispatch: AppDispatch = useDispatch();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
@@ -98,7 +98,7 @@ const NewAddress: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
-        <FormRow
+        <FormTextArea
           name="details"
           icon={add}
           label=" "
@@ -120,17 +120,7 @@ const NewAddress: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
-        <FormRow
-          name="landing_phone"
-          icon={ph}
-          label=" "
-          type="tel"
-          value={values.landing_phone}
-          high={false}
-          placeHolder={t('phoneNumber')}
-          handleChange={handleChange}
-          full={true}
-        />
+
         <button
           disabled={isLoading}
           onSubmit={onSubmit}

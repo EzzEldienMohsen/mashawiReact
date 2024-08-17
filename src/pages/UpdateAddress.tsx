@@ -1,9 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormRow } from '../subComponents';
+import { FormRow, FormTextArea } from '../subComponents';
 import add from '../assets/svg/newAddress/address.svg';
 import mob from '../assets/svg/newAddress/mobile.svg';
-import ph from '../assets/svg/newAddress/phone.svg';
 import { AddressData } from '../features/address/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
@@ -33,7 +32,7 @@ const UpdateAddress: React.FC = () => {
     name: '',
     details: '',
     phone: '',
-    landing_phone: '',
+    landing_phone: null,
     created_at: '',
   };
   const navigate = useNavigate();
@@ -105,7 +104,7 @@ const UpdateAddress: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
-        <FormRow
+        <FormTextArea
           name="details"
           icon={add}
           label=" "
@@ -127,17 +126,7 @@ const UpdateAddress: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
-        <FormRow
-          name="landing_phone"
-          icon={ph}
-          label=" "
-          type="tel"
-          value={values.landing_phone}
-          high={false}
-          placeHolder={t('phoneNumber')}
-          handleChange={handleChange}
-          full={true}
-        />
+
         <button
           disabled={isLoading}
           onSubmit={onSubmit}

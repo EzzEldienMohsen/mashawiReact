@@ -3,7 +3,7 @@ export type AddressData = {
   name: string;
   details: string;
   phone: string;
-  landing_phone: string;
+  landing_phone: string | null;
   created_at: string;
 };
 
@@ -17,7 +17,7 @@ export type CreateAddressReq = {
   name: string;
   details: string;
   phone: string;
-  landing_phone: string;
+  landing_phone: string | null;
 };
 export type CreateAddressResponse = {
   status: number;

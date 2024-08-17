@@ -52,8 +52,6 @@ export type UserInfo = {
   work?: string | null;
   nationality?: string | null;
   birthdate?: string | null;
-  password?: string | null;
-  password_confirmation?: string | null;
 };
 export type User = {
   user: UserInfo;

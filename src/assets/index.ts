@@ -463,7 +463,7 @@ export const newAddressInitialValues: CreateAddressReq = {
   name: '',
   details: '',
   phone: '',
-  landing_phone: '',
+  landing_phone: null,
 };
 
 export const singleOrder: Tracker[] = [

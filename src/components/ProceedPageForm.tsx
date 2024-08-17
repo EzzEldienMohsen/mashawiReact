@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormTextArea, ProceedTotals } from '../subComponents';
+import { AddAddressModal, FormTextArea, ProceedTotals } from '../subComponents';
 import { IconFormRow } from '../subSubComponents';
 import src from '../assets/svg/proceed/discount.svg';
 import { Link, useLoaderData } from 'react-router-dom';
@@ -180,14 +180,7 @@ const ProceedPageForm: React.FC = () => {
               type="text"
               placeHolder={t('selectAddress')}
             />
-            <div className="flex justify-between items-center gap-x-2 w-full md:w-full">
-              <button
-                type="submit"
-                className="bg-newRed w-full md:w-full lg:w-auto text-white py-2 px-6 rounded-2xl mt-4 font-semibold"
-              >
-                {t('newAdd')}
-              </button>
-            </div>
+            <AddAddressModal />
           </div>
         </div>
         {/* Text Area */}
