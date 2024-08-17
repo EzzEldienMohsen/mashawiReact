@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/svg/logo.svg';
-import { BigNavBar, HeaderButtons, SmallNavBar } from '../subComponents';
+import { BigNavBar, SmallNavBar } from '../subComponents';
 import icon from '../assets/svg/headerLogo.svg';
 import { useGlobalContext } from '../context/GlobalContext';
 const Header: React.FC = () => {
@@ -27,7 +27,6 @@ const Header: React.FC = () => {
           className="rounded-full w-10 h-10 md:w-16 md:h-16 my-2"
         />
       </Link>
-      <HeaderButtons />
       <BigNavBar />
       {/* Drawer Implementation */}
       <div className="drawer w-[32px]  lg:hidden">

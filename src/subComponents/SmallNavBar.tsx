@@ -6,7 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/svg/logo.svg';
-import HeaderButtons from './HeaderButtons';
 import { SecondaryDrawer, SecondaryDropDown } from '../subSubComponents';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
@@ -51,7 +50,6 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
           className="rounded-full w-16 h-16 md:w-24 md:h-24 my-2"
         />
       </Link>
-      <HeaderButtons isTrue={true} />
       <ul className="flex flex-col justify-start items-start pb-2 gap-y-1 w-full mt-1 border-b-2 white">
         {navBarLinks.map((li, index) => {
           if (index === 1) {
