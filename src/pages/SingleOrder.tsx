@@ -1,6 +1,15 @@
 import React from 'react';
 import { Steps } from '../components';
-import { singleOrder as theSingleOrder } from '../assets';
+import {
+  deliveredSingleOrder,
+  deliveringSingleOrder,
+  pendingSingleOrder,
+  processingBranchSingleOrder,
+  processingSingleOrder,
+  readyBranchSingleOrder,
+  rejectedSingleOrder,
+  returnedSingleOrder,
+} from '../assets';
 import { useTranslation } from 'react-i18next';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -41,10 +50,26 @@ const SingleOrder: React.FC = () => {
       </div>
     );
   }
-
+  const status = singleOrder.data.status;
+  const tracker =
+    status === 'pending'
+      ? pendingSingleOrder
+      : status === 'processing' && singleOrder.data.branch
+      ? processingBranchSingleOrder
+      : status === 'processing' && singleOrder.data.address
+      ? processingSingleOrder
+      : status === 'completed' && singleOrder.data.branch
+      ? readyBranchSingleOrder
+      : status === 'out_for_delivery'
+      ? deliveringSingleOrder
+      : status === 'delivered'
+      ? deliveredSingleOrder
+      : status === 'returned'
+      ? returnedSingleOrder
+      : rejectedSingleOrder;
   return (
     <div className="flex flex-col justify-center items-center gap-y-6 w-full px-8 lg:px-20  py-8">
-      <Steps tracker={theSingleOrder} />
+      <Steps tracker={tracker} />
       {/* Card */}
       <div className="my-16 w-full flex flex-col justify-center items-center px-8 lg:px-20">
         {singleOrder.data.meals.map((or) => {
@@ -58,8 +83,8 @@ const SingleOrder: React.FC = () => {
                   {or.meal}
                 </h1>
                 <p className="text-xs flex justify-start items-center gap-x-4 font-abdo w-1/3 text-[#7E7E7E] lg:text-md">
-                  {or.additions.map((ad) => {
-                    return <span>{ad.name}</span>;
+                  {or.additions.map((ad, index) => {
+                    return <span key={index}>{ad.name}</span>;
                   })}
                 </p>
                 <p className="text-newRed font-abdo text-sm lg:text-lg">
@@ -72,7 +97,11 @@ const SingleOrder: React.FC = () => {
       </div>
       {/* Address */}
       <div className="w-full lg:w-3/5 flex flex-col justify-center items-center gap-y-4">
-        <h1 className="font-abdo tex-black">{t('fakeAddress')}</h1>
+        <h1 className="font-abdo tex-black">
+          {singleOrder.data.address
+            ? singleOrder.data.address
+            : singleOrder.data.branch}
+        </h1>
         <div className="w-full flex justify-evenly items-center">
           <p className="text-black font-abdo">{t('totalOrderText')}</p>
           <p className="text-black font-abdo">

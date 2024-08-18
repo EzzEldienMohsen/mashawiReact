@@ -203,5 +203,8 @@
   "address": "address",
   "selectAddress": "select an existing address",
   "cash": "Cash",
-  "onlinePayment": "using a card"
+  "onlinePayment": "using a card",
+  "returnedStepText": "returned",
+  "rejectedStepText": "rejected",
+  "readyStepText": "ready"
 }

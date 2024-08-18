@@ -203,5 +203,8 @@
   "address": "العنوان",
   "selectAddress": "اختر عنوان موجود",
   "cash": "نقدا",
-  "onlinePayment": "استخدام البطاقة"
+  "onlinePayment": "استخدام البطاقة",
+  "returnedStepText": "تم الارجاع",
+  "rejectedStepText": "مرفوض",
+  "readyStepText": "تم التجهيز"
 }

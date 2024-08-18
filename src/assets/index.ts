@@ -62,11 +62,21 @@ import pr3 from '../assets/svg/proceed/ordered.svg';
 import cr1 from '../assets/svg/PaymentPage/proceed.svg';
 import cr2 from '../assets/svg/PaymentPage/CardData.svg';
 import cr3 from '../assets/svg/PaymentPage/ordered.svg';
-// SingleOrder
+// SingleOrder Red
 import sOr1 from '../assets/svg/singleOrder/ordered.svg';
 import sOr2 from '../assets/svg/singleOrder/preparing.svg';
 import sOr3 from '../assets/svg/singleOrder/delivering.svg';
 import sOr4 from '../assets/svg/singleOrder/delivered.svg';
+import sOr5 from '../assets/svg/singleOrder/returnedRed.svg';
+import sOr6 from '../assets/svg/singleOrder/rejectedRed.svg';
+import sOr7 from '../assets/svg/singleOrder/ready.svg';
+// SingleORderGray
+import sOrG2 from '../assets/svg/singleOrder/preparingGray.svg';
+import sOrG3 from '../assets/svg/singleOrder/deliveringGray.svg';
+import sOrG4 from '../assets/svg/singleOrder/deliveredGray.svg';
+
+import sOrG7 from '../assets/svg/singleOrder/readyGray.svg';
+
 // Single Order
 import meat from './svg/menu/meat.svg';
 import { UpdateUserReq } from '../features/user/types';
@@ -466,7 +476,7 @@ export const newAddressInitialValues: CreateAddressReq = {
   landing_phone: null,
 };
 
-export const singleOrder: Tracker[] = [
+export const deliveredSingleOrder: Tracker[] = [
   {
     id: nanoid(),
     img: sOr1,
@@ -489,6 +499,152 @@ export const singleOrder: Tracker[] = [
     id: nanoid(),
     img: sOr4,
     text: 'deliveredStepText',
+    status: 'complete',
+  },
+];
+export const pendingSingleOrder: Tracker[] = [
+  {
+    id: nanoid(),
+    img: sOr1,
+    text: 'orderedStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOrG2,
+    text: 'preparingStepText',
+    status: 'upcoming',
+  },
+  {
+    id: nanoid(),
+    img: sOrG3,
+    text: 'deliveringStepText',
+    status: 'upcoming',
+  },
+  {
+    id: nanoid(),
+    img: sOrG4,
+    text: 'deliveredStepText',
+    status: 'upcoming',
+  },
+];
+export const processingSingleOrder: Tracker[] = [
+  {
+    id: nanoid(),
+    img: sOr1,
+    text: 'orderedStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr2,
+    text: 'preparingStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOrG3,
+    text: 'deliveringStepText',
+    status: 'upcoming',
+  },
+  {
+    id: nanoid(),
+    img: sOrG4,
+    text: 'deliveredStepText',
+    status: 'upcoming',
+  },
+];
+export const processingBranchSingleOrder: Tracker[] = [
+  {
+    id: nanoid(),
+    img: sOr1,
+    text: 'orderedStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr2,
+    text: 'preparingStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOrG7,
+    text: 'readyStepText',
+    status: 'upcoming',
+  },
+];
+export const readyBranchSingleOrder: Tracker[] = [
+  {
+    id: nanoid(),
+    img: sOr1,
+    text: 'orderedStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr2,
+    text: 'preparingStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr7,
+    text: 'readyStepText',
+    status: 'complete',
+  },
+];
+export const deliveringSingleOrder: Tracker[] = [
+  {
+    id: nanoid(),
+    img: sOr1,
+    text: 'orderedStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr2,
+    text: 'preparingStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr3,
+    text: 'deliveringStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOrG4,
+    text: 'deliveredStepText',
+    status: 'upcoming',
+  },
+];
+export const returnedSingleOrder: Tracker[] = [
+  {
+    id: nanoid(),
+    img: sOr1,
+    text: 'orderedStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr5,
+    text: 'returnedStepText',
+    status: 'complete',
+  },
+];
+export const rejectedSingleOrder: Tracker[] = [
+  {
+    id: nanoid(),
+    img: sOr1,
+    text: 'orderedStepText',
+    status: 'complete',
+  },
+  {
+    id: nanoid(),
+    img: sOr6,
+    text: 'rejectedStepText',
     status: 'complete',
   },
 ];

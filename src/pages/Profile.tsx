@@ -57,8 +57,10 @@ const Profile: React.FC = () => {
             ? t('newAddress')
             : pathname === '/profile/changePassword'
             ? t('changePassword')
-            : id
+            : pathname === `/profile/update-address/${id}`
             ? t('editAddressText')
+            : pathname === `/profile/orders/${id}`
+            ? `${t('orderTitle')} ${id}`
             : t('tempTitle')}
         </h1>
       </div>
