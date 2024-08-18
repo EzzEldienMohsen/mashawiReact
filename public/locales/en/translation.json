@@ -206,5 +206,6 @@
   "onlinePayment": "using a card",
   "returnedStepText": "returned",
   "rejectedStepText": "rejected",
-  "readyStepText": "ready"
+  "readyStepText": "ready",
+  "orderDoneTitle": "Order Done"
 }

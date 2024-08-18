@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { AddAddressModal, FormTextArea, ProceedTotals } from '../subComponents';
 import { IconFormRow } from '../subSubComponents';
 import src from '../assets/svg/proceed/discount.svg';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import CustomSelect from '../subSubComponents/CustomSelect';
 import { AddressResponse } from '../assets/types';
@@ -32,7 +32,7 @@ const ProceedPageForm: React.FC = () => {
   const language = isLangArabic ? 'ar' : 'en';
   const { user } = useTypedSelector((state: RootState) => state.user);
   const token = user.token;
-
+  const navigate = useNavigate();
   const fetchAddress = React.useCallback(() => {
     if (token && language) {
       dispatch(getAddress({ token, language }));
@@ -116,10 +116,14 @@ const ProceedPageForm: React.FC = () => {
     );
   };
 
-  const onSubmit = (e: React.FormEvent): void => {
+  const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    dispatch(checkout({ reqData: values, token, language }));
-    console.log(values);
+    const response = await dispatch(
+      checkout({ reqData: values, token, language })
+    ).unwrap();
+    if (response.status === 1) {
+      navigate('/order-done');
+    }
     setValues(initialValues);
   };
   // Loading Return

@@ -1,6 +1,6 @@
 import React from 'react';
-import plus from "../assets/svg/menu/input/plus.svg"
-import minus from "../assets/svg/menu/input/minus.svg"
+import plus from '../assets/svg/menu/input/plus.svg';
+import minus from '../assets/svg/menu/input/minus.svg';
 interface AmountProps {
   amount: number;
   setAmount: (a: number | ((a: number) => number)) => void;
@@ -19,6 +19,7 @@ const AmountInput: React.FC<AmountProps> = ({ amount, setAmount }) => {
     setAmount((prevAmount: number) => (prevAmount > 1 ? prevAmount - 1 : 1));
   };
 
+  React.useEffect(() => {}, [amount]);
   return (
     <div className="w-1/2 flex justify-between items-center p-2 rounded-3xl bg-[#DDDDDD] gap-x-1">
       <button

@@ -7,10 +7,21 @@ import { WishlistButton, AmountInput } from '../subSubSubComponents';
 import { useGlobalContext } from '../context/GlobalContext';
 
 const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
-  const { amount, setAmount } = useGlobalContext();
   const { wishListItems } = useTypedSelector(
     (state: RootState) => state.mashawiWishList
   );
+  const { cartItems } = useTypedSelector(
+    (state: RootState) => state.theMashawiCart
+  );
+  const cartItem = cartItems.find((item) => item.cartItem.id === data.id);
+  const [amount, setAmount] = React.useState<number>(
+    cartItem?.cartItem.amount || 1
+  );
+  React.useEffect(() => {
+    if (cartItem) {
+      setAmount(cartItem.cartItem.amount);
+    }
+  }, [cartItem]);
   const { isLangArabic } = useGlobalContext();
   const modalId = `modal_${data.id}`;
   const { t } = useTranslation();

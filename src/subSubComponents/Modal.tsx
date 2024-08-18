@@ -30,9 +30,21 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
     (i: CartItemWithId) => i.cartItem.id === data.id
   );
   const { t } = useTranslation();
+  const { cartItems } = useTypedSelector(
+    (state: RootState) => state.theMashawiCart
+  );
+  const cartItem = cartItems.find((item) => item.cartItem.id === data.id);
+  const [amount, setAmount] = React.useState<number>(
+    cartItem?.cartItem.amount || 1
+  );
+  React.useEffect(() => {
+    if (cartItem) {
+      setAmount(cartItem.cartItem.amount);
+    }
+  }, [cartItem]);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const { user } = useTypedSelector((state: RootState) => state.user);
-  const { isLangArabic, amount, setAmount } = useGlobalContext();
+  const { isLangArabic } = useGlobalContext();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
   const handleAddOnChange = (addOn: AddOn, isChecked: boolean): void => {

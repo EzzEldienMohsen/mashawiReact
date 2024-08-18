@@ -30,7 +30,6 @@ import {
   News,
   SingleEventPage,
   TrackOrder,
-  DeliveredPage,
   ProceedPage,
   MenuCategory,
   PaymentDetails,
@@ -40,6 +39,7 @@ import {
   SingleOrder,
   SingleNewsPage,
   UpdateAddress,
+  OrderDonePage,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { AddressResponse, Categories, Meals } from './assets/types';
@@ -207,8 +207,8 @@ const AppRouter: React.FC = () => {
         },
         // UnRouted Pages
         {
-          path: '/delivered',
-          element: <DeliveredPage />,
+          path: '/order-done',
+          element: <OrderDonePage />,
         },
         {
           path: '/proceed',

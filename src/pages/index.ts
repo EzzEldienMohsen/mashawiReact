@@ -23,7 +23,7 @@ export { default as Events } from './Events';
 export { default as News } from './News';
 export { default as SingleEventPage } from './SingleEventPage';
 export { default as TrackOrder } from './TrackOrder';
-export { default as DeliveredPage } from './DeliveredPage';
+export { default as OrderDonePage } from './OrderDonePage';
 export { default as ProceedPage } from './ProceedPage';
 // export { default as ProceedDelivery } from './ProceedDelivery';
 export { default as MenuCategory } from './MenuCategory';

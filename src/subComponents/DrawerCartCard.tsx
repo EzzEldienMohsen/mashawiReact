@@ -19,7 +19,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
   cart_id,
 }) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const { isLangArabic, amount, setAmount } = useGlobalContext();
+  const { isLangArabic, setAmount } = useGlobalContext();
   const { user } = useTypedSelector((state: RootState) => state.user);
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
@@ -80,7 +80,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
           <div className="flex  justify-between gap-x-5    w-auto">
             <DrawerAmountInput
               editTheQuantity={editQuantityOfItem}
-              amount={amount}
+              amount={item.amount}
               setAmount={setAmount}
             />
           </div>

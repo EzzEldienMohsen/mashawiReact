@@ -22,7 +22,7 @@ const CartCard: React.FC<CartCardProps> = ({
   isLoading,
 }) => {
   const { t } = useTranslation();
-  const { isLangArabic, amount, setAmount } = useGlobalContext();
+  const { isLangArabic, setAmount } = useGlobalContext();
   const dispatch: AppDispatch = useDispatch();
 
   const { user } = useTypedSelector((state: RootState) => state.user);
@@ -81,7 +81,7 @@ const CartCard: React.FC<CartCardProps> = ({
           <div className="flex md:flex-col justify-between gap-x-1 md:items-end md:justify-end gap-y-3 w-auto">
             <DrawerAmountInput
               editTheQuantity={editQuantityOfItem}
-              amount={amount}
+              amount={item.amount}
               setAmount={setAmount}
             />
           </div>

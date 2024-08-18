@@ -206,5 +206,6 @@
   "onlinePayment": "استخدام البطاقة",
   "returnedStepText": "تم الارجاع",
   "rejectedStepText": "مرفوض",
-  "readyStepText": "تم التجهيز"
+  "readyStepText": "تم التجهيز",
+  "orderDoneTitle": "تم الطلب"
 }
