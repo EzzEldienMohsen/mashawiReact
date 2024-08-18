@@ -207,5 +207,12 @@
   "returnedStepText": "تم الارجاع",
   "rejectedStepText": "مرفوض",
   "readyStepText": "تم التجهيز",
-  "orderDoneTitle": "تم الطلب"
+  "orderDoneTitle": "تم الطلب",
+  "pendingTrackText": "عزيزي العميل تم الطلب و سيتم تجهيزه للوصول اليك في اسرع وقت",
+  "processingTrackText": "عزيزي العميل  جاري تجهيز الطلب",
+  "readyTrackText": "عزيزي العميل طلبكم جاهز للاستلام الان",
+  "deliveringTrackText": "عزيزي العميل  جاري توصيل الطلب",
+  "returnedTrackText": "عزيزي العميل يؤسفنا انه تم ارجاع طلبكم",
+  "rejectedTrackText": "عزيزي العميل يؤسفنا انه تم رفض طلبكم لعدم نوفر مكونات تجهيزه في الوقت الحالي",
+  "deliveredTrackText": "عزيزي العميل تم توصيل طلبك بنجاح"
 }

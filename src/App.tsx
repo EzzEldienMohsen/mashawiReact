@@ -13,33 +13,23 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
   Home,
   Jobs,
-  Privacy,
   Login,
   NewAccount,
-  Terms,
-  Payment,
-  Delivery,
-  Refund,
   ValidateOTP,
   ForgetPassword,
   ResetPassword,
   ChangePassword,
   Profile,
   User,
-  Events,
-  News,
-  SingleEventPage,
   TrackOrder,
   ProceedPage,
-  MenuCategory,
   PaymentDetails,
   VerifyEmail,
   MyAddress,
   NewAddress,
-  SingleOrder,
-  SingleNewsPage,
   UpdateAddress,
   OrderDonePage,
+  OrderTrack,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { AddressResponse, Categories, Meals } from './assets/types';
@@ -117,6 +107,17 @@ const About = React.lazy(() => import('./pages/About'));
 const ContactUs = React.lazy(() => import('./pages/ContactUs'));
 const Branches = React.lazy(() => import('./pages/Branches'));
 const Orders = React.lazy(() => import('./pages/Orders'));
+const SingleOrder = React.lazy(() => import('./pages/SingleOrder'));
+const MenuCategory = React.lazy(() => import('./pages/MenuCategory'));
+const Events = React.lazy(() => import('./pages/Events'));
+const SingleEventPage = React.lazy(() => import('./pages/SingleEventPage'));
+const SingleNewsPage = React.lazy(() => import('./pages/SingleNewsPage'));
+const News = React.lazy(() => import('./pages/News'));
+const Privacy = React.lazy(() => import('./pages/Privacy'));
+const Terms = React.lazy(() => import('./pages/Terms'));
+const Payment = React.lazy(() => import('./pages/Payment'));
+const Delivery = React.lazy(() => import('./pages/Delivery'));
+const Refund = React.lazy(() => import('./pages/Refund'));
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -182,23 +183,63 @@ const AppRouter: React.FC = () => {
         },
         {
           path: '/events',
-          element: <Events />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Events />
+            </Suspense>
+          ),
           loader: eventsLoader(queryClient, language),
         },
 
         {
           path: '/singleEvent/:id',
-          element: <SingleEventPage />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <SingleEventPage />
+            </Suspense>
+          ),
           loader: singleEventLoader(queryClient, language),
         },
         {
           path: '/singleNews/:id',
-          element: <SingleNewsPage />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <SingleNewsPage />
+            </Suspense>
+          ),
           loader: singleNewsLoader(queryClient, language),
         },
         {
           path: '/news',
-          element: <News />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <News />
+            </Suspense>
+          ),
           loader: newsLoader(queryClient, language),
         },
         {
@@ -225,6 +266,20 @@ const AppRouter: React.FC = () => {
           ),
           loader: addressLoader(queryClient, language),
         },
+        {
+          path: '/track-order',
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <OrderTrack />
+            </Suspense>
+          ),
+        },
         // {
         //   path: '/proceed-delivery',
         //   element: <ProceedDelivery />,
@@ -239,7 +294,17 @@ const AppRouter: React.FC = () => {
         },
         {
           path: '/privacy',
-          element: <Privacy />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Privacy />
+            </Suspense>
+          ),
           loader: privacyLoader(queryClient, language),
         },
         {
@@ -268,22 +333,62 @@ const AppRouter: React.FC = () => {
 
         {
           path: '/terms',
-          element: <Terms />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Terms />
+            </Suspense>
+          ),
           loader: termsLoader(queryClient, language),
         },
         {
           path: '/payment',
-          element: <Payment />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Payment />
+            </Suspense>
+          ),
           loader: paymentLoader(queryClient, language),
         },
         {
           path: '/delivery',
-          element: <Delivery />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Delivery />
+            </Suspense>
+          ),
           loader: deliveryLoader(queryClient, language),
         },
         {
           path: '/refund',
-          element: <Refund />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Refund />
+            </Suspense>
+          ),
           loader: refundLoader(queryClient, language),
         },
         {
@@ -336,7 +441,17 @@ const AppRouter: React.FC = () => {
             },
             {
               path: 'orders/:id',
-              element: <SingleOrder />,
+              element: (
+                <Suspense
+                  fallback={
+                    <div className="flex w-full py-8 justify-center items-center">
+                      <span className="loading loading-spinner loading-lg text-newRed"></span>
+                    </div>
+                  }
+                >
+                  <SingleOrder />
+                </Suspense>
+              ),
             },
             {
               path: 'changePassword',

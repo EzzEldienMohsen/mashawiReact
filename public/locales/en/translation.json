@@ -207,5 +207,12 @@
   "returnedStepText": "returned",
   "rejectedStepText": "rejected",
   "readyStepText": "ready",
-  "orderDoneTitle": "Order Done"
+  "orderDoneTitle": "Order Done",
+  "pendingTrackText": "Dear customer, the order has been placed and will be prepared to reach you as soon as possible",
+  "processingTrackText": "Dear customer, the order is being prepared",
+  "readyTrackText": "Dear customer, your order is ready for receipt now",
+  "deliveringTrackText": "Dear customer, the order is being delivered",
+  "returnedTrackText": "Dear customer, we regret that your order has been returned",
+  "rejectedTrackText": "Dear customer, we regret that your request was rejected because we do not provide the preparation components at the present time",
+  "deliveredTrackText": "Dear customer, your order has been delivered successfully"
 }
