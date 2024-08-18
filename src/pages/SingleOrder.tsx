@@ -16,6 +16,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { getSingleOrder } from '../features/orders/ordersSlice';
+import { Link } from 'react-router-dom';
 
 const SingleOrder: React.FC = () => {
   const { t } = useTranslation();
@@ -108,9 +109,12 @@ const SingleOrder: React.FC = () => {
             {singleOrder.data.calculations.total}
           </p>
         </div>
-        <button className=" btn btn-block md:w-3/5 my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full">
-          {t('paymentAndOrderText')}
-        </button>
+        <Link
+          to="/track"
+          className=" btn btn-block md:w-3/5 my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+        >
+          {t('trackButton')}
+        </Link>
       </div>
     </div>
   );
