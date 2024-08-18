@@ -15,7 +15,11 @@ const OrderDonePage: React.FC = () => {
       <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-20">
         <Steps tracker={completed} />
         <div className="flex flex-col gap-y-3 justify-center items-center text-sm md:text-md lg:text-lg font-abdo py-6 md:py-10 bg-white w-4/5 rounded-2xl px-6 md:px-10 lg:px-20 shadow-lg">
-          <img src={like} alt="like" />
+          <img
+            src={like}
+            alt="like"
+            className="w-2/5 aspect-square md:w-auto md:aspect-auto"
+          />
           <h1 className="text-black text-center">{t('deliveryText')}</h1>
         </div>
       </div>
