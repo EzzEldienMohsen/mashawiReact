@@ -91,7 +91,7 @@ const SingleOrder: React.FC = () => {
               />
               <div className="flex flex-col justify-stretch items-start gap-y-3 lg:gap-y-7">
                 <h1 className="text-sm font-abdo lg:text-xl"> {or.meal}</h1>
-                <p className="text-xs font-abdo w-1/3 text-[#7E7E7E] lg:text-md">
+                <p className="text-xs font-abdo flex flex-col gap-y-3 justify-start items-start w-1/3 text-[#7E7E7E] lg:text-md">
                   {or.additions.map((ad, index) => {
                     return <span key={index}>{ad.name}</span>;
                   })}
