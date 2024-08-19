@@ -55,50 +55,72 @@ const initialState: UserState = {
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
-  async (reqData: RegisterData, thunkAPI) => {
-    return registerUserThunk('/auth/register', reqData, thunkAPI);
+  async (data: { reqData: RegisterData; language: string }, thunkAPI) => {
+    const { reqData, language } = data;
+    return registerUserThunk('/auth/register', reqData, language, thunkAPI);
   }
 );
 export const loginUser = createAsyncThunk(
   'user/loginUser',
-  async (reqData: LoginData, thunkAPI) => {
-    return loginThunk('/auth/login', reqData, thunkAPI);
+  async (data: { reqData: LoginData; language: string }, thunkAPI) => {
+    const { reqData, language } = data;
+    return loginThunk('/auth/login', reqData, language, thunkAPI);
   }
 );
 export const forgetPassword = createAsyncThunk(
   'user/forgetPassword',
-  async (reqData: ForgetPasswordData, thunkAPI) => {
-    return forgetPasswordThunk('/auth/forget-password', reqData, thunkAPI);
+  async (data: { reqData: ForgetPasswordData; language: string }, thunkAPI) => {
+    const { reqData, language } = data;
+    return forgetPasswordThunk(
+      '/auth/forget-password',
+      reqData,
+      language,
+      thunkAPI
+    );
   }
 );
 export const emailVerification = createAsyncThunk(
   'user/emailVerification',
-  async (reqData: EmailVerificationData, thunkAPI) => {
-    return emailVerificationThunk('/auth/verify-email', reqData, thunkAPI);
+  async (
+    data: { reqData: EmailVerificationData; language: string },
+    thunkAPI
+  ) => {
+    const { reqData, language } = data;
+    return emailVerificationThunk(
+      '/auth/verify-email',
+      reqData,
+      language,
+      thunkAPI
+    );
   }
 );
 export const resendOTP = createAsyncThunk(
   'user/resendOTP',
-  async (reqData: ResendOTPData, thunkAPI) => {
-    return resendOTPThunk('/auth/resend-otp', reqData, thunkAPI);
+  async (data: { reqData: ResendOTPData; language: string }, thunkAPI) => {
+    const { reqData, language } = data;
+    return resendOTPThunk('/auth/resend-otp', reqData, language, thunkAPI);
   }
 );
 export const validateOTP = createAsyncThunk(
   'user/validateOTP',
-  async (reqData: ValidateOTPData, thunkAPI) => {
-    return validateOTPThunk('/auth/validate-otp', reqData, thunkAPI);
+  async (data: { reqData: ValidateOTPData; language: string }, thunkAPI) => {
+    const { reqData, language } = data;
+    return validateOTPThunk('/auth/validate-otp', reqData, language, thunkAPI);
   }
 );
 export const resetPassword = createAsyncThunk(
   'user/resetPassword',
-  async (reqData: ResetPasswordData, thunkAPI) => {
+  async (data: { reqData: ResetPasswordData; language: string }, thunkAPI) => {
     const { user } = thunkAPI.getState() as { user: UserState };
     if (!user || !user.user) {
       return thunkAPI.rejectWithValue('User is not authenticated');
     }
+    const { reqData, language } = data;
+
     return resetPasswordThunk(
       '/auth/reset-password',
       { ...reqData, token: user.user.token },
+      language,
       thunkAPI
     );
   }

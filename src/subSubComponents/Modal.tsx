@@ -109,20 +109,20 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
   return (
     <div>
       <button
-        className="btn bg-newRed text-white font-abdo font-thin text-xs md:text-sm flex-row flex justify-evenly w-full items-center px-5 lg:px-3 rounded-full py-1"
+        className="btn bg-newRed text-white font-abdo font-thin text-xs md:text-sm lg:text-xs flex-row flex justify-evenly w-full items-center px-5 lg:px-3 rounded-full py-1"
         onClick={() => dialogRef.current?.showModal()}
       >
-        <img src={src} alt="alt" className="w-1/4 lg:w-1/4" />
+        <img src={src} alt="alt" className="w-1/4 lg:w-1/5" />
         {t('addOnsText')}
       </button>
       <dialog
         ref={dialogRef}
         id={modalId}
-        className="modal overflow-y-auto mr-5 w-full flex justify-center items-center "
+        className="modal overflow-y-auto mr-5 w-full  flex justify-center items-center "
         onClick={handleClickOutside}
       >
         <div
-          className="flex flex-col md:justify-between md:flex-row md:items-start w-[90vw] lg:w-[80vw] h-auto rounded-2xl gap-x-2 bg-white p-8"
+          className="flex flex-col md:justify-between md:flex-row md:items-start w-[90vw] lg:w-[80vw] h-4/5 max-h-4/5 overflow-y-auto rounded-2xl gap-x-2 bg-white p-8"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex w-full md:w-2/5 flex-col justify-center items-stretch relative gap-y-2">

@@ -13,10 +13,10 @@ import { toast } from 'react-toastify';
 const VerifyForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
   const [values, setValues] = useState<InitialOTPInputs>(initialOTP);
-  const [isResendDisabled, setIsResendDisabled] = useState<boolean>(false);
+  const [isResendDisabled, setIsResendDisabled] = useState<boolean>(true);
   const [currentFocus, setCurrentFocus] = useState(0);
-  const [seconds, setSeconds] = useState<number>(0);
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [seconds, setSeconds] = useState<number>(65);
+  const [isActive, setIsActive] = useState<boolean>(true);
   const [timer, setTimer] = useState<number | null>(null);
 
   const dispatch: AppDispatch = useDispatch();
@@ -69,6 +69,7 @@ const VerifyForm: React.FC = () => {
       };
     } else if (seconds === 0) {
       setIsActive(false); // Stop the timer when it reaches 0
+      setIsResendDisabled(false);
     }
   }, [isActive, seconds]);
 
@@ -96,6 +97,7 @@ const VerifyForm: React.FC = () => {
       [name]: value,
     }));
   };
+  const language = isLangArabic ? 'ar' : 'en';
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
@@ -107,7 +109,9 @@ const VerifyForm: React.FC = () => {
     const token = parseInt(theToken);
     const user = { email, token };
     try {
-      const result = await dispatch(emailVerification(user)).unwrap();
+      const result = await dispatch(
+        emailVerification({ reqData: user, language })
+      ).unwrap();
       if (result.status === 1) {
         navigate('/');
       } else if (result.status === 0) {
@@ -122,7 +126,7 @@ const VerifyForm: React.FC = () => {
   };
 
   const resendTheOTP = () => {
-    dispatch(resendOTP({ email }));
+    dispatch(resendOTP({ reqData: { email }, language }));
     setIsResendDisabled(true);
     setTimeout(() => setIsResendDisabled(false), 60000);
   };
@@ -170,8 +174,22 @@ const VerifyForm: React.FC = () => {
           )}
         </button>
         {seconds > 0 ? (
-          <div className="w-10 h-10 rounded-full flex justify-center items-center text-center bg-newRed text-white text-sm">
-            {seconds}s
+          <div className="flex justify-between items-center w-full gap-x-4 mt-4">
+            <button
+              onClick={() => {
+                resendTheOTP();
+                handleButtonClick();
+              }}
+              disabled={isResendDisabled}
+              className={`text-newRed 4 text-xs md:text-sm w-full lg:text-sm  ${
+                isResendDisabled ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+            >
+              {t('resendText')}
+            </button>
+            <div className="w-8 h-8 rounded-full text-center flex justify-center items-center bg-newRed text-white text-sm">
+              <span>{seconds}s</span>
+            </div>
           </div>
         ) : (
           <button

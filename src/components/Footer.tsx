@@ -1,7 +1,7 @@
 import React from 'react';
 import { FooterFirstColumn } from '../subComponents';
 import { Link } from 'react-router-dom';
-import logo from '../assets/svg/logo.svg';
+import logo from '../assets/svg/header/whiteLogo.svg';
 import { useTranslation } from 'react-i18next';
 import { links } from '../assets';
 

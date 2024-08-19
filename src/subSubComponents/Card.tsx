@@ -36,9 +36,14 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
     amount: amount,
     additions: data.additions || [],
   };
+  function formatPrice(price: number | string) {
+    const numericPrice = Number(price);
+    return parseFloat(numericPrice.toFixed(2)).toString();
+  }
+
   return (
     <div
-      className={`my-2 w-3/4 pb-2 md:w-[90%] lg:w-[30%] ${
+      className={`my-2 w-3/4 pb-2 md:w-[90%] lg:w-[22%] ${
         isLangArabic
           ? 'rounded-tr-3xl rounded-bl-3xl'
           : 'rounded-tl-3xl rounded-br-3xl'
@@ -59,9 +64,9 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
         }`}
       />
       <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row my-2">
-        <h1>{data.name}</h1>
+        <h1 className="font-abdo font-bold">{data.name}</h1>
         <h2>
-          {data.price} {t('menuItemCurrency')}
+          {formatPrice(data.price)} {t('menuItemCurrency')}
         </h2>
       </div>
       <div className="flex px-2 gap-x-1 justify-between w-full flex-row  items-center my-2">

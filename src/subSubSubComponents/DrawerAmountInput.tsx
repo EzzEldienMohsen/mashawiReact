@@ -50,29 +50,7 @@ const DrawerAmountInput: React.FC<AmountProps> = ({
   };
 
   return (
-    <div className="w-full flex justify-between items-center p-2 rounded-3xl bg-[#DDDDDD] gap-x-2">
-      <button
-        disabled={amount === 1 || isLoading}
-        onClick={decrementAmount}
-        className={`w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center ${
-          isLoading ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-      >
-        <img src={minus} alt="-" />
-      </button>
-      <input
-        name="amount"
-        type="number"
-        disabled={isLoading}
-        value={amount}
-        onChange={handleAmount}
-        min="0"
-        className="bg-[#DDDDDD] text-center"
-        style={{
-          width: '50px',
-          textAlign: 'center',
-        }}
-      />
+    <div className="w-full flex justify-between items-center  p-[3px] rounded-3xl bg-[#F5F5F5] gap-x-2">
       <button
         disabled={isLoading}
         onClick={incrementAmount}
@@ -81,6 +59,28 @@ const DrawerAmountInput: React.FC<AmountProps> = ({
         }`}
       >
         <img src={plus} alt="+" />
+      </button>
+      <input
+        name="amount"
+        type="number"
+        disabled={isLoading}
+        value={amount}
+        onChange={handleAmount}
+        min="0"
+        className="bg-[#F5F5F5] text-center"
+        style={{
+          width: '50px',
+          textAlign: 'center',
+        }}
+      />
+      <button
+        disabled={amount === 1 || isLoading}
+        onClick={decrementAmount}
+        className={`w-8 aspect-square rounded-full text-black bg-white flex justify-center items-center ${
+          isLoading ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
+      >
+        <img src={minus} alt="-" />
       </button>
     </div>
   );

@@ -61,7 +61,7 @@ export const editQuantityThunk = async (
     return response.data;
   } catch (error: any) {
     if (error.response.status === 401) {
-      toast.warn(t('editCartMsg'));
+      toast.warn(t('editCartMsg'), { position: 'top-left' });
     } else {
       toast.error(error.response.data.message);
     }

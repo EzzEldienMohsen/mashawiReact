@@ -4,6 +4,7 @@ import logo from '../assets/svg/logo.svg';
 import { BigNavBar, SmallNavBar } from '../subComponents';
 import icon from '../assets/svg/headerLogo.svg';
 import { useGlobalContext } from '../context/GlobalContext';
+import { NavBarButtons } from '../subSubComponents';
 const Header: React.FC = () => {
   const { pathname } = useLocation();
   const { isLangArabic } = useGlobalContext();
@@ -20,14 +21,18 @@ const Header: React.FC = () => {
         pathname === '/' ? 'absolute top-0 left-0 z-50' : 'z-20'
       } justify-between items-center px-8 lg:px-20 py-2 bg-transparent`}
     >
-      <Link to="/">
-        <img
-          src={logo}
-          alt="logo"
-          className="rounded-full w-10 h-10 md:w-16 md:h-16 my-2"
-        />
-      </Link>
+      <div className="w-1/3 flex justify-start items-center">
+        <Link to="/">
+          <img
+            src={logo}
+            alt="logo"
+            className="rounded-full w-10 h-10 md:w-16 md:h-16 my-2"
+          />
+        </Link>
+      </div>
       <BigNavBar />
+      <NavBarButtons />
+
       {/* Drawer Implementation */}
       <div className="drawer w-[32px]  lg:hidden">
         <input

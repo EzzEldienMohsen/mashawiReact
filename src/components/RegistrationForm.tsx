@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { RegisterData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { toast } from 'react-toastify';
+import { useGlobalContext } from '../context/GlobalContext';
 
 const debounce = (func: (...args: any[]) => void, delay: number) => {
   let timeoutId: ReturnType<typeof setTimeout>;
@@ -51,12 +52,23 @@ const RegistrationForm: React.FC = () => {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
     handleValidation(name, value);
   };
-
+  const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     localStorage.setItem('registerData', JSON.stringify(values));
-    await dispatch(registerUser(values));
-    navigate('/verify-email');
+    if (values.password === values.password_confirmation) {
+      const response = await dispatch(
+        registerUser({ reqData: values, language })
+      ).unwrap();
+      if (response.status === 1) {
+        setTimeout(() => {
+          navigate('/verify-email');
+        }, 2000);
+      }
+    } else {
+      toast.error('passwordCheck');
+    }
   };
   return (
     <div className="flex justify-evenly w-full items-center">

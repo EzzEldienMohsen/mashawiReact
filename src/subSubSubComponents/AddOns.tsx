@@ -14,7 +14,7 @@ const AddOns: React.FC<AddOnsProps> = ({ data, handleAddOnChange }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col justify-start items-start w-full md:w-[58%]">
+    <div className="flex flex-col justify-start items-start gap-y-2 w-full md:w-[58%]">
       <h1 className="my-2">{t('addOnModalTitle')}</h1>
       {additions.map((addOn: AddOnInterface) => (
         <AddOn key={addOn.id} addOn={addOn} onAddOnChange={handleAddOnChange} />

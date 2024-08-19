@@ -16,7 +16,10 @@ const ProductDetails: React.FC<ProductProps> = ({
   handleAddToCart,
 }) => {
   const { t } = useTranslation();
-
+  function formatPrice(price: number | string | undefined) {
+    const numericPrice = Number(price);
+    return parseFloat(numericPrice.toFixed(2)).toString();
+  }
   return (
     <div className="flex flex-col  gap-y-2 justify-center items-center w-full">
       <img
@@ -27,7 +30,7 @@ const ProductDetails: React.FC<ProductProps> = ({
       <div className="flex justify-between flex-row w-full items-center my-2">
         <h1>{data.name}</h1>
         <h2>
-          {data.price} {t('menuItemCurrency')}
+          {formatPrice(data.price)} {t('menuItemCurrency')}
         </h2>
       </div>
       <div className="flex justify-between w-full flex-row items-center my-2">

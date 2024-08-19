@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaHeart } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 import {
   addItem,
@@ -12,6 +11,8 @@ import { CartItem, CartItemWithId, SingleMealData } from '../assets/types';
 import { useGlobalContext } from '../context/GlobalContext';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useTranslation } from 'react-i18next';
+import add from '../assets/svg/wishList/add.svg';
+import added from '../assets/svg/wishList/added.svg';
 
 interface WishlistProps {
   data: SingleMealData;
@@ -54,9 +55,9 @@ const WishListButton: React.FC<WishlistProps> = ({
     <button
       className={`absolute btn-ghost w-8 h-8 bg-white top-3 ${
         isLangArabic ? 'left-4' : 'right-4'
-      } border-0 flex justify-center items-center rounded-full ${
-        item?.cartItem.id === data.id ? 'text-newRed' : 'text-black'
-      } ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+      } border-0 flex justify-center items-center rounded-full  ${
+        isLoading ? 'opacity-50 cursor-not-allowed' : ''
+      }`}
       onClick={async () => {
         if (item) {
           await removeItemFromWishList(item.cartItem.id);
@@ -66,7 +67,7 @@ const WishListButton: React.FC<WishlistProps> = ({
       }}
       disabled={isLoading}
     >
-      <FaHeart />
+      <img src={item?.cartItem.id === data.id ? added : add} alt="heart" />
     </button>
   );
 };

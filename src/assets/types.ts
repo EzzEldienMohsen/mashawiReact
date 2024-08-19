@@ -7,6 +7,7 @@ export type AddOn = {
   values: {
     id: number;
     name: string;
+    price?: string;
   }[];
 };
 export type CartItemWithId = {
@@ -331,6 +332,7 @@ export type SingleMealData = {
     values: {
       id: number;
       name: string;
+      price?: string;
     }[];
   }[];
 };

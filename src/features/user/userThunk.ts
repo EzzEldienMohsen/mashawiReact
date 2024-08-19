@@ -20,6 +20,7 @@ import { GetUserResponse, UpdateUserReq, ValidateOTPRes } from './types';
 export const registerUserThunk = async (
   url: string,
   reqData: RegisterData,
+  language: string,
   thunkAPI: any
 ): Promise<ApiResponse> => {
   try {
@@ -30,6 +31,7 @@ export const registerUserThunk = async (
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
+          lang: language,
         },
       }
     );
@@ -44,12 +46,20 @@ export const registerUserThunk = async (
 export const loginThunk = async (
   url: string,
   reqData: LoginData,
+  language: string,
   thunkAPI: any
 ): Promise<CompleteUSer> => {
   try {
     const response: AxiosResponse<CompleteUSer> = await autoFetch.post(
       url,
-      reqData
+      reqData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          lang: language,
+        },
+      }
     );
     return response.data;
   } catch (error: any) {
@@ -63,12 +73,20 @@ export const loginThunk = async (
 export const forgetPasswordThunk = async (
   url: string,
   reqData: ForgetPasswordData,
+  language: string,
   thunkAPI: any
 ): Promise<ApiResponse> => {
   try {
     const response: AxiosResponse<ApiResponse> = await autoFetch.post(
       url,
-      reqData
+      reqData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          lang: language,
+        },
+      }
     );
     return response.data;
   } catch (error: any) {
@@ -80,12 +98,20 @@ export const forgetPasswordThunk = async (
 export const resendOTPThunk = async (
   url: string,
   reqData: ResendOTPData,
+  language: string,
   thunkAPI: any
 ): Promise<ApiResponse> => {
   try {
     const response: AxiosResponse<ApiResponse> = await autoFetch.post(
       url,
-      reqData
+      reqData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          lang: language,
+        },
+      }
     );
     return response.data;
   } catch (error: any) {
@@ -97,12 +123,20 @@ export const resendOTPThunk = async (
 export const validateOTPThunk = async (
   url: string,
   reqData: ValidateOTPData,
+  language: string,
   thunkAPI: any
 ): Promise<ValidateOTPRes> => {
   try {
     const response: AxiosResponse<ValidateOTPRes> = await autoFetch.post(
       url,
-      reqData
+      reqData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          lang: language,
+        },
+      }
     );
     return response.data;
   } catch (error: any) {
@@ -114,12 +148,20 @@ export const validateOTPThunk = async (
 export const resetPasswordThunk = async (
   url: string,
   reqData: ResetPasswordData,
+  language:string,
   thunkAPI: any
 ): Promise<CompleteUSer> => {
   try {
     const response: AxiosResponse<CompleteUSer> = await autoFetch.post(
       url,
-      reqData
+      reqData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          lang: language,
+        },
+      }
     );
     return response.data;
   } catch (error: any) {
@@ -131,12 +173,20 @@ export const resetPasswordThunk = async (
 export const emailVerificationThunk = async (
   url: string,
   reqData: EmailVerificationData,
+  language:string,
   thunkAPI: any
 ): Promise<CompleteUSer> => {
   try {
     const response: AxiosResponse<CompleteUSer> = await autoFetch.post(
       url,
-      reqData
+      reqData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          lang: language,
+        },
+      }
     );
     return response.data;
   } catch (error: any) {

@@ -36,7 +36,7 @@ const FormTextArea: React.FC<FormRowProps> = ({
           value={value || ''}
           placeholder={placeHolder}
           onChange={handleChange}
-          maxLength={isOTP ? 1 : 100}
+          maxLength={isOTP ? 1 : 25000}
           style={{ backgroundColor: 'white' }}
           className={`${
             icon ? 'px-16' : 'px-2'

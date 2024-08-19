@@ -6,6 +6,8 @@ import { FormRow, FormTitle } from '../subComponents';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { ResetPasswordData } from '../assets/types';
+import { useGlobalContext } from '../context/GlobalContext';
+import { toast } from 'react-toastify';
 
 const ResetPasswordForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -31,11 +33,22 @@ const ResetPasswordForm: React.FC = () => {
     const value = e.target.value;
     setValues({ ...values, [name]: value, token: theToken });
   };
-
+  const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    await dispatch(resetPassword(values));
-    navigate('/login');
+    if (values.password === values.password_confirmation) {
+      const response = await dispatch(
+        resetPassword({ reqData: values, language })
+      ).unwrap();
+      if (response.status === 1) {
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      } else {
+        toast.error('passwordCheck');
+      }
+    }
   };
   return (
     <div className="flex justify-evenly w-full items-center">

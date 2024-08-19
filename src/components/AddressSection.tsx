@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionTitle } from '../subComponents';
+import { FormTitle } from '../subComponents';
 import addressIcon from '../assets/svg/address.svg';
 import addMob from '../assets/svg/addMob.svg';
 import addTel from '../assets/svg/addTel.svg';
@@ -43,7 +43,7 @@ const AddressSection: React.FC = () => {
   const sortedItems = unSortedItems.sort((a, b) => a.order - b.order);
   return (
     <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-8 lg:px-20">
-      <SectionTitle title={t('branchesAndTimesTitle')} />
+      <FormTitle title={t('branchesAndTimesTitle')} />
       <div className="flex mt-2 flex-col justify-center items-center md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
         {sortedItems.map((ad) => {
           return (
@@ -52,13 +52,9 @@ const AddressSection: React.FC = () => {
                 setTheMap(() => ad.location);
               }}
               key={ad.id}
-              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md px-2 w-[90%] my-2 lg:w-[32%] md:w-[45%] "
+              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md px-2 w-[90%] my-2 lg:w-[23%] md:w-[45%] lg:h-[350px]"
             >
-              <img
-                src={addressIcon}
-                alt="alt"
-                className="bg-[#F4F4F4] p-2 rounded-full"
-              />
+              <img src={addressIcon} alt="alt" />
               <h1 className="text-black font-bold text-xl my-1 md:text-xl lg:text-lg">
                 {ad.name}
               </h1>

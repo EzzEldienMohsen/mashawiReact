@@ -187,6 +187,7 @@ const FormRow: React.FC<FormRowProps> = ({
         {label || name}
       </label>
       <input
+        required={isOTP}
         ref={inputRef}
         onKeyDown={handleKeyDown}
         type={type}
@@ -195,7 +196,7 @@ const FormRow: React.FC<FormRowProps> = ({
         value={value || ''}
         placeholder={placeHolder}
         onChange={handleChange}
-        maxLength={isOTP ? 1 : 100}
+        maxLength={isOTP ? 1 : 25000}
         style={{ backgroundColor: 'white' }}
         className={`px-4 bg-white place !important border-2 !important ${
           isOTP

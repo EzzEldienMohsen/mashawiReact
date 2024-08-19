@@ -19,9 +19,9 @@ const MainHero: React.FC = () => {
           isLangArabic ? 'left-0' : 'right-0'
         } `}
       ></div>
-      <div className="flex mt-10 w-full lg:mt-24 flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
+      <div className="flex mt-10 w-full lg:mt-[84px] flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
         {/* The image */}
-        <div className="relative w-4/5 lg:w-[36%] aspect-square md:aspect-[4/3] lg:aspect-square place-self-center">
+        <div className="relative w-4/5 md:w-1/2 lg:w-[36%] aspect-square md:aspect-[4/3] lg:aspect-square place-self-center">
           <img
             src={theImage}
             alt="mashawi"
@@ -34,7 +34,7 @@ const MainHero: React.FC = () => {
           />
         </div>
         {/* Content */}
-        <div className="flex flex-col lg:w-[45%] justify-start items-start gap-y-8 lg:pb-20 relative">
+        <div className="flex flex-col mt-4 lg:mt-0 lg:w-[45%] justify-start items-start gap-y-8 lg:pb-20 relative">
           <img
             src={onion}
             alt="leaf"

@@ -10,10 +10,21 @@ import message from '../assets/svg/message.svg';
 import { useTranslation } from 'react-i18next';
 import { ContactInitialValues } from '../assets/types';
 import { toast } from 'react-toastify';
+import { useGlobalContext } from '../context/GlobalContext';
 
-const request = async (data: ContactInitialValues, destination: string) => {
+const request = async (
+  data: ContactInitialValues,
+  destination: string,
+  language: string
+) => {
   try {
-    const resp = await autoFetch.post(`/${destination}`, data);
+    const resp = await autoFetch.post(`/${destination}`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        lang: language,
+      },
+    });
     toast.success(resp.data.message);
   } catch (error: any) {
     toast.error(error.response.data.message);
@@ -53,11 +64,7 @@ const ContactForm: React.FC<{ title: string; destination: string }> = ({
         toast.error(t('invalidEmailAddress'));
         return;
       }
-      // if (name === 'phone' && !validatePhoneNumber(value)) {
-      //   toast.error('Invalid phone number');
-      //   return;
-      // }
-    }, 3000),
+    }, 2000),
     []
   );
 
@@ -72,18 +79,21 @@ const ContactForm: React.FC<{ title: string; destination: string }> = ({
     setValues({ ...values, [name]: value });
     handleValidation(name, value);
   };
+  const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setIsLoading(true);
-    await request(values, destination);
+    await request(values, destination, language);
     setIsLoading(false);
+    setValues(contactInitialValues);
   };
 
   return (
     <div className="w-full relative flex flex-col justify-center items-center my-6 px-8 lg:px-20">
       <div className="absolute bottom-0 h-full w-4/5 p-3 bg-svg-background bg-contain bg-no-repeat bg-bottom"></div>
-      <div className="w-full lg:w-1/2 p-3 flex justify-center items-center bg-[#F4F4F4] flex-col z-10">
+      <div className="w-full lg:w-1/2 p-3 flex justify-center items-center bg-[#f4f4f4] flex-col z-10">
         <h1 className="text-black mb-6 font-bold text-xl md:text-2xl tracking-wide">
           {title}
         </h1>
@@ -99,7 +109,7 @@ const ContactForm: React.FC<{ title: string; destination: string }> = ({
             type="text"
             value={values.name}
             high={false}
-            placeHolder={t('nameInputPlaceHolder')}
+            placeHolder={t('contactNameInputPlaceHolder')}
             handleChange={handleChange}
             full={true}
           />

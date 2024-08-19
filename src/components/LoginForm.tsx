@@ -8,6 +8,7 @@ import { loginUser } from '../features/user/userSlice';
 import { useTranslation } from 'react-i18next';
 import { LoginData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
+import { useGlobalContext } from '../context/GlobalContext';
 
 const debounce = (func: (...args: any[]) => void, delay: number) => {
   let timeoutId: ReturnType<typeof setTimeout>;
@@ -50,6 +51,8 @@ const LoginForm: React.FC = () => {
     setValues({ ...values, [name]: value });
     handleValidation(name, value);
   };
+  const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
@@ -57,7 +60,9 @@ const LoginForm: React.FC = () => {
     localStorage.setItem('registerData', JSON.stringify(values));
 
     try {
-      const result = await dispatch(loginUser(values)).unwrap();
+      const result = await dispatch(
+        loginUser({ reqData: values, language })
+      ).unwrap();
       if (result.status === 1) {
         navigate('/');
       }

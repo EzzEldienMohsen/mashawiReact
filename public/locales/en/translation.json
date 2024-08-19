@@ -73,10 +73,11 @@
   "contiueSoppingText": "Continue Shopping",
   "clearCartText": "Empty Shopping Cart",
   "nameInputPlaceHolder": "Enter your name here",
+  "contactNameInputPlaceHolder": "name",
   "emailInputPlaceHolder": "Email",
   "mobileInputPlaceHolder": "Mobile Number",
   "subjectInputPlaceHolder": "Subject",
-  "textAreaInputPlaceHolder": "Enter your message here",
+  "textAreaInputPlaceHolder": "message",
   "sendText": "Send",
   "rights": "All rights reserved © 2024",
   "forgetPasswordText": "Forgot your password?",
@@ -216,5 +217,6 @@
   "rejectedTrackText": "Dear customer, we regret that your request was rejected because we do not provide the preparation components at the present time",
   "deliveredTrackText": "Congratulations, the order has been completed... Thank you for your cooperation",
   "trackButton": "track order",
-  "meal": "meal"
+  "meal": "meal",
+  "passwordCheck": "password is not matched"
 }

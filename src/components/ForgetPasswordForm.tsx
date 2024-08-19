@@ -7,6 +7,7 @@ import email from '../assets/svg/email.svg';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { toast } from 'react-toastify';
+import { useGlobalContext } from '../context/GlobalContext';
 
 const debounce = (func: (...args: any[]) => void, delay: number) => {
   let timeoutId: ReturnType<typeof setTimeout>;
@@ -48,11 +49,13 @@ const ForgetPasswordForm: React.FC = () => {
     setValues({ ...values, [name]: value });
     handleValidation(name, value);
   };
+  const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     localStorage.setItem('registerData', JSON.stringify(values));
-    await dispatch(forgetPassword(values));
+    await dispatch(forgetPassword({ reqData: values, language }));
     navigate('/validate-otp');
   };
   return (
