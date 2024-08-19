@@ -17,7 +17,7 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { getSingleOrder } from '../features/orders/ordersSlice';
 import { Link } from 'react-router-dom';
-import chicken from './svg/menu/chicken.svg';
+import chicken from '../assets/svg/menu/chicken.svg';
 
 const SingleOrder: React.FC = () => {
   const { t } = useTranslation();
