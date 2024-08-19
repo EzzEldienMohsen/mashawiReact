@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormTitle } from '../subComponents';
+import { SectionTitle } from '../subComponents';
 import addressIcon from '../assets/svg/address.svg';
 import addMob from '../assets/svg/addMob.svg';
 import addTel from '../assets/svg/addTel.svg';
@@ -46,7 +46,7 @@ const MainAddressSection: React.FC = () => {
   };
   return (
     <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-8 lg:px-20">
-      <FormTitle title={t('branchesAndTimesTitle')} />
+      <SectionTitle title={t('branchesAndTimesTitle')} />
       <div className="flex mt-2 flex-col justify-center items-center md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
         {sortedItems.map((ad) => {
           const timeIn24 = ad.working_time;
