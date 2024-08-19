@@ -97,7 +97,7 @@ const SingleOrder: React.FC = () => {
                   })}
                 </p>
                 <p className="text-newRed font-abdo text-sm lg:text-lg">
-                  {or.quantity}
+                  {`${or.quantity} ${t('meal')}`}
                 </p>
               </div>
             </div>

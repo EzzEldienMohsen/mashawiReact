@@ -215,5 +215,6 @@
   "returnedTrackText": "Dear customer, we regret that your order has been returned",
   "rejectedTrackText": "Dear customer, we regret that your request was rejected because we do not provide the preparation components at the present time",
   "deliveredTrackText": "Congratulations, the order has been completed... Thank you for your cooperation",
-  "trackButton": "track order"
+  "trackButton": "track order",
+  "meal": "meal"
 }
