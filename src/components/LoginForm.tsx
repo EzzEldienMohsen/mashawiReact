@@ -53,21 +53,25 @@ const LoginForm: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
+
     localStorage.setItem('registerData', JSON.stringify(values));
 
     try {
       const result = await dispatch(loginUser(values)).unwrap();
-
       if (result.status === 1) {
         navigate('/');
-      } else if (result.status === 2) {
-        toast.success(result.message);
       }
     } catch (error: any) {
-      if (error?.status === 403) {
+      console.log(error);
+      const errorMessage =
+        error?.message.message || 'An unexpected error occurred.';
+      const errorStatus = error?.status;
+
+      if (errorStatus === 403) {
+        toast.success(errorMessage);
         navigate('/verify-email');
       } else {
-        toast.success(error.message || 'Login failed');
+        toast.error(errorMessage);
       }
     }
   };

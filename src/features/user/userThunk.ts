@@ -53,11 +53,6 @@ export const loginThunk = async (
     );
     return response.data;
   } catch (error: any) {
-    if (error.response.status === 403) {
-      toast.success(error.response.data.message);
-    } else {
-      toast.error(error.response.data.message);
-    }
     return thunkAPI.rejectWithValue({
       message: error.response.data,
       status: error.response.status,
@@ -78,7 +73,7 @@ export const forgetPasswordThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 
@@ -95,7 +90,7 @@ export const resendOTPThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 
@@ -112,7 +107,7 @@ export const validateOTPThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 
@@ -129,7 +124,7 @@ export const resetPasswordThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 
@@ -146,7 +141,7 @@ export const emailVerificationThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 
@@ -170,7 +165,7 @@ export const logOutThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 
@@ -197,7 +192,7 @@ export const changePasswordThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 export const getUserThunk = async (
@@ -217,7 +212,7 @@ export const getUserThunk = async (
     });
     return response.data;
   } catch (error: any) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
 export const updateUserThunk = async (
@@ -243,6 +238,6 @@ export const updateUserThunk = async (
     return response.data;
   } catch (error: any) {
     toast.error(error.response.data.message);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.message);
   }
 };
