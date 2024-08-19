@@ -32,7 +32,7 @@ export type SingleOrderResponse = {
       quantity: number;
       total: string;
     }[];
-    address: string;
+    address: string | null;
     branch: string | null;
     calculations: {
       subtotal: string;

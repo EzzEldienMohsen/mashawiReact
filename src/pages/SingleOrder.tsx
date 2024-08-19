@@ -17,6 +17,7 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { getSingleOrder } from '../features/orders/ordersSlice';
 import { Link } from 'react-router-dom';
+import chicken from './svg/menu/chicken.svg';
 
 const SingleOrder: React.FC = () => {
   const { t } = useTranslation();
@@ -77,13 +78,20 @@ const SingleOrder: React.FC = () => {
           return (
             <div
               key={or.id}
-              className="flex bg-white w-full rounded-2xl  justify-between items-start py-4 px-4 my-2 gap-x-4 "
+              className="flex bg-white w-full rounded-2xl  justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-4 "
             >
-              <div className="flex justify-between items-start w-full">
-                <h1 className="text-sm font-abdo lg:text-xl w-1/3">
-                  {or.meal}
-                </h1>
-                <p className="text-xs flex justify-start items-center gap-x-4 font-abdo w-1/3 text-[#7E7E7E] lg:text-md">
+              <img
+                src={chicken}
+                alt="alt"
+                className={`w-1/3 md:w-1/5 aspect-square ${
+                  isLangArabic
+                    ? 'rounded-tr-3xl rounded-bl-3xl'
+                    : 'rounded-tl-3xl rounded-br-3xl'
+                }`}
+              />
+              <div className="flex flex-col justify-stretch items-start gap-y-3 lg:gap-y-7">
+                <h1 className="text-sm font-abdo lg:text-xl"> {or.meal}</h1>
+                <p className="text-xs font-abdo w-1/3 text-[#7E7E7E] lg:text-md">
                   {or.additions.map((ad, index) => {
                     return <span key={index}>{ad.name}</span>;
                   })}
