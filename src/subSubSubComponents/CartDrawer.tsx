@@ -8,7 +8,7 @@ import { clearCart, getCart } from '../features/cart/cartSlice';
 import { clearWishList } from '../features/wishList/wishListSlice';
 
 const CartDrawer: React.FC = () => {
-  const { isLangArabic } = useGlobalContext();
+  const { isLangArabic, goDown } = useGlobalContext();
 
   const { user, isLoading } = useTypedSelector(
     (state: RootState) => state.user
@@ -42,7 +42,7 @@ const CartDrawer: React.FC = () => {
           </div>
         </label>
       </div>
-      <div className="drawer-side z-30">
+      <div className={`drawer-side ${goDown ? '-z-30' : 'z-30'}`}>
         <label htmlFor="cart-drawer" className="drawer-overlay"></label>
         <div className="drawer-content w-1/2 h-full">
           <CartDrawerContent closeDrawer={closeDrawer} isLoading={isLoading} />
