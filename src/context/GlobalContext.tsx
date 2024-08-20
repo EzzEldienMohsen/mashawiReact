@@ -39,11 +39,11 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [isLangArabic]);
 
   const toggleLang = () => {
-    setGoDown(true);
+    setGoDown(() => true);
     setIsLangArabic((prev) => {
       const newLang = !prev;
       localStorage.setItem('lang', JSON.stringify(newLang));
-      setGoDown(false);
+      setGoDown(() => false);
       return newLang;
     });
   };
