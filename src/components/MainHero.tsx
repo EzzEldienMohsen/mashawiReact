@@ -34,7 +34,7 @@ const MainHero: React.FC = () => {
           />
         </div>
         {/* Content */}
-        <div className="flex flex-col mt-4 lg:mt-12 lg:w-[45%] justify-start items-start gap-y-8 lg:pb-20 relative">
+        <div className="flex flex-col mt-4 lg:mt-16 lg:w-[45%] justify-start items-start gap-y-8 lg:pb-20 relative">
           <img
             src={onion}
             alt="leaf"

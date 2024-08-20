@@ -12,7 +12,7 @@ import { RegisterData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { toast } from 'react-toastify';
 import { useGlobalContext } from '../context/GlobalContext';
-import { Validator } from 'node-input-validator';
+import * as Yup from 'yup';
 
 const RegistrationForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -35,26 +35,40 @@ const RegistrationForm: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
 
-  const validateForm = async (): Promise<boolean> => {
-    const v = new Validator(values, {
-      f_name: 'required|string|minLength:2',
-      l_name: 'required|string|minLength:2',
-      email: 'required|email',
-      phone: 'required|phoneNumber',
-      password: 'required|string|minLength:9',
-      password_confirmation: 'required|string|same:password',
-    });
+  const registrationSchema = Yup.object().shape({
+    f_name: Yup.string()
+      .required('First name is required')
+      .min(2, 'First name is too short'),
+    l_name: Yup.string()
+      .required('Last name is required')
+      .min(2, 'Last name is too short'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Invalid email format'),
+    phone: Yup.string()
+      .required('Phone number is required')
+      .matches(/^[0-9]+$/, 'Phone number is not valid'),
+    password: Yup.string()
+      .required('Password is required')
+      .min(9, 'Password is too short'),
+    password_confirmation: Yup.string()
+      .oneOf([Yup.ref('password')], 'Passwords must match')
+      .required('Password confirmation is required'),
+  });
 
-    const matched = await v.check();
-    if (!matched) {
-      Object.keys(v.errors).forEach((key) => {
-        toast.error(v.errors[key].message);
-      });
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await registrationSchema.validate(values, { abortEarly: false });
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach((error) => {
+          toast.error(error.message);
+        });
+      }
       return false;
     }
-    return true;
   };
-
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
