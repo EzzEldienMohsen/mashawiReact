@@ -8,7 +8,7 @@ import { clearCart, getCart } from '../features/cart/cartSlice';
 import { clearWishList } from '../features/wishList/wishListSlice';
 
 const CartDrawer: React.FC = () => {
-  const { isLangArabic, goDown } = useGlobalContext();
+  const { isLangArabic } = useGlobalContext();
   const [hideDrawer, setHideDrawer] = React.useState<boolean>(true);
   const { user, isLoading } = useTypedSelector(
     (state: RootState) => state.user
@@ -67,7 +67,7 @@ const CartDrawer: React.FC = () => {
           ref={drawerRef}
           className={`fixed inset-y-0 right-0 w-1/2 bg-white z-50 shadow-lg transform transition-transform duration-300 ${
             hideDrawer ? 'translate-x-full' : 'translate-x-0'
-          } ${goDown ? '-z-30' : 'z-30'}`}
+          } z-30`}
         >
           <div className="drawer-overlay" onClick={toggleDrawer}></div>
           <div className="w-full h-full">

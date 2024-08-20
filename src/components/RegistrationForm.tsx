@@ -37,23 +37,24 @@ const RegistrationForm: React.FC = () => {
 
   const registrationSchema = Yup.object().shape({
     f_name: Yup.string()
-      .required('First name is required')
-      .min(2, 'First name is too short'),
+      .required(t('isRequiredError'))
+      .min(2, t('firstNameIsTooShort')),
     l_name: Yup.string()
-      .required('Last name is required')
-      .min(2, 'Last name is too short'),
-    email: Yup.string()
-      .required('Email is required')
-      .email('Invalid email format'),
+      .required(t('isRequiredError'))
+      .min(2, t('secondNameIsTooShort')),
+    email: Yup.string().required(t('isRequiredError')).email(t('correctEmail')),
     phone: Yup.string()
-      .required('Phone number is required')
-      .matches(/^[0-9]+$/, 'Phone number is not valid'),
+      .required(t('isRequiredError'))
+      .matches(
+        /^((\+20|0)?1[0125][0-9]{8}$)|((\+971|0)?5[024568][0-9]{7}$)/,
+        t('correctPhoneNumber')
+      ),
     password: Yup.string()
-      .required('Password is required')
-      .min(9, 'Password is too short'),
+      .required(t('isRequiredError'))
+      .min(9, t('correctPassword')),
     password_confirmation: Yup.string()
-      .oneOf([Yup.ref('password')], 'Passwords must match')
-      .required('Password confirmation is required'),
+      .oneOf([Yup.ref('password')], t('correctConfirm'))
+      .required(t('isRequiredError')),
   });
 
   const validateForm = async (): Promise<boolean> => {

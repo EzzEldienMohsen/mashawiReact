@@ -219,5 +219,12 @@
   "trackButton": "متابعة الطلب",
   "meal": "وجبة",
   "passwordCheck": "رقم المرور غير متطابق",
-  "mapBtn": "عرض الخريطة"
+  "mapBtn": "عرض الخريطة",
+  "isRequiredError": "هذا الحقل مطلوب",
+  "firstNameIsTooShort": "الاسم الاول قصير جدا",
+  "secondNameIsTooShort": "الاسم الاخير قصير جدا",
+  "correctEmail": "برجاء ادخال بريد الكتروني صحيح",
+  "correctPhoneNumber": "برجاء ادخال رقم جوال صحيح",
+  "correctPassword": "برجاء ادخال كلمة مرور مكونة من تسعة ارقام",
+  "correctConfirm": "برجاء التاكد من مطابقة كلمة المرور مع التاكيد"
 }

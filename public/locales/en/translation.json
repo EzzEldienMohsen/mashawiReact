@@ -219,5 +219,12 @@
   "trackButton": "track order",
   "meal": "meal",
   "passwordCheck": "password is not matched",
-  "mapBtn": "show map"
+  "mapBtn": "show map",
+  "isRequiredError": "this field is required",
+  "firstNameIsTooShort": "first name is too short",
+  "secondNameIsTooShort": "second name is too short",
+  "correctEmail": "please insert a valid email",
+  "correctPhoneNumber": "please Insert a correct phone number",
+  "correctPassword": "please insert a 9 digits password",
+  "correctConfirm": "please make sure the password matches the confirmation password"
 }
