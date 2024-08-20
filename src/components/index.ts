@@ -19,7 +19,7 @@ export { default as Policy } from './Policy';
 export { default as UserForm } from './UserForm';
 export { default as AboutExcellence } from './AboutExcellence';
 export { default as AboutWhy } from './AboutWhy';
-export { default as Map } from './Map';
+// export { default as Map } from './Map';
 export { default as EventsCard } from './EventsCard';
 export { default as Steps } from './Steps';
 export { default as ProceedPageForm } from './ProceedPageForm';

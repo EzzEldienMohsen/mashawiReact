@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddressSection, ContactForm, Map, SidePageHero } from '../components';
+import { AddressSection, ContactForm, SidePageHero } from '../components';
 import img from '../assets/صورة تواصل معنا.png';
 import { useTranslation } from 'react-i18next';
 
@@ -14,7 +14,7 @@ const ContactUs: React.FC = () => {
       />
       <AddressSection />
       <ContactForm title={t('contactUsRoute')} destination="contact" />
-      <Map />
+      {/* <Map /> */}
     </div>
   );
 };

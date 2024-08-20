@@ -9,7 +9,11 @@ import { AddressResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { useLoaderData } from 'react-router-dom';
-import { useGlobalContext } from '../context/GlobalContext';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import addressBtn from '../assets/svg/addressMapButton.svg';
+
+dayjs.extend(customParseFormat);
 
 interface AddressQuery {
   queryKey: string[];
@@ -35,24 +39,27 @@ export const loader =
   };
 
 const AddressSection: React.FC = () => {
-  const { setTheMap } = useGlobalContext();
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
   const data: AddressResponse = axiosData.data;
   const unSortedItems = data.data;
   const sortedItems = unSortedItems.sort((a, b) => a.order - b.order);
+  const convertToAmPm = (time24: string) => {
+    return dayjs(time24, 'HH:mm').format('hh:mm A');
+  };
   return (
     <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-8 lg:px-20">
       <SectionTitle title={t('branchesAndTimesTitle')} />
       <div className="flex mt-2 flex-col justify-center items-center md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
         {sortedItems.map((ad) => {
+          const timeIn24 = ad.working_time;
+          const theSplitTime = timeIn24.split('-');
+          const theWantedTime = theSplitTime.map((time) => convertToAmPm(time));
+          const theActualForm = theWantedTime.join(' - ');
           return (
-            <button
-              onClick={() => {
-                setTheMap(() => ad.location);
-              }}
+            <div
               key={ad.id}
-              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md px-2 w-[90%] my-2 lg:w-[23%] md:w-[45%] lg:h-[350px]"
+              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md px-2 w-[90%] my-2 lg:w-[23%] md:w-[45%] lg:h-[400px]"
             >
               <img src={addressIcon} alt="alt" />
               <h1 className="text-black font-bold text-xl my-1 md:text-xl lg:text-lg">
@@ -71,11 +78,21 @@ const AddressSection: React.FC = () => {
                   <p className=" text-sm lg:text-md">{ad.landing_phone}</p>
                 </div>
               </div>
-              <div className="flex w-4/5 md:w-[90%] rounded-3xl gap-x-2 py-2 flex-row justify-center items-center  bg-[#F4F4F4]  md:text-md px-[4px] ">
+              <div
+                className="flex w-4/5 md:w-[90%] rounded-3xl gap-x-2 py-2 flex-row justify-center items-center  bg-[#F4F4F4]  md:text-md px-[4px]"
+                dir="ltr"
+              >
                 <img src={addTime} alt="alt" />
-                <p className="ml-2 text-sm">{ad.working_time}</p>
+                <p className="ml-2 text-sm">{theActualForm}</p>
               </div>
-            </button>
+              <a
+                href={ad.location}
+                className="flex w-4/5 md:w-[90%] rounded-3xl gap-x-2 py-2 flex-row justify-center items-center  bg-newRed text-white  md:text-md px-[4px] "
+              >
+                <img src={addressBtn} alt="alt" />
+                <p className="ml-2 text-sm">{t('mapBtn')}</p>
+              </a>
+            </div>
           );
         })}
       </div>

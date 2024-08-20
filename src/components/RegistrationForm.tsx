@@ -62,9 +62,7 @@ const RegistrationForm: React.FC = () => {
         registerUser({ reqData: values, language })
       ).unwrap();
       if (response.status === 1) {
-        setTimeout(() => {
-          navigate('/verify-email');
-        }, 2000);
+        navigate('/verify-email');
       }
     } else {
       toast.error('passwordCheck');
