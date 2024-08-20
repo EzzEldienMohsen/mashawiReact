@@ -56,16 +56,16 @@ const CartDrawer: React.FC = () => {
   return (
     <div className={`relative`}>
       <div
-        className="rounded-badge aspect-square flex items-center justify-center w-10 bg-white cursor-pointer"
+        className="rounded-badge 2xl:rounded-full aspect-square flex items-center justify-center w-10 2xl:w-20 bg-white cursor-pointer"
         onClick={toggleDrawer}
       >
-        <img src={cartImg} alt="Cart" className="w-5 h-5" />
+        <img src={cartImg} alt="Cart" className="w-5 2xl:w-10 2xl:h-10 h-5" />
       </div>
 
       {!hideDrawer && (
         <div
           ref={drawerRef}
-          className={`fixed inset-y-0 right-0 w-1/2 bg-white z-50 shadow-lg transform transition-transform duration-300 ${
+          className={`fixed inset-y-0 right-0 w-1/2 2xl:w-1/3 bg-white z-50 shadow-lg transform transition-transform duration-300 ${
             hideDrawer ? 'translate-x-full' : 'translate-x-0'
           } z-30`}
         >

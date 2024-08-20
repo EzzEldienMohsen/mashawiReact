@@ -26,7 +26,7 @@ const Header: React.FC = () => {
           <img
             src={logo}
             alt="logo"
-            className="rounded-full w-10 h-10 md:w-16 md:h-16 my-2"
+            className="rounded-full w-10 h-10 md:w-16 md:h-16 2xl:w-48 2xl:h-48 my-2"
           />
         </Link>
       </div>

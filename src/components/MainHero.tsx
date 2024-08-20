@@ -12,14 +12,14 @@ const MainHero: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const { t } = useTranslation();
   return (
-    <div className="w-full relative pb-2 2xl:pb-[124px] px-8 lg:px-20 ">
+    <div className="w-full relative pb-2 2xl:pb-[70px] px-8 lg:px-20 ">
       {/* the Colored Div */}
       <div
-        className={`absolute w-full  z-10 lg:w-[30%] 2xl:w-[40%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
+        className={`absolute w-full  z-10 lg:w-[30%] 2xl:w-[36%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
           isLangArabic ? 'left-0' : 'right-0'
         } `}
       ></div>
-      <div className="flex mt-10 w-full lg:mt-[60px] flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
+      <div className="flex mt-10 w-full lg:mt-[60px] 2xl:mt-64 flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
         {/* The image */}
         <div className="relative w-4/5 md:w-1/2 lg:w-[36%] 2xl:w-[45%] aspect-square md:aspect-[4/3] lg:aspect-square place-self-center">
           <img

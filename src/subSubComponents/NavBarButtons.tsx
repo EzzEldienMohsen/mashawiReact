@@ -12,12 +12,12 @@ const NavBarButtons: React.FC = () => {
   const token = user.token;
 
   return (
-    <div className="gap-x-2 hidden lg:flex justify-between items-center ">
+    <div className="gap-x-2 hidden lg:flex justify-between items-center w-1/5 ">
       <CartDrawer />
 
       <button
         onClick={toggleLang}
-        className="rounded-badge font-abdo aspect-square flex items-center justify-center w-10 bg-white"
+        className=" font-abdo aspect-square rounded-badge 2xl:rounded-full flex items-center justify-center w-10 2xl:w-20 2xl:text-3xl bg-white"
       >
         {isLangArabic ? 'EN' : 'AR'}
       </button>
@@ -26,9 +26,9 @@ const NavBarButtons: React.FC = () => {
       ) : (
         <Link
           to="/login"
-          className="rounded-badge aspect-square flex items-center justify-center w-10 bg-white my-2"
+          className="rounded-badge 2xl:rounded-full aspect-square flex items-center justify-center w-10 2xl:w-20 bg-white my-2"
         >
-          <img src={userImg} alt="" className="w-5 h-5" />
+          <img src={userImg} alt="" className="w-5 h-5 2xl:w-10 2xl:h-10" />
         </Link>
       )}
     </div>
