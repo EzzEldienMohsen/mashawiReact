@@ -8,7 +8,6 @@ interface GlobalContextProps {
   setAmount: React.Dispatch<React.SetStateAction<number>>;
   theMap: string;
   setTheMap: React.Dispatch<React.SetStateAction<string>>;
-  goDown: boolean;
 }
 
 const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
@@ -26,7 +25,6 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [amount, setAmount] = React.useState<number>(1);
   const [theMap, setTheMap] = React.useState<string>('');
-  const [goDown, setGoDown] = React.useState<boolean>(false);
   const [isLangArabic, setIsLangArabic] = React.useState<boolean>(() => {
     const lang = localStorage.getItem('lang');
     return lang !== null ? JSON.parse(lang) : true;
@@ -39,11 +37,9 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [isLangArabic]);
 
   const toggleLang = () => {
-    setGoDown(() => true);
     setIsLangArabic((prev) => {
       const newLang = !prev;
       localStorage.setItem('lang', JSON.stringify(newLang));
-      setGoDown(() => false);
       return newLang;
     });
   };
@@ -57,7 +53,6 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
         setAmount,
         theMap,
         setTheMap,
-        goDown,
       }}
     >
       {children}

@@ -12,14 +12,7 @@ import { RegisterData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { toast } from 'react-toastify';
 import { useGlobalContext } from '../context/GlobalContext';
-
-const debounce = (func: (...args: any[]) => void, delay: number) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return (...args: any[]) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
-};
+import { Validator } from 'node-input-validator';
 
 const RegistrationForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -28,20 +21,7 @@ const RegistrationForm: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
-  const handleValidation = React.useCallback(
-    debounce((name: string, value: string) => {
-      if (name === 'email' && !validateEmail(value)) {
-        toast.error(t('invalidEmailAddress'));
-        return;
-      }
-    }, 3000),
-    []
-  );
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -50,24 +30,46 @@ const RegistrationForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
-    handleValidation(name, value);
   };
+
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
+
+  const validateForm = async (): Promise<boolean> => {
+    const v = new Validator(values, {
+      f_name: 'required|string|minLength:2',
+      l_name: 'required|string|minLength:2',
+      email: 'required|email',
+      phone: 'required|phoneNumber',
+      password: 'required|string|minLength:9',
+      password_confirmation: 'required|string|same:password',
+    });
+
+    const matched = await v.check();
+    if (!matched) {
+      Object.keys(v.errors).forEach((key) => {
+        toast.error(v.errors[key].message);
+      });
+      return false;
+    }
+    return true;
+  };
+
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    localStorage.setItem('registerData', JSON.stringify(values));
-    if (values.password === values.password_confirmation) {
-      const response = await dispatch(
-        registerUser({ reqData: values, language })
-      ).unwrap();
-      if (response.status === 1) {
-        navigate('/verify-email');
-      }
-    } else {
-      toast.error('passwordCheck');
+
+    const isFormValid = await validateForm();
+    if (!isFormValid) return;
+
+    const response = await dispatch(
+      registerUser({ reqData: values, language })
+    ).unwrap();
+
+    if (response.status === 1) {
+      navigate('/verify-email');
     }
   };
+
   return (
     <div className="flex justify-evenly w-full items-center">
       <form
