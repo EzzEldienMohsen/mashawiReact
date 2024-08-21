@@ -86,3 +86,6 @@ background-size: contain;
 
 /* DropDown Select */
 
+.fill {
+  background-size: fill;
+}

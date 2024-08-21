@@ -46,7 +46,7 @@ const MainAddressSection: React.FC = () => {
     return dayjs(time24, 'HH:mm').format('hh:mm A');
   };
   return (
-    <div className="flex flex-col justify-center items-center gap-y-4 my-2 w-full px-8 lg:px-20">
+    <div className="flex flex-col justify-center items-center gap-y-4 2xl:gap-y-20 my-2 w-full px-8 lg:px-20">
       <SectionTitle title={t('branchesAndTimesTitle')} />
       <div className="flex mt-2 flex-col justify-center items-center md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
         {sortedItems.map((ad) => {
@@ -57,38 +57,40 @@ const MainAddressSection: React.FC = () => {
           return (
             <div
               key={ad.id}
-              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-2 gap-y-4 shadow-md px-2 w-[90%] my-2 lg:w-[23%] md:w-[45%] lg:h-[400px]"
+              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-6 gap-y-4 shadow-md px-2 w-[90%] my-2 lg:w-[30%] 2xl:w-[23%] md:w-[45%] "
             >
               <img src={addressIcon} alt="alt" />
-              <h1 className="text-black font-bold text-xl my-1 md:text-xl lg:text-lg">
+              <h1 className="text-black font-bold text-xl my-1 md:text-xl lg:text-lg 2xl:text-3xl">
                 {ad.name}
               </h1>
-              <p className=" text-sm md:text-md lg:text-sm text-center mb-2 text-gray-600 px-1">
+              <p className=" text-sm md:text-md lg:text-sm text-center mb-2 text-gray-600 px-1 2xl:text-2xl">
                 {ad.address}
               </p>
               <div className="flex flex-row gap-x-1 text-start items-center justify-between ">
-                <div className="flex flex-row gap-x-1 justify-between lg:text-xs text-sm ">
+                <div className="flex flex-row gap-x-1 justify-between lg:text-xs text-sm 2xl:text-xl ">
                   <img src={addMob} alt="alt" />{' '}
-                  <p className="text-sm lg:text-md">{ad.phone}</p>
+                  <p className="text-sm lg:text-md 2xl:text-xl">{ad.phone}</p>
                 </div>
                 <div className="flex flex-row gap-x-1 justify-between lg:text-xs text-sm mr-2">
                   <img src={addTel} alt="alt" />{' '}
-                  <p className=" text-sm lg:text-md">{ad.landing_phone}</p>
+                  <p className=" text-sm lg:text-md 2xl:text-xl">
+                    {ad.landing_phone}
+                  </p>
                 </div>
               </div>
               <div
-                className="flex w-4/5 md:w-[90%] rounded-3xl gap-x-2 py-2 flex-row justify-center items-center  bg-[#F4F4F4]  md:text-md px-[4px]"
+                className="flex w-4/5 md:w-[90%] 2xl:text-2xl rounded-full gap-x-2 py-2 flex-row justify-center items-center  bg-[#F4F4F4]  md:text-md  px-[4px]"
                 dir="ltr"
               >
                 <img src={addTime} alt="alt" />
-                <p className="ml-2 text-sm">{theActualForm}</p>
+                <p className="ml-2 text-sm 2xl:text-xl">{theActualForm}</p>
               </div>
               <a
                 href={ad.location}
-                className="flex w-4/5 md:w-[90%] rounded-3xl gap-x-2 py-2 flex-row justify-center items-center  bg-newRed text-white  md:text-md px-[4px] "
+                className="flex w-4/5 md:w-[90%] rounded-full gap-x-2 py-2 flex-row justify-center items-center  bg-newRed text-white  md:text-md 2xl:min-h-[40px] 2xl:h-auto 2xl:text-xl px-[4px] "
               >
                 <img src={addressBtn} alt="alt" />
-                <p className="ml-2 text-sm">{t('mapBtn')}</p>
+                <p className="ml-2 text-sm 2xl:text-xl">{t('mapBtn')}</p>
               </a>
             </div>
           );

@@ -14,7 +14,7 @@ const SectionTitle: React.FC<{ title: string }> = ({ title }) => {
         alt="leaf"
         className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
           isLangArabic ? 'left-1/2' : '-right-1/2 transform scale-x-[-1]'
-        }  mb-4 w-1/2 md:w-3/5 2xl:w-full`}
+        }  mb-4 w-1/2 md:w-3/5 2xl:w-3/4`}
       />
     </div>
   );

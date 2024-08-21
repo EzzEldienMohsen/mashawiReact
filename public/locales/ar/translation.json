@@ -226,5 +226,8 @@
   "correctEmail": "برجاء ادخال بريد الكتروني صحيح",
   "correctPhoneNumber": "برجاء ادخال رقم جوال صحيح",
   "correctPassword": "برجاء ادخال كلمة مرور مكونة من تسعة ارقام",
-  "correctConfirm": "برجاء التاكد من مطابقة كلمة المرور مع التاكيد"
+  "correctConfirm": "برجاء التاكد من مطابقة كلمة المرور مع التاكيد",
+  "nameIsTooShort": "الاسم قصير جدا",
+  "subjectIsTooShort": "الموضوع قصير جدا",
+  "messageIsTooShort": "الرسالة قصيرة جدا"
 }

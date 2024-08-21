@@ -63,10 +63,11 @@ const MainHero: React.FC = () => {
           </p>
           <Link
             to="/meals"
-            className="text-white bg-newRed btn px-4 text-xl w-1/2 py-2 2xl:py-12 2xl:px-10 flex justify-center items-center rounded-full 2xl:text-5xl"
-            style={{ height: 'auto', minHeight: '64px' }}
+            className="text-white bg-newRed btn px-2 text-lg w-1/3 py-2 2xl:py-10 2xl:px-10 flex justify-center items-center rounded-full  2xl:text-5xl 2xl:min-h-[64px] 2xl:h-auto"
           >
-            <span className="w-full text-center">{t('MainHeroOrder')}</span>
+            <span className="w-full text-center font-abdo">
+              {t('MainHeroOrder')}
+            </span>
           </Link>
         </div>
       </div>

@@ -226,5 +226,8 @@
   "correctEmail": "please insert a valid email",
   "correctPhoneNumber": "please Insert a correct phone number",
   "correctPassword": "please insert a 9 digits password",
-  "correctConfirm": "please make sure the password matches the confirmation password"
+  "correctConfirm": "please make sure the password matches the confirmation password",
+  "nameIsTooShort": "name is too short",
+  "subjectIsTooShort": "subject is too short",
+  "messageIsTooShort": "message is too short"
 }

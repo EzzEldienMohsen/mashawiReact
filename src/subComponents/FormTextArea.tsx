@@ -39,18 +39,20 @@ const FormTextArea: React.FC<FormRowProps> = ({
           maxLength={isOTP ? 1 : 25000}
           style={{ backgroundColor: 'white' }}
           className={`${
-            icon ? 'px-16' : 'px-2'
-          } text-sm md:text-auto bg-white font-abdo !important  !important ${
+            icon ? 'px-16 2xl:px-24 ' : 'px-2'
+          } text-sm md:text-auto bg-white font-abdo 2xl:placeholder:text-2xl 2xl:text-2xl  !important ${
             isOTP
               ? 'text-center w-12 lg:w-16 rounded-2xl'
               : 'rounded-3xl text-start  md:max-h-[150px] md:min-h-[100px]  w-full'
-          }  ${high ? 'py-6 md:py-6' : 'py-2'} ${isBorder ? 'border-2' : ''}`}
+          }  ${high ? 'py-6 md:py-6 2xl:py-6' : 'py-2 2xl:py-8'} ${
+            isBorder ? 'border-2' : ''
+          }`}
         />
         {icon ? (
           <img
             src={icon}
             alt="icon"
-            className={`absolute ${
+            className={`absolute 2xl:w-10 2xl:h-10  ${
               isLangArabic ? 'right-4' : 'left-4'
             } top-0 mt-[30px] md:mt-[26px] transform -translate-y-0 `}
           />
