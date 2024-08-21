@@ -45,7 +45,11 @@ const EventsCard: React.FC<{ data: EventData; destination: string }> = ({
         {data.title}
       </h1>
       <Link
-        to={`/${destination}/${data.id}`}
+        to={
+          destination !== 'singleArticle'
+            ? `/${destination}/${data.id}`
+            : `/${destination}`
+        }
         className="btn w-4/5 bg-newRed text-white font-abdo font-normal rounded-full 2xl:text-2xl 2xl:py-2 2xl:min-h-[40px] 2xl:h-auto 2xl:flex 2xl:justify-center 2xl:items-center"
       >
         {t('eventsButton')}

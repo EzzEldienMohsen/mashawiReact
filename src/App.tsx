@@ -119,6 +119,7 @@ const Payment = React.lazy(() => import('./pages/Payment'));
 const Delivery = React.lazy(() => import('./pages/Delivery'));
 const Refund = React.lazy(() => import('./pages/Refund'));
 const Articles = React.lazy(() => import('./pages/Articles'));
+const SingleArticlePage = React.lazy(() => import('./pages/SingleArticlePage'));
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -254,6 +255,20 @@ const AppRouter: React.FC = () => {
               }
             >
               <Articles />
+            </Suspense>
+          ),
+        },
+        {
+          path: '/SingleArticle',
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <SingleArticlePage />
             </Suspense>
           ),
         },

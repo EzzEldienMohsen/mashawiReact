@@ -108,6 +108,7 @@ export const links: Link[] = [
   { text: 'galleryRoute', to: '/gallery' },
   { text: 'contactUsRoute', to: '/contact' },
   { text: 'deliveryPolicyRoute', to: '/delivery' },
+  { text: 'articlesRoute', to: '/articles' },
   { text: 'refundPolicyRoute', to: '/refund' },
   // { text: 'main', to: '/' },
   // { text: 'cartRoute', to: '/cart' },
