@@ -1,10 +1,10 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { EventsCard } from '../components';
 import { EventsQuery, EventsResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
-import { useLoaderData } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { events } from '../assets';
+import { EventsCard } from '../components';
 const eventsQuery = (language: string): EventsQuery => {
   return {
     queryKey: ['events', language],
@@ -23,9 +23,7 @@ export const loader =
     return data;
   };
 
-const Events: React.FC = () => {
-  const axiosData: any = useLoaderData();
-  const data: EventsResponse = axiosData.data;
+const Articles: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col justify-center items-center w-full my-4  py-8">
@@ -36,9 +34,13 @@ const Events: React.FC = () => {
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
         <div className="my-8 flex flex-col  justify-center items-center gap-y-5 md:flex md:flex-row md:gap-x-2 lg:justify-start md:flex-wrap w-full">
-          {data.data.map((data) => {
+          {events.map((data) => {
             return (
-              <EventsCard key={data.id} data={data} destination="singleEvent" />
+              <EventsCard
+                key={data.id}
+                data={data}
+                destination="singleArticle"
+              />
             );
           })}
         </div>
@@ -46,5 +48,4 @@ const Events: React.FC = () => {
     </div>
   );
 };
-
-export default Events;
+export default Articles;

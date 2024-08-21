@@ -35,3 +35,4 @@ export { default as SingleOrder } from './SingleOrder';
 export { default as SingleNewsPage } from './SingleNewsPage';
 export { default as UpdateAddress } from './UpdateAddress';
 export { default as OrderTrack } from './OrderTrack';
+export { default as Articles } from './Articles';

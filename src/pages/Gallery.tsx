@@ -54,7 +54,7 @@ const Gallery: React.FC = () => {
               <img
                 src={data.path}
                 alt="alt"
-                className={`w-full aspect-square md:aspect-auto md:h-[348px] ${
+                className={`w-full aspect-square md:aspect-auto md:h-[348px] 2xl:aspect-square 2xl:h-auto ${
                   isLangArabic
                     ? 'rounded-tr-3xl rounded-bl-3xl'
                     : 'rounded-tl-3xl rounded-br-3xl'

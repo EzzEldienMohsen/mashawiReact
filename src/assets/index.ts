@@ -3,6 +3,7 @@ import {
   AddressData,
   CardData,
   ContactInitialValues,
+  Event,
   GalleryElement,
   InitialOTPInputs,
   Link,
@@ -10,6 +11,7 @@ import {
   PrivacyPolicyElement,
   ProfileLink,
   RegisterData,
+  SingleEvent,
   Tracker,
 } from './types';
 import arrow from '../assets/svg/header/arrow.svg';
@@ -76,7 +78,17 @@ import sOrG3 from '../assets/svg/singleOrder/deliveringGray.svg';
 import sOrG4 from '../assets/svg/singleOrder/deliveredGray.svg';
 
 import sOrG7 from '../assets/svg/singleOrder/readyGray.svg';
-
+//  events Images
+import pic1 from '../assets/svg/events/pic1.svg';
+import pic2 from '../assets/svg/events/pic2.svg';
+import pic3 from '../assets/svg/events/pic3.svg';
+import pic4 from '../assets/svg/events/pic4.svg';
+import pic5 from '../assets/svg/events/pic5.svg';
+import pic6 from '../assets/svg/events/pic6.svg';
+import pic7 from '../assets/svg/events/pic7.svg';
+import pic8 from '../assets/svg/events/pic8.svg';
+import dateIcon from '../assets/svg/events/dateIcon.svg';
+import eventPic from '../assets/svg/events/eventPic.svg';
 // Single Order
 import meat from './svg/menu/meat.svg';
 import { UpdateUserReq } from '../features/user/types';
@@ -691,3 +703,64 @@ export const singleOrderElements: {
     price: 'orderPrice',
   },
 ];
+// Events starts here
+
+export const events: Event[] = [
+  {
+    id: nanoid(),
+    image: pic1,
+    date: 'eventsDate',
+    title: 'eventsTitle',
+  },
+  {
+    id: nanoid(),
+    image: pic2,
+    date: 'eventsDate',
+    title: 'eventsTitle',
+  },
+  {
+    id: nanoid(),
+    image: pic3,
+    date: 'eventsDate',
+    title: 'eventsTitle',
+  },
+  {
+    id: nanoid(),
+    image: pic4,
+    date: 'eventsDate',
+    title: 'eventsTitle',
+  },
+  {
+    id: nanoid(),
+    image: pic5,
+    date: 'eventsDate',
+    title: 'eventsTitle',
+  },
+  {
+    id: nanoid(),
+    image: pic6,
+    date: 'eventsDate',
+    title: 'eventsTitle',
+  },
+  {
+    id: nanoid(),
+    image: pic7,
+    date: 'eventsDate',
+    title: 'eventsTitle',
+  },
+  {
+    id: nanoid(),
+    image: pic8,
+    date: 'eventsDate',
+    title: 'eventsTitle',
+  },
+];
+
+export const singleEvent: SingleEvent = {
+  id: nanoid(),
+  img: eventPic,
+  icon: dateIcon,
+  timeText: 'eventsDate',
+  title: 'eventsTitle',
+  text: 'policyFirstLorem',
+};

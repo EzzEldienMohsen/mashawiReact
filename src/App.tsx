@@ -118,6 +118,7 @@ const Terms = React.lazy(() => import('./pages/Terms'));
 const Payment = React.lazy(() => import('./pages/Payment'));
 const Delivery = React.lazy(() => import('./pages/Delivery'));
 const Refund = React.lazy(() => import('./pages/Refund'));
+const Articles = React.lazy(() => import('./pages/Articles'));
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -241,6 +242,20 @@ const AppRouter: React.FC = () => {
             </Suspense>
           ),
           loader: newsLoader(queryClient, language),
+        },
+        {
+          path: '/articles',
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <Articles />
+            </Suspense>
+          ),
         },
         {
           path: '/jobs',

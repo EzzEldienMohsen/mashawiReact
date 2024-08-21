@@ -21,7 +21,7 @@ const SidePageHero: React.FC<SidePageHeroProps> = ({
         <h1 className="mb-4 text-lg md:text-2xl lg:text-4xl 2xl:text-6xl my-1 md:text-start font-bold text-[#CD0B09]">
           {primaryText}
         </h1>
-        <p className="text-white text-sm md:text-md 2xl:text-2xl text-center md:text-start lg:text-lg my-1">
+        <p className="text-white text-sm md:text-md 2xl:text-2xl text-center md:text-start lg:text-lg my-1 2xl:leading-[3rem]">
           {secondaryText}
         </p>
       </div>
