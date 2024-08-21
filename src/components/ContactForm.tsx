@@ -100,7 +100,7 @@ const ContactForm: React.FC<{ title: string; destination: string }> = ({
     }
 
     const response = await request(values, destination, language);
-    if (response.status === 1) {
+    if (response.status === 200) {
       setIsLoading(false);
       setValues(contactInitialValues);
     }
