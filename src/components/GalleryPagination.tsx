@@ -4,7 +4,7 @@ import { GalleryResponse } from '../assets/types';
 import arrow from '../assets/svg/menu/pagination/paginationArroww.svg';
 import { useGlobalContext } from '../context/GlobalContext';
 
-const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo`;
+const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo 2xl:w-16 2xl:text-3xl`;
 
 const GalleryPagination: React.FC = () => {
   const axiosData: any = useLoaderData();
@@ -108,7 +108,9 @@ const GalleryPagination: React.FC = () => {
           <img
             src={arrow}
             alt="leaf"
-            className={` ${isLangArabic ? '' : ' transform scale-x-[-1]'} `}
+            className={` ${
+              isLangArabic ? '' : ' transform scale-x-[-1]'
+            } 2xl:w-6`}
           />
         </button>
         {renderPageButtons()}
@@ -122,7 +124,9 @@ const GalleryPagination: React.FC = () => {
           <img
             src={arrow}
             alt="leaf"
-            className={` ${isLangArabic ? 'transform scale-x-[-1]' : ' '} `}
+            className={` ${
+              isLangArabic ? 'transform scale-x-[-1]' : ' '
+            } 2xl:w-6 `}
           />
         </button>
       </div>

@@ -3,7 +3,7 @@ import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { Meals } from '../assets/types';
 import arrow from '../assets/svg/menu/pagination/paginationArroww.svg';
 import { useGlobalContext } from '../context/GlobalContext';
-const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo`;
+const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo 2xl:w-16 2xl:text-3xl`;
 const Pagination: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data2: Meals = axiosData.data2.data;
@@ -106,7 +106,9 @@ const Pagination: React.FC = () => {
           <img
             src={arrow}
             alt="leaf"
-            className={` ${isLangArabic ? '' : ' transform scale-x-[-1]'} `}
+            className={` ${
+              isLangArabic ? '' : ' transform scale-x-[-1]'
+            } 2xl:w-6`}
           />
         </button>
         {renderPageButtons()}
@@ -120,7 +122,9 @@ const Pagination: React.FC = () => {
           <img
             src={arrow}
             alt="leaf"
-            className={` ${isLangArabic ? 'transform scale-x-[-1]' : ' '} `}
+            className={` ${
+              isLangArabic ? 'transform scale-x-[-1]' : ' '
+            }  2xl:w-6`}
           />
         </button>
       </div>

@@ -109,7 +109,7 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
   return (
     <div className="2xl:w-full">
       <button
-        className="btn bg-newRed text-white font-abdo font-thin text-xs md:text-sm lg:text-xs 2xl:text-2xl flex flex-row justify-evenly w-full 2xl:w-4/5 items-center 2xl:justify-center px-5 lg:px-3 rounded-full py-1 2xl:py-4"
+        className="btn bg-newRed text-white font-abdo font-thin text-xs md:text-sm lg:text-xs 2xl:text-2xl flex flex-row justify-evenly w-full 2xl:w-[85%] items-center 2xl:justify-evenly px-5 lg:px-3 rounded-full py-1 2xl:py-4"
         onClick={() => dialogRef.current?.showModal()}
         style={{ height: 'auto', minHeight: '40px' }}
       >
