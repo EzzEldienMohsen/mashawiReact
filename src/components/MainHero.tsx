@@ -12,16 +12,16 @@ const MainHero: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const { t } = useTranslation();
   return (
-    <div className="w-full relative pb-2 2xl:pb-[70px] px-8 lg:px-20 ">
+    <div className="w-full relative pb-2 2xl:pb-[40px] px-8 lg:px-20 ">
       {/* the Colored Div */}
       <div
-        className={`absolute w-full  z-10 lg:w-[30%] 2xl:w-[36%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
+        className={`absolute w-full  z-10 lg:w-[30%] 2xl:w-[25%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
           isLangArabic ? 'left-0' : 'right-0'
         } `}
       ></div>
-      <div className="flex mt-10 w-full lg:mt-[60px] 2xl:mt-64 flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
+      <div className="flex mt-10 w-full lg:mt-[60px] 2xl:mt-[75px] flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
         {/* The image */}
-        <div className="relative w-4/5 md:w-1/2 lg:w-[36%] 2xl:w-[45%] aspect-square md:aspect-[4/3] lg:aspect-square place-self-center">
+        <div className="relative w-4/5 md:w-1/2 lg:w-[36%] 2xl:w-[30%] aspect-square md:aspect-[4/3] lg:aspect-square place-self-center">
           <img
             src={theImage}
             alt="mashawi"
@@ -34,17 +34,17 @@ const MainHero: React.FC = () => {
           />
         </div>
         {/* Content */}
-        <div className="flex flex-col mt-4 lg:mt-16 lg:w-[45%] 2xl:w-[50%] justify-start items-start gap-y-8 2xl:gap-y-40 lg:pb-20 2xl:pb-32 relative">
+        <div className="flex flex-col mt-4 lg:mt-16 lg:w-[45%] 2xl:w-[50%] justify-start items-start gap-y-8 2xl:gap-y-20 lg:pb-20 2xl:pb-16 relative">
           <img
             src={onion}
             alt="leaf"
-            className={`absolute w-28 md:w-48 2xl:w-80 aspect-square text-sm top-1/2 lg:top-[100%] ${
+            className={`absolute w-28 md:w-48 2xl:w-56 aspect-square text-sm top-1/2 lg:top-[100%] ${
               isLangArabic
                 ? 'left-[20%] md:left-0 lg:left-[82%] '
                 : '-right-1/3 md:-right-1/2 transform scale-x-[-1] lg:right-[30%]  '
             } transform -translate-x-1/2 -translate-y-1/2  `}
           />
-          <img src={slogan} alt="slogan" className="2xl:w-1/4" />
+          <img src={slogan} alt="slogan" className="" />
           <h1 className="text-black font-bold font-abdo relative text-xl md:tex-2xl lg:text-3xl 2xl:text-7xl">
             {t('MainHeroBigTitle')}
             <img
