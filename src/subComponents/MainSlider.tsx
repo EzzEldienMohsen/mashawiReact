@@ -48,7 +48,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
           onClick={() => {
             setMainData(() => mainData);
           }}
-          className={`flex-shrink-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
+          className={`flex-shrink-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 2xl:w-56 2xl:h-56 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
             isLangArabic
               ? 'rounded-tr-3xl rounded-bl-3xl'
               : 'rounded-tl-3xl rounded-br-3xl'
@@ -57,9 +57,9 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
           <img
             src={icon}
             alt="icon"
-            className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 mb-1 md:mb-2"
+            className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 2xl:w-28 2xl:h-28 mb-1 md:mb-2"
           />
-          <span className="text-black text-[10px] md:text-sm lg:text-base">
+          <span className="text-black text-[10px] md:text-sm lg:text-base 2xl:text-2xl">
             {t('allDishes')}
           </span>
         </button>
@@ -74,7 +74,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
 
               setMainData(() => reqData);
             }}
-            className={`flex-shrink-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
+            className={`flex-shrink-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 2xl:w-56 2xl:h-56 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
               isLangArabic
                 ? 'rounded-tr-3xl rounded-bl-3xl'
                 : 'rounded-tl-3xl rounded-br-3xl'
@@ -83,9 +83,9 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
             <img
               src={category.icon}
               alt={category.name}
-              className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 mb-1 md:mb-2"
+              className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 mb-1 md:mb-2 2xl:w-28 2xl:h-28"
             />
-            <span className="text-black text-[10px] md:text-sm lg:text-base">
+            <span className="text-black text-[10px] md:text-sm lg:text-base 2xl:text-2xl">
               {category.name}
             </span>
           </button>

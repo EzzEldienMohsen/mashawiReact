@@ -21,10 +21,10 @@ const AmountInput: React.FC<AmountProps> = ({ amount, setAmount }) => {
 
   React.useEffect(() => {}, [amount]);
   return (
-    <div className="w-1/2 flex justify-between items-center p-[3px] rounded-3xl bg-[#F5F5F5] gap-x-1">
+    <div className="w-1/2  flex justify-between items-center p-[3px] 2xl:p-3 rounded-3xl 2xl:rounded-full bg-[#F5F5F5] gap-x-1 2xl:gap-x-4">
       <button
         onClick={incrementAmount}
-        className="w-6 aspect-square rounded-full text-black bg-white flex justify-center items-center"
+        className="w-6 2xl:w-16 aspect-square rounded-full text-black bg-white flex justify-center items-center"
       >
         <img src={plus} alt="+" className="w-1/2" />
       </button>
@@ -34,7 +34,7 @@ const AmountInput: React.FC<AmountProps> = ({ amount, setAmount }) => {
         value={amount}
         onChange={handleAmount}
         min="1"
-        className="bg-[#F5F5F5] text-center appearance-none"
+        className="bg-[#F5F5F5] text-center 2xl:text-3xl appearance-none"
         style={{
           width: '30px',
           textAlign: 'center',
@@ -45,7 +45,7 @@ const AmountInput: React.FC<AmountProps> = ({ amount, setAmount }) => {
       />
       <button
         onClick={decrementAmount}
-        className="w-6 aspect-square rounded-full text-black bg-white flex justify-center items-center"
+        className="w-6 2xl:w-16 aspect-square rounded-full text-black bg-white flex justify-center items-center"
       >
         <img src={minus} alt="-" className="w-1/2" />
       </button>

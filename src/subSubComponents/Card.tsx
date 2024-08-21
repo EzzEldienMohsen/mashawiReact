@@ -43,11 +43,11 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
 
   return (
     <div
-      className={`my-2 w-3/4 pb-2 md:w-[90%] lg:w-[22%] ${
+      className={`my-2 w-3/4 pb-2 md:w-[90%] lg:w-[22%] 2xl:w-1/5 ${
         isLangArabic
           ? 'rounded-tr-3xl rounded-bl-3xl'
           : 'rounded-tl-3xl rounded-br-3xl'
-      } bg-white flex flex-col justify-center  items-center gap-y-2 relative`}
+      } bg-white flex flex-col justify-center items-center gap-y-2 2xl:gap-y-10 relative`}
     >
       <WishlistButton
         data={data}
@@ -57,15 +57,15 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
       <img
         src={data.image}
         alt="img"
-        className={`w-full aspect-square md:aspect-auto md:h-[348px] ${
+        className={`w-full aspect-square md:aspect-auto md:h-[348px]  ${
           isLangArabic
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'
         }`}
       />
-      <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row my-2">
-        <h1 className="font-abdo font-bold">{data.name}</h1>
-        <h2>
+      <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
+        <h1 className="font-abdo font-bold 2xl:text-3xl">{data.name}</h1>
+        <h2 className="font-abdo 2xl:text-3xl">
           {formatPrice(data.price)} {t('menuItemCurrency')}
         </h2>
       </div>
