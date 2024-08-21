@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
   return (
     <div className="bg-newRed text-white flex w-full flex-col justify-center lg:px-24 py-10 items-center lg:items-start ">
       <Link to="/">
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" className="2xl:w-32" />
       </Link>
       <div className="flex flex-col lg:flex-row w-full flex-wrap lg:justify-between   md:items-center ">
         <FooterFirstColumn />
@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
           {links.map((li) => {
             return (
               <Link key={li.text} to={li.to}>
-                <li className="my-1 ml-2 md:ml-1 text-xs font-extralight md:text-xs ">
+                <li className="my-1 ml-2 md:ml-1 text-xs font-extralight md:text-xs 2xl:text-xl ">
                   {t(li.text)}
                 </li>
               </Link>
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
           })}
         </ul>
       </div>
-      <div className="mt-4 flex justify-center text-center  items-center w-full  py-4">
+      <div className="mt-4 flex justify-center text-center  items-center w-full 2xl:text-2xl py-4">
         {t('rights')}
       </div>
     </div>
