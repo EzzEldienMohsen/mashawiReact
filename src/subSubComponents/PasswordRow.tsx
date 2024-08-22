@@ -28,8 +28,8 @@ const PasswordRow: React.FC<FormRowProps> = ({
       <img
         src={passwordIcon}
         alt="icon"
-        className={`absolute ${
-          isLangArabic ? 'right-4' : 'left-4'
+        className={`absolute 2xl:w-10 2xl:h-10 ${
+          isLangArabic ? 'right-4 2xl:right-8' : 'left-4 2xl:left-8'
         } top-1/2 transform -translate-y-1/2`}
       />
 
@@ -41,13 +41,13 @@ const PasswordRow: React.FC<FormRowProps> = ({
         value={value || ''}
         placeholder={placeHolder}
         onChange={handleChange}
-        className={`text-start px-14 bg-white border-2 w-full place-items-start rounded-full py-1  md:py-4
+        className={`text-start px-14  2xl:px-24 bg-white border-2 w-full place-items-start rounded-full py-1  md:py-4 2xl:py-8 2xl:placeholder:text-2xl 2xl:text-2xl
             `}
       />
       <button
         type="button"
-        className={`absolute ${
-          isLangArabic ? 'left-6' : 'right-6'
+        className={`absolute 2xl:w-10 2xl:h-10 ${
+          isLangArabic ? 'left-6 2xl:left-10' : 'right-6 2xl:right-10'
         } top-1/2 my-1 transform -translate-y-1/2 text-gray-400`}
         onClick={togglePasswordVisibility}
       >

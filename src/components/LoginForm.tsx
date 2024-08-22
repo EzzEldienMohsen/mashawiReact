@@ -9,14 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { LoginData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
-
-const debounce = (func: (...args: any[]) => void, delay: number) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return (...args: any[]) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
-};
+import * as Yup from 'yup';
 
 const LoginForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -27,20 +20,7 @@ const LoginForm: React.FC = () => {
   });
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
 
-  const handleValidation = React.useCallback(
-    debounce((name: string, value: string) => {
-      if (name === 'email' && !validateEmail(value)) {
-        toast.error(t('invalidEmailAddress'));
-        return;
-      }
-    }, 3000),
-    []
-  );
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -49,16 +29,37 @@ const LoginForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    handleValidation(name, value);
   };
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
 
+  const loginSchema = Yup.object().shape({
+    email: Yup.string().required(t('isRequiredError')).email(t('correctEmail')),
+
+    password: Yup.string()
+      .required(t('isRequiredError'))
+      .min(9, t('correctPassword')),
+  });
+
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await loginSchema.validate(values, { abortEarly: false });
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach((error) => {
+          toast.error(error.message);
+        });
+      }
+      return false;
+    }
+  };
+
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-
     localStorage.setItem('registerData', JSON.stringify(values));
-
+    const isFormValid = await validateForm();
+    if (!isFormValid) return;
     try {
       const result = await dispatch(
         loginUser({ reqData: values, language })

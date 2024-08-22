@@ -72,6 +72,7 @@ const RegistrationForm: React.FC = () => {
   };
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
+    localStorage.setItem('registerData', JSON.stringify(values));
 
     const isFormValid = await validateForm();
     if (!isFormValid) return;
