@@ -9,6 +9,7 @@ import { LoginData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 const LoginForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -70,6 +71,7 @@ const LoginForm: React.FC = () => {
         loginUser({ reqData: values, language })
       ).unwrap();
       if (result.status === 1) {
+        toast.success(result.message);
         navigate('/');
       }
     } catch (error: any) {
@@ -79,8 +81,10 @@ const LoginForm: React.FC = () => {
       const errorStatus = error?.status;
 
       if (errorStatus === 403) {
+        toast.success(errorMessage);
         navigate('/verify-email');
       } else {
+        toast.error(errorMessage);
         setErrors({ form: errorMessage });
       }
     }
