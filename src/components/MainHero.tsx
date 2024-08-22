@@ -19,7 +19,7 @@ const MainHero: React.FC = () => {
           isLangArabic ? 'left-0' : 'right-0'
         } `}
       ></div>
-      <div className="flex mt-10 w-full lg:mt-[60px] 2xl:mt-[75px] flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
+      <div className="flex mt-10 w-full lg:mt-[60px] 2xl:mt-[80px] flex-col justify-center items-start lg:flex-row-reverse lg:justify-between lg:items-center">
         {/* The image */}
         <div className="relative w-4/5 md:w-1/2 lg:w-[36%] 2xl:w-[30%] aspect-square md:aspect-[4/3] lg:aspect-square place-self-center">
           <img
@@ -34,7 +34,7 @@ const MainHero: React.FC = () => {
           />
         </div>
         {/* Content */}
-        <div className="flex flex-col mt-4 lg:mt-16 lg:w-[45%] 2xl:w-[50%] justify-start items-start gap-y-8 2xl:gap-y-20 lg:pb-20 2xl:pb-16 relative">
+        <div className="flex flex-col mt-4 lg:mt-16 lg:w-[45%] 2xl:w-[50%] justify-start items-start gap-y-8 2xl:gap-y-16 lg:pb-20 2xl:pb-16 relative">
           <img
             src={onion}
             alt="leaf"
@@ -45,7 +45,7 @@ const MainHero: React.FC = () => {
             } transform -translate-x-1/2 -translate-y-1/2  `}
           />
           <img src={slogan} alt="slogan" className="" />
-          <h1 className="text-black font-bold font-abdo relative text-xl md:tex-2xl lg:text-3xl 2xl:text-7xl">
+          <h1 className="text-black font-bold font-abdo relative text-xl md:tex-2xl lg:text-3xl 2xl:text-5xl">
             {t('MainHeroBigTitle')}
             <img
               src={grass}
@@ -55,15 +55,15 @@ const MainHero: React.FC = () => {
               } transform -translate-x-1/2 -translate-y-1/2 mb-4 w-1/2 md:w-3/5`}
             />
           </h1>
-          <h1 className="font-bold font-abdo text-newRed text-xl md:text-2xl lg:text-3xl xl:text-7xl">
+          <h1 className="font-bold font-abdo text-newRed text-xl md:text-2xl lg:text-3xl 2xl:text-5xl">
             {t('MainHeroSecondTitle')}
           </h1>
-          <p className="font-abdo text-black text-sm md:text-lg w-4/5 lg:w-full lg:text-xl 2xl:text-5xl">
+          <p className="font-abdo text-black text-sm md:text-lg w-4/5 lg:w-full lg:text-xl 2xl:text-3xl">
             {t('MainHeroText')}
           </p>
           <Link
             to="/meals"
-            className="text-white bg-newRed btn px-2 text-lg w-1/3 py-2 2xl:py-10 2xl:px-10 flex justify-center items-center rounded-full  2xl:text-5xl 2xl:min-h-[64px] 2xl:h-auto"
+            className="text-white bg-newRed btn px-2 text-lg w-1/3 py-2 2xl:py-6 2xl:px-10 flex justify-center items-center rounded-full  2xl:text-2xl 2xl:min-h-[40px] 2xl:h-auto"
           >
             <span className="w-full text-center font-abdo">
               {t('MainHeroOrder')}

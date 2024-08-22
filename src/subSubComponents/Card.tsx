@@ -64,8 +64,8 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
         }`}
       />
       <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
-        <h1 className="font-abdo font-bold 2xl:text-3xl">{data.name}</h1>
-        <h2 className="font-abdo 2xl:text-3xl">
+        <h1 className="font-abdo font-bold 2xl:text-2xl">{data.name}</h1>
+        <h2 className="font-abdo 2xl:text-2xl">
           {formatPrice(data.price)} {t('menuItemCurrency')}
         </h2>
       </div>
