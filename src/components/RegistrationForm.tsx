@@ -159,12 +159,12 @@ const RegistrationForm: React.FC = () => {
         />
         <Link
           to="/forget-password"
-          className="text-newRed text-start px-2 text-xs md:text-sm lg:text-sm mb-10"
+          className="text-newRed text-start px-2 text-xs md:text-sm lg:text-sm 2xl:text-lg mb-10"
         >
           {t('forgetPasswordText')}
         </Link>
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -175,7 +175,7 @@ const RegistrationForm: React.FC = () => {
         </button>
         <Link
           to="/login"
-          className="btn text-black btn-block hover:bg-[#D9D9D9] hover:text-black text-md rounded-3xl bg-[#D9D9D9] my-2"
+          className="btn text-black btn-block hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-xl rounded-3xl bg-[#D9D9D9] my-2"
         >
           {t('signInTitle')}
         </Link>

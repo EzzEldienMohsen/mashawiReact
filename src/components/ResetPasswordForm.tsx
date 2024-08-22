@@ -8,6 +8,7 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { ResetPasswordData } from '../assets/types';
 import { useGlobalContext } from '../context/GlobalContext';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 
 const ResetPasswordForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -35,19 +36,39 @@ const ResetPasswordForm: React.FC = () => {
   };
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
+
+  const resetPasswordSchema = Yup.object().shape({
+    password: Yup.string()
+      .required(t('isRequiredError'))
+      .min(9, t('correctPassword')),
+    password_confirmation: Yup.string()
+      .oneOf([Yup.ref('password')], t('correctConfirm'))
+      .required(t('isRequiredError')),
+  });
+
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await resetPasswordSchema.validate(values, { abortEarly: false });
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach((error) => {
+          toast.error(error.message);
+        });
+      }
+      return false;
+    }
+  };
+
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    if (values.password === values.password_confirmation) {
-      const response = await dispatch(
-        resetPassword({ reqData: values, language })
-      ).unwrap();
-      if (response.status === 1) {
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-      } else {
-        toast.error('passwordCheck');
-      }
+    const isFormValid = await validateForm();
+    if (!isFormValid) return;
+    const response = await dispatch(
+      resetPassword({ reqData: values, language })
+    ).unwrap();
+    if (response.status === 1) {
+      navigate('/login');
     }
   };
   return (
@@ -79,7 +100,7 @@ const ResetPasswordForm: React.FC = () => {
         />
 
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
           disabled={isLoading}
         >
           {isLoading ? (

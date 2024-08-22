@@ -8,14 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { toast } from 'react-toastify';
 import { useGlobalContext } from '../context/GlobalContext';
-
-const debounce = (func: (...args: any[]) => void, delay: number) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return (...args: any[]) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
-};
+import * as Yup from 'yup';
 
 const ForgetPasswordForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -23,21 +16,6 @@ const ForgetPasswordForm: React.FC = () => {
   const [values, setValues] = React.useState<{ email: string }>({ email: '' });
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handleValidation = React.useCallback(
-    debounce((name: string, value: string) => {
-      if (name === 'email' && !validateEmail(value)) {
-        toast.error(t('invalidEmailAddress'));
-        return;
-      }
-    }, 3000),
-    []
-  );
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -47,16 +25,38 @@ const ForgetPasswordForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    handleValidation(name, value);
   };
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
+  const forgetPasswordSchema = Yup.object().shape({
+    email: Yup.string().required(t('isRequiredError')).email(t('correctEmail')),
+  });
+
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await forgetPasswordSchema.validate(values, { abortEarly: false });
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach((error) => {
+          toast.error(error.message);
+        });
+      }
+      return false;
+    }
+  };
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     localStorage.setItem('registerData', JSON.stringify(values));
-    await dispatch(forgetPassword({ reqData: values, language }));
-    navigate('/validate-otp');
+    const isFormValid = await validateForm();
+    if (!isFormValid) return;
+    const response = await dispatch(
+      forgetPassword({ reqData: values, language })
+    ).unwrap();
+    if (response.status === 1) {
+      navigate('/validate-otp');
+    }
   };
   return (
     <div className="flex justify-evenly w-full items-center">
@@ -65,7 +65,7 @@ const ForgetPasswordForm: React.FC = () => {
         className="flex flex-col bg-transparent justify-center md:justify-center w-full items:center md:items-start rounded-lg"
       >
         <FormTitle title={t('forgetPasswordText')} />
-        <p className="my-2 text-center text-md md:text-lg lg:text-xl">
+        <p className="my-2 text-center text-md md:text-lg lg:text-xl 2xl:text-2xl">
           {t('forgetPasswordPageText')}
         </p>
         <FormRow
@@ -81,7 +81,7 @@ const ForgetPasswordForm: React.FC = () => {
         />
 
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
           disabled={isLoading}
         >
           {isLoading ? (

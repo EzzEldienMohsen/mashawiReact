@@ -46,7 +46,7 @@ const PasswordRow: React.FC<FormRowProps> = ({
       />
       <button
         type="button"
-        className={`absolute 2xl:w-10 2xl:h-10 ${
+        className={`absolute 2xl:w-14 2xl:h-14 ${
           isLangArabic ? 'left-6 2xl:left-10' : 'right-6 2xl:right-10'
         } top-1/2 my-1 transform -translate-y-1/2 text-gray-400`}
         onClick={togglePasswordVisibility}
