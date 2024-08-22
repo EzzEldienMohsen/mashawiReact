@@ -28,36 +28,38 @@ const UserDropDown: React.FC = () => {
         tabIndex={0}
         aria-label="menu"
         role="button"
-        className="rounded-badge aspect-square flex items-center justify-center  w-10 bg-white my-2"
+        className="rounded-badge 2xl:rounded-full aspect-square flex items-center justify-center  w-10 2xl:w-20 bg-white my-2"
       >
-        <img src={userImg} alt="" className="w-5 h-5" />
+        <img src={userImg} alt="" className="w-5 h-5 2xl:w-10 2xl:h-10" />
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content menu bg-white rounded-box gap-y-2 last:pt-2 z-[1] w-52 p-2 shadow"
+        className="dropdown-content menu bg-white rounded-box gap-y-2 last:pt-2 z-[1] w-52 2xl:w-72 p-2 shadow"
       >
         {profileLinks.map((li) => {
           return (
             <Link
               key={li.id}
               to={li.to}
-              className="flex justify-start items-center gap-x-4"
+              className="flex justify-start items-center gap-x-4 2xl:gap-x-8"
             >
-              <img src={li.img} alt="img" />
-              <p>{t(li.text)}</p>
+              <img src={li.img} alt="img" className="2xl:w-7" />
+              <p className="2xl:text-xl">{t(li.text)}</p>
             </Link>
           );
         })}
         <button
           onClick={theLogOut}
-          className="flex justify-start items-center gap-x-4"
+          className="flex justify-start items-center gap-x-4 2xl:gap-x-8"
         >
           <img
             src={logOutImg}
             alt="img"
-            className={`${isLangArabic ? '' : 'transform scale-x-[-1]'}`}
+            className={`2xl:w-7 ${
+              isLangArabic ? '' : 'transform scale-x-[-1]'
+            }`}
           />
-          <p>{t('signOut')}</p>
+          <p className="2xl:text-xl">{t('signOut')}</p>
         </button>
       </ul>
     </div>

@@ -200,9 +200,11 @@ const FormRow: React.FC<FormRowProps> = ({
         style={{ backgroundColor: 'white' }}
         className={`px-4 bg-white place !important border-2 2xl:placeholder:text-2xl 2xl:text-2xl !important ${
           isOTP
-            ? 'text-center w-12 lg:w-16 aspect-square rounded-2xl'
+            ? 'text-center w-12 lg:w-16 2xl:w-20 aspect-square rounded-2xl'
             : 'rounded-full text-start w-[100%]'
-        }  ${high ? 'py-6 md:py-6' : 'py-2 2xl:py-12'}`}
+        }  ${
+          high ? 'py-6 md:py-6' : `${isOTP ? 'py-2 ' : " 'py-2 2xl:py-12'"}`
+        }`}
       />
     </div>
   );

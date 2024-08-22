@@ -17,7 +17,6 @@ const OTPForm = () => {
   const [currentFocus, setCurrentFocus] = useState(0);
   const [seconds, setSeconds] = useState<number>(65);
   const [isActive, setIsActive] = useState<boolean>(true);
-  const [timer, setTimer] = useState<number | null>(null);
 
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
@@ -54,35 +53,35 @@ const OTPForm = () => {
     }
   }, [currentFocus]);
   // Seconds Controller
+  // count down
   useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
     if (isActive && seconds > 0) {
-      const newTimer = setInterval(() => {
+      timer = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
-      setTimer(newTimer);
-
-      // Cleanup interval on component unmount or when timer is stopped
-      return () => {
-        if (timer) {
-          clearInterval(timer);
-        }
-      };
     } else if (seconds === 0) {
-      setIsActive(false); // Stop the timer when it reaches 0
-      setIsResendDisabled(false);
+      setIsActive(false);
+      setIsResendDisabled(() => false);
+
+      // Add any additional actions when the countdown ends
     }
+
+    // Cleanup interval on component unmount or when the timer is stopped
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
   }, [isActive, seconds]);
 
-  // Handle Button Click For Timer
   const handleButtonClick = () => {
     if (isActive) {
-      setIsActive(false); // Stop the timer
-      if (timer !== null) {
-        window.clearInterval(timer); // Clear the existing interval
-      }
+      setIsActive(false);
     } else {
-      setSeconds(65); // Reset seconds to 60
-      setIsActive(true); // Start the timer
+      setSeconds(65);
+      setIsActive(true);
     }
   };
 
@@ -136,7 +135,7 @@ const OTPForm = () => {
         className="flex flex-col bg-transparent justify-center md:justify-center w-full items-center lg:justify-center lg:items-center rounded-lg"
       >
         <FormTitle title={t('OTPCodeTitle')} />
-        <p className="my-2 text-center text-md md:text-lg lg:text-xl">
+        <p className="my-2 text-center text-md md:text-lg lg:text-xl 2xl:text-2xl">
           {t('OTPCodeText')}
         </p>
         <div className="flex justify-start items-stretch gap-x-2 my-2 w-full">
@@ -162,7 +161,7 @@ const OTPForm = () => {
           ))}
         </div>
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -179,13 +178,13 @@ const OTPForm = () => {
                 handleButtonClick();
               }}
               disabled={isResendDisabled}
-              className={`text-newRed 4 text-xs md:text-sm w-full lg:text-sm  ${
+              className={`text-newRed 4 text-xs md:text-sm w-full lg:text-sm 2xl:text-xl ${
                 isResendDisabled ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
               {t('resendText')}
             </button>
-            <div className="w-8 h-8 rounded-full text-center flex justify-center items-center bg-newRed text-white text-sm">
+            <div className="w-8 h-8 2xl:w-12 2xl:h-12 rounded-full p-4 2xl:p-8 text-center flex justify-center items-center bg-newRed text-white text-sm 2xl:text-xl">
               <span>{seconds}s</span>
             </div>
           </div>
@@ -196,7 +195,7 @@ const OTPForm = () => {
               handleButtonClick();
             }}
             disabled={isResendDisabled}
-            className={`text-newRed mt-4 text-xs md:text-sm w-full lg:text-sm mb-10 ${
+            className={`text-newRed mt-4 text-xs md:text-sm w-full lg:text-sm 2xl:text-xl mb-10 ${
               isResendDisabled ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
