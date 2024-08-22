@@ -34,7 +34,6 @@ const PasswordRow: React.FC<FormRowProps> = ({
       />
 
       <input
-        required
         type={showPassword ? 'text' : 'password'}
         name={name}
         id={name}
