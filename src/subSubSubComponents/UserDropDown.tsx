@@ -28,9 +28,9 @@ const UserDropDown: React.FC = () => {
         tabIndex={0}
         aria-label="menu"
         role="button"
-        className="rounded-badge 2xl:rounded-full aspect-square flex items-center justify-center  w-10 2xl:w-20 bg-white my-2"
+        className="rounded-badge 2xl:rounded-full aspect-square flex items-center justify-center  w-10 2xl:w-14 bg-white my-2"
       >
-        <img src={userImg} alt="" className="w-5 h-5 2xl:w-10 2xl:h-10" />
+        <img src={userImg} alt="" className="w-5 h-5 2xl:w-6 2xl:h-6" />
       </div>
       <ul
         tabIndex={0}
