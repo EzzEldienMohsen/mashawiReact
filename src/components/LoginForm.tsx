@@ -38,10 +38,11 @@ const LoginForm: React.FC = () => {
 
   const loginSchema = Yup.object().shape({
     email: Yup.string().required(t('isRequiredError')).email(t('correctEmail')),
-
     password: Yup.string()
       .required(t('isRequiredError'))
-      .min(9, t('correctPassword')),
+      .test('min-length', t('correctPassword'), function (value) {
+        return !value || value.length >= 9;
+      }),
   });
 
   const validateForm = async (): Promise<boolean> => {

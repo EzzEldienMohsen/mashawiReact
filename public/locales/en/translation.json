@@ -231,5 +231,6 @@
   "subjectIsTooShort": "subject is too short",
   "messageIsTooShort": "message is too short",
   "articlesRoute": "Articles",
-  "singleArticleHeroText": "At Mashawi restaurant in the Emirates, we offer you a unique experience that combines authentic Arabic flavors and the art of traditional barbecue. Each meal is carefully prepared using the finest meats and spices, so you can enjoy an unforgettable taste in a warm and friendly atmosphere. Whether you are looking for a family meal or a get-together with friends, Mashawi is the ideal place for the most delicious grills in the Emirates."
+  "singleArticleHeroText": "At Mashawi restaurant in the Emirates, we offer you a unique experience that combines authentic Arabic flavors and the art of traditional barbecue. Each meal is carefully prepared using the finest meats and spices, so you can enjoy an unforgettable taste in a warm and friendly atmosphere. Whether you are looking for a family meal or a get-together with friends, Mashawi is the ideal place for the most delicious grills in the Emirates.",
+  "correctOTP": "please insert only numbers"
 }

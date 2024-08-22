@@ -16,6 +16,7 @@ import * as Yup from 'yup';
 
 const RegistrationForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
 
   const [values, setValues] = React.useState<RegisterData>(registerValues);
   const dispatch: AppDispatch = useDispatch();
@@ -30,6 +31,7 @@ const RegistrationForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
+    setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
   };
 
   const { isLangArabic } = useGlobalContext();
@@ -38,34 +40,47 @@ const RegistrationForm: React.FC = () => {
   const registrationSchema = Yup.object().shape({
     f_name: Yup.string()
       .required(t('isRequiredError'))
-      .min(2, t('firstNameIsTooShort')),
+      .test('name-length', t('firstNameIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
     l_name: Yup.string()
       .required(t('isRequiredError'))
-      .min(2, t('secondNameIsTooShort')),
+      .test('name-length', t('secondNameIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
     email: Yup.string().required(t('isRequiredError')).email(t('correctEmail')),
     phone: Yup.string()
       .required(t('isRequiredError'))
-      .matches(
-        /^((\+20|0)?1[0125][0-9]{8}$)|((\+971|0)?5[024568][0-9]{7}$)/,
-        t('correctPhoneNumber')
-      ),
+      .test('phone-format', t('correctPhoneNumber'), function (value) {
+        const egyptUaePhoneRegex =
+          /^((\+20|0)?1[0125][0-9]{8}$)|((\+971|0)?5[024568][0-9]{7}$)/;
+        return !value || egyptUaePhoneRegex.test(value);
+      }),
     password: Yup.string()
       .required(t('isRequiredError'))
-      .min(9, t('correctPassword')),
+      .test('password-length', t('correctPassword'), function (value) {
+        return !value || value.length >= 9;
+      }),
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password')], t('correctConfirm'))
-      .required(t('isRequiredError')),
+      .required(t('isRequiredError'))
+      .test('password-confirm-length', t('correctPassword'), function (value) {
+        return !value || value.length >= 9;
+      }),
   });
 
   const validateForm = async (): Promise<boolean> => {
     try {
       await registrationSchema.validate(values, { abortEarly: false });
+      setErrors({});
       return true;
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
         err.inner.forEach((error) => {
-          toast.error(error.message);
+          validationErrors[error.path!] = error.message;
         });
+        setErrors(validationErrors);
       }
       return false;
     }
@@ -82,6 +97,7 @@ const RegistrationForm: React.FC = () => {
     ).unwrap();
 
     if (response.status === 1) {
+      toast.success(response.message);
       navigate('/verify-email');
     }
   };
@@ -104,6 +120,11 @@ const RegistrationForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.f_name && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.f_name}
+          </p>
+        )}
         <FormRow
           name="l_name"
           label=" "
@@ -115,6 +136,11 @@ const RegistrationForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.l_name && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.l_name}
+          </p>
+        )}
         <FormRow
           name="email"
           icon={email}
@@ -126,6 +152,11 @@ const RegistrationForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.email && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.email}
+          </p>
+        )}
         <FormRow
           name="phone"
           label=" "
@@ -137,6 +168,11 @@ const RegistrationForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.phone && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.phone}
+          </p>
+        )}
         <FormRow
           name="password"
           label=" "
@@ -147,6 +183,11 @@ const RegistrationForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.password && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.password}
+          </p>
+        )}
         <FormRow
           name="password_confirmation"
           label=" "
@@ -157,14 +198,24 @@ const RegistrationForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.password_confirmation && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-2">
+            {errors.password_confirmation}
+          </p>
+        )}
         <Link
           to="/forget-password"
-          className="text-newRed text-start px-2 text-xs md:text-sm lg:text-sm 2xl:text-lg mb-10"
+          className="text-newRed text-start px-2 text-xs md:text-sm lg:text-sm 2xl:text-md mb-10"
         >
           {t('forgetPasswordText')}
         </Link>
+        {errors.form && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.form}
+          </p>
+        )}
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-2xl py-4 rounded-full bg-newRed my-4 flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -175,7 +226,7 @@ const RegistrationForm: React.FC = () => {
         </button>
         <Link
           to="/login"
-          className="btn text-black btn-block hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-xl rounded-3xl bg-[#D9D9D9] my-2"
+          className="btn text-black btn-block flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-2xl py-4 rounded-full bg-[#D9D9D9] my-2"
         >
           {t('signInTitle')}
         </Link>

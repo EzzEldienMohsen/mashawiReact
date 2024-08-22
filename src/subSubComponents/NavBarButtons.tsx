@@ -12,7 +12,7 @@ const NavBarButtons: React.FC = () => {
   const token = user.token;
 
   return (
-    <div className="gap-x-2 hidden lg:flex justify-between items-center w-[10%] ">
+    <div className="gap-x-3 hidden lg:flex justify-between items-center w-[10%] ">
       <CartDrawer />
 
       <button

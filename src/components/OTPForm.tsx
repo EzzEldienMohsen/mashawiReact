@@ -9,6 +9,7 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 
 const OTPForm = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
@@ -17,6 +18,7 @@ const OTPForm = () => {
   const [currentFocus, setCurrentFocus] = useState(0);
   const [seconds, setSeconds] = useState<number>(65);
   const [isActive, setIsActive] = useState<boolean>(true);
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
 
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
@@ -97,8 +99,61 @@ const OTPForm = () => {
     }));
   };
   const language = isLangArabic ? 'ar' : 'en';
+
+  const otpSchema = Yup.object().shape({
+    firstNum: Yup.string()
+      .required(t('isRequiredError'))
+      .test('otp-length', t('correctOTP'), function (value) {
+        return !value || value.length === 1;
+      }),
+    secondNum: Yup.string()
+      .required(t('isRequiredError'))
+      .test('otp-length', t('correctOTP'), function (value) {
+        return !value || value.length === 1;
+      }),
+    thirdNum: Yup.string()
+      .required(t('isRequiredError'))
+      .test('otp-length', t('correctOTP'), function (value) {
+        return !value || value.length === 1;
+      }),
+    fourthNum: Yup.string()
+      .required(t('isRequiredError'))
+      .test('otp-length', t('correctOTP'), function (value) {
+        return !value || value.length === 1;
+      }),
+    fifthNum: Yup.string()
+      .required(t('isRequiredError'))
+      .test('otp-length', t('correctOTP'), function (value) {
+        return !value || value.length === 1;
+      }),
+    sixthNum: Yup.string()
+      .required(t('isRequiredError'))
+      .test('otp-length', t('correctOTP'), function (value) {
+        return !value || value.length === 1;
+      }),
+  });
+
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await otpSchema.validate(values, { abortEarly: false });
+      setErrors({});
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
+        err.inner.forEach((error) => {
+          validationErrors[error.path!] = error.message;
+        });
+        setErrors(validationErrors);
+      }
+      return false;
+    }
+  };
+
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
+    const isFormValid = await validateForm();
+    if (!isFormValid) return;
     let tokenArray = Object.values(values);
     if (isLangArabic) {
       tokenArray = tokenArray.reverse();
@@ -110,6 +165,7 @@ const OTPForm = () => {
         validateOTP({ reqData: user, language })
       ).unwrap();
       if (result.status === 1) {
+        toast.success(result.message);
         navigate('/reset-password');
       } else if (result.status === 0) {
         toast.error(result.message);
@@ -135,7 +191,7 @@ const OTPForm = () => {
         className="flex flex-col bg-transparent justify-center md:justify-center w-full items-center lg:justify-center lg:items-center rounded-lg"
       >
         <FormTitle title={t('OTPCodeTitle')} />
-        <p className="my-2 text-center text-md md:text-lg lg:text-xl 2xl:text-2xl">
+        <p className="my-2 text-center text-md md:text-lg lg:text-xl 2xl:text-[16px]">
           {t('OTPCodeText')}
         </p>
         <div className="flex justify-start items-stretch gap-x-2 my-2 w-full">
@@ -147,19 +203,26 @@ const OTPForm = () => {
             'fifthNum',
             'sixthNum',
           ].map((name, index) => (
-            <FormRow
-              key={name}
-              name={name}
-              label=" "
-              type="text"
-              value={values[name as keyof InitialOTPInputs]}
-              high={false}
-              isOTP={true}
-              handleChange={handleChange}
-              inputRef={(el) => (inputRefs.current[index] = el)}
-            />
+            <div key={name} className="flex flex-col items-start w-full">
+              <FormRow
+                name={name}
+                label=" "
+                type="text"
+                value={values[name as keyof InitialOTPInputs]}
+                high={false}
+                isOTP={true}
+                handleChange={handleChange}
+                inputRef={(el) => (inputRefs.current[index] = el)}
+              />
+              {errors[name as keyof InitialOTPInputs] && (
+                <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+                  {errors[name as keyof InitialOTPInputs]}
+                </p>
+              )}
+            </div>
           ))}
         </div>
+
         <button
           className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
           disabled={isLoading}
@@ -184,7 +247,7 @@ const OTPForm = () => {
             >
               {t('resendText')}
             </button>
-            <div className="w-8 h-8 2xl:w-12 2xl:h-12 rounded-full p-4 2xl:p-8 text-center flex justify-center items-center bg-newRed text-white text-sm 2xl:text-xl">
+            <div className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full p-4 2xl:p-4 text-center flex justify-center items-center bg-newRed text-white text-sm 2xl:text-[18px]">
               <span>{seconds}s</span>
             </div>
           </div>
@@ -206,5 +269,4 @@ const OTPForm = () => {
     </div>
   );
 };
-
 export default OTPForm;

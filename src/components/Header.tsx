@@ -21,12 +21,12 @@ const Header: React.FC = () => {
         pathname === '/' ? 'absolute top-0 left-0 z-50' : 'z-20'
       } justify-between items-center px-8 lg:px-20 py-2 bg-transparent`}
     >
-      <div className="w-1/3 flex justify-start items-center">
+      <div className=" flex justify-start items-center">
         <Link to="/">
           <img
             src={logo}
             alt="logo"
-            className="rounded-full w-10 h-10 md:w-16 md:h-16 2xl:w-28 2xl:h-28 my-2"
+            className="rounded-full w-10 h-10 md:w-16 md:h-16 2xl:w-20 2xl:h-20 my-2"
           />
         </Link>
       </div>

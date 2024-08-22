@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 
 const ResetPasswordForm: React.FC = () => {
   const { isLoading } = useTypedSelector((state: RootState) => state.user);
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
 
   const { t } = useTranslation();
   const [values, setValues] = React.useState<ResetPasswordData>({
@@ -40,26 +41,33 @@ const ResetPasswordForm: React.FC = () => {
   const resetPasswordSchema = Yup.object().shape({
     password: Yup.string()
       .required(t('isRequiredError'))
-      .min(9, t('correctPassword')),
+      .test('password-length', t('correctPassword'), function (value) {
+        return !value || value.length >= 9;
+      }),
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password')], t('correctConfirm'))
-      .required(t('isRequiredError')),
+      .required(t('isRequiredError'))
+      .test('password-confirm-length', t('correctPassword'), function (value) {
+        return !value || value.length >= 9;
+      }),
   });
 
   const validateForm = async (): Promise<boolean> => {
     try {
       await resetPasswordSchema.validate(values, { abortEarly: false });
+      setErrors({});
       return true;
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
         err.inner.forEach((error) => {
-          toast.error(error.message);
+          validationErrors[error.path!] = error.message;
         });
+        setErrors(validationErrors);
       }
       return false;
     }
   };
-
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     const isFormValid = await validateForm();
@@ -68,6 +76,7 @@ const ResetPasswordForm: React.FC = () => {
       resetPassword({ reqData: values, language })
     ).unwrap();
     if (response.status === 1) {
+      toast.success(response.message);
       navigate('/login');
     }
   };
@@ -88,6 +97,11 @@ const ResetPasswordForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.password && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.password}
+          </p>
+        )}
         <FormRow
           name="password_confirmation"
           label=" "
@@ -98,9 +112,13 @@ const ResetPasswordForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
-
+        {errors.password_confirmation && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-2">
+            {errors.password_confirmation}
+          </p>
+        )}
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-2xl py-4 rounded-full bg-newRed my-4 flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto"
           disabled={isLoading}
         >
           {isLoading ? (
