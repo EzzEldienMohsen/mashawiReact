@@ -38,8 +38,8 @@ const ProductDetails: React.FC<ProductProps> = ({
           className="btn bg-newRed text-white flex justify-between items-center px-4 rounded-full py-4 2xl:w-2/5 2xl:py-2 2xl:px-4 2xl:min-h-[40px] 2xl:h-auto"
           onClick={handleAddToCart}
         >
-          <img src={addOrder} alt="alt" className="2xl:w-[22%]" />
-          <span className="font-abdo 2xl:text-xl">{t('addOrder')}</span>
+          <img src={addOrder} alt="alt" className="2xl:w-1/4" />
+          <span className="font-abdo 2xl:text-2xl">{t('addOrder')}</span>
         </button>
         <AmountInput amount={amount} setAmount={setAmount} />
       </div>
