@@ -113,8 +113,8 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
         onClick={() => dialogRef.current?.showModal()}
         style={{ height: 'auto', minHeight: '40px' }}
       >
-        <img src={src} alt="alt" className="w-1/4 lg:w-1/5 2xl:w-1/5" />
-        <span className="text-xs md:text-sm lg:text-xs 2xl:text-lg">
+        <img src={src} alt="alt" className="w-1/4 lg:w-1/5 2xl:w-[15%]" />
+        <span className="text-xs md:text-sm lg:text-xs 2xl:text-md">
           {t('addOnsText')}
         </span>
       </button>

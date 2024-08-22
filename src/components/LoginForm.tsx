@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { FormRow, FormTitle } from '../subComponents';
 import { Link, useNavigate } from 'react-router-dom';
 import emailIcon from '../assets/svg/email.svg';
@@ -18,6 +17,7 @@ const LoginForm: React.FC = () => {
     email: '',
     password: '',
   });
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,7 +29,9 @@ const LoginForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
   };
+
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
 
@@ -44,12 +46,15 @@ const LoginForm: React.FC = () => {
   const validateForm = async (): Promise<boolean> => {
     try {
       await loginSchema.validate(values, { abortEarly: false });
+      setErrors({});
       return true;
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
         err.inner.forEach((error) => {
-          toast.error(error.message);
+          validationErrors[error.path!] = error.message;
         });
+        setErrors(validationErrors);
       }
       return false;
     }
@@ -74,10 +79,9 @@ const LoginForm: React.FC = () => {
       const errorStatus = error?.status;
 
       if (errorStatus === 403) {
-        toast.success(errorMessage);
         navigate('/verify-email');
       } else {
-        toast.error(errorMessage);
+        setErrors({ form: errorMessage });
       }
     }
   };
@@ -100,6 +104,11 @@ const LoginForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.email && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.email}
+          </p>
+        )}
         <FormRow
           name="password"
           label=" "
@@ -110,27 +119,37 @@ const LoginForm: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.password && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-2">
+            {errors.password}
+          </p>
+        )}
         <Link
           to="/forget-password"
-          className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-lg mb-10"
+          className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-10"
         >
           {t('forgetPasswordText')}
         </Link>
+        {errors.form && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.form}
+          </p>
+        )}
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-2xl py-4 rounded-full bg-newRed my-4 flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto"
           disabled={isLoading}
         >
           {isLoading ? (
             <span className="loading loading-spinner loading-lg text-white"></span>
           ) : (
-            t('signInTitle')
+            <span>{t('signInTitle')}</span>
           )}
         </button>
         <Link
           to="/register"
-          className="btn text-black btn-block hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-xl rounded-3xl bg-[#D9D9D9] my-2"
+          className="btn text-black btn-block flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-2xl py-4 rounded-full bg-[#D9D9D9] my-2"
         >
-          {t('createAccountText')}
+          <span>{t('createAccountText')}</span>
         </Link>
       </form>
     </div>

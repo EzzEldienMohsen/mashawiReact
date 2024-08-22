@@ -5,6 +5,7 @@ import { CartItem, CartItemWithId, SingleMealData } from '../assets/types';
 import { RootState, useTypedSelector } from '../store';
 import { WishlistButton, AmountInput } from '../subSubSubComponents';
 import { useGlobalContext } from '../context/GlobalContext';
+import fallbackImage from '../assets/svg/imageGuard.svg';
 
 const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
   const { wishListItems } = useTypedSelector(
@@ -62,6 +63,9 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'
         }`}
+        onError={(e) => {
+          e.currentTarget.src = fallbackImage;
+        }}
       />
       <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
         <h1 className="font-abdo font-bold 2xl:text-2xl">{data.name}</h1>

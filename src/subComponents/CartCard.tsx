@@ -7,6 +7,7 @@ import { CartItem } from '../assets/types';
 import { DrawerAmountInput } from '../subSubSubComponents';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useGlobalContext } from '../context/GlobalContext';
+import fallbackImage from '../assets/svg/imageGuard.svg';
 
 interface CartCardProps {
   item: CartItem;
@@ -58,9 +59,13 @@ const CartCard: React.FC<CartCardProps> = ({
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'
         }`}
+        onError={(e) => {
+          e.currentTarget.src = fallbackImage;
+          e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
+        }}
       />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
-        <h1>{item.name}</h1>
+        <h1 className="font-abdo ">{item.name}</h1>
         <p className="text-newRed font-abdo flex flex-row gap-x-1">
           <span>{item.price}</span>
           <span>{t('menuItemCurrency')}</span>

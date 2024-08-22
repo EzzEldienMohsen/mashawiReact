@@ -1,10 +1,10 @@
 import React from 'react';
 import leaf from '../assets/svg/leaf.svg';
 
-const FormTitle:React.FC<{title:string}> = ({ title }) => {
+const FormTitle: React.FC<{ title: string }> = ({ title }) => {
   return (
     <div className="relative my-24 flex justify-center items-center md:w-full lg:w-4/5">
-      <h1 className="relative text-black font-bold text-2xl md:text-3xl lg:text-2xl z-10">
+      <h1 className="relative text-black font-bold text-2xl md:text-3xl lg:text-2xl 2xl:text-[40px] z-10">
         {title}
       </h1>
       <img

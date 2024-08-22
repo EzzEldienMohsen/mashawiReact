@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { AddOn as AddOnInterface } from '../assets/types';
-import defaultAddOn from '../assets/svg/defaultAddOn.svg';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useTranslation } from 'react-i18next';
+import fallbackImage from '../assets/svg/imageGuard.svg';
 
 interface AddOnProps {
   addOn: AddOnInterface;
@@ -22,14 +22,17 @@ const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange }) => {
     const numericPrice = Number(price);
     return parseFloat(numericPrice.toFixed(2)).toString();
   }
-
   return (
     <div className="bg-bgColor flex justify-start gap-x-4  w-full items-center py-2 px-4 my-1 rounded-lg">
       <div className="flex gap-x-3 w-1/5 2xl:w-1/4 items-center 2xl:gap-x-10">
         <img
-          src={addOn.icon || defaultAddOn}
+          src={addOn.icon}
           alt="alt"
           className="w-12 h-12 2xl:w-20 2xl:h-20 object-cover rounded-full"
+          onError={(e) => {
+            e.currentTarget.src = fallbackImage;
+            e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
+          }}
         />
         <h1 className="font-semibold text-xs 2xl:text-3xl font-abdo">
           {addOn.name}
@@ -51,7 +54,7 @@ const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange }) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={`absolute ${
-            isLangArabic ? 'left-[94.5%]' : 'right-[94.5%%]'
+            isLangArabic ? 'left-[93.5%] 2xl:left-[92%]' : 'right-[94.5%%]'
           } top-0 w-4 h-4 2xl:w-8 2xl:h-8 pointer-events-none transform scale-90 text-newRed ${
             isChecked ? 'block' : 'hidden'
           }`}

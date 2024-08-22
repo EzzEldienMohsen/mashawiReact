@@ -20,13 +20,13 @@ const CartDrawerContent: React.FC<CartDrawer> = ({
     );
   }
   return (
-    <div className="w-full flex flex-col justify-start relative  overflow-y-auto pb-48  items-center px-3 pt-3 bg-[#F8F8F8] h-full">
+    <div className="w-full flex flex-col justify-start relative  overflow-y-auto pb-72 gap-y-4 2xl:gap-y-8  items-center px-3 pt-3 bg-[#F8F8F8] h-full">
       {/* title and clear cart logic */}
-      <div className="w-full flex justify-start items-center gap-x-6">
+      <div className="w-full flex justify-start items-center gap-x-6 2xl:gap-x-10">
         <button className="mt-3" onClick={() => closeDrawer()}>
-          <img src={theClose} alt="alt" />
+          <img src={theClose} alt="alt" className="2xl:w-10 2xl:h-10" />
         </button>
-        <h1 className="text-newRed text-3xl font-abdo font-bold">
+        <h1 className="text-newRed text-3xl 2xl:text-5xl font-abdo font-bold">
           {t('cartTitle')}
         </h1>
       </div>

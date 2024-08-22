@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext';
 import icon from '../assets/svg/menu/all.svg';
 import { useTranslation } from 'react-i18next';
+import fallbackImage from '../assets/svg/imageGuard.svg';
+
 interface CategoriesQuery {
   queryKey: string[];
   queryFn: () => Promise<Categories>;
@@ -52,6 +54,10 @@ const Slider: React.FC = () => {
             src={icon}
             alt="icon"
             className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 2xl:w-28 2xl:h-28 mb-1 md:mb-2"
+            onError={(e) => {
+              e.currentTarget.src = fallbackImage;
+              e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
+            }}
           />
           <span className="text-black text-[10px] md:text-sm lg:text-base 2xl:text-2xl">
             {t('allDishes')}
@@ -72,6 +78,10 @@ const Slider: React.FC = () => {
               src={category.icon}
               alt={category.name}
               className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 xl:w-28 2xl:h-28 mb-1 md:mb-2"
+              onError={(e) => {
+                e.currentTarget.src = fallbackImage;
+                e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
+              }}
             />
             <span className="text-black text-[10px] md:text-sm lg:text-base 2xl:text-2xl">
               {category.name}

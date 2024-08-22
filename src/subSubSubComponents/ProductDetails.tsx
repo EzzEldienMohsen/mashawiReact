@@ -3,6 +3,9 @@ import addOrder from '../assets/svg/menu/addOrder.svg';
 import AmountInput from './AmountInput';
 import { useTranslation } from 'react-i18next';
 import { SingleMealData } from '../assets/types';
+import fallbackImage from '../assets/svg/imageGuard.svg';
+import { useGlobalContext } from '../context/GlobalContext';
+
 interface ProductProps {
   data: SingleMealData;
   amount: number;
@@ -15,6 +18,7 @@ const ProductDetails: React.FC<ProductProps> = ({
   setAmount,
   handleAddToCart,
 }) => {
+  const { isLangArabic } = useGlobalContext();
   const { t } = useTranslation();
   function formatPrice(price: number | string | undefined) {
     const numericPrice = Number(price);
@@ -25,7 +29,15 @@ const ProductDetails: React.FC<ProductProps> = ({
       <img
         src={data.image}
         alt="img"
-        className="rounded-tr-3xl rounded-bl-3xl w-full aspect-[4/3]"
+        className={`${
+          isLangArabic
+            ? 'rounded-tr-3xl rounded-bl-3xl'
+            : 'rounded-tl-3xl rounded-br-3xl'
+        } w-full aspect-[4/3] object-cover`} // Add object-cover or object-contain here
+        onError={(e) => {
+          e.currentTarget.src = fallbackImage;
+          e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
+        }}
       />
       <div className="flex justify-between flex-row w-full items-center my-2">
         <h1 className="font-abdo font-bold 2xl:text-3xl">{data.name}</h1>
@@ -35,10 +47,10 @@ const ProductDetails: React.FC<ProductProps> = ({
       </div>
       <div className="flex justify-between w-full flex-row items-center my-2">
         <button
-          className="btn bg-newRed text-white flex justify-between items-center px-4 rounded-full py-4 2xl:w-2/5 2xl:py-2 2xl:px-4 2xl:min-h-[40px] 2xl:h-auto"
+          className="btn bg-newRed text-white flex justify-evenly items-center px-4 rounded-full py-2 2xl:w-2/5 2xl:py-2 2xl:px-4 2xl:min-h-[40px] 2xl:h-auto"
           onClick={handleAddToCart}
         >
-          <img src={addOrder} alt="alt" className="2xl:w-1/4" />
+          <img src={addOrder} alt="alt" className="2xl:w-1/5" />
           <span className="font-abdo 2xl:text-2xl">{t('addOrder')}</span>
         </button>
         <AmountInput amount={amount} setAmount={setAmount} />
