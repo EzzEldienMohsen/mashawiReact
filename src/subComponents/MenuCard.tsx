@@ -8,7 +8,7 @@ const MenuCard: React.FC<{ data: MealData }> = ({ data }) => {
   if (data.length === 0) {
     return (
       <div className="flex justify-center items-center bg-white text-center w-full my-8 py-5 rounded-2xl shadow-md ">
-        <h1 className="text-black font-abdo 2xl:text-3xl font-light">
+        <h1 className="text-black font-abdo 2xl:text-xl font-light">
           {t('emptyCat')}
         </h1>
       </div>

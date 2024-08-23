@@ -74,9 +74,9 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
             return (
               <div
                 key={addOn.id}
-                className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
+                className="w-full text-[#7E7E7E] flex justify-between items-evenly text-sm "
               >
-                <p className="text-xs 2xl:text-md w-1/3 font-abdo">
+                <p className="text-sm  w-1/3 font-abdo">
                   {addOn.values[0].name}
                 </p>
               </div>
@@ -84,7 +84,7 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
           })}
         </div>
         <div className="flex gap-y-4 flex-row justify-between items-center w-full">
-          <p className="text-newRed flex flex-row gap-x-1 font-abdo 2xl:text-lg 2xl:gap-x-3">
+          <p className="text-newRed flex flex-row gap-x-1 font-abdo 2xl:text-xl 2xl:gap-x-3">
             <span>{item.price}</span>
             <span>{t('menuItemCurrency')}</span>
           </p>

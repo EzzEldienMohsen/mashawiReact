@@ -72,7 +72,6 @@ const LoginForm: React.FC = () => {
         loginUser({ reqData: values, language })
       ).unwrap();
       if (result.status === 1) {
-        toast.success(result.message);
         navigate('/');
       }
     } catch (error: any) {

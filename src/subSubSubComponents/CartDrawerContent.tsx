@@ -24,9 +24,9 @@ const CartDrawerContent: React.FC<CartDrawer> = ({
       {/* title and clear cart logic */}
       <div className="w-full flex justify-start items-center gap-x-6 2xl:gap-x-10">
         <button className="mt-3" onClick={() => closeDrawer()}>
-          <img src={theClose} alt="alt" className="2xl:w-10 2xl:h-10" />
+          <img src={theClose} alt="alt" className="2xl:w-6 2xl:h-6" />
         </button>
-        <h1 className="text-newRed text-3xl 2xl:text-5xl font-abdo font-bold">
+        <h1 className="text-newRed text-3xl 2xl:text-4xl font-abdo font-bold">
           {t('cartTitle')}
         </h1>
       </div>
