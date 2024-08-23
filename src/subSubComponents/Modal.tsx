@@ -107,14 +107,17 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
   };
 
   return (
-    <div className="2xl:w-full">
+    <div className="w-full">
       <button
-        className="btn bg-newRed text-white font-abdo font-thin text-xs md:text-sm lg:text-xs 2xl:text-md flex flex-row justify-evenly w-full 2xl:w-[85%] items-center 2xl:justify-evenly px-5 lg:px-3 rounded-full py-1 2xl:py-4"
+        className="btn bg-newRed text-white font-abdo h-auto min-h-[46px] font-thin text-[10px] md:text-[16px]  flex flex-row justify-evenly w-4/5 lg:w-[90%] 2xl:w-5/6  items-center 2xl:justify-evenly px-2  md:px-5 rounded-full py-1 2xl:py-4"
         onClick={() => dialogRef.current?.showModal()}
-        style={{ height: 'auto', minHeight: '40px' }}
       >
-        <img src={src} alt="alt" className="w-1/4 lg:w-1/5 2xl:w-[15%]" />
-        <span className="text-xs md:text-sm lg:text-xs 2xl:text-md">
+        <img
+          src={src}
+          alt="alt"
+          className="w-1/4 md:w-auto lg:w-1/4 2xl:w-auto"
+        />
+        <span className="text-[10px] md:text-[16px] font-abdo">
           {t('addOnsText')}
         </span>
       </button>

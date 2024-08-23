@@ -6,7 +6,7 @@ const SectionTitle: React.FC<{ title: string }> = ({ title }) => {
   const { isLangArabic } = useGlobalContext();
   return (
     <div className="my-16 relative flex justify-center items-center">
-      <h1 className="text-black font-bold text-2xl md:text-3xl lg:text-2xl 2xl:text-4xl tracking-wide">
+      <h1 className="text-black font-bold text-xl md:text-[28px] lg:text-2xl 2xl:text-[40px] tracking-wide">
         {title}
       </h1>
       <img

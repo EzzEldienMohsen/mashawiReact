@@ -53,7 +53,7 @@ const WishListButton: React.FC<WishlistProps> = ({
 
   return (
     <button
-      className={`absolute btn-ghost w-8 h-8 2xl:w-16 2xl:h-16 bg-transparent top-3 ${
+      className={`absolute btn-ghost  bg-transparent top-3 ${
         isLangArabic ? 'left-4' : 'right-4'
       } border-0 flex justify-center items-center rounded-full  ${
         isLoading ? 'opacity-50 cursor-not-allowed' : ''
@@ -70,7 +70,7 @@ const WishListButton: React.FC<WishlistProps> = ({
       <img
         src={item?.cartItem.id === data.id ? added : add}
         alt="heart"
-        className="2xl:w-16 2xl:h-16"
+        className=""
       />
     </button>
   );

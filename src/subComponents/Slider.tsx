@@ -40,11 +40,11 @@ const Slider: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="carousel carousel-center rounded-box w-3/4">
+    <div className="carousel carousel-center rounded-box w-5/6 lg:w-3/5 2xl:w-3/5">
       <div className="carousel-item">
         <Link
           to="/meals"
-          className={`flex-shrink-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 2xl:w-56 2xl:h-56 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
+          className={`flex-shrink-0 w-24 h-24 md:w-[120px] md:h-[120px] lg:w-36 lg:h-36 2xl:w-[186px] 2xl:h-[180px] bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
             isLangArabic
               ? 'rounded-tr-3xl rounded-bl-3xl'
               : 'rounded-tl-3xl rounded-br-3xl'
@@ -53,13 +53,13 @@ const Slider: React.FC = () => {
           <img
             src={icon}
             alt="icon"
-            className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 2xl:w-28 2xl:h-28 mb-1 md:mb-2"
+            className="w-7 h-7 md:w-10 md:h-10 lg:w-12 lg:h-12 2xl:w-[60px] 2xl:h-[60px] mb-1 md:mb-[6px] lg:mb-3 2xl:mb-4"
             onError={(e) => {
               e.currentTarget.src = fallbackImage;
               e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
             }}
           />
-          <span className="text-black text-[10px] md:text-sm lg:text-base 2xl:text-2xl">
+          <span className="text-black font-abdo text-[13px] md:text-[16px] lg:text-base 2xl:text-xl">
             {t('allDishes')}
           </span>
         </Link>
@@ -68,7 +68,7 @@ const Slider: React.FC = () => {
         <div className="carousel-item" key={category.id}>
           <Link
             to={`/meals/category/${category.id}`}
-            className={`flex-shrink-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 2xl:w-56 2xl:h-56 bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
+            className={`flex-shrink-0 w-24 h-24 md:w-[120px] md:h-[120px] lg:w-36 lg:h-36 2xl:w-[186px] 2xl:h-[180px] bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
               isLangArabic
                 ? 'rounded-tr-3xl rounded-bl-3xl'
                 : 'rounded-tl-3xl rounded-br-3xl'
@@ -77,13 +77,13 @@ const Slider: React.FC = () => {
             <img
               src={category.icon}
               alt={category.name}
-              className="w-4 h-4 md:w-8 md:h-8 lg:w-12 lg:h-12 xl:w-28 2xl:h-28 mb-1 md:mb-2"
+              className="w-7 h-7 md:w-10 md:h-10 lg:w-12 lg:h-12 2xl:w-[60px] 2xl:h-[60px] mb-1 md:mb-[6px] lg:mb-3 2xl:mb-4 "
               onError={(e) => {
                 e.currentTarget.src = fallbackImage;
                 e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
               }}
             />
-            <span className="text-black text-[10px] md:text-sm lg:text-base 2xl:text-2xl">
+            <span className="text-black font-abdo text-[13px] md:text-[16px] lg:text-base 2xl:text-xl">
               {category.name}
             </span>
           </Link>

@@ -13,7 +13,6 @@ const FormTextArea: React.FC<FormRowProps> = ({
   icon,
   isOTP,
   isBorder,
-  required,
 }) => {
   const { isLangArabic } = useGlobalContext();
   return (
@@ -30,7 +29,6 @@ const FormTextArea: React.FC<FormRowProps> = ({
       </label>
       <div className="relative w-full flex  items-start">
         <textarea
-          required={required ? false : true}
           name={name}
           id={name}
           value={value || ''}
@@ -40,7 +38,7 @@ const FormTextArea: React.FC<FormRowProps> = ({
           style={{ backgroundColor: 'white' }}
           className={`${
             icon ? 'px-16 2xl:px-24 ' : 'px-2'
-          } text-sm md:text-auto bg-white font-abdo 2xl:placeholder:text-2xl 2xl:text-2xl  !important ${
+          } px-14 2xl:px-16 bg-white border-2 w-full place-items-start rounded-3xl py-4 md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px] ${
             isOTP
               ? 'text-center w-12 lg:w-16 rounded-2xl'
               : 'rounded-3xl text-start  md:max-h-[150px] md:min-h-[100px]  w-full'
@@ -52,8 +50,8 @@ const FormTextArea: React.FC<FormRowProps> = ({
           <img
             src={icon}
             alt="icon"
-            className={`absolute 2xl:w-10 2xl:h-10  ${
-              isLangArabic ? 'right-4' : 'left-4'
+            className={`absolute 2xl:w-6 2xl:h-6  ${
+              isLangArabic ? 'right-4 2xl:right-8' : 'left-4 2xl:left-8'
             } top-0 mt-[30px] md:mt-[26px] transform -translate-y-0 `}
           />
         ) : null}

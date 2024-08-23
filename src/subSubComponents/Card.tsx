@@ -44,11 +44,11 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
 
   return (
     <div
-      className={`my-2 w-3/4 pb-2 md:w-[90%] lg:w-[22%] 2xl:w-1/5 ${
+      className={`my-2 w-[95%] pb-2 md:w-[90%] lg:w-[22%] 2xl:w-1/5 ${
         isLangArabic
           ? 'rounded-tr-3xl rounded-bl-3xl'
           : 'rounded-tl-3xl rounded-br-3xl'
-      } bg-white flex flex-col justify-center items-center gap-y-2 2xl:gap-y-10 relative`}
+      } bg-white flex flex-col justify-center items-center gap-y-2 2xl:gap-y-5 relative`}
     >
       <WishlistButton
         data={data}
@@ -58,22 +58,23 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
       <img
         src={data.image}
         alt="img"
-        className={`w-full aspect-square md:aspect-auto md:h-[348px]  ${
+        className={`w-full  md:h-[348px] lg:h-[280px] 2xl:h-[348px]  ${
           isLangArabic
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'
         }`}
         onError={(e) => {
           e.currentTarget.src = fallbackImage;
+          e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
         }}
       />
       <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
-        <h1 className="font-abdo font-bold 2xl:text-2xl">{data.name}</h1>
-        <h2 className="font-abdo 2xl:text-2xl">
+        <h1 className="font-abdo font-bold text-4 2xl:text-xl">{data.name}</h1>
+        <h2 className="font-abdo text-4 2xl:text-xl">
           {formatPrice(data.price)} {t('menuItemCurrency')}
         </h2>
       </div>
-      <div className="flex px-2 gap-x-1 justify-between w-full flex-row  items-center my-2">
+      <div className="flex px-2 gap-x-[2px] mt-[25px] lg:mt-6 justify-between w-full flex-row  items-center ">
         <Modal data={data} modalId={modalId} />
         <AmountInput amount={amount} setAmount={setAmount} />
       </div>
