@@ -59,7 +59,7 @@ const Slider: React.FC = () => {
               e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
             }}
           />
-          <span className="text-black font-abdo text-[13px] md:text-[16px] lg:text-base 2xl:text-xl">
+          <span className="text-black font-abdo text-[13px] md:text-lg lg:text-base 2xl:text-xl">
             {t('allDishes')}
           </span>
         </Link>
@@ -83,7 +83,7 @@ const Slider: React.FC = () => {
                 e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
               }}
             />
-            <span className="text-black font-abdo text-[13px] md:text-[16px] lg:text-base 2xl:text-xl">
+            <span className="text-black font-abdo text-[13px] md:text-lg lg:text-base 2xl:text-xl">
               {category.name}
             </span>
           </Link>

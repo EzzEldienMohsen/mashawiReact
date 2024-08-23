@@ -71,7 +71,7 @@ const ForgetPasswordForm: React.FC = () => {
         className="flex flex-col bg-transparent justify-center md:justify-center w-full items:center md:items-center  rounded-lg"
       >
         <FormTitle title={t('forgetPasswordText')} />
-        <p className="my-2 2xl:my-9 text-center text-md md:text-lg lg:text-xl 2xl:text-[16px]">
+        <p className="my-2 2xl:my-9 text-center text-md md:text-lg lg:text-xl 2xl:text-lg">
           {t('forgetPasswordPageText')}
         </p>
         <FormRow

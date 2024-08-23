@@ -60,20 +60,20 @@ const MainAddressSection: React.FC = () => {
               className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-6 gap-y-4 lg:gap-y-5 shadow-md px-2 w-[90%] my-2 lg:w-[30%] 2xl:w-[23%] md:w-[45%] "
             >
               <img src={addressIcon} alt="alt" />
-              <h1 className="text-black font-bold text-lg my-1 md:text-xl lg:text-[23px]">
+              <h1 className="text-black font-bold text-lg my-1 md:text-xl lg:text-2xl">
                 {ad.name}
               </h1>
-              <p className=" text-[14px] lg:text-[14.9px] text-center mb-2 text-black px-1 ">
+              <p className=" text-sm lg:text-[14.9px] text-center mb-2 text-black px-1 ">
                 {ad.address}
               </p>
               <div className="flex flex-row gap-x-1 text-start items-center justify-between ">
                 <div className="flex flex-row gap-x-1 justify-between ">
                   <img src={addMob} alt="alt" />{' '}
-                  <p className="text-sm  2xl:text-[16px]">{ad.phone}</p>
+                  <p className="text-sm  2xl:text-lg">{ad.phone}</p>
                 </div>
                 <div className="flex flex-row gap-x-1 justify-between mr-2">
                   <img src={addTel} alt="alt" />{' '}
-                  <p className="text-sm  2xl:text-[16px]">{ad.landing_phone}</p>
+                  <p className="text-sm  2xl:text-lg">{ad.landing_phone}</p>
                 </div>
               </div>
               <div
@@ -81,14 +81,14 @@ const MainAddressSection: React.FC = () => {
                 dir="ltr"
               >
                 <img src={addTime} alt="alt" />
-                <p className="ml-2 text-[16px]">{theActualForm}</p>
+                <p className="ml-2 text-lg">{theActualForm}</p>
               </div>
               <a
                 href={ad.location}
-                className="flex w-4/5 md:w-[90%] rounded-full gap-x-2 py-2 flex-row justify-center items-center  bg-newRed text-white text-[16px] min-h-[46px] h-auto  px-[4px] "
+                className="flex w-4/5 md:w-[90%] rounded-full gap-x-2 py-2 flex-row justify-center items-center  bg-newRed text-white text-lg min-h-[46px] h-auto  px-[4px] "
               >
                 <img src={addressBtn} alt="alt" />
-                <p className="ml-2 text-[16px]">{t('mapBtn')}</p>
+                <p className="ml-2 text-lg">{t('mapBtn')}</p>
               </a>
             </div>
           );

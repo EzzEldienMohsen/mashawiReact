@@ -12,7 +12,7 @@ const BigNavBar: React.FC = () => {
         {headerLinks.map((li) => {
           return (
             <Link key={li.text} to={li.to}>
-              <li className=" text-sm 2xl:text-[16px] hover:text-newRed">
+              <li className=" text-sm 2xl:text-lg hover:text-newRed">
                 {t(li.text)}
               </li>
             </Link>

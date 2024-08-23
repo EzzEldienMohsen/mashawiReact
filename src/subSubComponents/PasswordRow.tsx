@@ -40,7 +40,7 @@ const PasswordRow: React.FC<FormRowProps> = ({
         value={value || ''}
         placeholder={placeHolder}
         onChange={handleChange}
-        className={`text-start px-14  2xl:px-16 bg-white border-2 w-full place-items-start rounded-full py-1  md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px]
+        className={`text-start px-14  2xl:px-16 bg-white border-2 w-full place-items-start rounded-full py-1  md:py-4 2xl:py-5 2xl:placeholder:text-lg 2xl:text-lg
             `}
       />
       <button

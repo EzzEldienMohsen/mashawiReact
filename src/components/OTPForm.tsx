@@ -191,7 +191,7 @@ const OTPForm = () => {
         className="flex flex-col bg-transparent justify-center md:justify-center w-full items-center lg:justify-center lg:items-center rounded-lg"
       >
         <FormTitle title={t('OTPCodeTitle')} />
-        <p className="my-2 text-center text-md md:text-lg lg:text-xl 2xl:text-[16px]">
+        <p className="my-2 text-center text-md md:text-lg lg:text-xl 2xl:text-lg">
           {t('OTPCodeText')}
         </p>
         <div className="flex justify-start items-stretch gap-x-2 my-2 w-full">
@@ -247,7 +247,7 @@ const OTPForm = () => {
             >
               {t('resendText')}
             </button>
-            <div className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full p-4 2xl:p-4 text-center flex justify-center items-center bg-newRed text-white text-sm 2xl:text-[18px]">
+            <div className="w-8 h-8 2xl:w-10 2xl:h-10 rounded-full p-4 2xl:p-4 text-center flex justify-center items-center bg-newRed text-white text-sm 2xl:text-lg">
               <span>{seconds}s</span>
             </div>
           </div>

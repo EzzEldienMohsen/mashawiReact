@@ -19,7 +19,7 @@ const MenuSection: React.FC = () => {
         </p>
         <Link
           to="/meals"
-          className="btn text-white hover:bg-newRed font-abdo hover:text-white px-16 py-2 text-center text-[16px]   lg:text-xl rounded-full bg-newRed my-2 min-h-12 lg:min-h-[56px] h-auto"
+          className="btn text-white hover:bg-newRed font-abdo hover:text-white px-16 py-2 text-center text-lg   lg:text-xl rounded-full bg-newRed my-2 min-h-12 lg:min-h-[56px] h-auto"
         >
           {t('browseMenu')}
         </Link>

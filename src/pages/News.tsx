@@ -31,7 +31,7 @@ const News: React.FC = () => {
   return (
     <div className="flex flex-col justify-center items-center w-full my-4  py-8">
       <div className="bg-[#2C2220] flex flex-col text-start  w-full justify-start items-center px-4 py-6 my-6 font-abdo">
-        <h1 className="mb-4  text-xl md:text-xl lg:text-2xl 2xl:text-5xl text-start font-bold text-newRed">
+        <h1 className="mb-4  text-xl md:text-3xl  lg:text-5xl text-start font-bold text-newRed">
           {t('newsRoute')}
         </h1>
       </div>

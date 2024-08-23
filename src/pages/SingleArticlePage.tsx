@@ -101,20 +101,18 @@ const SingleArticlePage: React.FC = () => {
       </div>
       {/* The rest of the page */}
       <div className="w-full flex-col flex justify-start items-start px-8 lg:px-20 gap-y-6 2xl:gap-y-10">
-        <div className="flex justify-start gap-x-6 2xl:gap-x-10 items-center">
-          <img src={dateIcon} alt="date" className="2xl:w-10 2xl:h-10" />
-          <p className="font-abdo text-md md:text-lg lg:text-xl font-light 2xl:text-3xl">
-            {formattedDate}
-          </p>
+        <div className="flex justify-start gap-x-6  items-center">
+          <img src={dateIcon} alt="date" className="" />
+          <p className="font-abdo text-lg">{formattedDate}</p>
         </div>
-        <h1 className="font-abdo text-lg md:text-2xl font-bold 2xl:text-5xl">
+        <h1 className="font-abdo text-xl font-bold lg:text-3xl">
           {t(singleEvent.title)}
         </h1>
         {/* <p
-          className="font-abdo text-lg md:text-xl font-medium 2xl:text-4xl"
+          className="font-abdo text-sm md:text-lg  font-medium lg:text-xl"
           dangerouslySetInnerHTML={{ __html: data.data.content }}
         /> */}
-        <p className="font-abdo text-lg md:text-xl font-medium 2xl:text-4xl">
+        <p className="font-abdo text-sm md:text-lg  font-medium lg:text-xl">
           {' '}
           {t(singleEvent.text)}
         </p>

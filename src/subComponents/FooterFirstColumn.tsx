@@ -8,7 +8,7 @@ const FooterFirstColumn: React.FC = () => {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center lg:items-start md:w-4/5 lg:w-2/5">
-      <p className="pb-2  text-md md:text-xl font-abdo mb-4 py-8 text-center lg:text-start 2xl:text-[16px]">
+      <p className="pb-2  text-md md:text-xl font-abdo mb-4 py-8 text-center lg:text-start 2xl:text-lg">
         {t('footerMainText')}
       </p>
       <div className="flex justify-center gap-x-6 lg:justify-start  items-center w-full lg:w-2/5 flex-row my-2">

@@ -65,7 +65,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
               e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
             }}
           />
-          <span className="text-black font-abdo text-[13px] md:text-[16px] lg:text-base 2xl:text-xl">
+          <span className="text-black font-abdo text-[13px] md:text-lg lg:text-base 2xl:text-xl">
             {t('allDishes')}
           </span>
         </button>
@@ -95,7 +95,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
                 e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
               }}
             />
-            <span className="text-black font-abdo text-[13px] md:text-[16px] lg:text-base 2xl:text-xl">
+            <span className="text-black font-abdo text-[13px] md:text-lg lg:text-base 2xl:text-xl">
               {category.name}
             </span>
           </button>

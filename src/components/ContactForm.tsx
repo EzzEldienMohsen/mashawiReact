@@ -211,7 +211,7 @@ const ContactForm: React.FC<{ title: string; destination: string }> = ({
           )}
           <button
             disabled={isLoading}
-            className="btn text-white  btn-block md:w-1/2 hover:bg-newRed hover:text-white text-[16px] 2xl:text-2xl 2xl:py-2 min-h-[46px] 2xl:min-h-[58px] :h-auto rounded-full bg-newRed my-2"
+            className="btn text-white  btn-block md:w-1/2 hover:bg-newRed hover:text-white text-lg 2xl:text-2xl 2xl:py-2 min-h-[46px] 2xl:min-h-[58px] :h-auto rounded-full bg-newRed my-2"
           >
             {isLoading ? (
               <span className="loading loading-spinner loading-lg text-white"></span>

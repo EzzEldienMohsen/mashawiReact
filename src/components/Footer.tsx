@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
           {links.map((li) => {
             return (
               <Link key={li.text} to={li.to}>
-                <li className="my-1 ml-2 md:ml-1 text-xs font-abdo font-extralight md:text-xs 2xl:text-[16px] ">
+                <li className="my-1 ml-2 md:ml-1 text-xs font-abdo font-extralight md:text-xs lg:text-lg">
                   {t(li.text)}
                 </li>
               </Link>
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
           })}
         </ul>
       </div>
-      <div className="mt-4 flex justify-center text-center  items-center w-full 2xl:text-[16px] py-4">
+      <div className="mt-4 flex justify-center text-center  items-center w-full 2xl:text-lg py-4">
         {t('rights')}
       </div>
     </div>

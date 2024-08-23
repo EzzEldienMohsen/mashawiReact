@@ -51,7 +51,7 @@ const ProductDetails: React.FC<ProductProps> = ({
           onClick={handleAddToCart}
         >
           <img src={addOrder} alt="alt" className="w-1/5 lg:w-[15%] " />
-          <span className="font-abdo text-[10px] lg:text-[18px] 2xl:text-2xl">
+          <span className="font-abdo text-[10px] lg:text-lg 2xl:text-2xl">
             {t('addOrder')}
           </span>
         </button>

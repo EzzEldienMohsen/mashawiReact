@@ -7,6 +7,7 @@ import dateIcon from '../assets/svg/events/dateIcon.svg';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ar';
 import 'dayjs/locale/en';
+import fallbackImage from '../assets/svg/imageGuard.svg';
 
 const EventsCard: React.FC<{ data: EventData; destination: string }> = ({
   data,
@@ -34,14 +35,18 @@ const EventsCard: React.FC<{ data: EventData; destination: string }> = ({
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'
         }`}
+        onError={(e) => {
+          e.currentTarget.src = fallbackImage;
+          e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
+        }}
       />
       <div className="flex justify-evenly gap-x-2 2xl:gap-x-4 items-center">
         <img src={dateIcon} alt="date" />
-        <p className="font-abdo text-sm md:text-xs font-light 2xl:text-xl">
+        <p className="font-abdo text-sm md:text-xs font-light 2xl:text-lg">
           {formattedDate}
         </p>
       </div>
-      <h1 className="font-abdo text-md md:text-sm font-semibold 2xl:text-3xl">
+      <h1 className="font-abdo text-md md:text-sm font-semibold 2xl:text-xl">
         {data.title}
       </h1>
       <Link
@@ -50,7 +55,7 @@ const EventsCard: React.FC<{ data: EventData; destination: string }> = ({
             ? `/${destination}/${data.id}`
             : `/${destination}`
         }
-        className="btn w-4/5 bg-newRed text-white font-abdo font-normal rounded-full 2xl:text-2xl 2xl:py-2 2xl:min-h-[40px] 2xl:h-auto 2xl:flex 2xl:justify-center 2xl:items-center"
+        className="btn w-4/5 bg-newRed text-white font-abdo font-normal rounded-full text-lg 2xl:py-2 min-h-[46px] h-auto 2xl:flex 2xl:justify-center 2xl:items-center"
       >
         {t('eventsButton')}
       </Link>
