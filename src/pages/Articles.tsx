@@ -3,13 +3,14 @@ import { EventsQuery, EventsResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { events } from '../assets';
+// import { events } from '../assets';
 import { EventsCard } from '../components';
+import { useLoaderData } from 'react-router-dom';
 const eventsQuery = (language: string): EventsQuery => {
   return {
-    queryKey: ['events', language],
+    queryKey: ['blogs', language],
     queryFn: () =>
-      autoFetch('events', {
+      autoFetch('blogs', {
         headers: {
           lang: language,
         },
@@ -25,6 +26,8 @@ export const loader =
 
 const Articles: React.FC = () => {
   const { t } = useTranslation();
+  const axiosData: any = useLoaderData();
+  const data: EventsResponse = axiosData.data;
   return (
     <div className="flex flex-col justify-center items-center w-full my-4  py-8">
       <div className="bg-[#2C2220] flex flex-col text-start  w-full justify-start items-center px-4 py-6 my-6 font-abdo">
@@ -34,7 +37,7 @@ const Articles: React.FC = () => {
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
         <div className="my-8 flex flex-col  justify-center items-center gap-y-5 md:flex md:flex-row md:gap-x-2 lg:justify-start md:flex-wrap w-full">
-          {events.map((data) => {
+          {data.data.map((data) => {
             return (
               <EventsCard
                 key={data.id}

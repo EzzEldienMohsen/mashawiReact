@@ -448,3 +448,17 @@ export type TheAddressData = {
   weekend: string[];
   location: string;
 };
+
+
+// Social Media
+
+export type SocialResponse = {
+  status: number;
+  message: string;
+  data: {
+    facebook: string;
+    instagram: string;
+    linkedin: string;
+    twitter: string;
+  };
+};

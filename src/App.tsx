@@ -11,7 +11,6 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
-  Home,
   Jobs,
   Login,
   NewAccount,
@@ -49,10 +48,12 @@ import { loader as menuWithCategoryProductLoader } from './components/MenuWithCa
 import { loader as galleryLoader } from './pages/Gallery';
 import { loader as eventsLoader } from './pages/Events';
 import { loader as newsLoader } from './pages/News';
+import { loader as articlesLoader } from './pages/Articles';
 import { loader as singleEventLoader } from './pages/SingleEventPage';
 import { loader as singleNewsLoader } from './pages/SingleNewsPage';
 import { loader as MainAddressLoader } from './components/MainAddressSection';
 import { loader as addressLoader } from './components/AddressSection';
+import { loader as socialLoader } from './subComponents/FooterFirstColumn';
 
 // Combined loaders
 // First Menu Loaders
@@ -99,6 +100,7 @@ const menuWithCategoryLoader =
 
 // Lazy-loaded components
 const Landing = React.lazy(() => import('./pages/Landing'));
+const Home = React.lazy(() => import('./pages/Home'));
 const MenuList = React.lazy(() => import('./pages/MenuList'));
 const Cart = React.lazy(() => import('./pages/Cart'));
 const WishList = React.lazy(() => import('./pages/WishList'));
@@ -136,7 +138,17 @@ const AppRouter: React.FC = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Home />,
+      element: (
+        <Suspense
+          fallback={
+            <div className="flex w-full py-8 justify-center items-center">
+              <span className="loading loading-spinner loading-lg text-newRed"></span>
+            </div>
+          }
+        >
+          <Home />
+        </Suspense>
+      ),
       children: [
         {
           index: true,
@@ -257,6 +269,7 @@ const AppRouter: React.FC = () => {
               <Articles />
             </Suspense>
           ),
+          loader: articlesLoader(queryClient, language),
         },
         {
           path: '/SingleArticle',
@@ -575,6 +588,7 @@ const AppRouter: React.FC = () => {
           loader: galleryLoader(queryClient, language),
         },
       ],
+      loader: socialLoader(queryClient, language),
     },
   ]);
 
