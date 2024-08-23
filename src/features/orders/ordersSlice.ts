@@ -27,7 +27,12 @@ const initialSingleOrder = {
     id: 0,
     status: '',
     meals: [],
-    address: '',
+    address: {
+      name: '',
+      phone: '',
+      landing_phone: null,
+      details: '',
+    },
     branch: '',
     calculations: {
       subtotal: '',
