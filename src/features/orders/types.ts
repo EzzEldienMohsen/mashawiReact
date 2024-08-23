@@ -24,6 +24,7 @@ export type SingleOrderResponse = {
     status: string;
     meals: {
       id: number;
+      image: string;
       meal: string;
       additions: {
         name: string;
@@ -32,7 +33,12 @@ export type SingleOrderResponse = {
       quantity: number;
       total: string;
     }[];
-    address: string | null;
+    address: {
+      name: string | null;
+      details: string | null;
+      phone: string | null;
+      landing_phone: string | null;
+    } | null;
     branch: string | null;
     calculations: {
       subtotal: string;

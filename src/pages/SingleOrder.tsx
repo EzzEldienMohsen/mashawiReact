@@ -17,7 +17,7 @@ import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { getSingleOrder } from '../features/orders/ordersSlice';
 import { Link } from 'react-router-dom';
-import chicken from '../assets/svg/menu/chicken.svg';
+import fallbackImage from '../assets/svg/imageGuard.svg';
 
 const SingleOrder: React.FC = () => {
   const { t } = useTranslation();
@@ -30,8 +30,6 @@ const SingleOrder: React.FC = () => {
   const { singleOrder, isLoading } = useTypedSelector(
     (state: RootState) => state.orders
   );
-
-  console.log(singleOrder);
 
   const navigate = useNavigate();
   const getTheOrder = async () => {
@@ -81,13 +79,17 @@ const SingleOrder: React.FC = () => {
               className="flex bg-white w-full rounded-2xl  justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-4 "
             >
               <img
-                src={chicken}
+                src={or.image}
                 alt="alt"
                 className={`w-1/3 md:w-1/5 aspect-square ${
                   isLangArabic
                     ? 'rounded-tr-3xl rounded-bl-3xl'
                     : 'rounded-tl-3xl rounded-br-3xl'
                 }`}
+                onError={(e) => {
+                  e.currentTarget.src = fallbackImage;
+                  e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
+                }}
               />
               <div className="flex flex-col justify-stretch items-start gap-y-3 lg:gap-y-7">
                 <h1 className="text-sm font-abdo lg:text-xl"> {or.meal}</h1>
@@ -107,9 +109,9 @@ const SingleOrder: React.FC = () => {
       {/* Address */}
       <div className="w-full lg:w-3/5 flex flex-col justify-center items-center gap-y-4">
         <h1 className="font-abdo tex-black">
-          {singleOrder.data.address
-            ? singleOrder.data.address
-            : singleOrder.data.branch}
+          {singleOrder.data.branch
+            ? singleOrder.data.branch
+            : singleOrder.data.address?.name}
         </h1>
         <div className="w-full flex justify-evenly items-center">
           <p className="text-black font-abdo">{t('totalOrderText')}</p>
