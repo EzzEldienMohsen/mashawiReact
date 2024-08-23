@@ -104,7 +104,7 @@ const FormRow: React.FC<FormRowProps> = ({
         <div className={`w-full !important`}>
           <DatePicker
             wrapperClassName="w-full"
-            className={`text-start px-14 bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 `}
+            className={`px-14 2xl:px-16 bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px]`}
             selected={selectedDate}
             onChange={(date) => {
               setSelectedDate(date);
@@ -140,8 +140,10 @@ const FormRow: React.FC<FormRowProps> = ({
                     <img
                       src={icon}
                       alt="calendar icon"
-                      className={`absolute ${
-                        isLangArabic ? 'right-4' : 'left-4'
+                      className={`absolute 2xl:w-6 2xl:h-6 ${
+                        isLangArabic
+                          ? 'right-4 2xl:right-8'
+                          : 'left-4 2xl:left-8'
                       } top-1/2 transform -translate-y-1/2`}
                     />
                   </div>

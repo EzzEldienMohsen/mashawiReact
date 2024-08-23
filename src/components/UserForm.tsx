@@ -15,12 +15,12 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { useDispatch } from 'react-redux';
 import { updateUser } from '../features/user/userSlice';
-import { toast } from 'react-toastify';
 import CustomSelect from '../subSubComponents/CustomSelect';
 // Country library options
 import countries from 'i18n-iso-countries';
 import enLocale from 'i18n-iso-countries/langs/en.json';
 import arLocale from 'i18n-iso-countries/langs/ar.json';
+import * as Yup from 'yup';
 
 countries.registerLocale(enLocale);
 countries.registerLocale(arLocale);
@@ -30,14 +30,6 @@ const getCountryOptions = (lang: string) => {
     value: code,
     label: name,
   }));
-};
-
-const debounce = (func: (...args: any[]) => void, delay: number) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return (...args: any[]) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
 };
 
 const UserForm: React.FC = () => {
@@ -59,20 +51,8 @@ const UserForm: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
   const token = user.token;
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
 
-  const handleValidation = React.useCallback(
-    debounce((name: string, value: string) => {
-      if (name === 'email' && !validateEmail(value)) {
-        toast.error(t('invalidEmailAddress'));
-        return;
-      }
-    }, 3000),
-    []
-  );
   const dispatch: AppDispatch = useDispatch();
   const handleChange = (
     e: React.ChangeEvent<
@@ -82,12 +62,77 @@ const UserForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    handleValidation(name, value);
+    setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
+  };
+
+  const userSchema = Yup.object().shape({
+    f_name: Yup.string()
+      .required(t('isRequiredError'))
+      .test('name-length', t('firstNameIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
+    l_name: Yup.string()
+      .required(t('isRequiredError'))
+      .test('name-length', t('secondNameIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
+    email: Yup.string().required(t('isRequiredError')).email(t('correctEmail')),
+    phone: Yup.string()
+      .required(t('isRequiredError'))
+      .test('phone-format', t('correctPhoneNumber'), function (value) {
+        const egyptUaePhoneRegex =
+          /^((\+20|0)?1[0125][0-9]{8}$)|((\+971|0)?5[024568][0-9]{7}$)/;
+        return !value || egyptUaePhoneRegex.test(value);
+      }),
+    birthdate: Yup.string()
+      .required(t('isRequiredError'))
+      .test('is-valid-birthdate', t('invalidBirthdateError'), function (value) {
+        const parsedDate = new Date(value);
+        const currentDate = new Date();
+        return (
+          !value || (!isNaN(parsedDate.getTime()) && parsedDate < currentDate)
+        );
+      }),
+    gender: Yup.string()
+      .required(t('isRequiredError'))
+      .oneOf(
+        genderOptions.map((option) => option.value),
+        t('invalidSelect')
+      ),
+    nationality: Yup.string()
+      .required(t('isRequiredError'))
+      .oneOf(
+        getCountryOptions(language).map((option) => option.value),
+        t('invalidSelect')
+      ),
+    work: Yup.string()
+      .required(t('isRequiredError'))
+      .test('work-length', t('workIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
+  });
+
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await userSchema.validate(values, { abortEarly: false });
+      setErrors({});
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
+        err.inner.forEach((error) => {
+          validationErrors[error.path!] = error.message;
+        });
+        setErrors(validationErrors);
+      }
+      return false;
+    }
   };
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    console.log(values);
+    const isFormValid = await validateForm();
+    if (!isFormValid) return;
     await dispatch(updateUser({ reqData: values, token, language }));
   };
 
@@ -108,6 +153,11 @@ const UserForm: React.FC = () => {
         handleChange={handleChange}
         full={true}
       />
+      {errors.f_name && (
+        <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+          {errors.f_name}
+        </p>
+      )}
       <FormRow
         name="l_name"
         icon={person}
@@ -119,6 +169,11 @@ const UserForm: React.FC = () => {
         handleChange={handleChange}
         full={true}
       />
+      {errors.l_name && (
+        <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+          {errors.l_name}
+        </p>
+      )}
       <FormRow
         name="phone"
         icon={mobile}
@@ -130,6 +185,11 @@ const UserForm: React.FC = () => {
         full={true}
         handleChange={handleChange}
       />
+      {errors.phone && (
+        <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+          {errors.phone}
+        </p>
+      )}
       <FormRow
         name="email"
         icon={mail}
@@ -141,6 +201,11 @@ const UserForm: React.FC = () => {
         handleChange={handleChange}
         full={true}
       />
+      {errors.email && (
+        <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+          {errors.email}
+        </p>
+      )}
       <FormRow
         name="birthdate"
         label=" "
@@ -151,6 +216,11 @@ const UserForm: React.FC = () => {
         placeHolder={t('birthDateInput')}
         full={true}
       />
+      {errors.birthdate && (
+        <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+          {errors.birthdate}
+        </p>
+      )}
       <CustomSelect
         name="gender"
         label=" "
@@ -162,6 +232,11 @@ const UserForm: React.FC = () => {
         options={genderOptions}
         full={true}
       />
+      {errors.gender && (
+        <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+          {errors.gender}
+        </p>
+      )}
       <CustomSelect
         name="nationality"
         label=" "
@@ -173,6 +248,11 @@ const UserForm: React.FC = () => {
         options={getCountryOptions(language)}
         full={true}
       />
+      {errors.nationality && (
+        <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+          {errors.nationality}
+        </p>
+      )}
       {/* <FormRow
         name="nationality"
         label=" "
@@ -194,9 +274,14 @@ const UserForm: React.FC = () => {
         handleChange={handleChange}
         full={true}
       />
+      {errors.work && (
+        <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+          {errors.work}
+        </p>
+      )}
       <button
         disabled={isLoading}
-        className="btn btn-block rounded-full text-white w-inherit hover:bg-newRed hover:text-white text-xl bg-newRed my-2"
+        className="btn btn-block rounded-full text-white w-inherit hover:bg-newRed hover:text-white  bg-newRed my-2 lg:my-4 min-h-[46px] lg:min-h-[56px] h-auto text-sm lg:text-2xl"
       >
         {isLoading ? (
           <span className="loading loading-spinner loading-lg text-white"></span>
@@ -206,7 +291,7 @@ const UserForm: React.FC = () => {
       </button>
       <Link
         to="/profile/changePassword"
-        className="btn btn-block rounded-full text-black w-inherit  text-xl bg-transparent  my-2"
+        className="btn btn-block rounded-full text-black w-inherit bg-transparent  my-2 min-h-[46px] lg:min-h-[56px] h-auto text-sm lg:text-2xl"
       >
         {t('changePassword')}
       </Link>
