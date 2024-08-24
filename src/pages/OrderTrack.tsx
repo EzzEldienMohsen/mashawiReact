@@ -15,6 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import like from '../assets/svg/delivery/like.svg';
 import rejected from '../assets/svg/delivery/rejectedOrder.svg';
+import { Link } from 'react-router-dom';
 
 const OrderTrack: React.FC = () => {
   const { t } = useTranslation();
@@ -39,8 +40,8 @@ const OrderTrack: React.FC = () => {
   }
   const status = singleOrder.data.status;
   const tracker =
-    status === 'pending'
-      ? pendingSingleOrder
+    status === 'rejected'
+      ? rejectedSingleOrder
       : status === 'processing' && singleOrder.data.branch
       ? processingBranchSingleOrder
       : status === 'processing' && singleOrder.data.address
@@ -53,10 +54,10 @@ const OrderTrack: React.FC = () => {
       ? deliveredSingleOrder
       : status === 'returned'
       ? returnedSingleOrder
-      : rejectedSingleOrder;
+      : pendingSingleOrder;
   const trackText =
-    status === 'pending'
-      ? 'pendingTrackText'
+    status === 'rejected'
+      ? 'rejectedTrackText'
       : status === 'processing' && singleOrder.data.branch
       ? 'processingTrackText'
       : status === 'processing' && singleOrder.data.address
@@ -69,12 +70,12 @@ const OrderTrack: React.FC = () => {
       ? 'deliveredTrackText'
       : status === 'returned'
       ? 'returnedTrackText'
-      : 'rejectedTrackText';
+      : 'pendingTrackText';
   if (status === 'completed' || status === 'delivered') {
     return (
       <div className="flex flex-col justify-center items-center w-full my-2">
         <div className="bg-[#2C2220] flex flex-col text-start w-full justify-start items-center px-4 py-6 my-6 font-abdo">
-          <h1 className="mb-4 text-xl md:text-xl lg:text-2xl text-start font-bold text-newRed">
+          <h1 className="mb-4 text-xl md:text-3xl lg:text-5xl  text-start font-bold text-newRed">
             {t('orderDoneTitle')}
           </h1>
         </div>
@@ -86,7 +87,9 @@ const OrderTrack: React.FC = () => {
               alt="like"
               className="w-2/5 aspect-square md:w-auto md:aspect-auto"
             />
-            <h1 className="text-black text-center">{t(trackText)}</h1>
+            <h1 className="text-black text-center text-lg md:text-xl lg:text-2xl">
+              {t(trackText)}
+            </h1>
           </div>
         </div>
       </div>
@@ -95,7 +98,7 @@ const OrderTrack: React.FC = () => {
     return (
       <div className="flex flex-col justify-center items-center w-full my-2">
         <div className="bg-[#2C2220] flex flex-col text-start w-full justify-start items-center px-4 py-6 my-6 font-abdo">
-          <h1 className="mb-4 text-xl md:text-xl lg:text-2xl text-start font-bold text-newRed">
+          <h1 className="mb-4 text-xl md:text-3xl lg:text-5xl font-bold text-newRed">
             {t('orderDoneTitle')}
           </h1>
         </div>
@@ -107,7 +110,15 @@ const OrderTrack: React.FC = () => {
               alt="rejected"
               className="w-2/5 aspect-square md:w-auto md:aspect-auto"
             />
-            <h1 className="text-black text-center">{t(trackText)}</h1>
+            <h1 className="text-black text-center text-lg md:text-xl lg:text-2xl">
+              {t(trackText)}
+            </h1>
+            <Link
+              to="/contact"
+              className=" btn btn-block md:w-1/2 lg:w-1/3 my-4 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl"
+            >
+              {t('contactUsRoute')}
+            </Link>
           </div>
         </div>
       </div>
@@ -116,14 +127,16 @@ const OrderTrack: React.FC = () => {
     return (
       <div className="flex flex-col justify-center items-center w-full my-2">
         <div className="bg-[#2C2220] flex flex-col text-start w-full justify-start items-center px-4 py-6 my-6 font-abdo">
-          <h1 className="mb-4 text-xl md:text-xl lg:text-2xl text-start font-bold text-newRed">
+          <h1 className="mb-4 text-xl md:text-3xl lg:text-5xl text-start font-bold text-newRed">
             {t('orderDoneTitle')}
           </h1>
         </div>
         <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-20">
           <Steps tracker={tracker} />
           <div className="flex flex-col gap-y-3 justify-center items-center text-sm md:text-md lg:text-lg font-abdo py-6 md:py-10 bg-white w-4/5 rounded-2xl px-6 md:px-10 lg:px-20 shadow-lg">
-            <h1 className="text-black text-center">{t(trackText)}</h1>
+            <h1 className="text-black text-center text-lg md:text-xl lg:text-2xl">
+              {t(trackText)}
+            </h1>
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { getAddress } from '../features/address/addressSlice';
 import { CheckoutReq } from '../features/orders/types';
 import { applyCoupon, checkout } from '../features/orders/ordersSlice';
+import * as Yup from 'yup';
 
 const initialValues: CheckoutReq = {
   payment_method: '',
@@ -49,6 +50,8 @@ const ProceedPageForm: React.FC = () => {
   const [values, setValues] = React.useState<CheckoutReq>(initialValues);
   const { t } = useTranslation();
   const [branch, setBranch] = React.useState<string>('branch');
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
+
   const addressOptions = React.useMemo(
     () =>
       address.map((branch) => ({
@@ -79,12 +82,6 @@ const ProceedPageForm: React.FC = () => {
   const handleBranchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedBranch = e.target.value;
     setBranch(selectedBranch);
-
-    if (selectedBranch === 'home') {
-      setTheBranchesOptions(addressOptions);
-    } else if (selectedBranch === 'branch') {
-      setTheBranchesOptions(branchesOptions);
-    }
   };
 
   const handleChange = (
@@ -98,6 +95,7 @@ const ProceedPageForm: React.FC = () => {
       ...prevValues,
       [name]: value,
     }));
+    setErrors({ ...errors, [name]: '' });
   };
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +103,12 @@ const ProceedPageForm: React.FC = () => {
       ...prevValues,
       payment_method: e.target.value,
     }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      payment_method: '', // Clear the error when user selects a payment method
+    }));
   };
+
   // Submitting values and loading
   const { isLoading: ordersLoading } = useTypedSelector(
     (state: RootState) => state.orders
@@ -116,11 +119,74 @@ const ProceedPageForm: React.FC = () => {
     );
   };
 
+  const proceedPageSchema = Yup.object().shape({
+    payment_method: Yup.string()
+      .required(t('isRequiredError'))
+      .oneOf(['cash', 'card'], t('invalidSelect')),
+
+    address_id: Yup.number().when('branch', {
+      is: (branch: string) => branch === 'home',
+      then: (schema) =>
+        schema.required(t('isRequiredError')).oneOf(
+          addressOptions.map((option) => option.value),
+          t('invalidSelect')
+        ),
+      otherwise: (schema) => schema.nullable(),
+    }),
+
+    branch_id: Yup.number().when('branch', {
+      is: (branch: string) => branch === 'branch',
+      then: (schema) =>
+        schema.required(t('isRequiredError')).oneOf(
+          branchesOptions.map((option) => option.value),
+          t('invalidSelect')
+        ),
+      otherwise: (schema) => schema.nullable(),
+    }),
+
+    coupon_code: Yup.string().notRequired(),
+
+    customValidation: Yup.mixed().test(
+      'one-required',
+      t('selectOneError'),
+      function () {
+        const { address_id, branch_id } = this.parent;
+        return (address_id && !branch_id) || (!address_id && branch_id);
+      }
+    ),
+  });
+
+  const validateTheForm = async (): Promise<boolean> => {
+    try {
+      await proceedPageSchema.validate(values, { abortEarly: false });
+      setErrors({});
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
+        err.inner.forEach((error) => {
+          validationErrors[error.path!] = error.message;
+        });
+        setErrors(validationErrors);
+        console.log(errors);
+      }
+      return false;
+    }
+  };
+
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
+    console.log('submitting');
+    const isFormValid = await validateTheForm();
+    if (!isFormValid) {
+      console.log('error');
+
+      return;
+    }
     const response = await dispatch(
       checkout({ reqData: values, token, language })
     ).unwrap();
+    console.log(response);
     if (response.status === 1) {
       navigate('/order-done');
     }
@@ -174,7 +240,7 @@ const ProceedPageForm: React.FC = () => {
           <h1 className="text-black font-abdo text-xl font-semibold mb-4">
             {t('address')}
           </h1>
-          <div className="flex flex-col gap-y-4 md:gap-x-2 md:flex-row md:justify-between w-full lg:w-full">
+          <div className="flex flex-col gap-y-4 md:gap-x-2 md:flex-row md:justify-between w-full lg:w-3/5">
             <CustomSelect
               name={branch === 'home' ? 'address_id' : 'branch_id'}
               handleChange={handleChange}
@@ -186,6 +252,16 @@ const ProceedPageForm: React.FC = () => {
             />
             <AddAddressModal />
           </div>
+          {errors.address_id && branch === 'home' && (
+            <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+              {errors.address_id}
+            </p>
+          )}
+          {errors.branch_id && branch === 'branch' && (
+            <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+              {errors.branch_id}
+            </p>
+          )}
         </div>
         {/* Text Area */}
         <div className="w-full flex flex-col justify-start items-start bg-white rounded-2xl p-4 shadow-md">
@@ -199,6 +275,11 @@ const ProceedPageForm: React.FC = () => {
             full={true}
             value={values.notes}
           />
+          {/* {errors.notes && (
+            <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+              {errors.notes}
+            </p>
+          )} */}
         </div>
         {/* Radio Buttons */}
         <div className="w-full flex flex-col justify-start items-start bg-white rounded-2xl p-4 shadow-md">
@@ -227,6 +308,11 @@ const ProceedPageForm: React.FC = () => {
             />
             <p className="text-lg font-abdo">{t('onlinePayment')}</p>
           </label>
+          {errors.payment_method && (
+            <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+              {errors.payment_method}
+            </p>
+          )}
         </div>
         {/* Coupon */}
         <div className="w-full flex flex-col justify-start items-start bg-white rounded-2xl p-4 shadow-md">

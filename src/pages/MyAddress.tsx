@@ -44,11 +44,11 @@ const MyAddress: React.FC = () => {
     );
   }
   return (
-    <div className="flex mt-2 flex-col relative px-8 lg:px-20 justify-center pt-24 items-center  md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
+    <div className="flex mt-2 flex-col relative px-8 lg:px-20 justify-center pt-24 items-center  md:flex md:flex-row md:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
       <Link
         to="/profile/new-address"
-        className={`btn w-3/5 md:w-1/5 absolute top-0 ${
-          isLangArabic ? 'left-20' : 'right-20'
+        className={`btn w-3/4 md:w-2/5 lg:w-1/4 2xl:w-auto m px-6 absolute min-h-[46px] lg:min-h-[58px] h-auto text-lg lg:text-2xl top-0 ${
+          isLangArabic ? 'left-13 md:left-20' : 'right-20'
         } bg-newRed text-white rounded-full my-1`}
       >
         {t('newAddress')}
@@ -57,7 +57,7 @@ const MyAddress: React.FC = () => {
         return (
           <div
             key={ad.id}
-            className="rounded-2xl md:h-[350px] aspect-auto relative flex flex-col justify-between items-center bg-white lg:px-2 text-center py-2 gap-y-4 shadow-md w-[90vw] my-2 lg:w-[32%] md:w-[42%] "
+            className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-6 gap-y-4 lg:gap-y-5 shadow-md px-2 w-[90%] my-2 lg:w-[30%] 2xl:w-[23%] md:w-[45%] "
           >
             <button
               className={`absolute top-2 ${
@@ -67,32 +67,28 @@ const MyAddress: React.FC = () => {
             >
               <img src={theClose} alt="alt" className={` `} />
             </button>
-            <img
-              src={addressIcon}
-              alt="alt"
-              className="bg-[#F4F4F4] p-2 rounded-full"
-            />
-            <h1 className="text-black font-normal text-md my-1 md:text-md lg:text-md">
+            <img src={addressIcon} alt="alt" />
+            <h1 className="text-black font-bold text-lg my-1 md:text-xl lg:text-2xl">
               {ad.name}
             </h1>
-            <p className="text-start text-sm md:text-md lg:text-sm mb-2 text-gray-600 px-1">
+            <p className=" text-sm lg:text-[14.9px] text-center mb-2 text-black px-1 ">
               {ad.details}
             </p>
-            <div className="flex flex-row text-start items-center justify-between px-1 text-md md:text-xs lg:text-xs">
-              <div className="flex flex-row gap-x-1 text-start items-center justify-between ">
-                <div className="flex flex-row gap-x-1 justify-between lg:text-xs text-sm ">
-                  <img src={addMob} alt="alt" />{' '}
-                  <p className="text-sm lg:text-xs">{ad.phone}</p>
-                </div>
-                <div className="flex flex-row gap-x-1 justify-between lg:text-xs text-sm mr-2">
-                  <img src={addTel} alt="alt" />{' '}
-                  <p className=" text-sm lg:text-xs">{ad.landing_phone}</p>
-                </div>
+            <div className="flex flex-row gap-x-1 text-start items-center justify-between ">
+              <div className="flex flex-row gap-x-1 justify-between ">
+                <img src={addMob} alt="alt" />{' '}
+                <p className="text-sm  2xl:text-lg">{ad.phone}</p>
               </div>
+              {ad.landing_phone && (
+                <div className="flex flex-row gap-x-1 justify-between mr-2">
+                  <img src={addTel} alt="alt" />{' '}
+                  <p className="text-sm  2xl:text-lg">{ad.landing_phone}</p>
+                </div>
+              )}
             </div>
             <Link
               to={`/profile/update-address/${ad.id}`}
-              className="btn w-3/5 bg-newRed text-white rounded-full my-1"
+              className="btn w-3/5 bg-newRed text-white rounded-full  text-lg min-h-[46px] h-auto  px-[4px] my-1"
             >
               {t('editAddressText')}
             </Link>

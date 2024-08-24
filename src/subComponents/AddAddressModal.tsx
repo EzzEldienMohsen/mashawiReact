@@ -11,18 +11,12 @@ import { useDispatch } from 'react-redux';
 import { createAddress, getAddress } from '../features/address/addressSlice';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-
-const debounce = (func: (...args: any[]) => void, delay: number) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return (...args: any[]) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
-};
+import * as Yup from 'yup';
 
 const AddAddressModal: React.FC = () => {
   const { t } = useTranslation();
   const dialogRef = React.useRef<HTMLDialogElement>(null);
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
 
   // Close Modal
   const closeModal = () => dialogRef.current?.close();
@@ -48,21 +42,6 @@ const AddAddressModal: React.FC = () => {
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
 
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handleValidation = React.useCallback(
-    debounce((name: string, value: string) => {
-      if (name === 'email' && !validateEmail(value)) {
-        toast.error(t('invalidEmailAddress'));
-        return;
-      }
-    }, 3000),
-    []
-  );
-
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -71,18 +50,57 @@ const AddAddressModal: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    handleValidation(name, value);
+    setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
   };
 
-  const onSubmit = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault(); // Prevent default form submission
-    console.log(values);
+  const newAddressSchema = Yup.object().shape({
+    name: Yup.string()
+      .required(t('isRequiredError'))
+      .test('name-length', t('addressNameIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
+    details: Yup.string()
+      .required(t('isRequiredError'))
+      .test('name-length', t('addressDetailsIsTooShort'), function (value) {
+        return !value || value.length >= 10;
+      }),
+    phone: Yup.string()
+      .required(t('isRequiredError'))
+      .test('phone-format', t('correctPhoneNumber'), function (value) {
+        const egyptUaePhoneRegex =
+          /^((\+20|0)?1[0125][0-9]{8}$)|((\+971|0)?5[024568][0-9]{7}$)/;
+        return !value || egyptUaePhoneRegex.test(value);
+      }),
+  });
+
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await newAddressSchema.validate(values, { abortEarly: false });
+      setErrors({});
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
+        err.inner.forEach((error) => {
+          validationErrors[error.path!] = error.message;
+        });
+        setErrors(validationErrors);
+      }
+      return false;
+    }
+  };
+
+  const handleSubmit = async () => {
+    console.log('submitting');
+    const isFormValid = await validateForm();
+    if (!isFormValid) return;
+
     try {
       await dispatch(
         createAddress({ reqData: values, token, language })
       ).unwrap();
       await dispatch(getAddress({ token, language })).unwrap();
-      dialogRef.current?.close();
+      closeModal();
       navigate('/proceed');
     } catch (error) {
       console.error('Failed to create address:', error);
@@ -94,7 +112,7 @@ const AddAddressModal: React.FC = () => {
     <div>
       <button
         onClick={() => dialogRef.current?.showModal()}
-        className="bg-newRed w-full md:w-full lg:w-auto text-white py-2 px-6 rounded-2xl mt-4 font-semibold"
+        className="bg-newRed w-auto h-auto  min-w-[180px] text-sm min-h-[46px] text-white py-2 px-6 rounded-2xl mt-4 font-semibold"
       >
         {t('newAdd')}
       </button>
@@ -122,6 +140,11 @@ const AddAddressModal: React.FC = () => {
             handleChange={handleChange}
             full={true}
           />
+          {errors.name && (
+            <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+              {errors.name}
+            </p>
+          )}
           <FormTextArea
             name="details"
             icon={add}
@@ -134,6 +157,11 @@ const AddAddressModal: React.FC = () => {
             handleChange={handleChange}
             full={true}
           />
+          {errors.details && (
+            <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+              {errors.details}
+            </p>
+          )}
           <FormRow
             name="phone"
             icon={mob}
@@ -147,20 +175,25 @@ const AddAddressModal: React.FC = () => {
             full={true}
           />
 
+          {errors.phone && (
+            <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+              {errors.phone}
+            </p>
+          )}
           <button
             disabled={isLoading}
-            onClick={onSubmit}
-            className="btn text-white btn-block hover:bg-newRed hover:text-white text-xl rounded-full bg-newRed my-2"
+            onClick={handleSubmit}
+            className="btn text-white btn-block  hover:bg-newRed hover:text-white  rounded-full bg-newRed my-2 min-h-[46px] lg:min-h-[56px] h-auto text-sm lg:text-2xl"
           >
             {isLoading ? (
-              <span className="loading loading-spinner loading-lg"></span>
+              <span className="loading loading-spinner loading-lg text-white"></span>
             ) : (
               t('save')
             )}
           </button>
 
           <button type="button" onClick={closeModal} className="mt-2">
-            {t('close')}
+            close
           </button>
         </div>
       </dialog>

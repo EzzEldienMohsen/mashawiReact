@@ -94,17 +94,17 @@ const UserForm: React.FC = () => {
         );
       }),
     gender: Yup.string()
-      .required(t('isRequiredError'))
       .oneOf(
         genderOptions.map((option) => option.value),
         t('invalidSelect')
-      ),
+      )
+      .required(t('isRequiredError')),
     nationality: Yup.string()
-      .required(t('isRequiredError'))
-      .oneOf(
-        getCountryOptions(language).map((option) => option.value),
-        t('invalidSelect')
-      ),
+    .oneOf(
+      getCountryOptions(language).map((option) => option.value),
+      t('invalidSelect')
+    )
+    .required(t('isRequiredError')),
     work: Yup.string()
       .required(t('isRequiredError'))
       .test('work-length', t('workIsTooShort'), function (value) {

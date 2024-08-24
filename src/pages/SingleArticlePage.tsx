@@ -1,9 +1,9 @@
 import React from 'react';
 import { useGlobalContext } from '../context/GlobalContext';
-import { SingleEventQuery, SingleEventResponse } from '../assets/types';
+import { SingleBlogResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
-import { Params } from 'react-router-dom';
+import { Params, useLoaderData } from 'react-router-dom';
 import dateIcon from '../assets/svg/events/dateIcon.svg';
 import theImage from '../assets/svg/singleArticle/Image.svg';
 
@@ -11,15 +11,19 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ar';
 import 'dayjs/locale/en';
 import { useTranslation } from 'react-i18next';
-import { singleEvent } from '../assets';
-const singleEventQuery = (
+interface blogQuery {
+  queryKey: (string | undefined)[];
+  queryFn: () => Promise<SingleBlogResponse>;
+}
+
+const singleBlogQuery = (
   language: string,
   id: string | undefined
-): SingleEventQuery => {
+): blogQuery => {
   return {
-    queryKey: ['singleEvent', language, id],
+    queryKey: ['blogs', language, id],
     queryFn: () =>
-      autoFetch(`events/${id}`, {
+      autoFetch(`blogs/${id}`, {
         headers: {
           lang: language,
         },
@@ -33,21 +37,22 @@ export const loader =
     params,
   }: {
     params: Params<string>;
-  }): Promise<SingleEventResponse> => {
+  }): Promise<SingleBlogResponse> => {
     const { id } = params;
     const data = await queryClient.ensureQueryData(
-      singleEventQuery(language, id)
+      singleBlogQuery(language, id)
     );
     return data;
   };
 const SingleArticlePage: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
-  //   const axiosData: any = useLoaderData();
-  //   const data: SingleEventResponse = axiosData.data;
+  const axiosData: any = useLoaderData();
+  const data: SingleBlogResponse = axiosData.data;
+  console.log(data);
   const locale = isLangArabic ? 'ar' : 'en';
   dayjs.locale(locale);
   const { t } = useTranslation();
-  const formattedDate = dayjs(singleEvent.timeText)
+  const formattedDate = dayjs(data.data.date)
     .locale(locale)
     .format('DD MMM YYYY');
   return (
@@ -56,7 +61,7 @@ const SingleArticlePage: React.FC = () => {
       <div className={`w-full flex justify-center items-center `}>
         {/* the group parent */}
         <div
-          className={`w-4/5 aspect-[4/3] md:aspect-[6/2] px-2 py-4 lg:p-2 2xl:aspect-[6/1] flex relative flex-col gap-y-6 lg:flex-row-reverse lg:items-center lg:justify-evenly bg-white  2xl:w-4/5 z-10 ${
+          className={`w-4/5 aspect-[4/3] md:aspect-[6/2] px-1 py-4  lg:p-2 2xl:aspect-[6/1.5] flex relative flex-col gap-y-6 lg:flex-row-reverse lg:items-center lg:justify-evenly bg-white  2xl:w-4/5 z-10 ${
             isLangArabic
               ? 'rounded-tr-3xl rounded-bl-3xl'
               : 'rounded-tl-3xl rounded-br-3xl'
@@ -86,14 +91,14 @@ const SingleArticlePage: React.FC = () => {
           {/* Content */}
           <div className="flex flex-col w-full lg:w-[45%] 2xl:w-[50%] justify-start items-start gap-y-2 lg:gap-y-8 ">
             <div className="flex justify-center items-center gap-x-1">
-              <h1 className="text-black font-bold font-abdo  text-sm md:tex-3xl lg:text-2xl 2xl:text-5xl">
+              <h1 className="text-black font-bold font-abdo  text-xl  lg:text-[40px]">
                 {t('MainHeroBigTitle')}
               </h1>
-              <h1 className="font-bold font-abdo text-newRed text-sm md:tex-3xl lg:text-2xl 2xl:text-5xl">
+              <h1 className="font-bold font-abdo text-newRed text-xl  lg:text-[40px]">
                 {t('MainHeroSecondTitle')}
               </h1>
             </div>
-            <p className="font-abdo text-black text-xs font-light md:text-lg w-4/5 lg:w-full lg:text-xl 2xl:text-3xl">
+            <p className="font-abdo text-black text-xs font-light md:text-lg w-4/5 lg:w-full lg:text-xl ">
               {t('singleArticleHeroText')}
             </p>
           </div>
@@ -106,16 +111,12 @@ const SingleArticlePage: React.FC = () => {
           <p className="font-abdo text-lg">{formattedDate}</p>
         </div>
         <h1 className="font-abdo text-xl font-bold lg:text-3xl">
-          {t(singleEvent.title)}
+          {data.data.title}
         </h1>
-        {/* <p
+        <p
           className="font-abdo text-sm md:text-lg  font-medium lg:text-xl"
           dangerouslySetInnerHTML={{ __html: data.data.content }}
-        /> */}
-        <p className="font-abdo text-sm md:text-lg  font-medium lg:text-xl">
-          {' '}
-          {t(singleEvent.text)}
-        </p>
+        />
       </div>
     </div>
   );

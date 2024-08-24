@@ -54,15 +54,15 @@ const Orders: React.FC = () => {
           <Link
             to={`/profile/orders/${order.id}`}
             key={order.id}
-            className="flex flex-col rounded-2xl justify-center items-start  bg-white px-4 py-6 relative gap-y-4 md:flex-row w-full md:justify-between lg:px-2 lg:gap-x-6"
+            className="flex flex-col rounded-2xl justify-center items-start  bg-white px-4 py-6 relative gap-y-4 md:flex-row w-full md:justify-between lg:px-6 lg:gap-x-6"
           >
-            <h1 className="underLine font-bold font-abdo text-black text-md md:text-lg lg:text-xl">
+            <h1 className="underline underline-offset-8 font-bold font-abdo text-black text-lg lg:text-3xl">
               {`${t('orderTitle')} ${order.id}`}
             </h1>
-            <p className="text-xs md:text-sm lg:text-md font-abdo text-[#939393]">
+            <p className="text-sm md:text-lg lg:text-xl font-abdo text-[#939393]">
               {formatDate({ date: order.date })}
             </p>
-            <p className="text-newRed text-sm md:text-md lg:text-lg font-abdo font-medium">
+            <p className="text-newRed text-lg lg:text-3xl font-abdo font-medium">
               {formatPrice(order.total)}
             </p>
           </Link>

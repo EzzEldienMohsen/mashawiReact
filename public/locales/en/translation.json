@@ -235,5 +235,10 @@
   "correctOTP": "please insert only numbers",
   "invalidBirthdateError": "please insert a valid birth date",
   "invalidSelect": "please select from the list",
-  "workIsTooShort": "job is too short"
+  "workIsTooShort": "job is too short",
+  "addressNameIsTooShort": "address name is too short",
+  "addressDetailsIsTooShort": "address details is too short",
+  "subTotal": "sub total",
+  "tax": "tax",
+  "couponDiscount": "coupon discount"
 }

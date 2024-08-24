@@ -45,6 +45,7 @@ export type SingleOrderResponse = {
       vat: string;
       discount: string;
       total: string;
+      vat_percent:string;
     };
   };
 };

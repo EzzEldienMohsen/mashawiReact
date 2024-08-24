@@ -30,7 +30,6 @@ const SingleOrder: React.FC = () => {
   const { singleOrder, isLoading } = useTypedSelector(
     (state: RootState) => state.orders
   );
-
   const navigate = useNavigate();
   const getTheOrder = async () => {
     await dispatch(getSingleOrder({ id, token, language }));
@@ -50,6 +49,11 @@ const SingleOrder: React.FC = () => {
       </div>
     );
   }
+  function formatPrice(price: number | string) {
+    const numericPrice = Number(price);
+    return parseFloat(numericPrice.toFixed(2)).toString();
+  }
+
   const status = singleOrder.data.status;
   const tracker =
     status === 'pending'
@@ -67,6 +71,9 @@ const SingleOrder: React.FC = () => {
       : status === 'returned'
       ? returnedSingleOrder
       : rejectedSingleOrder;
+  if (status === 'rejected' || status === 'returned') {
+    navigate('/track');
+  }
   return (
     <div className="flex flex-col justify-center items-center gap-y-6 w-full px-8 lg:px-20  py-8">
       <Steps tracker={tracker} />
@@ -92,14 +99,17 @@ const SingleOrder: React.FC = () => {
                 }}
               />
               <div className="flex flex-col justify-stretch items-start gap-y-3 lg:gap-y-7">
-                <h1 className="text-sm font-abdo lg:text-xl"> {or.meal}</h1>
-                <p className="text-xs font-abdo flex flex-col gap-y-3 justify-start items-start w-1/3 text-[#7E7E7E] lg:text-md">
+                <h1 className="text-sm md:text-lg font-abdo lg:text-2xl">
+                  {' '}
+                  {or.meal}
+                </h1>
+                <p className="text-xs md:text-sm font-abdo flex flex-col gap-y-3 justify-start items-start w-1/3 text-[#7E7E7E] lg:text-xl">
                   {or.additions.map((ad, index) => {
                     return <span key={index}>{ad.name}</span>;
                   })}
                 </p>
-                <p className="text-newRed font-abdo text-sm lg:text-lg">
-                  {`${or.quantity} ${t('meal')}`}
+                <p className="text-newRed text-sm md:text-lg font-abdo lg:text-2xl">
+                  {`${or.total} ${t('menuItemCurrency')}`}
                 </p>
               </div>
             </div>
@@ -108,20 +118,48 @@ const SingleOrder: React.FC = () => {
       </div>
       {/* Address */}
       <div className="w-full lg:w-3/5 flex flex-col justify-center items-center gap-y-4">
-        <h1 className="font-abdo tex-black">
+        <h1 className="font-abdo tex-black text-xs md:text-lg lg:text-xl">
           {singleOrder.data.branch
             ? singleOrder.data.branch
             : singleOrder.data.address?.name}
         </h1>
-        <div className="w-full flex justify-evenly items-center">
-          <p className="text-black font-abdo">{t('totalOrderText')}</p>
-          <p className="text-black font-abdo">
-            {singleOrder.data.calculations.total}
+        <div className="w-full flex justify-between items-center">
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {t('subTotal')}
+          </p>
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {singleOrder.data.calculations.subtotal}
+          </p>
+        </div>
+        <div className="w-full flex justify-between items-center ">
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {`${t('tax')} ${formatPrice(
+              singleOrder.data.calculations.vat_percent
+            )}%`}
+          </p>
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {singleOrder.data.calculations.vat}
+          </p>
+        </div>
+        <div className="w-full flex justify-between items-center">
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {t('couponDiscount')}
+          </p>
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {singleOrder.data.calculations.discount}
+          </p>
+        </div>
+        <div className="w-full flex justify-between items-center">
+          <p className="text-black font-abdo text-sm md:text-xl lg:text-3xl ">
+            {t('totalOrderText')}
+          </p>
+          <p className="text-newRed font-abdo text-sm md:text-xl lg:text-3xl">
+            {` ${singleOrder.data.calculations.total} ${t('menuItemCurrency')}`}
           </p>
         </div>
         <Link
           to="/track"
-          className=" btn btn-block md:w-3/5 my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+          className=" btn btn-block md:w-1/2 lg:w-1/4 my-4 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl"
         >
           {t('trackButton')}
         </Link>

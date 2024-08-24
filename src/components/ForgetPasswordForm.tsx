@@ -27,6 +27,7 @@ const ForgetPasswordForm: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
   };
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';

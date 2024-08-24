@@ -28,7 +28,6 @@ import {
   NewAddress,
   UpdateAddress,
   OrderDonePage,
-  OrderTrack,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
 import { AddressResponse, Categories, Meals } from './assets/types';
@@ -54,6 +53,7 @@ import { loader as singleNewsLoader } from './pages/SingleNewsPage';
 import { loader as MainAddressLoader } from './components/MainAddressSection';
 import { loader as addressLoader } from './components/AddressSection';
 import { loader as socialLoader } from './subComponents/FooterFirstColumn';
+import { loader as singleArticleLoader } from './pages/SingleArticlePage';
 
 // Combined loaders
 // First Menu Loaders
@@ -122,6 +122,7 @@ const Delivery = React.lazy(() => import('./pages/Delivery'));
 const Refund = React.lazy(() => import('./pages/Refund'));
 const Articles = React.lazy(() => import('./pages/Articles'));
 const SingleArticlePage = React.lazy(() => import('./pages/SingleArticlePage'));
+const OrderTrack = React.lazy(() => import('./pages/OrderTrack'));
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -272,7 +273,7 @@ const AppRouter: React.FC = () => {
           loader: articlesLoader(queryClient, language),
         },
         {
-          path: '/SingleArticle',
+          path: '/SingleArticle/:id',
           element: (
             <Suspense
               fallback={
@@ -284,6 +285,7 @@ const AppRouter: React.FC = () => {
               <SingleArticlePage />
             </Suspense>
           ),
+          loader: singleArticleLoader(queryClient, language),
         },
         {
           path: '/jobs',
@@ -319,7 +321,7 @@ const AppRouter: React.FC = () => {
                 </div>
               }
             >
-              <OrderTrack />
+              <TrackOrder />
             </Suspense>
           ),
         },
@@ -333,7 +335,17 @@ const AppRouter: React.FC = () => {
         },
         {
           path: '/track',
-          element: <TrackOrder />,
+          element: (
+            <Suspense
+              fallback={
+                <div className="flex w-full py-8 justify-center items-center">
+                  <span className="loading loading-spinner loading-lg text-newRed"></span>
+                </div>
+              }
+            >
+              <OrderTrack />
+            </Suspense>
+          ),
         },
         {
           path: '/privacy',

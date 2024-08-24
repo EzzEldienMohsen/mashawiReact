@@ -1,5 +1,4 @@
 import React from 'react';
-import { formatPrice } from '../utils';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
@@ -22,64 +21,53 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
     (state: RootState) => state.orders
   );
   const { t } = useTranslation();
+  function formatThePrice(price: number | string) {
+    const numericPrice = Number(price);
+    return parseFloat(numericPrice.toFixed(2)).toString();
+  }
+
   return (
     <div className="flex flex-col my-4 py-4 justify-between md:justify-center items-center border-t-[2px] border-gray-500 w-full px-8 lg:px-20">
       <p className="text-newRed text-lg md:text-xl my-2 lg:text-2xl">
         {t('vatContentText')}
       </p>
-      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
-        <span>{t('totalOrderText')}</span>
-        <span>{formatPrice(parseInt(orderTotal.sub_total))}</span>
-      </p>
-
-      {/* TAX precentage */}
-      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
-        <span>{t('taxrsText')}</span>
-        <span className="font-medium">{orderTotal.vat_percent}%</span>
-      </p>
-      {/* TAX  */}
-      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
-        <span>{t('taxValue')}</span>
-        <span className="font-medium">
-          {formatPrice(parseInt(orderTotal.vat))}
-        </span>
-      </p>
-      {/* ORDER TOTAL Or Total Before */}
-      <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
-        <span>{t('totalText')}</span>
-        <span className="font-medium text-newRed">
-          {formatPrice(
-            parseInt(
-              orderTotal.total_before
-                ? orderTotal.total_before
-                : orderTotal.total
-            )
-          )}
-        </span>
-      </p>
-      {/*Discount */}
-      {orderTotal.discount ? (
-        <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
-          <span>{t('totalText')}</span>
-          <span className="font-medium">
-            {formatPrice(parseInt(orderTotal.discount))}
-          </span>
+      <div className="w-full flex justify-between items-center">
+        <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+          {t('subTotal')}
         </p>
-      ) : null}
-      {/*Total after */}
-      {orderTotal.total_after ? (
-        <p className=" pb-2 flex w-full md:w-3/5 justify-between flex-row gap-x-4 text-black font-bold text-lg md:text-xl my-2 lg:text-2xl ">
-          <span>{t('totalText')}</span>
-          <span className="font-medium">
-            {formatPrice(parseInt(orderTotal.total_after))}
-          </span>
+        <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+          {orderTotal.sub_total}
         </p>
-      ) : null}
+      </div>
+      <div className="w-full flex justify-between items-center ">
+        <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+          {`${t('tax')} ${formatThePrice(orderTotal.vat_percent)}%`}
+        </p>
+        <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+          {orderTotal.vat}
+        </p>
+      </div>
+      <div className="w-full flex justify-between items-center">
+        <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+          {t('couponDiscount')}
+        </p>
+        <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+          {orderTotal.discount}
+        </p>
+      </div>
+      <div className="w-full flex justify-between items-center">
+        <p className="text-black font-abdo text-sm md:text-xl lg:text-3xl ">
+          {t('totalOrderText')}
+        </p>
+        <p className="text-newRed font-abdo text-sm md:text-xl lg:text-3xl">
+          {` ${orderTotal.total} ${t('menuItemCurrency')}`}
+        </p>
+      </div>
       <button
         type="submit"
         disabled={isLoading}
         onSubmit={onSubmit}
-        className=" btn btn-block my-2 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+        className=" btn btn-block md:w-1/2 lg:w-1/4 my-4 min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
       >
         {isLoading ? (
           <span className="loading loading-spinner loading-lg text-white"></span>
@@ -90,7 +78,7 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
 
       <Link
         to="/meals"
-        className=" btn btn-block my-2 flex justify-center shadow-xl bg-[#D9D9D9] items-center rounded-full"
+        className=" btn btn-block md:w-1/2 lg:w-1/4 my-4 min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl flex justify-center shadow-xl bg-[#D9D9D9] items-center rounded-full"
       >
         {t('contiueSoppingText')}
       </Link>

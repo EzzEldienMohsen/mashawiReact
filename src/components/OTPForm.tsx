@@ -97,6 +97,8 @@ const OTPForm = () => {
       ...prevValues,
       [name]: value,
     }));
+        setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
+
   };
   const language = isLangArabic ? 'ar' : 'en';
 

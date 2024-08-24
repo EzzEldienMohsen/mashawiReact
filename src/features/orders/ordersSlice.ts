@@ -39,6 +39,7 @@ const initialSingleOrder = {
       vat: '',
       discount: '',
       total: '',
+      vat_percent: '',
     },
   },
 };

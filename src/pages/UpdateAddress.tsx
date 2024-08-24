@@ -9,15 +9,7 @@ import { useGlobalContext } from '../context/GlobalContext';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAddress, updateAddress } from '../features/address/addressSlice';
-import { toast } from 'react-toastify';
-
-const debounce = (func: (...args: any[]) => void, delay: number) => {
-  let timeoutId: ReturnType<typeof setTimeout>;
-  return (...args: any[]) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
-};
+import * as Yup from 'yup';
 
 const UpdateAddress: React.FC = () => {
   const { t } = useTranslation();
@@ -36,33 +28,13 @@ const UpdateAddress: React.FC = () => {
     created_at: '',
   };
   const navigate = useNavigate();
+  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
+
   const [values, setValues] = React.useState<AddressData>(item);
   const dispatch: AppDispatch = useDispatch();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
 
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  // const validatePhoneNumber = (phoneNumber: string): boolean => {
-  //   const phoneRegex = /^\+?[1-9]\d{1,14}$/; // E.164 international format
-  //   return phoneRegex.test(phoneNumber);
-  // };
-  const handleValidation = React.useCallback(
-    debounce((name: string, value: string) => {
-      if (name === 'email' && !validateEmail(value)) {
-        toast.error(t('invalidEmailAddress'));
-        return;
-      }
-      // if (name === 'phone' && !validatePhoneNumber(value)) {
-      //   toast.error('Invalid phone number');
-      //   return;
-      // }
-    }, 3000),
-    []
-  );
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -71,11 +43,50 @@ const UpdateAddress: React.FC = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    handleValidation(name, value);
+    setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
+  };
+
+  const updateAddressSchema = Yup.object().shape({
+    name: Yup.string()
+      .required(t('isRequiredError'))
+      .test('name-length', t('addressNameIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
+    details: Yup.string()
+      .required(t('isRequiredError'))
+      .test('name-length', t('addressDetailsIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
+    phone: Yup.string()
+      .required(t('isRequiredError'))
+      .test('phone-format', t('correctPhoneNumber'), function (value) {
+        const egyptUaePhoneRegex =
+          /^((\+20|0)?1[0125][0-9]{8}$)|((\+971|0)?5[024568][0-9]{7}$)/;
+        return !value || egyptUaePhoneRegex.test(value);
+      }),
+  });
+
+  const validateForm = async (): Promise<boolean> => {
+    try {
+      await updateAddressSchema.validate(values, { abortEarly: false });
+      setErrors({});
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
+        err.inner.forEach((error) => {
+          validationErrors[error.path!] = error.message;
+        });
+        setErrors(validationErrors);
+      }
+      return false;
+    }
   };
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
+    const isFormValid = await validateForm();
+    if (!isFormValid) return;
     await dispatch(
       updateAddress({ id: `${item.id}`, reqData: values, token, language })
     );
@@ -104,6 +115,11 @@ const UpdateAddress: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.name && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.name}
+          </p>
+        )}
         <FormTextArea
           name="details"
           icon={add}
@@ -115,6 +131,11 @@ const UpdateAddress: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
+        {errors.details && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.details}
+          </p>
+        )}
         <FormRow
           name="phone"
           icon={mob}
@@ -126,11 +147,15 @@ const UpdateAddress: React.FC = () => {
           handleChange={handleChange}
           full={true}
         />
-
+        {errors.phone && (
+          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.phone}
+          </p>
+        )}
         <button
           disabled={isLoading}
           onSubmit={onSubmit}
-          className="btn text-white btn-block  hover:bg-newRed hover:text-white text-xl rounded-full bg-newRed my-2"
+          className="btn text-white btn-block  hover:bg-newRed hover:text-white  rounded-full bg-newRed my-2 min-h-[46px] lg:min-h-[56px] h-auto text-sm lg:text-2xl"
         >
           {isLoading ? (
             <span className="loading loading-spinner loading-lg text-white"></span>

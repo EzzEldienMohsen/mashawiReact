@@ -449,7 +449,6 @@ export type TheAddressData = {
   location: string;
 };
 
-
 // Social Media
 
 export type SocialResponse = {
@@ -460,5 +459,18 @@ export type SocialResponse = {
     instagram: string;
     linkedin: string;
     twitter: string;
+  };
+};
+// types.ts
+
+export type SingleBlogResponse = {
+  status: number;
+  message: string;
+  data: {
+    id: number;
+    image: string;
+    title: string;
+    content: string;
+    date: string; // Use `string` here as ISO date strings are usually represented as strings in JSON
   };
 };

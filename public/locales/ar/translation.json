@@ -235,5 +235,10 @@
   "correctOTP": "برجاء ادخال ارقام فقط",
   "invalidBirthdateError": "برجاء ادخال تاريخ ميلاد صحيح",
   "invalidSelect": "برجاء الاختيار من القائمة ادناه",
-  "workIsTooShort": "الوظيفة قصيرة جدا"
+  "workIsTooShort": "الوظيفة قصيرة جدا",
+  "addressNameIsTooShort": "اسم العنوان قصير جدا",
+  "addressDetailsIsTooShort": "تفاصيل العنوان قصيرة جدا",
+  "subTotal": "المجموع الجزئي",
+  "tax": "الضريبة",
+  "couponDiscount": "قيمة خصم الكوبون"
 }
