@@ -148,7 +148,7 @@ const ProceedPageForm: React.FC = () => {
 
     customValidation: Yup.mixed().test(
       'one-required',
-      t('selectOneError'),
+      t('invalidSelect'),
       function () {
         const { address_id, branch_id } = this.parent;
         return (address_id && !branch_id) || (!address_id && branch_id);
@@ -252,14 +252,14 @@ const ProceedPageForm: React.FC = () => {
             />
             <AddAddressModal />
           </div>
-          {errors.address_id && branch === 'home' && (
+          {errors.customValidation && branch === 'home' && (
             <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
-              {errors.address_id}
+              {errors.customValidation}
             </p>
           )}
-          {errors.branch_id && branch === 'branch' && (
+          {errors.customValidation && branch === 'branch' && (
             <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
-              {errors.branch_id}
+              {errors.customValidation}
             </p>
           )}
         </div>
