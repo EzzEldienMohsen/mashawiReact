@@ -168,7 +168,6 @@ const ProceedPageForm: React.FC = () => {
           validationErrors[error.path!] = error.message;
         });
         setErrors(validationErrors);
-        console.log(errors);
       }
       return false;
     }
@@ -176,17 +175,13 @@ const ProceedPageForm: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    console.log('submitting');
     const isFormValid = await validateTheForm();
     if (!isFormValid) {
-      console.log('error');
-
       return;
     }
     const response = await dispatch(
       checkout({ reqData: values, token, language })
     ).unwrap();
-    console.log(response);
     if (response.status === 1) {
       navigate('/order-done');
     }
