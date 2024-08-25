@@ -56,7 +56,9 @@ const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange }) => {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className={`absolute ${
-            isLangArabic ? 'left-[93.5%] 2xl:left-[92%]' : 'right-[94.5%%]'
+            isLangArabic
+              ? 'left-[85%] md:left-[90%] lg:top-[6px] 2xl:top-0 lg:left-[90%] 2xl:left-[90%]'
+              : 'lg:top-[6px] 2xl:top-0 lg:right-[90%]  2xl:right-[94.5%%]'
           } top-0 w-4 h-4 2xl:w-8 2xl:h-8 pointer-events-none transform scale-90 text-newRed ${
             isChecked ? 'block' : 'hidden'
           }`}
