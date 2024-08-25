@@ -22,8 +22,9 @@ const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange }) => {
     const numericPrice = Number(price);
     return parseFloat(numericPrice.toFixed(2)).toString();
   }
+
   return (
-    <div className="bg-bgColor flex justify-between md:justify-start gap-x-4  w-full items-center py-2 lg:py-4 px-2 md:px-4 my-1 rounded-lg">
+    <div className="bg-bgColor flex justify-between md:justify-start gap-x-4 w-full items-center py-2 lg:py-4 px-2 md:px-4 my-1 rounded-lg">
       <div className="flex gap-x-4 md:gap-x-3 w-1/5 2xl:w-1/4 items-center 2xl:gap-x-4">
         <img
           src={addOn.icon}
@@ -38,28 +39,18 @@ const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange }) => {
           {addOn.name}
         </h1>
       </div>
-      <label className="flex gap-x-2 lg:gap-x-4 2xl:gap-x-4  items-center justify-start text-thin font-abdo text-[10px] md:text-sm lg:text-xl 2xl:text-3xl md:selection:w-1/2 relative">
+      <label className="flex gap-x-2 lg:gap-x-4 2xl:gap-x-4 items-center justify-start text-thin font-abdo text-[10px] md:text-sm lg:text-xl 2xl:text-3xl relative">
         <input
           type="checkbox"
           checked={isChecked}
           onChange={(e) => handleAddOnCheckboxChange(e.target.checked)}
           className={`h-4 w-4 lg:h-6 lg:w-6 2xl:w-8 2xl:h-8 appearance-none border-2 border-black rounded-sm bg-white checked:border-newRed focus:outline-none`}
         />
-        <span className="font-semibold text-[10px] md:text-sm lg:text-xl  font-abdo">
-          {addOn.values[0].name}
-        </span>
-        <span className="font-semibold text-[10px] md:text-sm lg:text-xl font-abdo">
-          {formatPrice(addOn.values[0].price)} {t('menuItemCurrency')}
-        </span>
 
         {/* Custom checkbox with thin red checkmark */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className={`absolute ${
-            isLangArabic
-              ? 'left-[85%] md:left-[90%] lg:top-[6px] 2xl:top-0 lg:left-[90%] 2xl:left-[85%]'
-              : 'lg:top-[6px] 2xl:top-0 lg:right-[90%]  2xl:right-[85%]'
-          } top-0 w-4 h-4 2xl:w-8 2xl:h-8 pointer-events-none transform scale-90 text-newRed ${
+          className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 2xl:w-8 2xl:h-8 pointer-events-none text-newRed ${
             isChecked ? 'block' : 'hidden'
           }`}
           viewBox="0 0 24 24"
@@ -72,6 +63,12 @@ const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange }) => {
           <path d="M5 12l5 5L20 7" />
         </svg>
       </label>
+      <span className="font-semibold text-[10px] md:text-sm lg:text-xl font-abdo">
+        {addOn.values[0].name}
+      </span>
+      <span className="font-semibold text-[10px] md:text-sm lg:text-xl font-abdo">
+        {formatPrice(addOn.values[0].price)} {t('menuItemCurrency')}
+      </span>
     </div>
   );
 };
