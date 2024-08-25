@@ -474,3 +474,11 @@ export type SingleBlogResponse = {
     date: string; // Use `string` here as ISO date strings are usually represented as strings in JSON
   };
 };
+
+export type MenuResponse = {
+  status: number;
+  message: string;
+  data: {
+    menu: string;
+  };
+};

@@ -1,12 +1,39 @@
 import React from 'react';
 import { FooterFirstColumn } from '../subComponents';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import logo from '../assets/svg/header/whiteLogo.svg';
 import { useTranslation } from 'react-i18next';
 import { links } from '../assets';
+import { MenuResponse } from '../assets/types';
+import { autoFetch } from '../utils';
+import { QueryClient } from '@tanstack/react-query';
+interface MenuQuery {
+  queryKey: string[];
+  queryFn: () => Promise<MenuResponse>;
+}
+
+const menuQuery = (language: string): MenuQuery => {
+  return {
+    queryKey: ['socialMedia', language],
+    queryFn: () =>
+      autoFetch('social-links', {
+        headers: {
+          lang: language,
+        },
+      }),
+  };
+};
+export const loader =
+  (queryClient: QueryClient, language: string) =>
+  async (): Promise<MenuResponse> => {
+    const data = await queryClient.ensureQueryData(menuQuery(language));
+    return data;
+  };
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
+  const axiosData: any = useLoaderData();
+  const data: MenuResponse = axiosData.data2.data;
   return (
     <div className="bg-newRed text-white flex w-full flex-col justify-center lg:px-24 py-10 items-center lg:items-start ">
       <Link to="/">
@@ -14,15 +41,31 @@ const Footer: React.FC = () => {
       </Link>
       <div className="flex flex-col lg:flex-row w-full flex-wrap lg:justify-between   md:items-center ">
         <FooterFirstColumn />
-        <ul className=" hidden lg:grid  lg:grid-cols-3  list-disc list-inside md:w-3/5 lg:w-[55%] mt-1">
+        <ul className="hidden lg:grid lg:grid-cols-3 list-disc list-inside md:w-3/5 lg:w-[55%] mt-1">
           {links.map((li) => {
-            return (
-              <Link key={li.text} to={li.to}>
-                <li className="my-1 ml-2 md:ml-1 text-xs font-abdo font-extralight md:text-xs lg:text-lg">
-                  {t(li.text)}
+            const commonClassName =
+              'my-1 ml-2 md:ml-1 text-xs font-abdo font-extralight md:text-xs lg:text-lg';
+
+            if (li.text === 'downloadMenu') {
+              return (
+                <li key={li.text} className={commonClassName}>
+                  <a
+                    href={data.data.menu}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block"
+                  >
+                    {t(li.text)}
+                  </a>
                 </li>
-              </Link>
-            );
+              );
+            } else {
+              return (
+                <Link key={li.text} to={li.to}>
+                  <li className={commonClassName}>{t(li.text)}</li>
+                </Link>
+              );
+            }
           })}
         </ul>
       </div>

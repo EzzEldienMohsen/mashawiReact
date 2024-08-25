@@ -108,13 +108,9 @@ export const links: Link[] = [
   { text: 'galleryRoute', to: '/gallery' },
   { text: 'contactUsRoute', to: '/contact' },
   { text: 'deliveryPolicyRoute', to: '/delivery' },
+  { text: 'downloadMenu', to: '' },
   { text: 'articlesRoute', to: '/articles' },
   { text: 'refundPolicyRoute', to: '/refund' },
-  // { text: 'main', to: '/' },
-  // { text: 'cartRoute', to: '/cart' },
-  // { text: 'wishListRoute', to: '/wishList' },
-  // { text: 'loginRoute', to: '/login' },
-  // { text: 'myProfileRoute', to: '/profile' },
 ];
 
 export const headerLinks: Link[] = [

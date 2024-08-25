@@ -97,39 +97,44 @@ const OTPForm = () => {
       ...prevValues,
       [name]: value,
     }));
-        setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
-
+    setErrors({ ...errors, [name]: '' }); // Clear error when user starts typing
   };
   const language = isLangArabic ? 'ar' : 'en';
 
   const otpSchema = Yup.object().shape({
     firstNum: Yup.string()
       .required(t('isRequiredError'))
+      .matches(/^[0-9]$/, t('correctOTP'))
       .test('otp-length', t('correctOTP'), function (value) {
         return !value || value.length === 1;
       }),
     secondNum: Yup.string()
       .required(t('isRequiredError'))
+      .matches(/^[0-9]$/, t('correctOTP'))
       .test('otp-length', t('correctOTP'), function (value) {
         return !value || value.length === 1;
       }),
     thirdNum: Yup.string()
       .required(t('isRequiredError'))
+      .matches(/^[0-9]$/, t('correctOTP'))
       .test('otp-length', t('correctOTP'), function (value) {
         return !value || value.length === 1;
       }),
     fourthNum: Yup.string()
       .required(t('isRequiredError'))
+      .matches(/^[0-9]$/, t('correctOTP'))
       .test('otp-length', t('correctOTP'), function (value) {
         return !value || value.length === 1;
       }),
     fifthNum: Yup.string()
       .required(t('isRequiredError'))
+      .matches(/^[0-9]$/, t('correctOTP'))
       .test('otp-length', t('correctOTP'), function (value) {
         return !value || value.length === 1;
       }),
     sixthNum: Yup.string()
       .required(t('isRequiredError'))
+      .matches(/^[0-9]$/, t('correctOTP'))
       .test('otp-length', t('correctOTP'), function (value) {
         return !value || value.length === 1;
       }),

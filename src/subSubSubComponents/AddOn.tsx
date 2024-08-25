@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AddOn as AddOnInterface } from '../assets/types';
-import { useGlobalContext } from '../context/GlobalContext';
 import { useTranslation } from 'react-i18next';
 import fallbackImage from '../assets/svg/imageGuard.svg';
 
@@ -11,7 +10,6 @@ interface AddOnProps {
 
 const AddOn: React.FC<AddOnProps> = ({ addOn, onAddOnChange }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const { isLangArabic } = useGlobalContext();
   const handleAddOnCheckboxChange = (isChecked: boolean) => {
     setIsChecked(isChecked);
     onAddOnChange(addOn, isChecked);

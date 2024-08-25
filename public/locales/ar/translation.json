@@ -240,5 +240,6 @@
   "addressDetailsIsTooShort": "تفاصيل العنوان قصيرة جدا",
   "subTotal": "المجموع الجزئي",
   "tax": "الضريبة",
-  "couponDiscount": "قيمة خصم الكوبون"
+  "couponDiscount": "قيمة خصم الكوبون",
+  "downloadMenu": "تحميل قائمة الطعام"
 }

@@ -240,5 +240,6 @@
   "addressDetailsIsTooShort": "address details is too short",
   "subTotal": "sub total",
   "tax": "tax",
-  "couponDiscount": "coupon discount"
+  "couponDiscount": "coupon discount",
+  "downloadMenu": "download menu"
 }

@@ -20,9 +20,7 @@ import {
   ChangePassword,
   Profile,
   User,
-  TrackOrder,
   ProceedPage,
-  PaymentDetails,
   VerifyEmail,
   MyAddress,
   NewAddress,
@@ -30,7 +28,13 @@ import {
   OrderDonePage,
 } from './pages';
 import { GlobalProvider, useGlobalContext } from './context/GlobalContext';
-import { AddressResponse, Categories, Meals } from './assets/types';
+import {
+  AddressResponse,
+  Categories,
+  Meals,
+  MenuResponse,
+  SocialResponse,
+} from './assets/types';
 
 //  loaders
 import { loader as aboutLoader } from './pages/About';
@@ -54,6 +58,7 @@ import { loader as MainAddressLoader } from './components/MainAddressSection';
 import { loader as addressLoader } from './components/AddressSection';
 import { loader as socialLoader } from './subComponents/FooterFirstColumn';
 import { loader as singleArticleLoader } from './pages/SingleArticlePage';
+import { loader as downLoadMenuLoader } from './components/Footer';
 
 // Combined loaders
 // First Menu Loaders
@@ -97,7 +102,17 @@ const menuWithCategoryLoader =
     )();
     return { data1, data2 };
   };
+// footerLoader
+interface Footer {
+  data1: SocialResponse;
+  data2: MenuResponse;
+}
 
+const footerLoader = (language: string) => async (): Promise<Footer> => {
+  const data1 = await socialLoader(queryClient, language)();
+  const data2 = await downLoadMenuLoader(queryClient, language)();
+  return { data1, data2 };
+};
 // Lazy-loaded components
 const Landing = React.lazy(() => import('./pages/Landing'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -122,7 +137,6 @@ const Delivery = React.lazy(() => import('./pages/Delivery'));
 const Refund = React.lazy(() => import('./pages/Refund'));
 const Articles = React.lazy(() => import('./pages/Articles'));
 const SingleArticlePage = React.lazy(() => import('./pages/SingleArticlePage'));
-const OrderTrack = React.lazy(() => import('./pages/OrderTrack'));
 
 const defaultOptions: DefaultOptions = {
   queries: {
@@ -311,42 +325,42 @@ const AppRouter: React.FC = () => {
           ),
           loader: addressLoader(queryClient, language),
         },
-        {
-          path: '/track-order',
-          element: (
-            <Suspense
-              fallback={
-                <div className="flex w-full py-8 justify-center items-center">
-                  <span className="loading loading-spinner loading-lg text-newRed"></span>
-                </div>
-              }
-            >
-              <TrackOrder />
-            </Suspense>
-          ),
-        },
+        // {
+        //   path: '/track-order',
+        //   element: (
+        //     <Suspense
+        //       fallback={
+        //         <div className="flex w-full py-8 justify-center items-center">
+        //           <span className="loading loading-spinner loading-lg text-newRed"></span>
+        //         </div>
+        //       }
+        //     >
+        //       <TrackOrder />
+        //     </Suspense>
+        //   ),
+        // },
         // {
         //   path: '/proceed-delivery',
         //   element: <ProceedDelivery />,
         // },
-        {
-          path: '/card-data',
-          element: <PaymentDetails />,
-        },
-        {
-          path: '/track',
-          element: (
-            <Suspense
-              fallback={
-                <div className="flex w-full py-8 justify-center items-center">
-                  <span className="loading loading-spinner loading-lg text-newRed"></span>
-                </div>
-              }
-            >
-              <OrderTrack />
-            </Suspense>
-          ),
-        },
+        // {
+        //   path: '/card-data',
+        //   element: <PaymentDetails />,
+        // },
+        // {
+        //   path: '/track',
+        //   element: (
+        //     <Suspense
+        //       fallback={
+        //         <div className="flex w-full py-8 justify-center items-center">
+        //           <span className="loading loading-spinner loading-lg text-newRed"></span>
+        //         </div>
+        //       }
+        //     >
+        //       <OrderTrack />
+        //     </Suspense>
+        //   ),
+        // },
         {
           path: '/privacy',
           element: (
@@ -600,7 +614,7 @@ const AppRouter: React.FC = () => {
           loader: galleryLoader(queryClient, language),
         },
       ],
-      loader: socialLoader(queryClient, language),
+      loader: footerLoader(language),
     },
   ]);
 
