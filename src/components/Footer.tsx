@@ -14,9 +14,9 @@ interface MenuQuery {
 
 const menuQuery = (language: string): MenuQuery => {
   return {
-    queryKey: ['socialMedia', language],
+    queryKey: ['food-menu', language],
     queryFn: () =>
-      autoFetch('social-links', {
+      autoFetch('food-menu', {
         headers: {
           lang: language,
         },
