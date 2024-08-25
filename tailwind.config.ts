@@ -8,6 +8,7 @@ const config: Config = {
   theme: {
     fontFamily: {
       abdo: ['abodmaster'],
+      tajawal: ['Tajawal', 'sans-serif'],
     },
     extend: {
       gradientColorStops: (theme) => ({

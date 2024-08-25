@@ -148,7 +148,7 @@ export const validateOTPThunk = async (
 export const resetPasswordThunk = async (
   url: string,
   reqData: ResetPasswordData,
-  language:string,
+  language: string,
   thunkAPI: any
 ): Promise<CompleteUSer> => {
   try {
@@ -173,7 +173,7 @@ export const resetPasswordThunk = async (
 export const emailVerificationThunk = async (
   url: string,
   reqData: EmailVerificationData,
-  language:string,
+  language: string,
   thunkAPI: any
 ): Promise<CompleteUSer> => {
   try {
@@ -198,6 +198,7 @@ export const emailVerificationThunk = async (
 export const logOutThunk = async (
   url: string,
   token: string,
+  language: string,
   thunkAPI: any
 ): Promise<ApiResponse> => {
   try {
@@ -209,6 +210,7 @@ export const logOutThunk = async (
           'Content-Type': 'application/json',
           Accept: 'application/json',
           Authorization: `Bearer ${token}`,
+          lang: language,
         },
       }
     );

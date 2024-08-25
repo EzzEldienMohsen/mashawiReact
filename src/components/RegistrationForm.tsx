@@ -10,7 +10,6 @@ import { registerUser } from '../features/user/userSlice';
 import { useTranslation } from 'react-i18next';
 import { RegisterData } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
-import { toast } from 'react-toastify';
 import { useGlobalContext } from '../context/GlobalContext';
 import * as Yup from 'yup';
 
@@ -97,7 +96,6 @@ const RegistrationForm: React.FC = () => {
     ).unwrap();
 
     if (response.status === 1) {
-      toast.success(response.message);
       navigate('/verify-email');
     }
   };
@@ -215,7 +213,7 @@ const RegistrationForm: React.FC = () => {
           </p>
         )}
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-2xl py-4 rounded-full bg-newRed my-4 flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -226,7 +224,7 @@ const RegistrationForm: React.FC = () => {
         </button>
         <Link
           to="/login"
-          className="btn text-black btn-block flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-2xl py-4 rounded-full bg-[#D9D9D9] my-2"
+          className="btn text-black btn-block hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-xl rounded-3xl bg-[#D9D9D9] my-4"
         >
           {t('signInTitle')}
         </Link>

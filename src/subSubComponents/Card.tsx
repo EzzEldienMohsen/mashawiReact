@@ -11,6 +11,7 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
   const { wishListItems } = useTypedSelector(
     (state: RootState) => state.mashawiWishList
   );
+  const { user } = useTypedSelector((state: RootState) => state.user);
   const { cartItems } = useTypedSelector(
     (state: RootState) => state.theMashawiCart
   );
@@ -41,37 +42,47 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
     const numericPrice = Number(price);
     return parseFloat(numericPrice.toFixed(2)).toString();
   }
+  function convertToArabicNumbers(number: string): string {
+    const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
+    return number.replace(/\d/g, (digit) => arabicNumbers[parseInt(digit)]);
+  }
   return (
     <div
-      className={`my-2 w-[95%] pb-2 md:w-[90%] lg:w-[22%] 2xl:w-1/5 ${
+      className={`my-2 w-[95%] pb-2 md:w-[90%] lg:w-[22%]  ${
         isLangArabic
           ? 'rounded-tr-3xl rounded-bl-3xl'
           : 'rounded-tl-3xl rounded-br-3xl'
       } bg-white flex flex-col justify-center items-center gap-y-2 2xl:gap-y-5 relative`}
     >
-      <WishlistButton
-        data={data}
-        item={item}
-        wishListProduct={wishListProduct}
-      />
+      {user.token && (
+        <WishlistButton
+          data={data}
+          item={item}
+          wishListProduct={wishListProduct}
+        />
+      )}
       <img
         src={data.image}
         alt="img"
-        className={`w-full  md:h-[348px] lg:h-[280px] 2xl:h-[348px]  ${
+        className={`w-full  md:h-[348px] ${
           isLangArabic
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'
         }`}
         onError={(e) => {
           e.currentTarget.src = fallbackImage;
-          e.currentTarget.className += ' object-contain'; // Ensures the fallback image respects the object-fit style
+          e.currentTarget.className += 'object-cover'; // Ensures the fallback image respects the object-fit style
         }}
       />
       <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
         <h1 className="font-abdo font-bold text-4 2xl:text-xl">{data.name}</h1>
-        <h2 className="font-abdo text-4 2xl:text-xl">
-          {formatPrice(data.price)} {t('menuItemCurrency')}
+        <h2 className="font-abdo text-4 2xl:text-xl text-newRed">
+          {`${
+            isLangArabic
+              ? convertToArabicNumbers(formatPrice(data.price))
+              : formatPrice(data.price)
+          }  ${t('menuItemCurrency')} `}
         </h2>
       </div>
       <div className="flex px-2 gap-x-[2px] mt-[25px] lg:mt-6 justify-between w-full flex-row  items-center ">

@@ -21,9 +21,9 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
   const token = user.token;
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-
+  const language = isLangArabic ? 'ar' : 'en';
   const theLogOut = async () => {
-    await dispatch(logOut(user.token));
+    await dispatch(logOut({ token, language }));
     await dispatch(clearAddress());
     await dispatch(logoutUser());
     window.location.reload();

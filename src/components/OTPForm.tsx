@@ -16,9 +16,9 @@ const OTPForm = () => {
   const [values, setValues] = useState<InitialOTPInputs>(initialOTP);
   const [isResendDisabled, setIsResendDisabled] = useState<boolean>(true);
   const [currentFocus, setCurrentFocus] = useState(0);
-  const [seconds, setSeconds] = useState<number>(65);
+  const [seconds, setSeconds] = useState<number>(60);
   const [isActive, setIsActive] = useState<boolean>(true);
-  const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = React.useState<string[]>([]);
 
   const dispatch: AppDispatch = useDispatch();
   const { t } = useTranslation();
@@ -82,7 +82,7 @@ const OTPForm = () => {
     if (isActive) {
       setIsActive(false);
     } else {
-      setSeconds(65);
+      setSeconds(60);
       setIsActive(true);
     }
   };
@@ -143,15 +143,18 @@ const OTPForm = () => {
   const validateForm = async (): Promise<boolean> => {
     try {
       await otpSchema.validate(values, { abortEarly: false });
-      setErrors({});
+      setErrors([]);
       return true;
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
-        const validationErrors: { [key: string]: string } = {};
+        const uniqueErrors: Set<string> = new Set();
+
         err.inner.forEach((error) => {
-          validationErrors[error.path!] = error.message;
+          uniqueErrors.add(error.message);
         });
-        setErrors(validationErrors);
+
+        // Convert Set back to an array and set as the errors state
+        setErrors(Array.from(uniqueErrors));
       }
       return false;
     }
@@ -172,7 +175,6 @@ const OTPForm = () => {
         validateOTP({ reqData: user, language })
       ).unwrap();
       if (result.status === 1) {
-        toast.success(result.message);
         navigate('/reset-password');
       } else if (result.status === 0) {
         toast.error(result.message);
@@ -221,14 +223,18 @@ const OTPForm = () => {
                 handleChange={handleChange}
                 inputRef={(el) => (inputRefs.current[index] = el)}
               />
-              {errors[name as keyof InitialOTPInputs] && (
-                <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
-                  {errors[name as keyof InitialOTPInputs]}
-                </p>
-              )}
             </div>
           ))}
         </div>
+
+        {/* Display error messages */}
+        {errors.length > 0 && (
+          <div className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+            {errors.map((error, idx) => (
+              <p key={idx}>{error}</p>
+            ))}
+          </div>
+        )}
 
         <button
           className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"

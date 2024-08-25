@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import { ResetPasswordData } from '../assets/types';
 import { useGlobalContext } from '../context/GlobalContext';
-import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
 const ResetPasswordForm: React.FC = () => {
@@ -77,8 +76,7 @@ const ResetPasswordForm: React.FC = () => {
       resetPassword({ reqData: values, language })
     ).unwrap();
     if (response.status === 1) {
-      toast.success(response.message);
-      navigate('/login');
+      navigate('/');
     }
   };
   return (
@@ -119,7 +117,7 @@ const ResetPasswordForm: React.FC = () => {
           </p>
         )}
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-2xl py-4 rounded-full bg-newRed my-4 flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
           disabled={isLoading}
         >
           {isLoading ? (

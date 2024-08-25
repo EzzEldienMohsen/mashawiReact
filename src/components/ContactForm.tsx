@@ -29,7 +29,7 @@ const request = async (
     toast.success(resp.data.message);
     return resp;
   } catch (error: any) {
-    toast.error(error.response.data.message);
+    toast.error(error.response?.data?.message);
     return error;
   }
 };
@@ -112,8 +112,10 @@ const ContactForm: React.FC<{ title: string; destination: string }> = ({
     const response = await request(values, destination, language);
     if (response.status === 200) {
       setIsLoading(false);
+
       setValues(contactInitialValues);
     }
+    setIsLoading(false);
   };
 
   return (

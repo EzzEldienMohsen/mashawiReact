@@ -127,8 +127,9 @@ export const resetPassword = createAsyncThunk(
 );
 export const logOut = createAsyncThunk(
   'user/logOut',
-  async (token: string, thunkAPI) => {
-    return logOutThunk('/auth/logout', token, thunkAPI);
+  async (data: { token: string; language: string }, thunkAPI) => {
+    const { token, language } = data;
+    return logOutThunk('/auth/logout', token, language, thunkAPI);
   }
 );
 
@@ -255,6 +256,9 @@ const userSlice = createSlice({
           toast.success(message);
         }
       )
+      .addCase(forgetPassword.rejected, (state) => {
+        state.isLoading = false;
+      })
       .addCase(changePassword.pending, (state) => {
         state.isLoading = true;
       })

@@ -11,12 +11,13 @@ import { logOut, logoutUser } from '../features/user/userSlice';
 import { clearAddress } from '../features/address/addressSlice';
 const UserDropDown: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
+  const language = isLangArabic ? 'ar' : 'en';
   const { user } = useTypedSelector((state: RootState) => state.user);
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const theLogOut = async () => {
-    await dispatch(logOut(user.token));
+    await dispatch(logOut({ token: user.token, language }));
     await dispatch(clearAddress());
     await dispatch(logoutUser());
     window.location.reload();

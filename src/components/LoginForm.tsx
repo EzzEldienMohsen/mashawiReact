@@ -130,17 +130,13 @@ const LoginForm: React.FC = () => {
         )}
         <Link
           to="/forget-password"
-          className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-10"
+          className="text-newRed underLine underLine-offset-8 mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-10"
         >
           {t('forgetPasswordText')}
         </Link>
-        {errors.form && (
-          <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
-            {errors.form}
-          </p>
-        )}
+
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-2xl py-4 rounded-full bg-newRed my-4 flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -151,7 +147,7 @@ const LoginForm: React.FC = () => {
         </button>
         <Link
           to="/register"
-          className="btn text-black btn-block flex justify-center items-center 2xl:min-h-[45px] 2xl:h-auto hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-2xl py-4 rounded-full bg-[#D9D9D9] my-2"
+          className="btn text-black btn-block hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-xl rounded-3xl bg-[#D9D9D9] my-4"
         >
           <span>{t('createAccountText')}</span>
         </Link>

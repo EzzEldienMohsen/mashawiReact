@@ -46,7 +46,7 @@ const MainAddressSection: React.FC = () => {
     return dayjs(time24, 'HH:mm').format('hh:mm A');
   };
   return (
-    <div className="flex flex-col justify-center items-center gap-y-10 md:gap-y-[64px]  2xl:gap-y-[78px] my-2 w-full px-8 lg:px-20">
+    <div className="flex flex-col justify-center items-center gap-y-10 md:gap-y-[64px] bg-[#F5F5F5]  2xl:gap-y-[78px] my-2 w-full px-8 lg:px-20">
       <SectionTitle title={t('branchesAndTimesTitle')} />
       <div className="flex mt-2 flex-col justify-center items-center md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
         {sortedItems.map((ad) => {

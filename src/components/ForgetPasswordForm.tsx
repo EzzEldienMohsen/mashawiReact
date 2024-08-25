@@ -6,7 +6,6 @@ import { FormRow, FormTitle } from '../subComponents';
 import email from '../assets/svg/email.svg';
 import { useTranslation } from 'react-i18next';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
-import { toast } from 'react-toastify';
 import { useGlobalContext } from '../context/GlobalContext';
 import * as Yup from 'yup';
 
@@ -61,7 +60,6 @@ const ForgetPasswordForm: React.FC = () => {
       forgetPassword({ reqData: values, language })
     ).unwrap();
     if (response.status === 1) {
-      toast.success(response.message);
       navigate('/validate-otp');
     }
   };

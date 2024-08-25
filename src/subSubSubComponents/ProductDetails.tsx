@@ -24,6 +24,11 @@ const ProductDetails: React.FC<ProductProps> = ({
     const numericPrice = Number(price);
     return parseFloat(numericPrice.toFixed(2)).toString();
   }
+  function convertToArabicNumbers(number: string): string {
+    const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+    return number.replace(/\d/g, (digit) => arabicNumbers[parseInt(digit)]);
+  }
   return (
     <div className="flex flex-col  gap-y-2 2xl:gap-y-6 justify-center items-center w-full">
       <img
@@ -41,11 +46,15 @@ const ProductDetails: React.FC<ProductProps> = ({
       />
       <div className="flex justify-between flex-row w-full items-center my-2">
         <h1 className="font-abdo font-bold text-4 2xl:text-xl">{data.name}</h1>
-        <h2 className="font-abdo text-4 2xl:text-xl">
-          {formatPrice(data.price)} {t('menuItemCurrency')}
+        <h2 className="font-abdo text-4 2xl:text-xl text-newRed">
+          {`${
+            isLangArabic
+              ? convertToArabicNumbers(formatPrice(data.price))
+              : formatPrice(data.price)
+          }  ${t('menuItemCurrency')} `}
         </h2>
       </div>
-      <div className="flex justify-between w-full flex-row items-center my-2">
+      <div className="flex justify-evenly w-full flex-row items-center my-2">
         <button
           className="btn bg-newRed text-white flex justify-evenly lg:gap-x-[6px] items-center px-4 rounded-full py-1 lg:w-[45%]  2xl:py-2 2xl:px-4 2xl:min-h-[40px] 2xl:h-auto"
           onClick={handleAddToCart}

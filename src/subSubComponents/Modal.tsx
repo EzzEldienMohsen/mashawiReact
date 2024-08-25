@@ -26,6 +26,7 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
   const { wishListItems } = useTypedSelector(
     (state: RootState) => state.mashawiWishList
   );
+
   const item = wishListItems.find(
     (i: CartItemWithId) => i.cartItem.id === data.id
   );
@@ -133,11 +134,13 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex w-full md:w-2/5 flex-col justify-center items-stretch relative gap-y-2">
-            <WishlistButton
-              data={data}
-              item={item}
-              wishListProduct={wishListProduct}
-            />
+            {user.token && (
+              <WishlistButton
+                data={data}
+                item={item}
+                wishListProduct={wishListProduct}
+              />
+            )}
             <ProductDetails
               data={data}
               amount={amount}
