@@ -6,3 +6,4 @@ export { default as AddOns } from './AddOns';
 export { default as CartDrawer } from './CartDrawer';
 export { default as DrawerAmountInput } from './DrawerAmountInput';
 export { default as UserDropDown } from './UserDropDown';
+export { default as ImageSlider } from './ImageSlider';

@@ -203,8 +203,7 @@ const userSlice = createSlice({
           const user = action.payload.data;
           state.user = user;
           addUserToLocalStorage(user);
-          const message = action.payload.message;
-          toast.success(message);
+          toast.success(action.payload.message);
         }
       )
       .addCase(loginUser.rejected, (state) => {

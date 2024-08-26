@@ -52,6 +52,7 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
   const toggleTruncate = () => {
     setIsTruncated(!isTruncated);
   };
+
   return (
     <div
       className={`my-2 w-[95%] pb-2 md:w-[90%] lg:w-[23%]  ${
@@ -77,9 +78,9 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
         }`}
         onError={(e) => {
           e.currentTarget.src = fallbackImage;
-          e.currentTarget.className += 'object-cover'; // Ensures the fallback image respects the object-fit style
+          e.currentTarget.classList.add('h-full', 'object-cover');
         }}
-      />
+      />{' '}
       <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
         <h1
           className={`font-abdo font-bold text-4 2xl:text-xl  ${

@@ -3,8 +3,9 @@ import addOrder from '../assets/svg/menu/addOrder.svg';
 import AmountInput from './AmountInput';
 import { useTranslation } from 'react-i18next';
 import { SingleMealData } from '../assets/types';
-import fallbackImage from '../assets/svg/imageGuard.svg';
+// import fallbackImage from '../assets/svg/imageGuard.svg';
 import { useGlobalContext } from '../context/GlobalContext';
+import ImageSlider from './ImageSlider';
 
 interface ProductProps {
   data: SingleMealData;
@@ -36,7 +37,7 @@ const ProductDetails: React.FC<ProductProps> = ({
   };
   return (
     <div className="flex flex-col  gap-y-2 2xl:gap-y-6 justify-center items-center w-full">
-      <img
+      {/* <img
         src={data.image}
         alt="img"
         className={`${
@@ -48,7 +49,8 @@ const ProductDetails: React.FC<ProductProps> = ({
           e.currentTarget.src = fallbackImage;
           e.currentTarget.className += ' object-cover'; // Ensures the fallback image respects the object-fit style
         }}
-      />
+      /> */}
+      <ImageSlider isLangArabic={isLangArabic} gallery={data.gallery} />
       <div className="flex justify-between flex-row w-full items-center my-2">
         <h1
           className={`font-abdo font-bold text-4 2xl:text-xl  ${

@@ -53,7 +53,7 @@ const WishListButton: React.FC<WishlistProps> = ({
 
   return (
     <button
-      className={`absolute btn-ghost  bg-transparent top-3 ${
+      className={`absolute btn-ghost z-10  bg-transparent top-3 ${
         isLangArabic ? 'left-4' : 'right-4'
       } border-0 flex justify-center items-center rounded-full  ${
         isLoading ? 'opacity-50 cursor-not-allowed' : ''
