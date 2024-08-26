@@ -46,7 +46,11 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
     dispatch(editQuantityLocally({ cartID: item.id, qty }));
     dispatch(editQuantity({ reqData: { qty }, cart_id, token, language, t }));
   };
+  const [isTruncated, setIsTruncated] = React.useState(true);
 
+  const toggleTruncate = () => {
+    setIsTruncated(!isTruncated);
+  };
   return (
     <div className="flex w-full rounded-xl border-b-[2px] justify-start items-start pt-4 pb-6 px-2 my-2 gap-x-2 2xl:gap-x-6 ">
       <img
@@ -60,7 +64,17 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
       />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <div className="w-full flex justify-between items-center">
-          <h1 className="font-abdo 2xl:text-xl">{item.name}</h1>
+          <h1
+            className={`font-abdo 2xl:text-xl ${isTruncated ? 'truncate' : ''}`}
+            style={{
+              maxWidth: '150px',
+              whiteSpace: isTruncated ? 'nowrap' : 'normal',
+            }}
+            onClick={toggleTruncate}
+          >
+            {item.name}
+          </h1>
+
           <button
             className={`${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={() => removeItemsFromCart(item, cart_id)}
@@ -74,11 +88,15 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
             return (
               <div
                 key={addOn.id}
-                className="w-full text-[#7E7E7E] flex justify-between items-evenly text-sm "
+                className="w-full text-[#7E7E7E] flex flex-col gap-y-1 justify-start items-start text-sm "
               >
-                <p className="text-sm  w-1/3 font-abdo">
-                  {addOn.values[0].name}
-                </p>
+                {addOn.values.map((value) => {
+                  return (
+                    <p key={value.id} className="text-sm  w-1/3 font-abdo">
+                      {value.name}
+                    </p>
+                  );
+                })}
               </div>
             );
           })}

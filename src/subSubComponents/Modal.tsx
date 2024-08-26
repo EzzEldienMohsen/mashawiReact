@@ -48,12 +48,29 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
   const { isLangArabic } = useGlobalContext();
   const token = user.token;
   const language = isLangArabic ? 'ar' : 'en';
-  const handleAddOnChange = (addOn: AddOn, isChecked: boolean): void => {
-    setSelectedAddOns((prevAddOns) =>
-      isChecked
-        ? [...prevAddOns, addOn]
-        : prevAddOns.filter((ao) => ao.id !== addOn.id)
-    );
+  const handleAddOnChange = (
+    addOn: AddOn,
+    selectedValues: { id: number; name: string; price: string }[]
+  ) => {
+    setSelectedAddOns((prevAddOns) => {
+      // Find if the add-on already exists
+      const existingAddOnIndex = prevAddOns.findIndex(
+        (ao) => ao.id === addOn.id
+      );
+
+      if (existingAddOnIndex > -1) {
+        // If it exists, update its values
+        const updatedAddOns = [...prevAddOns];
+        updatedAddOns[existingAddOnIndex] = {
+          ...updatedAddOns[existingAddOnIndex],
+          values: selectedValues,
+        };
+        return updatedAddOns;
+      } else {
+        // If it doesn't exist, add it to the array
+        return [...prevAddOns, { ...addOn, values: selectedValues }];
+      }
+    });
   };
 
   const handleAddToCart = () => {
@@ -76,7 +93,7 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
         data: {
           meal_id: data.id,
           qty: amount,
-          additions: cartProduct.additions.flatMap((item) =>
+          additions: selectedAddOns.flatMap((item) =>
             item.values.map((value) => ({
               id: item.id,
               value: value.id,

@@ -40,7 +40,11 @@ const CartCard: React.FC<CartCardProps> = ({
     dispatch(editQuantityLocally({ cartID: item.id, qty }));
     dispatch(editQuantity({ reqData: { qty }, cart_id, token, language, t }));
   };
+  const [isTruncated, setIsTruncated] = React.useState(true);
 
+  const toggleTruncate = () => {
+    setIsTruncated(!isTruncated);
+  };
   return (
     <div className="flex bg-white w-full rounded-2xl relative justify-start items-start pt-4 pb-2 px-2 my-2 gap-x-8 ">
       <button
@@ -65,7 +69,16 @@ const CartCard: React.FC<CartCardProps> = ({
         }}
       />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
-        <h1 className="font-abdo ">{item.name}</h1>
+        <h1
+          className={`font-abdo 2xl:text-xl ${isTruncated ? 'truncate' : ''}`}
+          style={{
+            maxWidth: '150px',
+            whiteSpace: isTruncated ? 'nowrap' : 'normal',
+          }}
+          onClick={toggleTruncate}
+        >
+          {item.name}
+        </h1>{' '}
         <p className="text-newRed font-abdo flex flex-row gap-x-1">
           <span>{item.price}</span>
           <span>{t('menuItemCurrency')}</span>
@@ -75,11 +88,15 @@ const CartCard: React.FC<CartCardProps> = ({
             {item.additions.map((addOn) => (
               <div
                 key={addOn.id}
-                className="w-full text-[#7E7E7E] flex justify-between items-evenly text-xs "
+                className="w-full text-[#7E7E7E] flex flex-col gap-y-1 justify-start items-start text-sm "
               >
-                <p className="text-xs w-1/3 font-abdo">
-                  {addOn.values[0].name}
-                </p>
+                {addOn.values.map((value) => {
+                  return (
+                    <p key={value.id} className="text-sm  w-1/3 font-abdo">
+                      {value.name}
+                    </p>
+                  );
+                })}
               </div>
             ))}
           </div>

@@ -7,9 +7,10 @@ export type AddOn = {
   values: {
     id: number;
     name: string;
-    price?: string;
+    price?: string;  // Keep it optional
   }[];
 };
+
 export type CartItemWithId = {
   cart_id: number;
   cartItem: CartItem;

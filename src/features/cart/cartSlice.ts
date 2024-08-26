@@ -21,8 +21,21 @@ const defaultState: CartState = {
 };
 
 const calculateProductTotal = (product: CartItemWithId): number => {
-  return product.cartItem.price * product.cartItem.amount;
+  // Calculate base product price
+  const basePrice = product.cartItem.price;
+
+  // Calculate total add-ons price
+  const addOnsTotal = product.cartItem.additions.reduce((total, addOn) => {
+    const addOnPrice = addOn.values.reduce((sum, value) => {
+      return sum + parseInt(value.price ? value.price : '0');
+    }, 0);
+    return total + addOnPrice;
+  }, 0);
+
+  // Calculate total price for the product
+  return (basePrice + addOnsTotal) * product.cartItem.amount;
 };
+
 // Restful api
 export const addThisItemToCart = createAsyncThunk(
   'theMashawiCart/addThisItemToCart',
@@ -232,11 +245,17 @@ const cartSlice = createSlice({
       if (!Array.isArray(state.cartItems)) {
         state.cartItems = [];
       }
+
+      // Calculate cart total by summing up the total for each product
       state.cartTotal = state.cartItems.reduce((total, item) => {
         return total + calculateProductTotal(item);
       }, 0);
+
+      // Calculate tax and order total
       state.tax = 0.05 * state.cartTotal;
       state.orderTotal = state.cartTotal + state.tax;
+
+      // Store the updated state in localStorage
       localStorage.setItem('theMashawiCart', JSON.stringify(state));
     },
   },

@@ -6,7 +6,10 @@ import { AddOn as AddOnInterface } from '../assets/types';
 
 interface AddOnsProps {
   data: SingleMealData;
-  handleAddOnChange: (addOn: AddOnInterface, isChecked: boolean) => void;
+ handleAddOnChange: (
+    addOn: AddOnInterface,
+    selectedValues: { id: number; name: string; price: string }[]
+  ) => void;
 }
 
 const AddOns: React.FC<AddOnsProps> = ({ data, handleAddOnChange }) => {
