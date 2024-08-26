@@ -13,7 +13,7 @@ const SidePageHero: React.FC<SidePageHeroProps> = ({
 }) => {
   return (
     <div
-      className={`bg-[#2C2220] flex flex-col justify-center md:flex-row md:justify-between items-center px-8 lg:px-20 ${
+      className={`bg-[#2C2220] flex flex-col justify-center md:flex-row md:justify-between items-center px-8 lg:px-20 z-10 ${
         isJob ? 'pt-2' : 'py-4'
       } md:mb-12 lg:mt-16 mb-20`}
     >

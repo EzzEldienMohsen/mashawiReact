@@ -75,7 +75,6 @@ const LoginForm: React.FC = () => {
         navigate('/');
       }
     } catch (error: any) {
-      console.log(error);
       const errorMessage =
         error?.message.message || 'An unexpected error occurred.';
       const errorStatus = error?.status;

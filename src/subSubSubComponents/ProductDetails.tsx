@@ -29,6 +29,11 @@ const ProductDetails: React.FC<ProductProps> = ({
 
     return number.replace(/\d/g, (digit) => arabicNumbers[parseInt(digit)]);
   }
+  const [isTruncated, setIsTruncated] = React.useState(true);
+
+  const toggleTruncate = () => {
+    setIsTruncated(!isTruncated);
+  };
   return (
     <div className="flex flex-col  gap-y-2 2xl:gap-y-6 justify-center items-center w-full">
       <img
@@ -45,7 +50,18 @@ const ProductDetails: React.FC<ProductProps> = ({
         }}
       />
       <div className="flex justify-between flex-row w-full items-center my-2">
-        <h1 className="font-abdo font-bold text-4 2xl:text-xl">{data.name}</h1>
+        <h1
+          className={`font-abdo font-bold text-4 2xl:text-xl  ${
+            isTruncated ? 'truncate' : ''
+          }`}
+          style={{
+            maxWidth: '150px',
+            whiteSpace: isTruncated ? 'nowrap' : 'normal',
+          }}
+          onClick={toggleTruncate}
+        >
+          {data.name}
+        </h1>
         <h2 className="font-abdo text-4 2xl:text-xl text-newRed">
           {`${
             isLangArabic

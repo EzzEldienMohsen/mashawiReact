@@ -13,7 +13,11 @@ const ContactUs: React.FC = () => {
         secondaryText={t('contactPageText')}
       />
       <AddressSection />
-      <ContactForm title={t('contactUsRoute')} destination="contact" />
+      <ContactForm
+        title={t('contactUsRoute')}
+        destination="contact"
+        isJob={false}
+      />
       {/* <Map /> */}
     </div>
   );

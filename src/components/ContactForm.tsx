@@ -34,10 +34,11 @@ const request = async (
   }
 };
 
-const ContactForm: React.FC<{ title: string; destination: string }> = ({
-  title,
-  destination,
-}) => {
+const ContactForm: React.FC<{
+  title: string;
+  destination: string;
+  isJob: boolean;
+}> = ({ title, destination, isJob }) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
 
@@ -120,8 +121,16 @@ const ContactForm: React.FC<{ title: string; destination: string }> = ({
 
   return (
     <div className="w-full relative flex flex-col justify-center items-center my-6 px-8 lg:px-20">
-      <div className="absolute bottom-0 h-full w-full lg:w-4/5 2xl:w-full p-3 bg-svg-background bg-contain 2xl:bg-auto 2xl:fill  bg-no-repeat bg-bottom"></div>
-      <div className="w-full md:w-4/5 lg:w-1/2 2xl:w-2/5 p-3  py-[68px] flex justify-center items-center bg-[#f4f4f4] flex-col z-10">
+      <div
+        className={`${
+          isJob ? 'hidden' : ''
+        } absolute bottom-0 h-full w-full lg:w-4/5 2xl:w-full p-3 bg-svg-background bg-contain 2xl:bg-auto 2xl:fill  bg-no-repeat bg-bottom`}
+      ></div>
+      <div
+        className={`w-full md:w-4/5 lg:w-1/2 ${
+          isJob ? '2xl:w-1/2' : '2xl:w-2/5'
+        } p-3  py-[68px] flex justify-center items-center bg-[#f4f4f4] flex-col z-10`}
+      >
         <h1 className="text-black mb-6 font-bold text-xl md:text-2xl 2xl:text-4xl tracking-wide">
           {title}
         </h1>

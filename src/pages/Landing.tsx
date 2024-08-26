@@ -16,7 +16,11 @@ const Landing: React.FC = () => {
       <MainMenu />
       <MenuSection />
       <MainAddressSection />
-      <ContactForm title={t('contactUsRoute')} destination="contact" />
+      <ContactForm
+        title={t('contactUsRoute')}
+        destination="contact"
+        isJob={false}
+      />
     </div>
   );
 };

@@ -34,7 +34,7 @@ const Menu: React.FC = () => {
   const data: MealData = axiosData.data2.data.data.data;
   const { t } = useTranslation();
   return (
-    <div className="flex justify-center w-full bg-[#F5F5F5] items-center flex-col 2xl:gap-y-10 px-8 lg:px-20 2xl:px-20">
+    <div className="flex py-4 lg:py-16 mt-16 justify-center w-full bg-[#F5F5F5] items-center flex-col 2xl:gap-y-10 px-8 lg:px-20 2xl:px-20">
       <SectionTitle title={t('menuSectionTitle')} />
       <Slider />
       <MenuCard data={data} />

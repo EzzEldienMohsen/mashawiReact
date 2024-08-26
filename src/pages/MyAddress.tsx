@@ -54,6 +54,11 @@ const MyAddress: React.FC = () => {
         {t('newAddress')}
       </Link>
       {address.map((ad) => {
+        const [isTruncated, setIsTruncated] = React.useState(true);
+
+        const toggleTruncate = () => {
+          setIsTruncated(!isTruncated);
+        };
         return (
           <div
             key={ad.id}
@@ -68,10 +73,29 @@ const MyAddress: React.FC = () => {
               <img src={theClose} alt="alt" className={` `} />
             </button>
             <img src={addressIcon} alt="alt" />
-            <h1 className="text-black font-bold text-lg my-1 md:text-xl lg:text-2xl">
+            <h1
+              className={`text-black font-bold text-lg my-1 md:text-xl lg:text-2xl ${
+                isTruncated ? 'truncate' : ''
+              }`}
+              style={{
+                maxWidth: '150px',
+                whiteSpace: isTruncated ? 'nowrap' : 'normal',
+              }}
+              onClick={toggleTruncate}
+            >
+              {' '}
               {ad.name}
             </h1>
-            <p className=" text-sm lg:text-[14.9px] text-center mb-2 text-black px-1 ">
+            <p
+              className={`text-sm lg:text-[14.9px] text-center mb-2 text-black px-1 ${
+                isTruncated ? 'truncate' : ''
+              }`}
+              style={{
+                maxWidth: '150px',
+                whiteSpace: isTruncated ? 'nowrap' : 'normal',
+              }}
+              onClick={toggleTruncate}
+            >
               {ad.details}
             </p>
             <div className="flex flex-row gap-x-1 text-start items-center justify-between ">

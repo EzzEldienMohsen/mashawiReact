@@ -47,9 +47,14 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
 
     return number.replace(/\d/g, (digit) => arabicNumbers[parseInt(digit)]);
   }
+  const [isTruncated, setIsTruncated] = React.useState(true);
+
+  const toggleTruncate = () => {
+    setIsTruncated(!isTruncated);
+  };
   return (
     <div
-      className={`my-2 w-[95%] pb-2 md:w-[90%] lg:w-[22%]  ${
+      className={`my-2 w-[95%] pb-2 md:w-[90%] lg:w-[23%]  ${
         isLangArabic
           ? 'rounded-tr-3xl rounded-bl-3xl'
           : 'rounded-tl-3xl rounded-br-3xl'
@@ -76,7 +81,18 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
         }}
       />
       <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
-        <h1 className="font-abdo font-bold text-4 2xl:text-xl">{data.name}</h1>
+        <h1
+          className={`font-abdo font-bold text-4 2xl:text-xl  ${
+            isTruncated ? 'truncate' : ''
+          }`}
+          style={{
+            maxWidth: '150px',
+            whiteSpace: isTruncated ? 'nowrap' : 'normal',
+          }}
+          onClick={toggleTruncate}
+        >
+          {data.name}
+        </h1>
         <h2 className="font-abdo text-4 2xl:text-xl text-newRed">
           {`${
             isLangArabic

@@ -12,7 +12,11 @@ const Jobs: React.FC = () => {
         secondaryText={t('jobsText')}
         isJob={true}
       />
-      <ContactForm title={t('contactFormTitle')} destination="job" />
+      <ContactForm
+        title={t('contactFormTitle')}
+        destination="job"
+        isJob={true}
+      />
     </div>
   );
 };

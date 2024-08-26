@@ -35,7 +35,6 @@ const FooterFirstColumn: React.FC = () => {
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
   const data: SocialResponse = axiosData.data1.data;
-  console.log(data);
   return (
     <div className="flex flex-col items-center lg:items-start md:w-4/5 lg:w-2/5">
       <p className="pb-2  text-md md:text-xl font-abdo mb-4 py-8 text-center lg:text-start 2xl:text-lg">
