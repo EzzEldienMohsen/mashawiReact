@@ -1,10 +1,17 @@
-import React from 'react'
+import React from 'react';
 import { ProceedPageForm, Steps } from '../components';
 import { useTranslation } from 'react-i18next';
 import { proceed } from '../assets';
+import { useNavigate } from 'react-router-dom';
+import { RootState, useTypedSelector } from '../store';
 
-const ProceedPage:React.FC = () => {
-    const {t} = useTranslation()
+const ProceedPage: React.FC = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { user } = useTypedSelector((state: RootState) => state.user);
+  if (!user.token) {
+    navigate('/');
+  }
   return (
     <div className="flex flex-col justify-center items-center w-full my-2">
       <div className="bg-[#2C2220] flex flex-col text-start w-full justify-start items-center px-4 py-6 my-6 font-abdo">
@@ -14,10 +21,10 @@ const ProceedPage:React.FC = () => {
       </div>
       <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-20">
         <Steps tracker={proceed} />
-        <ProceedPageForm/>
+        <ProceedPageForm />
       </div>
     </div>
   );
-}
+};
 
-export default ProceedPage
+export default ProceedPage;

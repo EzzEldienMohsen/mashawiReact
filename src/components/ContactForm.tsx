@@ -129,9 +129,9 @@ const ContactForm: React.FC<{
       <div
         className={`w-full md:w-4/5 lg:w-1/2 ${
           isJob ? '2xl:w-1/2' : '2xl:w-2/5'
-        } p-3  py-[68px] flex justify-center items-center bg-[#f4f4f4] flex-col z-10`}
+        } p-3  py-[68px] flex justify-center gap-y-4 items-center bg-[#f5f5f5] flex-col z-10`}
       >
-        <h1 className="text-black mb-6 font-bold text-xl md:text-2xl 2xl:text-4xl tracking-wide">
+        <h1 className="text-black  font-bold text-xl md:text-2xl 2xl:text-4xl tracking-wide">
           {title}
         </h1>
         <form

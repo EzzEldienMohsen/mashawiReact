@@ -175,14 +175,13 @@ const VerifyForm: React.FC = () => {
         emailVerification({ reqData: user, language })
       ).unwrap();
       if (result.status === 1) {
-        navigate('/');
+        navigate('/', { replace: true });
       } else if (result.status === 0) {
         toast.error(result.message);
       }
     } catch (error: any) {
       if (error.status === 403) {
         toast.error(error.message);
-        toast.error('Please Insert Email Correctly');
       }
     }
   };

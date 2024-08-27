@@ -39,8 +39,15 @@ export const loader =
 const MenuWithCategory: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: MealData = axiosData.data2.data.data.data;
-
   const { t } = useTranslation();
+
+  if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   return (
     <div className="flex justify-center w-full items-center 2xl:gap-y-10 flex-col px-8 lg:px-20">
       <SectionTitle title={t('menuSectionTitle')} />

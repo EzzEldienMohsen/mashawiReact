@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { AddAddressModal, FormTextArea, ProceedTotals } from '../subComponents';
 import { IconFormRow } from '../subSubComponents';
 import src from '../assets/svg/proceed/discount.svg';
-import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
 import CustomSelect from '../subSubComponents/CustomSelect';
 import { AddressResponse } from '../assets/types';
@@ -11,7 +11,11 @@ import { useDispatch } from 'react-redux';
 import { useGlobalContext } from '../context/GlobalContext';
 import { getAddress } from '../features/address/addressSlice';
 import { CheckoutReq } from '../features/orders/types';
-import { applyCoupon, checkout } from '../features/orders/ordersSlice';
+import {
+  applyCoupon,
+  checkout,
+  getTotals,
+} from '../features/orders/ordersSlice';
 import * as Yup from 'yup';
 
 const initialValues: CheckoutReq = {
@@ -51,6 +55,7 @@ const ProceedPageForm: React.FC = () => {
   const { t } = useTranslation();
   const [branch, setBranch] = React.useState<string>('branch');
   const [errors, setErrors] = React.useState<{ [key: string]: string }>({});
+  const [error, setError] = React.useState<{ [key: string]: string }>({});
 
   const addressOptions = React.useMemo(
     () =>
@@ -96,6 +101,7 @@ const ProceedPageForm: React.FC = () => {
       [name]: value,
     }));
     setErrors({ ...errors, [name]: '' });
+    setError({ ...error, [name]: '' });
   };
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,11 +119,6 @@ const ProceedPageForm: React.FC = () => {
   const { isLoading: ordersLoading } = useTypedSelector(
     (state: RootState) => state.orders
   );
-  const submitTheCoupon = () => {
-    dispatch(
-      applyCoupon({ reqData: { code: values.coupon_code }, token, language })
-    );
-  };
 
   const proceedPageSchema = Yup.object().shape({
     payment_method: Yup.string()
@@ -172,7 +173,41 @@ const ProceedPageForm: React.FC = () => {
       return false;
     }
   };
+  const couponSchema = Yup.object().shape({
+    coupon_code: Yup.string()
+      .required(t('isRequiredError'))
+      .test('name-length', t('firstNameIsTooShort'), function (value) {
+        return !value || value.length >= 2;
+      }),
+  });
 
+  const validateCouponForm = async (): Promise<boolean> => {
+    try {
+      await couponSchema.validate(values, { abortEarly: false });
+      setError({});
+      return true;
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const validationErrors: { [key: string]: string } = {};
+        err.inner.forEach((error) => {
+          validationErrors[error.path!] = error.message;
+        });
+        setError(validationErrors);
+      }
+      return false;
+    }
+  };
+
+  const submitTheCoupon = async (e: React.FormEvent): Promise<void> => {
+    e.preventDefault();
+    const isFormValid = await validateCouponForm();
+    if (!isFormValid) {
+      return;
+    }
+    await dispatch(
+      applyCoupon({ reqData: { code: values.coupon_code }, token, language })
+    );
+  };
   const onSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     const isFormValid = await validateTheForm();
@@ -183,7 +218,7 @@ const ProceedPageForm: React.FC = () => {
       checkout({ reqData: values, token, language })
     ).unwrap();
     if (response.status === 1) {
-      navigate('/order-done');
+      navigate('/order-done', { replace: true });
     }
     setValues(initialValues);
   };
@@ -195,6 +230,10 @@ const ProceedPageForm: React.FC = () => {
       </div>
     );
   }
+
+  const getCalculations = () => {
+    dispatch(getTotals({ token, language }));
+  };
   return (
     <div className="w-full flex justify-center items-center px-4 md:px-8 lg:px-20">
       <form
@@ -245,7 +284,7 @@ const ProceedPageForm: React.FC = () => {
               type="text"
               placeHolder={t('selectAddress')}
             />
-            <AddAddressModal />
+            {branch === 'home' && <AddAddressModal />}
           </div>
           {errors.customValidation && branch === 'home' && (
             <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
@@ -310,10 +349,11 @@ const ProceedPageForm: React.FC = () => {
           )}
         </div>
         {/* Coupon */}
-        <div className="w-full flex flex-col justify-start items-start bg-white rounded-2xl p-4 shadow-md">
+        <div className="w-full flex flex-col justify-start items-start bg-white rounded-2xl p-4  shadow-md">
           <h1 className="text-black font-abdo text-xl font-semibold mb-4">
             {t('discount')}
           </h1>
+
           <div className="flex flex-col gap-y-4 md:gap-x-2 md:flex-row md:justify-between w-full lg:w-3/5">
             <IconFormRow
               name="coupon_code"
@@ -324,6 +364,7 @@ const ProceedPageForm: React.FC = () => {
               type="text"
               placeHolder={t('coupon')}
             />
+
             <div className="flex justify-between items-center gap-x-2 w-full md:w-1/2">
               <button
                 type="button"
@@ -337,14 +378,19 @@ const ProceedPageForm: React.FC = () => {
                   t('usage')
                 )}
               </button>
-              <Link
-                to="/menu"
+              <button
+                onClick={getCalculations}
                 className="bg-bgColor w-full md:w-1/2 lg:w-3/5 text-black py-2 px-6 rounded-2xl mt-4 font-semibold text-center"
               >
                 {t('cancellation')}
-              </Link>
+              </button>
             </div>
           </div>
+          {error.coupon_code && (
+            <p className="text-newRed mr-3 my-4 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
+              {error.coupon_code}
+            </p>
+          )}
         </div>
         {/* Total */}
         <div className="w-full flex flex-col justify-start items-start bg-white rounded-2xl p-4 shadow-md">

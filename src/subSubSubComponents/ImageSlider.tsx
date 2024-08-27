@@ -34,7 +34,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ gallery, isLangArabic }) => {
   return (
     <div className="w-full relative">
       <div
-        className={`w-full carousel  md:h-[348px] ${
+        className={`w-full carousel md:h-[348px] ${
           isLangArabic
             ? 'rounded-tr-3xl rounded-bl-3xl'
             : 'rounded-tl-3xl rounded-br-3xl'
@@ -44,16 +44,12 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ gallery, isLangArabic }) => {
           <div
             key={index}
             id={`${index + 1}`}
-            className={`carousel-item w-full ${
-              selected === `${index + 1}` || gallery.length === 1
-                ? 'block'
-                : 'hidden'
-            }`}
+            className={`carousel-item w-full $`}
           >
             <img
               alt="gallery"
               src={img}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-fit"
               onError={(e) => {
                 e.currentTarget.src = fallbackImage;
               }}

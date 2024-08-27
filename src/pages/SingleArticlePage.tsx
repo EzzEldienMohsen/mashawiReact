@@ -52,6 +52,16 @@ const SingleArticlePage: React.FC = () => {
   const locale = isLangArabic ? 'ar' : 'en';
   dayjs.locale(locale);
   const { t } = useTranslation();
+    React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+ if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   const formattedDate = dayjs(data.data.date)
     .locale(locale)
     .format('DD MMM YYYY');

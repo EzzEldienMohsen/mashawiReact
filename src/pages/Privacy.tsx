@@ -30,6 +30,16 @@ const Privacy: React.FC = () => {
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
   const data: StaticRequestData = axiosData.data;
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   return (
     <>
       <Policy title={t('PrivacyPolicyRoute')} data={data} />

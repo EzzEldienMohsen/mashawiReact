@@ -34,6 +34,14 @@ const Footer: React.FC = () => {
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
   const data: MenuResponse = axiosData.data2.data;
+
+  if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   return (
     <div className="bg-newRed text-white flex w-full flex-col justify-center lg:px-24 py-10 items-center lg:items-start ">
       <Link to="/">

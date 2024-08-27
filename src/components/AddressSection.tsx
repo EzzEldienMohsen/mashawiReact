@@ -12,6 +12,7 @@ import { useLoaderData } from 'react-router-dom';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import addressBtn from '../assets/svg/addressMapButton.svg';
+import { useGlobalContext } from '../context/GlobalContext';
 
 dayjs.extend(customParseFormat);
 
@@ -47,7 +48,14 @@ const AddressSection: React.FC = () => {
   const convertToAmPm = (time24: string) => {
     return dayjs(time24, 'HH:mm').format('hh:mm A');
   };
-
+  if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
+  const { isLangArabic } = useGlobalContext();
   return (
     <div className="flex flex-col py-4 lg:py-16 mt-16 bg-[#F5F5F5] justify-center items-center gap-y-10 md:gap-y-[64px]  2xl:gap-y-[78px] my-2 w-full px-8 lg:px-20">
       <SectionTitle title={t('branchesAndTimesTitle')} />
@@ -65,7 +73,7 @@ const AddressSection: React.FC = () => {
           return (
             <div
               key={ad.id}
-              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-6 gap-y-4 lg:gap-y-5 shadow-md px-2 w-[90%] my-2 lg:w-[30%] 2xl:w-[23%] md:w-[45%] "
+              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-6 gap-y-4 lg:gap-y-5 px-2 w-[90%] my-2 lg:w-[30%] 2xl:w-[23%] md:w-[45%] "
             >
               <img src={addressIcon} alt="alt" />
               <h1
@@ -80,19 +88,46 @@ const AddressSection: React.FC = () => {
               >
                 {ad.name}
               </h1>
-              <p
-                className={`text-sm lg:text-[14.9px] text-center mb-2 text-black px-1 ${
-                  isTruncated ? 'truncate' : ''
-                }`}
-                style={{
-                  maxWidth: '150px',
-                  whiteSpace: isTruncated ? 'nowrap' : 'normal',
-                }}
-                onClick={toggleTruncate}
-              >
-                {' '}
-                {ad.address}
-              </p>
+              <div className="w-full flex flex-col justify-start items-start gap-y-4 lg:gap-y-5 px-2">
+                <p
+                  className={`text-sm lg:text-[14.9px] text-start mb-2 text-black px-1 ${
+                    isTruncated ? 'truncate' : ''
+                  }`}
+                  style={{
+                    maxWidth: '150px',
+                    whiteSpace: isTruncated ? 'nowrap' : 'normal',
+                  }}
+                  onClick={toggleTruncate}
+                >
+                  {' '}
+                  {ad.address}
+                </p>
+                <ul
+                  className="flex justify-start items-center"
+                  onClick={toggleTruncate}
+                >
+                  <li
+                    className={`relative text-sm ${
+                      isLangArabic ? 'pr-4 pl-0' : 'pl-4 pr-0'
+                    } text-start lg:text-[14.9px] mb-2 text-black px-1 ${
+                      isTruncated ? 'truncate' : ''
+                    }`}
+                  >
+                    <span
+                      className={`absolute ${
+                        isLangArabic ? 'right-0' : 'left-0'
+                      }`}
+                      style={{
+                        transform: 'translateY(-50%)',
+                        top: '50%',
+                      }}
+                    >
+                      •
+                    </span>
+                    {`${t('holiday')} ${ad.weekend}`}
+                  </li>
+                </ul>
+              </div>
               <div className="flex flex-row gap-x-1 text-start items-center justify-between ">
                 <div className="flex flex-row gap-x-1 justify-between ">
                   <img src={addMob} alt="alt" />{' '}
@@ -103,6 +138,7 @@ const AddressSection: React.FC = () => {
                   <p className="text-sm  2xl:text-lg">{ad.landing_phone}</p>
                 </div>
               </div>
+
               <div
                 className="flex w-4/5 md:w-[90%] 2xl:text-2xl rounded-full gap-x-2 py-2 flex-row justify-center items-center  bg-[#F4F4F4]  md:text-md  px-[4px]"
                 dir="ltr"

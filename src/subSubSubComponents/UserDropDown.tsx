@@ -12,7 +12,9 @@ import { clearAddress } from '../features/address/addressSlice';
 const UserDropDown: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
-  const { user } = useTypedSelector((state: RootState) => state.user);
+  const { user, isLoading } = useTypedSelector(
+    (state: RootState) => state.user
+  );
   const { t } = useTranslation();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,8 +52,11 @@ const UserDropDown: React.FC = () => {
           );
         })}
         <button
+          disabled={isLoading}
           onClick={theLogOut}
-          className="flex justify-start items-center gap-x-4 2xl:gap-x-8"
+          className={`flex justify-start items-center gap-x-4 2xl:gap-x-8 ${
+            isLoading ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
           <img
             src={logOutImg}

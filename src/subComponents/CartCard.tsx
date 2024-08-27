@@ -70,7 +70,9 @@ const CartCard: React.FC<CartCardProps> = ({
       />
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <h1
-          className={`font-abdo 2xl:text-xl ${isTruncated ? 'truncate' : ''}`}
+          className={`font-abdo 2xl:text-xl break-all ${
+            isTruncated ? 'truncate' : ''
+          }`}
           style={{
             maxWidth: '150px',
             whiteSpace: isTruncated ? 'nowrap' : 'normal',
@@ -78,7 +80,8 @@ const CartCard: React.FC<CartCardProps> = ({
           onClick={toggleTruncate}
         >
           {item.name}
-        </h1>{' '}
+        </h1>
+
         <p className="text-newRed font-abdo flex flex-row gap-x-1">
           <span>{item.price}</span>
           <span>{t('menuItemCurrency')}</span>

@@ -34,19 +34,40 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
 }) => {
   const { t } = useTranslation();
   const { isLangArabic } = useGlobalContext();
-  const [searchTerm, setSearchTerm] = useState(value || '');
+  const [searchTerm, setSearchTerm] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Set the label of the selected option as the search term when the component mounts or value changes
+    const selectedOption = options?.find((option) => option.value === value);
+    setSearchTerm(
+      selectedOption
+        ? name === 'gender'
+          ? t(selectedOption.label)
+          : selectedOption.label
+        : ''
+    );
+  }, [value, options, name, t]);
 
   // Filter the options based on the search term and apply translation conditionally
   const filteredOptions = options?.filter((option) =>
     (name === 'gender' ? t(option.label) : option.label)
       .toLowerCase()
-      .includes(searchTerm.toString().toLowerCase())
+      .includes(searchTerm.toLowerCase())
   );
 
   const handleSelect = (selectedValue: string | number) => {
-    setSearchTerm(selectedValue); // Set the search term for display
+    const selectedOption = options?.find(
+      (option) => option.value === selectedValue
+    );
+    setSearchTerm(
+      selectedOption
+        ? name === 'gender'
+          ? t(selectedOption.label)
+          : selectedOption.label
+        : ''
+    ); // Set the search term to the selected option's label
     setIsOpen(false);
 
     handleChange({

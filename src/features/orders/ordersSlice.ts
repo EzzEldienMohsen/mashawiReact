@@ -37,7 +37,9 @@ const initialSingleOrder = {
     calculations: {
       subtotal: '',
       vat: '',
+      total_before: '',
       discount: '',
+      total_after: '',
       total: '',
       vat_percent: '',
     },
@@ -45,9 +47,12 @@ const initialSingleOrder = {
 };
 const initialCalc: OrderCalc = {
   sub_total: '',
-  vat_percent: '',
   vat: '',
+  total_before: '',
+  discount: '',
+  total_after: '',
   total: '',
+  vat_percent: '',
 };
 const initialState: OrdersState = {
   isLoading: false,
@@ -159,6 +164,9 @@ const ordersSlice = createSlice({
         (state, action: PayloadAction<GetCalcRes>) => {
           state.isLoading = false;
           state.orderTotal = action.payload.data;
+          state.orderTotal.total_before = '';
+          state.orderTotal.total_after = '';
+          state.orderTotal.discount = '';
         }
       )
       .addCase(getTotals.rejected, (state) => {

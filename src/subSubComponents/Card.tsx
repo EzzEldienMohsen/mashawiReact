@@ -83,7 +83,7 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
       />{' '}
       <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
         <h1
-          className={`font-abdo font-bold text-4 2xl:text-xl  ${
+          className={`font-abdo font-bold text-4 2xl:text-xl break-all ${
             isTruncated ? 'truncate' : ''
           }`}
           style={{

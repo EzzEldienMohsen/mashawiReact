@@ -37,6 +37,16 @@ const Gallery: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: GalleryResponse = axiosData.data;
   const { t } = useTranslation();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col justify-center items-center w-full ">
       <div className="bg-[#2C2220] flex flex-col text-start  w-full justify-start items-center px-4 py-6 my-6 font-abdo">

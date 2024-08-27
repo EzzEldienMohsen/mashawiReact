@@ -91,3 +91,10 @@ background-size: contain;
 .fill {
   background-size: fill;
 }
+
+
+.selected-class img {
+  border: 2px solid red; /* Example style */
+  transition: transform 0.3s ease;
+  transform: scale(1.05); /* Slightly enlarge the selected image */
+}

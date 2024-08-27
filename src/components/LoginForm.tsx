@@ -72,7 +72,7 @@ const LoginForm: React.FC = () => {
         loginUser({ reqData: values, language })
       ).unwrap();
       if (result.status === 1) {
-        navigate('/');
+        navigate('/', { replace: true });
       }
     } catch (error: any) {
       const errorMessage =
@@ -129,7 +129,7 @@ const LoginForm: React.FC = () => {
         )}
         <Link
           to="/forget-password"
-          className="text-newRed underLine underLine-offset-8 mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-10"
+          className="text-newRed underline underline-offset-2 mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-10"
         >
           {t('forgetPasswordText')}
         </Link>

@@ -20,6 +20,7 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
   const { isLoading, orderTotal } = useTypedSelector(
     (state: RootState) => state.orders
   );
+  console.log(orderTotal);
   const { t } = useTranslation();
   function formatThePrice(price: number | string) {
     const numericPrice = Number(price);
@@ -36,7 +37,7 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
           {t('subTotal')}
         </p>
         <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
-          {orderTotal.sub_total}
+          {` ${orderTotal.sub_total} ${t('menuItemCurrency')}`}
         </p>
       </div>
       <div className="w-full flex justify-between items-center ">
@@ -44,9 +45,19 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
           {`${t('tax')} ${formatThePrice(orderTotal.vat_percent)}%`}
         </p>
         <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
-          {orderTotal.vat}
+          {` ${orderTotal.vat} ${t('menuItemCurrency')}`}
         </p>
       </div>
+      {orderTotal.total_before && (
+        <div className="w-full flex justify-between items-center">
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {t('couponDiscount')}
+          </p>
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {` ${orderTotal.total_before} ${t('menuItemCurrency')}`}
+          </p>
+        </div>
+      )}
       <div className="w-full flex justify-between items-center">
         <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
           {t('couponDiscount')}
@@ -55,6 +66,16 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
           {orderTotal.discount}
         </p>
       </div>
+      {orderTotal.total_after && (
+        <div className="w-full flex justify-between items-center">
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {t('couponDiscount')}
+          </p>
+          <p className="text-black font-abdo text-xs md:text-lg lg:text-xl">
+            {` ${orderTotal.total_after} ${t('menuItemCurrency')}`}
+          </p>
+        </div>
+      )}
       <div className="w-full flex justify-between items-center">
         <p className="text-black font-abdo text-sm md:text-xl lg:text-3xl ">
           {t('totalOrderText')}

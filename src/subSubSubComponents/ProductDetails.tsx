@@ -53,7 +53,7 @@ const ProductDetails: React.FC<ProductProps> = ({
       <ImageSlider isLangArabic={isLangArabic} gallery={data.gallery} />
       <div className="flex justify-between flex-row w-full items-center my-2">
         <h1
-          className={`font-abdo font-bold text-4 2xl:text-xl  ${
+          className={`font-abdo font-bold text-4 2xl:text-xl break-all ${
             isTruncated ? 'truncate' : ''
           }`}
           style={{

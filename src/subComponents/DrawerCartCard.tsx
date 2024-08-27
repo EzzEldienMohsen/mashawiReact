@@ -65,7 +65,9 @@ const DrawerCartCard: React.FC<{ item: CartItem; cart_id: number }> = ({
       <div className="flex flex-col w-4/5 justify-center items-start gap-y-4">
         <div className="w-full flex justify-between items-center">
           <h1
-            className={`font-abdo 2xl:text-xl ${isTruncated ? 'truncate' : ''}`}
+            className={`font-abdo 2xl:text-xl break-all ${
+              isTruncated ? 'truncate' : ''
+            }`}
             style={{
               maxWidth: '150px',
               whiteSpace: isTruncated ? 'nowrap' : 'normal',

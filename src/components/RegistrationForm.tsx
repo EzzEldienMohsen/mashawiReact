@@ -96,7 +96,7 @@ const RegistrationForm: React.FC = () => {
     ).unwrap();
 
     if (response.status === 1) {
-      navigate('/verify-email');
+      navigate('/verify-email', { replace: true });
     }
   };
 
@@ -203,10 +203,11 @@ const RegistrationForm: React.FC = () => {
         )}
         <Link
           to="/forget-password"
-          className="text-newRed text-start px-2 text-xs md:text-sm lg:text-sm 2xl:text-md mb-10"
+          className="text-newRed underline underline-offset-2 mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md mb-10"
         >
           {t('forgetPasswordText')}
         </Link>
+
         {errors.form && (
           <p className="text-newRed mr-3 w-full text-start text-xs md:text-sm lg:text-sm 2xl:text-md">
             {errors.form}

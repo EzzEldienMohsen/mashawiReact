@@ -48,6 +48,16 @@ const SingleNewsPage: React.FC = () => {
   const formattedDate = dayjs(data.data.date)
     .locale(locale)
     .format('DD MMM YYYY');
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col justify-start items-start relative gap-y-6 2xl:gap-y-10 py-4 w-full">
       <div className="absolute top-0 left-0 w-full py-10 md:py-20 2xl:py-28 bg-[#2C2220] "></div>

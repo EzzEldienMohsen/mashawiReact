@@ -29,6 +29,16 @@ const Refund: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: StaticRequestData = axiosData.data;
   const { t } = useTranslation();
+    React.useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+    if (!data) {
+      return (
+        <div className="flex w-full py-8 justify-center items-center">
+          <span className="loading loading-spinner loading-lg text-newRed"></span>
+        </div>
+      );
+    }
   return <Policy title={t('refundPageTitle')} data={data} />;
 };
 

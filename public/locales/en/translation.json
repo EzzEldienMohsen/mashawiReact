@@ -241,5 +241,7 @@
   "subTotal": "sub total",
   "tax": "tax",
   "couponDiscount": "coupon discount",
-  "downloadMenu": "download menu"
+  "downloadMenu": "download menu",
+  "emptyCartWarning": "please add some elements to the cart to proceed",
+  "holiday": "The branch has one day off"
 }

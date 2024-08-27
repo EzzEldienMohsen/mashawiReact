@@ -17,7 +17,9 @@ interface CloseDrawer {
 const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
   const { isLangArabic, toggleLang } = useGlobalContext();
   const { t } = useTranslation();
-  const { user } = useTypedSelector((state: RootState) => state.user);
+  const { user, isLoading } = useTypedSelector(
+    (state: RootState) => state.user
+  );
   const token = user.token;
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
@@ -131,11 +133,14 @@ const SmallNavBar: React.FC<CloseDrawer> = ({ closeDrawer }) => {
       </ul>
       {token ? (
         <button
+          disabled={isLoading}
           onClick={() => {
             closeDrawer();
             theLogOut();
           }}
-          className="flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2"
+          className={`flex justify-start w-full items-center gap-x-4 font-abdo text-white py-2 ${
+            isLoading ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
           <img
             src={icon}

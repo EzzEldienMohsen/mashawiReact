@@ -32,6 +32,14 @@ const MainMenu: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data: MealData = axiosData.data2.data.data.data;
   const { t } = useTranslation();
+
+  if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   const [mainData, setMainData] = React.useState<MealData>(data);
   return (
     <div className="flex py-4 lg:py-16 justify-center w-full bg-[#F5F5F5] items-center 2xl:gap-y-10 flex-col px-8 lg:px-20">

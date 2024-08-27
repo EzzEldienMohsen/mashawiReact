@@ -183,7 +183,7 @@ const AppRouter: React.FC = () => {
         {
           path: '/about',
           element: (
-            <Suspense
+            <React.Suspense
               fallback={
                 <div className="flex w-full py-8 justify-center items-center">
                   <span className="loading loading-spinner loading-lg text-newRed"></span>
@@ -191,7 +191,7 @@ const AppRouter: React.FC = () => {
               }
             >
               <About />
-            </Suspense>
+            </React.Suspense>
           ),
           loader: aboutLoader(queryClient, language),
         },
