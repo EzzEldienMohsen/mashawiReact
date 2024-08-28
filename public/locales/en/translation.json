@@ -93,8 +93,7 @@
   "signInLinksText": "Or sign in with",
   "menuSectionTitle": "Our Menu",
   "mainMenuSectionText1": "The most delicious and delightful dishes with our special menu",
-  "mainMenuSectionText2": "With distinctive flavors and high-quality ingredients at affordable prices",
-  "mainMenuSectionText3": "With excellent service ensuring customer satisfaction and trust",
+  "mainMenuSectionText2": "With a distinctive flavor and high-quality ingredients at prices that suit everyone and excellent service that ensures customer satisfaction and trust",
   "browseMenu": "Browse the Menu",
   "OTPCodeTitle": "Enter the OTP Code",
   "OTPCodeText": "Enter the 6-digit code we sent to your email",
@@ -243,5 +242,6 @@
   "couponDiscount": "coupon discount",
   "downloadMenu": "download menu",
   "emptyCartWarning": "please add some elements to the cart to proceed",
-  "holiday": "The branch has one day off"
+  "holiday": "The branch has one day off",
+  "mealTitle": "menu"
 }

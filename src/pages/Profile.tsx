@@ -64,7 +64,7 @@ const Profile: React.FC = () => {
             : t('tempTitle')}
         </h1>
       </div>
-      <div className="my-8 px-8 lg:px-20 flex flex-row justify-evenly items-center w-full"></div>
+      <div className="my-8 px-8 lg:px-[220px] flex flex-row justify-evenly items-center w-full"></div>
       <div className="flex flex-col justify-center items-center w-full">
         <Outlet />
       </div>

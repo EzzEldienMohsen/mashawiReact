@@ -10,7 +10,7 @@ const AboutWhy: React.FC<{ data: string }> = ({ data }) => {
         alt="alt"
         className="w-full lg:w-1/2 md:h-1/4 lg:h-auto"
       />
-      <div className="font-abdo flex flex-col justify-center items-center gap-y-6 px-8 lg:px-20 py-4 w-full lg:w-1/2">
+      <div className="font-abdo flex flex-col justify-center items-center gap-y-6 px-8 lg:px-[220px] py-4 w-full lg:w-1/2">
         <p
           className="font-semibold text-black text-sm md:text-md lg:text-lg"
           dangerouslySetInnerHTML={{ __html: data }}

@@ -49,7 +49,7 @@ const MenuWithCategory: React.FC = () => {
     );
   }
   return (
-    <div className="flex justify-center w-full items-center 2xl:gap-y-10 flex-col px-8 lg:px-20">
+    <div className="flex justify-center w-full items-center 2xl:gap-y-10 flex-col px-8 lg:px-[220px]">
       <SectionTitle title={t('menuSectionTitle')} />
       <Slider />
       <MenuCard data={data} />

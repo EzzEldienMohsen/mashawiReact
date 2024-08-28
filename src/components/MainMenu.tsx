@@ -11,20 +11,35 @@ interface MealsQuery {
   queryFn: () => Promise<Meals>;
 }
 
-const mealsQuery = (language: string): MealsQuery => {
-  return {
-    queryKey: ['meals', language],
-    queryFn: () =>
-      autoFetch(`/meals?limit=12`, {
-        headers: {
-          lang: language,
-        },
-      }),
-  };
+const mealsQuery = (language: string, id?: string): MealsQuery => {
+  if (id) {
+    console.log(id);
+    return {
+      queryKey: ['meals', language, id],
+      queryFn: () =>
+        autoFetch(`/meals/category/${id}?limit=4`, {
+          headers: {
+            lang: language,
+          },
+        }),
+    };
+  } else {
+    return {
+      queryKey: ['meals', language],
+      queryFn: () =>
+        autoFetch(`/meals?limit=4`, {
+          headers: {
+            lang: language,
+          },
+        }),
+    };
+  }
 };
 export const loader =
-  (queryClient: QueryClient, language: string) => async (): Promise<Meals> => {
-    const data = await queryClient.ensureQueryData(mealsQuery(language));
+  (queryClient: QueryClient, language: string, id?: string) =>
+  async (): Promise<Meals> => {
+    console.log(id);
+    const data = await queryClient.ensureQueryData(mealsQuery(language, id));
     return data;
   };
 
@@ -40,12 +55,11 @@ const MainMenu: React.FC = () => {
       </div>
     );
   }
-  const [mainData, setMainData] = React.useState<MealData>(data);
   return (
-    <div className="flex py-4 lg:py-16 justify-center w-full bg-[#F5F5F5] items-center 2xl:gap-y-10 flex-col px-8 lg:px-20">
+    <div className="flex py-4 lg:py-16 justify-center w-full bg-[#F5F5F5] items-center 2xl:gap-y-10 flex-col px-8 lg:px-[220px]">
       <SectionTitle title={t('menuSectionTitle')} />
-      <MainSlider mainData={data} setMainData={setMainData} />
-      <MenuCard data={mainData} />
+      <MainSlider />
+      <MenuCard data={data} />
     </div>
   );
 };

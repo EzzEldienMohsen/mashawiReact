@@ -6,14 +6,14 @@ import { useTranslation } from 'react-i18next';
 const AboutExcellence: React.FC = () => {
   const { t } = useTranslation();
   return (
-    <div className=" flex flex-col justify-center items-center 2xl:gap-y-10 my-12 px-8 lg:px-20">
+    <div className=" flex flex-col justify-center items-center 2xl:gap-y-10 my-12 lg:px-[220px]">
       <SectionTitle title={t('aboutExcellenceSectionTitle')} />
-      <div className="flex flex-col justify-start items-start gap-y-6 lg:flex-row lg:justify-evenly lg:items-center w-full lg:flex-wrap">
+      <div className="flex flex-col justify-start items-start gap-y-6 2xl:gap-y-[170px] lg:flex-row lg:justify-evenly lg:items-center w-full lg:flex-wrap">
         {excellence.map((card) => {
           return (
             <div
               key={card.id}
-              className="flex justify-start items-start gap-x-2 w-full lg:w-[44%]"
+              className="flex justify-start items-start gap-x-10 w-full lg:w-[44%]"
             >
               <img
                 src={card.src}
@@ -24,7 +24,7 @@ const AboutExcellence: React.FC = () => {
                 <h1 className="font-bold text-md md:text-lg 2xl:text-3xl">
                   {t(card.title)}
                 </h1>
-                <p className="text-xs md:text-sm lg:text-sm 2xl:text-2xl">
+                <p className="text-xs md:text-sm lg:text-sm 2xl:text-xl font-abdo">
                   {t(card.text)}
                 </p>
               </div>

@@ -48,7 +48,7 @@ const MyAddress: React.FC = () => {
   }
 
   return (
-    <div className="flex mt-2 flex-col relative px-8 lg:px-20 justify-center pt-24 items-center md:flex md:flex-row md:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full">
+    <div className="flex mt-2 flex-col relative px-8 lg:px-[220px] justify-center pt-24 items-center md:flex md:flex-row md:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full">
       <Link
         to="/profile/new-address"
         className={`btn w-3/4 md:w-2/5 lg:w-1/4 2xl:w-auto m px-6 absolute min-h-[46px] lg:min-h-[58px] h-auto text-lg lg:text-2xl top-0 ${

@@ -19,7 +19,7 @@ const ProceedPage: React.FC = () => {
           {t('deliveredTitle')}
         </h1>
       </div>
-      <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-20">
+      <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-[220px]">
         <Steps tracker={proceed} />
         <ProceedPageForm />
       </div>

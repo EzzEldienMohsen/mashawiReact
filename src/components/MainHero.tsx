@@ -12,10 +12,10 @@ const MainHero: React.FC = () => {
   const { isLangArabic } = useGlobalContext();
   const { t } = useTranslation();
   return (
-    <div className="w-full relative pb-2 2xl:pb-[40px] px-8 lg:px-20 ">
+    <div className="w-full relative pb-2 2xl:pb-[40px] px-8 lg:px-[220px] ">
       {/* the Colored Div */}
       <div
-        className={`absolute w-full  z-10 lg:w-[30%] 2xl:w-[25%] background-gradient h-1/4 md:h-1/3 lg:h-full top-0 ${
+        className={`absolute w-full  z-10 lg:w-[30%] 2xl:w-[27%] background-gradient h-1/3 md:h-2/5 lg:h-full top-0 ${
           isLangArabic ? 'left-0' : 'right-0'
         } `}
       ></div>
@@ -34,7 +34,7 @@ const MainHero: React.FC = () => {
           />
         </div>
         {/* Content */}
-        <div className="flex flex-col mt-4 lg:mt-16 lg:w-[45%] 2xl:w-[50%] justify-start items-start gap-y-8 lg:pb-20 2xl:pb-16 relative">
+        <div className="flex flex-col mt-4 lg:mt-16 lg:w-[45%] 2xl:w-[50%] justify-start items-start gap-y-4 lg:gap-y-8 lg:pb-20 2xl:pb-16 relative">
           <img
             src={onion}
             alt="leaf"
@@ -63,7 +63,7 @@ const MainHero: React.FC = () => {
           </p>
           <Link
             to="/meals"
-            className="text-white bg-newRed btn px-2 text-lg w-1/3 py-2 2xl:py-6 2xl:px-10 flex justify-center items-center rounded-full  2xl:text-2xl 2xl:min-h-[40px] 2xl:h-auto"
+            className="text-white bg-newRed btn px-2 text-lg w-1/3 md:w-3/5 lg:w-1/3 py-2 2xl:py-6 2xl:px-10 flex justify-center items-center rounded-full  2xl:text-2xl 2xl:min-h-[40px] 2xl:h-auto"
           >
             <span className="w-full text-center font-abdo">
               {t('MainHeroOrder')}

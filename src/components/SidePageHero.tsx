@@ -13,15 +13,15 @@ const SidePageHero: React.FC<SidePageHeroProps> = ({
 }) => {
   return (
     <div
-      className={`bg-[#2C2220] flex flex-col justify-center md:flex-row md:justify-between items-center px-8 lg:px-20 z-10 ${
+      className={`bg-[#2C2220] flex flex-col justify-center md:flex-row md:justify-between items-center px-8 lg:px-[220px] z-10 ${
         isJob ? 'pt-2' : 'py-4'
       } md:mb-12 lg:mt-16 mb-20`}
     >
       <div className="flex flex-col md:text-start justify-center items-center md:justify-start 2xl:gap-y-8 md:items-start lg:w-2/5">
-        <h1 className="mb-4 text-xl md:text-3xl lg:text-4xl 2xl:text-5xl my-1 md:text-start font-bold text-[#CD0B09]">
+        <h1 className="mb-4 text-xl font-abdo md:text-3xl lg:text-4xl 2xl:text-5xl my-1 md:text-start font-bold text-[#CD0B09]">
           {primaryText}
         </h1>
-        <p className="text-white text-xs md:text-xl 2xl:text-xl text-center md:text-start lg:text-lg my-1 2xl:leading-[3rem]">
+        <p className="text-white font-abdo text-xs md:text-xl 2xl:text-xl text-center md:text-start lg:text-lg my-1 2xl:leading-[3rem]">
           {secondaryText}
         </p>
       </div>
@@ -30,9 +30,9 @@ const SidePageHero: React.FC<SidePageHeroProps> = ({
         alt="image"
         className={`${
           isJob
-            ? 'md:-mt-16 lg:-mt-28'
-            : 'mt-2 -mb-24 md:-my-32 lg:-my-20 2xl:-my-36'
-        }  w-1/2 md:w-2/5 lg:w-1/3 aspect-square `}
+            ? 'md:-mt-16 lg:-mt-28 lg:w-[27%]'
+            : 'mt-2 -mb-24 md:-my-32 lg:w-1/3 lg:-my-20 2xl:-my-36'
+        }  w-1/2 md:w-2/5  aspect-square `}
       />
     </div>
   );

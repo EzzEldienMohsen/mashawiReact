@@ -72,42 +72,42 @@ const SingleOrder: React.FC = () => {
       : status === 'returned'
       ? returnedSingleOrder
       : rejectedSingleOrder;
- if (status === 'rejected') {
-   return (
-     <div className="flex flex-col justify-center items-center w-full my-2">
-       <div className="bg-[#2C2220] flex flex-col text-start w-full justify-start items-center px-4 py-6 my-6 font-abdo">
-         <h1 className="mb-4 text-xl md:text-3xl lg:text-5xl font-bold text-newRed">
-           {t('orderDoneTitle')}
-         </h1>
-       </div>
-       <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-20">
-         <Steps tracker={tracker} />
-         <div className="flex flex-col gap-y-3 justify-center items-center text-sm md:text-md lg:text-lg font-abdo py-6 md:py-10 bg-white w-4/5 rounded-2xl px-6 md:px-10 lg:px-20 shadow-lg">
-           <img
-             src={rejected}
-             alt="rejected"
-             className="w-2/5 aspect-square md:w-auto md:aspect-auto"
-           />
-           <h1 className="text-black text-center text-lg md:text-xl lg:text-2xl">
-             {t("rejectedTrackText")}
-           </h1>
-           <Link
-             to="/contact"
-             className=" btn btn-block md:w-1/2 lg:w-1/3 my-4 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl"
-           >
-             {t('contactUsRoute')}
-           </Link>
-         </div>
-       </div>
-     </div>
-   );
- }
+  if (status === 'rejected') {
+    return (
+      <div className="flex flex-col justify-center items-center w-full my-2">
+        <div className="bg-[#2C2220] flex flex-col text-start w-full justify-start items-center px-4 py-6 my-6 font-abdo">
+          <h1 className="mb-4 text-xl md:text-3xl lg:text-5xl font-bold text-newRed">
+            {t('orderDoneTitle')}
+          </h1>
+        </div>
+        <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-[220px]">
+          <Steps tracker={tracker} />
+          <div className="flex flex-col gap-y-3 justify-center items-center text-sm md:text-md lg:text-lg font-abdo py-6 md:py-10 bg-white w-4/5 rounded-2xl px-6 md:px-10 lg:px-20 shadow-lg">
+            <img
+              src={rejected}
+              alt="rejected"
+              className="w-2/5 aspect-square md:w-auto md:aspect-auto"
+            />
+            <h1 className="text-black text-center text-lg md:text-xl lg:text-2xl">
+              {t('rejectedTrackText')}
+            </h1>
+            <Link
+              to="/contact"
+              className=" btn btn-block md:w-1/2 lg:w-1/3 my-4 flex justify-center shadow-xl bg-newRed text-white items-center rounded-full min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl"
+            >
+              {t('contactUsRoute')}
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-y-6 w-full px-8 lg:px-20  py-8">
+    <div className="flex flex-col justify-center items-center gap-y-6 w-full px-8 lg:px-[220px]  py-8">
       <Steps tracker={tracker} />
       {/* Card */}
-      <div className="my-16 w-full flex flex-col justify-center items-center px-8 lg:px-20">
+      <div className="my-16 w-full flex flex-col justify-center items-center px-8 lg:px-[220px]">
         {singleOrder.data.meals.map((or) => {
           return (
             <div

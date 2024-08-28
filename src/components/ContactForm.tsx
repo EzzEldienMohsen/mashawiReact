@@ -81,7 +81,7 @@ const ContactForm: React.FC<{
     message: Yup.string()
       .required(t('isRequiredError'))
       .test('name-length', t('messageIsTooShort'), function (value) {
-        return !value || value.length >= 16;
+        return !value || value.length >= 1;
       }),
   });
 
@@ -120,7 +120,7 @@ const ContactForm: React.FC<{
   };
 
   return (
-    <div className="w-full relative flex flex-col justify-center items-center my-6 px-8 lg:px-20">
+    <div className="w-full relative flex flex-col justify-center items-center my-6 px-8 lg:px-[220px]">
       <div
         className={`${
           isJob ? 'hidden' : ''
@@ -129,7 +129,7 @@ const ContactForm: React.FC<{
       <div
         className={`w-full md:w-4/5 lg:w-1/2 ${
           isJob ? '2xl:w-1/2' : '2xl:w-2/5'
-        } p-3  py-[68px] flex justify-center gap-y-4 items-center bg-[#f5f5f5] flex-col z-10`}
+        } p-3  py-[68px] flex justify-center gap-y-4 items-center bg-[#f5f5f5] flex-col z-10 shadow-sm`}
       >
         <h1 className="text-black  font-bold text-xl md:text-2xl 2xl:text-4xl tracking-wide">
           {title}

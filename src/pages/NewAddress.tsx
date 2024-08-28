@@ -90,7 +90,7 @@ const NewAddress: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-y-4 w-full md:w-4/5 lg:w-3/4 px-8 lg:px-20">
+    <div className="flex flex-col justify-center items-center gap-y-4 w-full md:w-4/5 lg:w-4/5 px-8 lg:px-[220px]">
       <h1 className="text-black text-lg md:text-xl lg:text-2xl font-abdo font-semibold">
         {t('newAddress')}
       </h1>

@@ -90,7 +90,7 @@ const ForgetPasswordForm: React.FC = () => {
           </p>
         )}
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed mt-[84px] mb-4"
           disabled={isLoading}
         >
           {isLoading ? (

@@ -57,14 +57,18 @@ const AddressSection: React.FC = () => {
   }
   const { isLangArabic } = useGlobalContext();
   return (
-    <div className="flex flex-col py-4 lg:py-16 mt-16 bg-[#F5F5F5] justify-center items-center gap-y-10 md:gap-y-[64px]  2xl:gap-y-[78px] my-2 w-full px-8 lg:px-20">
+    <div className="flex flex-col py-4 lg:py-16 mt-16 bg-[#F5F5F5] justify-center items-center gap-y-10 md:gap-y-[64px]  2xl:gap-y-[78px] my-2 w-full px-8 lg:px-[220px]">
       <SectionTitle title={t('branchesAndTimesTitle')} />
       <div className="flex mt-2 flex-col justify-center items-center md:flex md:flex-row lg:justify-start md:items-start md:flex-wrap md:gap-x-2 w-full ">
         {sortedItems.map((ad) => {
           const [isTruncated, setIsTruncated] = React.useState(true);
+          const [isNameTruncated, setIsNameTruncated] = React.useState(true);
 
           const toggleTruncate = () => {
             setIsTruncated(!isTruncated);
+          };
+          const toggleNameTruncate = () => {
+            setIsNameTruncated(!isTruncated);
           };
           const timeIn24 = ad.working_time;
           const theSplitTime = timeIn24.split('-');
@@ -73,28 +77,27 @@ const AddressSection: React.FC = () => {
           return (
             <div
               key={ad.id}
-              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-6 gap-y-4 lg:gap-y-5 px-2 w-[90%] my-2 lg:w-[30%] 2xl:w-[23%] md:w-[45%] "
+              className="rounded-2xl aspect-auto relative flex flex-col justify-evenly items-center bg-white py-6 gap-y-4 lg:gap-y-5 px-2 w-[90%] my-2 lg:w-[30%] 2xl:w-[23%] md:w-[45%]"
             >
               <img src={addressIcon} alt="alt" />
               <h1
                 className={`text-black font-bold text-lg my-1 md:text-xl lg:text-2xl ${
-                  isTruncated ? 'truncate' : ''
-                }`}
+                  isNameTruncated ? 'truncate max-w-[150px]' : ''
+                } text-center`}
                 style={{
-                  maxWidth: '150px',
-                  whiteSpace: isTruncated ? 'nowrap' : 'normal',
+                  whiteSpace: isNameTruncated ? 'nowrap' : 'normal',
                 }}
-                onClick={toggleTruncate}
+                onClick={toggleNameTruncate}
               >
                 {ad.name}
               </h1>
+
               <div className="w-full flex flex-col justify-start items-start gap-y-4 lg:gap-y-5 px-2">
                 <p
-                  className={`text-sm lg:text-[14.9px] text-start mb-2 text-black px-1 ${
-                    isTruncated ? 'truncate' : ''
+                  className={`text-sm lg:text-[14.9px] text-start w-full mb-2 text-black px-1 break-all ${
+                    isTruncated ? 'truncate max-w-[150px]' : ''
                   }`}
                   style={{
-                    maxWidth: '150px',
                     whiteSpace: isTruncated ? 'nowrap' : 'normal',
                   }}
                   onClick={toggleTruncate}

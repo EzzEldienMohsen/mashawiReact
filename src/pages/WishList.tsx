@@ -54,7 +54,7 @@ const WishList: React.FC = () => {
           {t('wishListRoute')}
         </h1>
       </div>
-      <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
+      <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-[220px]">
         <div className="my-8 flex flex-col justify-center items-center gap-y-5 md:flex-row md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-start lg:gap-x-5  lg:flex-wrap w-full">
           {items.map((data, index) => {
             return <Card data={data.cartItem} key={data.cartItem.id + index} />;

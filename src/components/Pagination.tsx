@@ -3,7 +3,7 @@ import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { Meals } from '../assets/types';
 import arrow from '../assets/svg/menu/pagination/paginationArroww.svg';
 import { useGlobalContext } from '../context/GlobalContext';
-const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo 2xl:w-12 2xl:text-lg`;
+const buttonClass = `p-2 text-xs w-10 border-[1px] border-black aspect-square bg-white font-abdo 2xl:w-12 2xl:text-lg rounded-xl`;
 const Pagination: React.FC = () => {
   const axiosData: any = useLoaderData();
   const data2: Meals = axiosData.data2.data;
@@ -94,7 +94,7 @@ const Pagination: React.FC = () => {
   if (pageCount < 2) return null;
 
   return (
-    <div className="w-full px-8 lg:px-20 flex justify-end items-center">
+    <div className="w-full px-8 lg:px-[220px] flex justify-end items-center">
       <div className="flex justify-end items-center gap-x-2">
         <button
           className={`${buttonClass} flex justify-center items-center`}

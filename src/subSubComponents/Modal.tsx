@@ -10,13 +10,12 @@ import {
   SingleMealData,
 } from '../assets/types';
 import { AppDispatch, RootState, useTypedSelector } from '../store';
-import { AddOns, ProductDetails, WishlistButton } from '../subSubSubComponents';
+import { AddOns, ProductDetails } from '../subSubSubComponents';
 import { addItem as addToCart } from '../features/cart/cartSlice';
 import { useGlobalContext } from '../context/GlobalContext';
 
 interface ModalProps {
   modalId: string;
-
   data: SingleMealData;
 }
 
@@ -147,22 +146,17 @@ const Modal: React.FC<ModalProps> = ({ data, modalId }) => {
         onClick={handleClickOutside}
       >
         <div
-          className="flex flex-col md:justify-between md:flex-row md:items-start w-[90vw] lg:w-[80vw] h-4/5 max-h-4/5 overflow-y-auto rounded-2xl gap-x-2 bg-white p-8"
+          className="flex flex-col md:justify-between lg:flex-row lg:items-start w-[90vw] lg:w-[80vw] h-4/5 md:h-auto overflow-y-auto rounded-2xl gap-x-2 bg-white p-8"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex w-full md:w-2/5 flex-col justify-center items-stretch relative gap-y-2">
-            {user.token && (
-              <WishlistButton
-                data={data}
-                item={item}
-                wishListProduct={wishListProduct}
-              />
-            )}
+          <div className="flex w-full md:w-full lg:w-2/5 flex-col justify-center items-stretch  gap-y-2">
             <ProductDetails
               data={data}
               amount={amount}
               setAmount={setAmount}
               handleAddToCart={handleAddToCart}
+              item={item}
+              wishListProduct={wishListProduct}
             />
           </div>
           <AddOns data={data} handleAddOnChange={handleAddOnChange} />

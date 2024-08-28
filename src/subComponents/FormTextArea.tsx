@@ -38,7 +38,7 @@ const FormTextArea: React.FC<FormRowProps> = ({
           style={{ backgroundColor: 'white' }}
           className={`${
             icon ? 'px-14 2xl:px-16 ' : 'px-2'
-          } px-14 2xl:px-16 bg-white border-2 w-full place-items-start rounded-3xl py-4 md:py-4 2xl:py-5 2xl:placeholder:text-lg 2xl:text-lg ${
+          } px-14 2xl:px-16 stroke-[#DDDDDD] bg-white border-2 w-full place-items-start rounded-3xl py-4 md:py-4 2xl:py-5 2xl:placeholder:text-lg 2xl:text-lg ${
             isOTP
               ? 'text-center w-12 lg:w-16 rounded-2xl'
               : 'rounded-3xl text-start  md:max-h-[150px] md:min-h-[100px]  w-full'

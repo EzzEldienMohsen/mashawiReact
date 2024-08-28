@@ -235,7 +235,7 @@ const ProceedPageForm: React.FC = () => {
     dispatch(getTotals({ token, language }));
   };
   return (
-    <div className="w-full flex justify-center items-center px-4 md:px-8 lg:px-20">
+    <div className="w-full flex justify-center items-center px-4 md:px-8 lg:px-[220px]">
       <form
         onSubmit={onSubmit}
         method="POST"

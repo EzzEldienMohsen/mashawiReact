@@ -58,7 +58,7 @@ const Slider: React.FC = () => {
     <div className="relative flex items-center justify-center w-5/6 lg:w-3/5 2xl:w-3/5">
       <button
         onClick={scrollLeft}
-        className="flex lg:block absolute left-[-100px] z-10 w-10 h-10 rounded-full  items-center justify-center focus:outline-none"
+        className="hidden lg:flex  absolute left-[-100px] z-10 w-10 h-10 rounded-full  items-center justify-center focus:outline-none"
       >
         <img src={rightArrow} alt="arrow" />
       </button>
@@ -119,7 +119,7 @@ const Slider: React.FC = () => {
 
       <button
         onClick={scrollRight}
-        className="hidden lg:flex absolute right-[-100px] z-10 w-10 h-10 rounded-full items-center justify-center focus:outline-none"
+        className="hidden lg:flex  absolute right-[-100px] z-10 w-10 h-10 rounded-full items-center justify-center focus:outline-none"
       >
         <img src={leftArrow} alt="arrow" />
       </button>

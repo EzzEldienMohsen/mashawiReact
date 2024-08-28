@@ -12,7 +12,7 @@ const OrderDonePage: React.FC = () => {
           {t('orderDoneTitle')}
         </h1>
       </div>
-      <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-20">
+      <div className="w-full flex flex-col justify-center items-center gap-y-6 md:gap-y-20 px-4 md:px-8 lg:px-[220px]">
         <Steps tracker={completed} />
         <div className="flex flex-col gap-y-3 justify-center items-center text-sm md:text-md lg:text-lg font-abdo py-6 md:py-10 bg-white w-4/5 rounded-2xl px-6 md:px-10 lg:px-20 shadow-lg">
           <img

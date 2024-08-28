@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
     );
   }
   return (
-    <div className="bg-newRed text-white flex w-full flex-col justify-center lg:px-24 py-10 items-center lg:items-start ">
+    <div className="bg-newRed text-white flex w-full flex-col justify-center lg:px-[220px] py-10 items-center lg:items-start ">
       <Link to="/">
         <img src={logo} alt="logo" className="2xl:w-20" />
       </Link>

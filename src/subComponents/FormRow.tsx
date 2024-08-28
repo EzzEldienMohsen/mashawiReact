@@ -69,7 +69,7 @@ const FormRow: React.FC<FormRowProps> = ({
             id={name}
             value={value || ''}
             onChange={handleChange}
-            className="appearance-none px-4 bg-white border-2 rounded-full py-2 w-full text-start"
+            className="appearance-none px-4 stroke-[#DDDDDD] bg-white border-2 rounded-full py-2 w-full text-start"
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -104,7 +104,7 @@ const FormRow: React.FC<FormRowProps> = ({
         <div className={`w-full !important`}>
           <DatePicker
             wrapperClassName="w-full"
-            className={`px-14 2xl:px-16 bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px]`}
+            className={`px-14 2xl:px-16 stroke-[#DDDDDD] bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px]`}
             selected={selectedDate}
             onChange={(date) => {
               setSelectedDate(date);
@@ -199,7 +199,7 @@ const FormRow: React.FC<FormRowProps> = ({
         onChange={handleChange}
         maxLength={isOTP ? 1 : 25000}
         style={{ backgroundColor: 'white' }}
-        className={`px-4 bg-white place !important border-2 2xl:placeholder:text-2xl 2xl:text-2xl !important ${
+        className={`px-4 stroke-[#DDDDDD] bg-white place !important border-2 2xl:placeholder:text-2xl 2xl:text-2xl !important ${
           isOTP
             ? 'text-center w-12 lg:w-16 2xl:w-28 aspect-square rounded-2xl'
             : 'rounded-full text-start w-[100%]'

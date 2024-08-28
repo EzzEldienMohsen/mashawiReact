@@ -71,12 +71,13 @@ export type MainLoader = {
   data2: Meals;
   data3: AddressResponse;
 };
-const mainMenuLoader = (language: string) => async (): Promise<MainLoader> => {
-  const data1 = await mainCategoryLoader(queryClient, language)();
-  const data2 = await mainMealsLoader(queryClient, language)();
-  const data3 = await MainAddressLoader(queryClient, language)();
-  return { data1, data2, data3 };
-};
+const mainMenuLoader =
+  (language: string, id?: string) => async (): Promise<MainLoader> => {
+    const data1 = await mainCategoryLoader(queryClient, language)();
+    const data2 = await mainMealsLoader(queryClient, language, id)();
+    const data3 = await MainAddressLoader(queryClient, language)();
+    return { data1, data2, data3 };
+  };
 const menuLoader =
   (language: string) =>
   async ({ request }: LoaderFunctionArgs): Promise<MenuLoader> => {
@@ -147,8 +148,9 @@ const defaultOptions: DefaultOptions = {
 const queryClient = new QueryClient({ defaultOptions });
 
 const AppRouter: React.FC = () => {
-  const { isLangArabic } = useGlobalContext();
+  const { isLangArabic, id } = useGlobalContext();
   const language = isLangArabic ? 'ar' : 'en';
+  console.log(id);
 
   const router = createBrowserRouter([
     {
@@ -178,7 +180,7 @@ const AppRouter: React.FC = () => {
               <Landing />
             </Suspense>
           ),
-          loader: mainMenuLoader(language),
+          loader: mainMenuLoader(language, id),
         },
         {
           path: '/about',

@@ -116,7 +116,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
             setIsOpen(true);
           }}
           onClick={() => setIsOpen(true)}
-          className={`px-14 2xl:px-16 bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px] ${
+          className={`px-14 2xl:px-16 stroke-[#DDDDDD] bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px] ${
             high ? 'py-6 md:py-6' : 'py-4'
           }`}
           placeholder={placeHolder || 'Select...'}

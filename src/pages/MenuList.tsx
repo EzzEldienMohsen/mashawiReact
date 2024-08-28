@@ -12,7 +12,7 @@ const MenuList: React.FC = () => {
     <div className="flex flex-col justify-center items-center ">
       <SidePageHero
         img={img}
-        primaryText={t('menuRoute')}
+        primaryText={t('mealTitle')}
         secondaryText={t('menuPageText')}
       />
       <Menu />

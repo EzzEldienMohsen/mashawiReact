@@ -45,7 +45,7 @@ const About: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="w-full ">
+    <div className="w-full 2xl:gap-y-[75px]">
       <SidePageHero
         img={img}
         primaryText={t('aboutPageTitle')}

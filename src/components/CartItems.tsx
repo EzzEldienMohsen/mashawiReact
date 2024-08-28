@@ -28,7 +28,7 @@ const CartItems: React.FC = () => {
   );
   if (cartItems.length === 0) {
     return (
-      <div className=" w-full px-8 lg:px-20">
+      <div className=" w-full px-8 lg:px-[220px]">
         <div className="flex justify-center items-center bg-white text-center my-8 py-5 rounded-2xl shadow-md ">
           <h1 className="text-black font-abdo font-light">{t('emptyCart')}</h1>
         </div>
@@ -43,7 +43,7 @@ const CartItems: React.FC = () => {
     );
   }
   return (
-    <div className="my-16 w-full flex flex-col justify-center items-center px-8 lg:px-20">
+    <div className="my-16 w-full flex flex-col justify-center items-center px-8 lg:px-[220px]">
       {cartItems.map((item) => {
         return (
           <CartCard

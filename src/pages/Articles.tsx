@@ -1,5 +1,5 @@
 import React from 'react';
-import {  EventsResponse } from '../assets/types';
+import { EventsResponse } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
@@ -32,7 +32,6 @@ export const loader =
     });
   };
 
-
 const Articles: React.FC = () => {
   const { t } = useTranslation();
   const axiosData: any = useLoaderData();
@@ -40,13 +39,13 @@ const Articles: React.FC = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-   if (!data) {
-     return (
-       <div className="flex w-full py-8 justify-center items-center">
-         <span className="loading loading-spinner loading-lg text-newRed"></span>
-       </div>
-     );
-   }
+  if (!data) {
+    return (
+      <div className="flex w-full py-8 justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-newRed"></span>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col justify-center items-center w-full my-4  py-8">
       <div className="bg-[#2C2220] flex flex-col text-start  w-full justify-start items-center px-4 py-6 my-6 font-abdo">
@@ -54,7 +53,7 @@ const Articles: React.FC = () => {
           {t('articlesRoute')}
         </h1>
       </div>
-      <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
+      <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-[220px]">
         <div className="my-8 flex flex-col  justify-center items-center gap-y-5 md:flex md:flex-row md:gap-x-2 lg:justify-start md:flex-wrap w-full">
           {data.data.map((data) => {
             return (

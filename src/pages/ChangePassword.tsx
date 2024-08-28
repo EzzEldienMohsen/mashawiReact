@@ -81,7 +81,7 @@ const ChangePassword: React.FC = () => {
     <form
       method="post"
       onSubmit={onSubmit}
-      className="flex flex-col w-full lg:w-1/2 justify-start md:justify-evenly items-center lg:justify-center lg:border-0  px-8 lg:px-20 py-2 rounded-2xl  my-4"
+      className="flex flex-col w-full lg:w-1/2 justify-start md:justify-evenly items-center lg:justify-center lg:border-0  px-8 lg:px-[220px] py-2 rounded-2xl  my-4"
     >
       <FormRow
         name="old_password"

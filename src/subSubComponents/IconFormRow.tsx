@@ -32,7 +32,7 @@ const IconFormRow: React.FC<FormRowProps> = ({
           onChange={handleChange}
           className={`${
             type === 'tel' ? '' : 'text-start'
-          } px-14 2xl:px-16 bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px] ${
+          } px-14 2xl:px-16 stroke-[#DDDDDD] bg-white border-2 w-full place-items-start rounded-full py-4 md:py-4 2xl:py-5 2xl:placeholder:text-[18px] 2xl:text-[18px] ${
             type === 'date' ? 'input-date' : ''
           }`}
           style={{

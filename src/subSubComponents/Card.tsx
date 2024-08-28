@@ -81,7 +81,7 @@ const Card: React.FC<{ data: SingleMealData }> = ({ data }) => {
           e.currentTarget.classList.add('h-full', 'object-cover');
         }}
       />{' '}
-      <div className="flex px-4 lg:text-sm justify-between items-center w-full flex-row ">
+      <div className="flex px-4 lg:text-sm mt-3 justify-between items-center w-full flex-row ">
         <h1
           className={`font-abdo font-bold text-4 2xl:text-xl break-all ${
             isTruncated ? 'truncate' : ''

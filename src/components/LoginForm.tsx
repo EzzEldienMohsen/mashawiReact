@@ -135,7 +135,7 @@ const LoginForm: React.FC = () => {
         </Link>
 
         <button
-          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-4"
+          className="btn text-white btn-block hover:bg-newRed hover:text-white text-md 2xl:text-xl rounded-3xl bg-newRed my-2"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -146,7 +146,7 @@ const LoginForm: React.FC = () => {
         </button>
         <Link
           to="/register"
-          className="btn text-black btn-block hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-xl rounded-3xl bg-[#D9D9D9] my-4"
+          className="btn text-black btn-block hover:bg-[#D9D9D9] hover:text-black text-md 2xl:text-xl rounded-3xl bg-[#D9D9D9] my-2"
         >
           <span>{t('createAccountText')}</span>
         </Link>

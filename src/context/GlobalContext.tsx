@@ -8,6 +8,8 @@ interface GlobalContextProps {
   setAmount: React.Dispatch<React.SetStateAction<number>>;
   theMap: string;
   setTheMap: React.Dispatch<React.SetStateAction<string>>;
+  id: string;
+  setId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
@@ -25,6 +27,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [amount, setAmount] = React.useState<number>(1);
   const [theMap, setTheMap] = React.useState<string>('');
+  const [id, setId] = React.useState<string>('');
   const [isLangArabic, setIsLangArabic] = React.useState<boolean>(() => {
     const lang = localStorage.getItem('lang');
     return lang !== null ? JSON.parse(lang) : true;
@@ -53,6 +56,8 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
         setAmount,
         theMap,
         setTheMap,
+        id,
+        setId,
       }}
     >
       {children}

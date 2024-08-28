@@ -52,10 +52,10 @@ const SingleArticlePage: React.FC = () => {
   const locale = isLangArabic ? 'ar' : 'en';
   dayjs.locale(locale);
   const { t } = useTranslation();
-    React.useEffect(() => {
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
- if (!data) {
+  if (!data) {
     return (
       <div className="flex w-full py-8 justify-center items-center">
         <span className="loading loading-spinner loading-lg text-newRed"></span>
@@ -115,7 +115,7 @@ const SingleArticlePage: React.FC = () => {
         </div>
       </div>
       {/* The rest of the page */}
-      <div className="w-full flex-col flex justify-start items-start px-8 lg:px-20 gap-y-6 2xl:gap-y-10">
+      <div className="w-full flex-col flex justify-start items-start px-8 lg:px-[220px] gap-y-6 2xl:gap-y-10">
         <div className="flex justify-start gap-x-6  items-center">
           <img src={dateIcon} alt="date" className="" />
           <p className="font-abdo text-lg">{formattedDate}</p>

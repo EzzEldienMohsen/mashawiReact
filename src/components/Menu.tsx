@@ -42,7 +42,7 @@ const Menu: React.FC = () => {
     );
   }
   return (
-    <div className="flex py-4 lg:py-16 mt-16 justify-center w-full bg-[#F5F5F5] items-center flex-col 2xl:gap-y-10 px-8 lg:px-20 2xl:px-20">
+    <div className="flex py-4 lg:py-16 mt-16 justify-center w-full bg-[#F5F5F5] items-center flex-col 2xl:gap-y-10 px-8 lg:px-[220px]">
       <SectionTitle title={t('menuSectionTitle')} />
       <Slider />
       <MenuCard data={data} />

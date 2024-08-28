@@ -48,7 +48,7 @@ const Orders: React.FC = () => {
   }
 
   return (
-    <div className="my-4 w-full flex flex-col px-8 lg:px-20 gap-y-6 justify-center items-center">
+    <div className="my-4 w-full flex flex-col px-8 lg:px-[220px] gap-y-6 justify-center items-center">
       {orders.map((order) => {
         return (
           <Link

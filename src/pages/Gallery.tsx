@@ -54,21 +54,17 @@ const Gallery: React.FC = () => {
           {t('galleryText')}
         </h1>
       </div>
-      <div className="my-8 flex flex-col justify-center items-center md:flex-row md:justify-between lg:justify-between md:gap-x-6 gap-y-6 md:flex-wrap w-full px-8 lg:px-20">
+      <div className="my-8 flex flex-col justify-center items-center md:flex-row md:justify-between lg:justify-between md:gap-x-6 gap-y-6 md:flex-wrap w-full px-8 lg:px-[220px]">
         {data.data.data.map((data) => {
           return (
             <div
               key={data.id}
-              className=" my-2 w-4/5  md:w-[45%] lg:w-[31%] rounded-2xl  flex flex-col justify-center items-center "
+              className=" my-2 w-4/5  md:w-[45%] lg:w-[21%] rounded-2xl  flex flex-col justify-center items-center "
             >
               <img
                 src={data.path}
                 alt="alt"
-                className={`w-full aspect-square md:aspect-auto md:h-[348px] 2xl:aspect-square 2xl:h-auto ${
-                  isLangArabic
-                    ? 'rounded-tr-3xl rounded-bl-3xl'
-                    : 'rounded-tl-3xl rounded-br-3xl'
-                }`}
+                className={`w-full aspect-square md:aspect-auto md:h-[348px] 2xl:aspect-square 2xl:h-[348px] rounded-3xl `}
               />
             </div>
           );

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Categories, CategoriesData, MealData } from '../assets/types';
+import { Categories, CategoriesData } from '../assets/types';
 import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { useLoaderData } from 'react-router-dom';
@@ -34,13 +34,8 @@ export const loader =
     return data;
   };
 
-interface MainSliderProps {
-  mainData: MealData;
-  setMainData: React.Dispatch<React.SetStateAction<MealData>>;
-}
-
-const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
-  const { isLangArabic } = useGlobalContext();
+const MainSlider: React.FC = () => {
+  const { isLangArabic, setId } = useGlobalContext();
   const axiosData: any = useLoaderData();
   const { t } = useTranslation();
   const data: CategoriesData = axiosData.data1.data.data.data;
@@ -62,7 +57,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
     <div className="relative flex items-center justify-center w-5/6 lg:w-3/5 2xl:w-3/5">
       <button
         onClick={scrollLeft}
-        className="flex lg:block absolute left-[-100px] z-10 w-10 h-10 rounded-full items-center justify-center focus:outline-none"
+        className="hidden lg:flex  absolute left-[-100px] z-10 w-10 h-10 rounded-full items-center justify-center focus:outline-none"
       >
         <img src={rightArrow} alt="arrow" />
       </button>
@@ -74,7 +69,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
         <div className="carousel-item">
           <button
             onClick={() => {
-              setMainData(() => mainData);
+              setId(() => '');
             }}
             className={`flex-shrink-0 w-24 h-24 md:w-[120px] md:h-[120px] lg:w-36 lg:h-36 2xl:w-[186px] 2xl:h-[180px] bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
               isLangArabic
@@ -100,11 +95,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
           <div className="carousel-item" key={category.id}>
             <button
               onClick={() => {
-                const reqData = mainData.filter((meal) =>
-                  meal.categories?.some((cat) => cat.id === category.id)
-                );
-
-                setMainData(() => reqData);
+                setId(() => `${category.id}`);
               }}
               className={`flex-shrink-0 w-24 h-24 md:w-[120px] md:h-[120px] lg:w-36 lg:h-36 2xl:w-[186px] 2xl:h-[180px] bg-transparent border-[#E4E4E4] flex flex-col items-center justify-center mx-1 border-[1px] p-2 ${
                 isLangArabic
@@ -131,7 +122,7 @@ const MainSlider: React.FC<MainSliderProps> = ({ mainData, setMainData }) => {
 
       <button
         onClick={scrollRight}
-        className="hidden lg:flex absolute right-[-100px] z-10 w-10 h-10 rounded-full items-center justify-center focus:outline-none"
+        className="hidden lg:flex  absolute right-[-100px] z-10 w-10 h-10 rounded-full items-center justify-center focus:outline-none"
       >
         <img src={leftArrow} alt="arrow" />
       </button>

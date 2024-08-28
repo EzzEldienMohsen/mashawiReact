@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     <div
       className={`flex w-full  flex-row ${
         pathname === '/' ? 'absolute top-0 left-0 z-50' : 'z-20'
-      } justify-between items-center px-8 lg:px-20 py-2 bg-transparent`}
+      } justify-between items-center px-8 lg:px-[220px] py-2 bg-transparent`}
     >
       <div className=" flex justify-start items-center">
         <Link to="/">

@@ -75,7 +75,7 @@ const SingleEventPage: React.FC = () => {
           }}
         />
       </div>
-      <div className="w-full flex-col flex justify-start items-start px-8 lg:px-20 gap-y-6 2xl:gap-y-10">
+      <div className="w-full flex-col flex justify-start items-start px-8 lg:px-[220px] gap-y-6 2xl:gap-y-10">
         <div className="flex justify-start gap-x-6  items-center">
           <img src={dateIcon} alt="date" className="" />
           <p className="font-abdo text-lg">{formattedDate}</p>

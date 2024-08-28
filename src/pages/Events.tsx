@@ -21,7 +21,7 @@ const Events: React.FC = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
- if (!data) {
+  if (!data) {
     return (
       <div className="flex w-full py-8 justify-center items-center">
         <span className="loading loading-spinner loading-lg text-newRed"></span>
@@ -35,7 +35,7 @@ const Events: React.FC = () => {
           {t('eventsRoute')}
         </h1>
       </div>
-      <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-20">
+      <div className="w-full flex flex-col justify-center items-center gap-y-4 px-8 lg:px-[220px]">
         <div className="my-8 flex flex-col  justify-center items-center gap-y-5 md:flex md:flex-row md:gap-x-2 lg:justify-start md:flex-wrap w-full">
           {data.data.map((data) => {
             return (

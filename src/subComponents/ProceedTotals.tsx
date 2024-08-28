@@ -88,7 +88,7 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
         type="submit"
         disabled={isLoading}
         onSubmit={onSubmit}
-        className=" btn btn-block md:w-1/2 lg:w-1/4 my-4 min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
+        className=" btn btn-block md:w-1/2 lg:w-3/4 my-2 min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl flex justify-center shadow-xl bg-newRed text-white items-center rounded-full"
       >
         {isLoading ? (
           <span className="loading loading-spinner loading-lg text-white"></span>
@@ -99,7 +99,7 @@ const ProceedTotals: React.FC<ProceedTotalProps> = ({ onSubmit }) => {
 
       <Link
         to="/meals"
-        className=" btn btn-block md:w-1/2 lg:w-1/4 my-4 min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl flex justify-center shadow-xl bg-[#D9D9D9] items-center rounded-full"
+        className=" btn btn-block md:w-1/2 lg:w-3/4 my-2 min-h-[48px] lg:min-h-[56px] h-auto text-sm lg:text-2xl flex justify-center shadow-xl bg-[#D9D9D9] items-center rounded-full"
       >
         {t('contiueSoppingText')}
       </Link>

@@ -13,7 +13,7 @@ const Policy: React.FC<PolicyProps> = ({ title, data }) => {
           {title}
         </h1>
       </div>
-      <ul className="list-none text-start w-full px-8 lg:px-20   mb-6">
+      <ul className="list-none text-start w-full px-8 lg:px-[220px]   mb-6">
         <p
           className="my-4 text-sm md:text-md lg:text-md font-normal text-start"
           dangerouslySetInnerHTML={{ __html: data.data }}
