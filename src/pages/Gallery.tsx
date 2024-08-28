@@ -15,7 +15,7 @@ const galleryQuery = (language: string, page: string): GalleryQuery => {
   return {
     queryKey: ['gallery', language, page],
     queryFn: () =>
-      autoFetch(`/gallery?limit=1&page=${page}`, {
+      autoFetch(`/gallery?limit=20&page=${page}`, {
         headers: {
           lang: language,
         },
