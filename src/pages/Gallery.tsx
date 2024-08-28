@@ -5,7 +5,6 @@ import { autoFetch } from '../utils';
 import { QueryClient } from '@tanstack/react-query';
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import { GalleryPagination } from '../components';
-import { useGlobalContext } from '../context/GlobalContext';
 
 interface GalleryQuery {
   queryKey: string[];
@@ -33,7 +32,6 @@ export const loader =
   };
 
 const Gallery: React.FC = () => {
-  const { isLangArabic } = useGlobalContext();
   const axiosData: any = useLoaderData();
   const data: GalleryResponse = axiosData.data;
   const { t } = useTranslation();
